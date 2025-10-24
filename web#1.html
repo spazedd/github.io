@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Something to Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f5f5f0;
+            color: #2a2a2a;
+            transition: background 0.3s, color 0.3s;
+        }
+        body.dark-mode {
+            background: #1a1a1a;
+            color: #e0e0e0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .main-content {
+            padding: 20px 0;
+        }
+        .story {
+            display: block;
+            margin-bottom: 20px;
+            font-size: 16px;
+            text-align: left;
+        }
+        .story:hover { color: #8b0000; transition: color 0.2s; }
+        .segment { margin-bottom: 50px; }
+        .family .story, .education .story, .security .story, .american-values .story, .global-influence .story, .journal .story { text-decoration: underline; }
+
+        h1 {
+            margin: 0;
+            padding: 20px 0;
+            font-family: 'Georgia', serif;
+            font-size: 48px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 1px 1px 2px #666;
+            color: #2a2a2a;
+            border-bottom: 2px solid #8b0000;
+            white-space: nowrap;
+            overflow: hidden;
+            text-align: center;
+            background: linear-gradient(to right, #f5f5f0, #f0f0f0); /* Matches page background */
+        }
+        h1:hover {
+            text-shadow: 0 0 10px rgba(139, 0, 0, 0.5); /* Flair with hover glow */
+            transition: text-shadow 0.3s;
+        }
+
+        h2 { font-size: 24px; margin-bottom: 10px; color: #8b0000; }
+        p { margin-bottom: 30px; }
+
+        .date-section { text-align: left; }
+        .date-toggle {
+            font-size: 20px;
+            font-weight: bold;
+            padding: 10px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            text-decoration: underline;
+            color: #2a2a2a;
+            display: block;
+            margin-bottom: 10px;
+        }
+        .date-dropdown {
+            display: none;
+            text-align: left;
+            max-width: 800px;
+            margin: 0 0 20px 0;
+            border: 2px solid #8b0000;
+            padding: 10px;
+            border-radius: 5px;
+            animation: fadeIn 0.3s ease-in; /* Flair with animation */
+        }
+        .date-dropdown.active { display: block; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .controls {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+        .search-bar {
+            padding: 5px;
+            width: 200px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: border-color 0.3s;
+        }
+        .search-bar:focus {
+            border-color: #8b0000;
+            outline: none;
+        }
+        .dark-mode-toggle {
+            padding: 5px 15px;
+            background: #8b0000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .dark-mode-toggle:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 5px rgba(139, 0, 0, 0.5); /* Flair with hover effect */
+        }
+        .dark-mode-toggle:active {
+            transform: scale(0.95);
+        }
+        .policy-tracker {
+            margin-top: 40px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .policy-tracker table { width: 100%; border-collapse: collapse; }
+        .policy-tracker th, .policy-tracker td { padding: 8px; text-align: left; border-bottom: 1px solid #ddd; }
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            font-size: 12px;
+            color: #666;
+            border-top: 1px solid #ccc;
+            margin-top: 20px;
+            background: linear-gradient(to right, #f0f0f0, #f5f5f0); /* Decorative flair */
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 36px; letter-spacing: 2px; white-space: normal; }
+            .main-content { padding: 10px 0; }
+            .story { font-size: 14px; margin-bottom: 15px; }
+            .segment { margin-bottom: 30px; }
+            .date-section { text-align: center; }
+            .controls { text-align: center; }
+            .search-bar, .dark-mode-toggle { display: block; margin: 10px auto; width: 100%; max-width: 200px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <main class="main-content">
+            <div class="controls">
+                <input type="text" class="search-bar" placeholder="Search" oninput="filterContent(this.value)">
+                <button class="dark-mode-toggle" onclick="toggleDarkMode()">Dark Mode</button>
+            </div>
+            <h1>Something to Report</h1>
+            <h2>BREAKING GLOBAL NEWS: UN Summit Addresses Climate Crisis</h2>
+            <p>Details from world leaders' discussions emerging...</p>
+            
+            <div class="date-section">
+                <button class="date-toggle" onclick="document.getElementById('dropdown-10-24-2025').classList.toggle('active')">10/24/2025</button>
+                <div id="dropdown-10-24-2025" class="date-dropdown">
+                    <div class="family">
+                        <a href="#" class="story">US Family Values Debate: Tax Incentives - 10/24/2025</a><span class="summary">New proposals to support traditional family structures.</span>
+                    </div>
+                    <div class="education">
+                        <a href="#" class="story">US School Policy Reforms: Curriculum Debate - 10/24/2025</a><span class="summary">Discussions on revising educational standards.</span>
+                    </div>
+                    <div class="security">
+                        <a href="#" class="story">European Border Policy: Update - 10/24/2025</a><span class="summary">Stricter border controls proposed to address migration.</span>
+                    </div>
+                    <div class="american-values">
+                        <a href="#" class="story">US Aid to Ukraine: Diplomatic Push - 10/24/2025</a><span class="summary">New diplomatic efforts to support Ukraine amid tensions.</span>
+                        <a href="#" class="story">China Trade Talks: Latest Moves - 10/24/2025</a><span class="summary">Negotiations focus on tariffs and market access.</span>
+                    </div>
+                    <div class="global-influence">
+                        <a href="#" class="story">EU Climate Summit: New Pledges - 10/24/2025</a><span class="summary">European leaders commit to aggressive carbon reduction goals.</span>
+                    </div>
+                    <div class="journal">
+                        <a href="journal.html" class="story">Click to Read Entries - 10/24/2025</a><span class="summary">Readers share thoughts on today's global events.</span>
+                    </div>
+                </div>
+
+                <button class="date-toggle" onclick="document.getElementById('dropdown-10-23-2025').classList.toggle('active')">10/23/2025</button>
+                <div id="dropdown-10-23-2025" class="date-dropdown">
+                    <div class="family">
+                        <a href="#" class="story">Family Support Policies: Tax Break Proposal - 10/23/2025</a><span class="summary">Initiatives to strengthen family economic stability.</span>
+                    </div>
+                    <div class="security">
+                        <a href="#" class="story">Border Security Talks - 10/23/2025</a><span class="summary">Discussions on tightening EU border policies.</span>
+                    </div>
+                    <div class="global-influence">
+                        <a href="#" class="story">EU Green Deal Progress - 10/23/2025</a><span class="summary">Updates on renewable energy targets across Europe.</span>
+                    </div>
+                </div>
+
+                <button class="date-toggle" onclick="document.getElementById('dropdown-10-22-2025').classList.toggle('active')">10/22/2025</button>
+                <div id="dropdown-10-22-2025" class="date-dropdown">
+                    <div class="education">
+                        <a href="#" class="story">Education Reforms: Parental Rights - 10/22/2025</a><span class="summary">Push for greater parental control over curricula.</span>
+                    </div>
+                    <div class="global-influence">
+                        <a href="#" class="story">Middle East Talks - 10/22/2025</a><span class="summary">Peace negotiations show early progress in the region.</span>
+                    </div>
+                    <div class="security">
+                        <a href="#" class="story">NATO Funding Priorities - 10/22/2025</a><span class="summary">Debate over defense spending allocations intensifies.</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="segment family">
+                <h3>Family</h3>
+                <a href="#" class="story">US Family Values Debate: Tax Incentives - 2025.10.24</a>
+                <a href="#" class="story">Family Support Policies: Tax Break Proposal - 2025.10.23</a>
+            </div>
+            
+            <div class="segment education">
+                <h3>Education</h3>
+                <a href="#" class="story">US School Policy Reforms: Curriculum Debate - 2025.10.24</a>
+                <a href="#" class="story">Education Reforms: Parental Rights - 2025.10.22</a>
+            </div>
+            
+            <div class="segment security">
+                <h3>Security</h3>
+                <a href="#" class="story">European Border Policy: Update - 2025.10.24</a>
+                <a href="#" class="story">Border Security Talks - 2025.10.23</a>
+                <a href="#" class="story">NATO Funding: Defense Priorities - 2025.10.22</a>
+            </div>
+            
+            <div class="segment american-values">
+                <h3>American Values</h3>
+                <a href="#" class="story">US Aid to Ukraine: Diplomatic Push - 2025.10.24</a>
+                <a href="#" class="story">China Trade Talks: Latest Moves - 2025.10.24</a>
+            </div>
+            
+            <div class="segment global-influence">
+                <h3>Global Influence</h3>
+                <a href="#" class="story">EU Green Deal Progress: Climate Focus - 2025.10.23</a>
+                <a href="#" class="story">Middle East Talks: Peace Efforts - 2025.10.22</a>
+            </div>
+            
+            <div class="segment journal">
+                <h3>Journal</h3>
+                <a href="journal.html" class="story">Click to Read Entries</a>
+            </div>
+
+            <div class="policy-tracker">
+                <h3>Policy Tracker</h3>
+                <table>
+                    <tr><th>Category</th><th>Priority</th><th>Latest Update</th><th>Status</th></tr>
+                    <tr><td>Family</td><td>Tax Incentives</td><td>10/24/2025</td><td><a href="#">Proposed</a></td></tr>
+                    <tr><td>Education</td><td>Curriculum Reforms</td><td>10/24/2025</td><td><a href="#">Debate Ongoing</a></td></tr>
+                    <tr><td>Security</td><td>Border Security</td><td>10/24/2025</td><td><a href="#">Ongoing Talks</a></td></tr>
+                    <tr><td>American Values</td><td>Trade/Tariffs</td><td>10/24/2025</td><td><a href="#">Negotiations Active</a></td></tr>
+                    <tr><td>Global Influence</td><td>Defense Funding</td><td>10/22/2025</td><td><a href="#">Debate Intensifies</a></td></tr>
+                </table>
+            </div>
+
+            <footer>© 2025 Something to Report. All rights reserved.</footer>
+        </main>
+    </div>
+
+    <script>
+        // Dark mode toggle with debug log
+        document.querySelector('.dark-mode-toggle').addEventListener('click', function() {
+            console.log('Dark mode toggled'); // Debug log
+            document.body.classList.toggle('dark-mode');
+        });
+
+        // Simple search filter
+        function filterContent(query) {
+            const stories = document.querySelectorAll('.story');
+            stories.forEach(story => {
+                if (story.textContent.toLowerCase().includes(query.toLowerCase())) {
+                    story.style.display = 'block';
+                } else {
+                    story.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
