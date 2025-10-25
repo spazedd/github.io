@@ -563,14 +563,15 @@ isoDates.slice(0, MAX_DAYS).forEach((iso, i) => {
     if(initial){ applyDateFilter(initial); }
 
     // expand/collapse all
-    const toggleAll=$("#toggleAll");
-    toggleAll.addEventListener("click", ()=>{
-      const open = toggleAll.getAttribute("aria-pressed")!=="true";
-      toggleAll.setAttribute("aria-pressed", String(open));
-      toggleAll.textContent = open ? "Collapse all stories" : "Expand all stories";
-      $$(".story").forEach(st=> setStoryOpen(st, open));
-    });
-
+   const toggleAll = $("#toggleAll");
+if (toggleAll) {
+  toggleAll.addEventListener("click", ()=>{
+    const open = toggleAll.getAttribute("aria-pressed")!=="true";
+    toggleAll.setAttribute("aria-pressed", String(open));
+    toggleAll.textContent = open ? "Collapse all stories" : "Expand all stories";
+    $$(".story").forEach(st=> setStoryOpen(st, open));
+  });
+}
     // Archive: build accordion from visible stories
     const archive=$("#archive");
     const byDate={};
@@ -580,6 +581,18 @@ isoDates.slice(0, MAX_DAYS).forEach((iso, i) => {
       (byDate[label] ||= []).push(st.querySelector(".title").textContent);
     });
     Object.keys(byDate).sort((a,b)=> b.localeCompare(a)).forEach(date=>{
+    // ensure "today" shows in Archive (even if there are no stories yet)
+const today = new Date();
+const y = today.getFullYear();
+const m2 = String(today.getMonth() + 1).padStart(2, "0");
+const d2 = String(today.getDate()).padStart(2, "0");
+const todayIso = `${y}-${m2}-${d2}`;
+const todayLabelForArchive = labelFromIso(todayIso);
+
+if (!byDate[todayLabelForArchive]) {
+  byDate[todayLabelForArchive] = ["(no items yet — add today's JSON)"];
+}
+
       const details=document.createElement("details");
       details.id = `a-${date}`;
       const sum=document.createElement("summary");
