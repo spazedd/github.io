@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <title>Something to Report</title>
-  <meta name="description" content="Headlines with sources, fast summaries, and a clean archive." />
+  <meta name="description" content="Headlines with sources, fast summaries, three-day view, and a clean policy tracker." />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
   <script>(()=>{const m=localStorage.getItem("mode");if(m==="dark")document.documentElement.setAttribute("data-theme","dark");})();</script>
@@ -77,15 +77,7 @@
 
     .expand-wrap{display:flex;justify-content:center;margin-top:24px}
 
-    details.archive{background:var(--card);border:1px solid var(--ring);border-radius:var(--radius);margin-top:14px;overflow:hidden;box-shadow:var(--shadow)}
-    details.archive>summary{cursor:pointer;list-style:none;padding:16px 20px;font-weight:700;letter-spacing:.3px}
-    details.archive[open]>summary{border-bottom:1px dashed var(--ring)}
-    .archive-body{padding:12px 20px}
-    .archive-accordion details{background:var(--card);border:1px solid var(--ring);border-radius:14px}
-    .archive-accordion details+details{margin-top:10px}
-    .archive-accordion summary{cursor:pointer;list-style:none;padding:12px 16px;font-weight:600}
-    .archive-accordion .day{padding:8px 16px 16px;font-size:var(--small);color:var(--muted)}
-
+    /* Policy Tracker table */
     .table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--ring);border-radius:var(--radius);box-shadow:var(--shadow);margin-top:28px;overflow:hidden}
     .table caption{padding:14px 18px;font-weight:700;text-align:left;color:var(--brand-strong);text-transform:uppercase}
     .table th,.table td{text-align:left;padding:14px 18px;font-size:var(--body);border-bottom:1px solid var(--ring)}
@@ -94,17 +86,6 @@
     .badge{display:inline-block;padding:6px 12px;border-radius:999px;background:color-mix(in oklab,var(--brand) 18%,transparent);color:var(--brand);font-size:var(--small);font-weight:700;letter-spacing:.3px;text-transform:uppercase}
 
     footer{text-align:center;padding:32px 0 48px;color:var(--muted);font-size:var(--small)}
-/* --- 3-day & accordion helpers --- */
-.cat { border:1px solid var(--ring); border-radius:var(--radius); background:var(--card); box-shadow:var(--shadow); overflow:hidden }
-.cat + .cat { margin-top:clamp(12px,2.2vw,18px) }
-.cat > summary { list-style:none; display:flex; align-items:center; gap:10px; padding:16px 18px; cursor:pointer; font-weight:800; letter-spacing:.3px; color:var(--brand-strong); }
-.cat > summary::-webkit-details-marker { display:none }
-.cat[open] > summary { border-bottom:1px dashed var(--ring) }
-.cat-title { flex:1 }
-.cat-count { font-size:var(--small); color:var(--muted); background:color-mix(in oklab,var(--brand) 12%,transparent); border-radius:999px; padding:4px 10px; font-weight:700 }
-.cat-body.card { margin:0; border:0; box-shadow:none; border-radius:0 }
-.items .story { padding:12px 0; border-bottom:1px dashed var(--ring) }
-.items .story:last-child { border-bottom:none }
   </style>
 </head>
 <body>
@@ -124,7 +105,7 @@
   <header>
     <div class="wrap">
       <h1 class="brand">Something to Report</h1>
-      <p class="dek">Daily briefings with links to original sources, mobile-first layout, and quick inline expands.</p>
+      <p class="dek">Daily briefings with links to original sources, mobile-first layout, inline expands, and a tight three-day view.</p>
     </div>
   </header>
 
@@ -142,7 +123,7 @@
       <div class="body">Short kicker line here. Add a source link once confirmed.</div>
     </section>
 
-    <!-- sections (UPDATED WITH YOUR NEW STORIES) -->
+    <!-- sections -->
     <section class="sections">
       <div class="grid" id="sections">
 
@@ -150,275 +131,289 @@
         <article class="card section" data-section="family">
           <h3>Family</h3>
 
+          <div class="story" data-date="2025-10-24">
+            <div class="head">
+              <button class="title">WA conservatives challenge rewrite of parental-rights law</button>
+              <a class="source" href="https://washingtonstatestandard.com/2025/10/24/conservative-group-sues-to-overturn-rewrite-of-wa-parental-rights-law/" target="_blank" rel="noopener">Washington State Standard ↗</a>
+            </div>
+            <div class="summary">Suit targets expansions in student privacy and gender-care access, arguing parents are cut out of key medical decisions.</div>
+          </div>
+
+          <div class="story" data-date="2025-10-24">
+            <div class="head">
+              <button class="title">Trump team urges states to review LGBTQ+ foster rules</button>
+              <a class="source" href="https://imprintnews.org/top-stories/trump-appointee-demands-states-roll-back-foster-parenting-rules-that-aim-to-protect-lgbtq-youth/268231" target="_blank" rel="noopener">Imprint News ↗</a>
+            </div>
+            <div class="summary">Push to roll back affirmation requirements sparks debate over foster youth protections vs. aligning with biological standards.</div>
+          </div>
+
+          <div class="story" data-date="2025-10-24">
+            <div class="head">
+              <button class="title">24 GOP AGs back challenge to birthright citizenship</button>
+              <a class="source" href="https://www.foxnews.com/politics/nearly-all-republican-ags-add-firepower-trumps-birthright-citizenship-push" target="_blank" rel="noopener">Fox News ↗</a>
+            </div>
+            <div class="summary">Brief supports limiting automatic citizenship for children of undocumented parents, citing 14th Amendment interpretation.</div>
+          </div>
+
           <div class="story" data-date="2025-10-21">
-  <div class="head">
-    <button class="title">UK repeals presumption of parental contact in abuse cases</button>
-    <a class="source" href="https://www.theguardian.com/uk-news/2025/oct/21/family-law-shift-hailed-as-victory-for-children-facing-domestic-abuse" target="_blank" rel="noopener">Guardian ↗</a>
-  </div>
-  <div class="summary">Courts prioritize child safety over automatic parental involvement; supporters say it protects victims, critics worry about misuse to deny contact.</div>
-</div>
+            <div class="head">
+              <button class="title">UK repeals presumption of parental contact in abuse cases</button>
+              <a class="source" href="https://www.theguardian.com/uk-news/2025/oct/21/family-law-shift-hailed-as-victory-for-children-facing-domestic-abuse" target="_blank" rel="noopener">Guardian ↗</a>
+            </div>
+            <div class="summary">Courts prioritize child safety over automatic parental involvement; supporters say it protects victims, critics worry about misuse to deny contact.</div>
+          </div>
 
-<div class="story" data-date="2025-01-01">
-  <div class="head">
-    <button class="title">California expands paid family leave to 90% wage replacement</button>
-    <a class="source" href="https://www.gov.ca.gov/2024/12/30/new-in-2025-supporting-more-families/" target="_blank" rel="noopener">Gov.ca.gov ↗</a>
-  </div>
-  <div class="summary">Higher benefits for bonding/caregiving ease family burdens but raise questions on cost as state taxes climb.</div>
-</div>
+          <div class="story" data-date="2025-10-01">
+            <div class="head">
+              <button class="title">Florida updates child support to reflect real costs</button>
+              <a class="source" href="https://dewittlaw.com/family-law/20390/floridas-family-law-changes-in-2025-what-you-need-to-know/" target="_blank" rel="noopener">DeWitt Law ↗</a>
+            </div>
+            <div class="summary">New formulas factor daycare and extracurriculars—simplifying calculations but potentially raising obligations.</div>
+          </div>
 
-<div class="story" data-date="2025-10-24">
-  <div class="head">
-    <button class="title">WA conservatives challenge rewrite of parental-rights law</button>
-    <a class="source" href="https://washingtonstatestandard.com/2025/10/24/conservative-group-sues-to-overturn-rewrite-of-wa-parental-rights-law/" target="_blank" rel="noopener">Washington State Standard ↗</a>
-  </div>
-  <div class="summary">Suit targets expansions in student privacy and gender-care access, arguing parents are cut out of key medical decisions.</div>
-</div>
+          <div class="story" data-date="2025-01-01">
+            <div class="head">
+              <button class="title">California expands paid family leave to 90% wage replacement</button>
+              <a class="source" href="https://www.gov.ca.gov/2024/12/30/new-in-2025-supporting-more-families/" target="_blank" rel="noopener">Gov.ca.gov ↗</a>
+            </div>
+            <div class="summary">Higher benefits for bonding/caregiving ease family burdens but raise questions on cost as state taxes climb.</div>
+          </div>
 
-<div class="story" data-date="2025-10-24">
-  <div class="head">
-    <button class="title">Trump team urges states to review LGBTQ+ foster rules</button>
-    <a class="source" href="https://imprintnews.org/top-stories/trump-appointee-demands-states-roll-back-foster-parenting-rules-that-aim-to-protect-lgbtq-youth/268231" target="_blank" rel="noopener">Imprint News ↗</a>
-  </div>
-  <div class="summary">Push to roll back affirmation requirements sparks debate over foster youth protections vs. aligning with biological standards.</div>
-</div>
-
-<div class="story" data-date="2025-10-24">
-  <div class="head">
-    <button class="title">24 GOP AGs back challenge to birthright citizenship</button>
-    <a class="source" href="https://www.foxnews.com/politics/nearly-all-republican-ags-add-firepower-trumps-birthright-citizenship-push" target="_blank" rel="noopener">Fox News ↗</a>
-  </div>
-  <div class="summary">Brief supports limiting automatic citizenship for children of undocumented parents, citing 14th Amendment interpretation.</div>
-</div>
-
-<div class="story" data-date="2025-10-01">
-  <div class="head">
-    <button class="title">Florida updates child support to reflect real costs</button>
-    <a class="source" href="https://dewittlaw.com/family-law/20390/floridas-family-law-changes-in-2025-what-you-need-to-know/" target="_blank" rel="noopener">DeWitt Law ↗</a>
-  </div>
-  <div class="summary">New formulas factor daycare and extracurriculars—simplifying calculations but potentially raising obligations.</div>
-</div>
-
+          <small class="meta">Policies impacting family structure and independence</small>
+          <div class="no-results">No family-focused briefings for this date yet.</div>
         </article>
 
         <!-- EDUCATION -->
         <article class="card section" data-section="education">
           <h3>Education</h3>
 
+          <div class="story" data-date="2025-10-23">
+            <div class="head">
+              <button class="title">India–Nigeria IIT campus aims at AI & tech skills</button>
+              <a class="source" href="https://www.thehindu.com/education/news-from-the-world-of-education-october-23-2025/article70195483.ece" target="_blank" rel="noopener">The Hindu ↗</a>
+            </div>
+            <div class="summary">Cross-border training expands access but reignites “brain drain” concerns.</div>
+          </div>
+
           <div class="story" data-date="2025-10-18">
-  <div class="head">
-    <button class="title">Elite universities reject Trump higher-ed compact</button>
-    <a class="source" href="https://www.nytimes.com/2025/10/18/us/politics/trump-administration-education-agenda.html" target="_blank" rel="noopener">NYT ↗</a>
-  </div>
-  <div class="summary">Guidelines tying federal funds to neutrality on race/identity face pushback as curbs on academic freedom.</div>
-</div>
+            <div class="head">
+              <button class="title">Elite universities reject Trump higher-ed compact</button>
+              <a class="source" href="https://www.nytimes.com/2025/10/18/us/politics/trump-administration-education-agenda.html" target="_blank" rel="noopener">NYT ↗</a>
+            </div>
+            <div class="summary">Guidelines tying federal funds to neutrality on race/identity face pushback as curbs on academic freedom.</div>
+          </div>
 
-<div class="story" data-date="2025-10-01">
-  <div class="head">
-    <button class="title">Project 2025 education blueprint ignites voucher debate</button>
-    <a class="source" href="https://rickhess99.medium.com/project-2025s-education-lead-on-the-controversial-policy-agenda-8e4cf7e3dc95" target="_blank" rel="noopener">Analysis ↗</a>
-  </div>
-  <div class="summary">Decentralization and school choice framed as parent empowerment; critics warn of weakened district systems.</div>
-</div>
+          <div class="story" data-date="2025-10-01">
+            <div class="head">
+              <button class="title">Project 2025 education blueprint ignites voucher debate</button>
+              <a class="source" href="https://rickhess99.medium.com/project-2025s-education-lead-on-the-controversial-policy-agenda-8e4cf7e3dc95" target="_blank" rel="noopener">Analysis ↗</a>
+            </div>
+            <div class="summary">Decentralization and school choice framed as parent empowerment; critics warn of weakened district systems.</div>
+          </div>
 
-<div class="story" data-date="2025-07-01">
-  <div class="head">
-    <button class="title">Senate GOP presses White House to release stalled school aid</button>
-    <a class="source" href="https://subscriber.politicopro.com/article/2025/07/republicans-urge-white-house-on-federal-school-aid-00457522" target="_blank" rel="noopener">Politico Pro ↗</a>
-  </div>
-  <div class="summary">Delays hit rural districts; Republicans seek streamlined delivery focused on skills rather than equity programs.</div>
-</div>
+          <div class="story" data-date="2025-07-01">
+            <div class="head">
+              <button class="title">Senate GOP presses White House to release stalled school aid</button>
+              <a class="source" href="https://subscriber.politicopro.com/article/2025/07/republicans-urge-white-house-on-federal-school-aid-00457522" target="_blank" rel="noopener">Politico Pro ↗</a>
+            </div>
+            <div class="summary">Delays hit rural districts; Republicans seek streamlined delivery focused on skills rather than equity programs.</div>
+          </div>
 
-<div class="story" data-date="2025-10-23">
-  <div class="head">
-    <button class="title">India–Nigeria IIT campus aims at AI & tech skills</button>
-    <a class="source" href="https://www.thehindu.com/education/news-from-the-world-of-education-october-23-2025/article70195483.ece" target="_blank" rel="noopener">The Hindu ↗</a>
-  </div>
-  <div class="summary">Cross-border training expands access but reignites “brain drain” concerns.</div>
-</div>
-
+          <small class="meta">Admissions policies, funding, and choice debates</small>
+          <div class="no-results">No education headlines for this date.</div>
         </article>
 
         <!-- SECURITY & BORDERS -->
         <article class="card section" data-section="security">
           <h3>Security &amp; Borders</h3>
 
-         <div class="story" data-date="2025-10-24">
-  <div class="head">
-    <button class="title">Bay Area ICE operations paused amid protests</button>
-    <a class="source" href="https://abc7news.com/live-updates/protest-planned-border-patrol-agents-begin-immigration-operation-san-francisco-president-trumps-direction-live-updates/18059194/" target="_blank" rel="noopener">ABC7 ↗</a>
-  </div>
-  <div class="summary">Planned enforcement draws demonstrations, highlighting friction between federal priorities and sanctuary policies.</div>
-</div>
+          <div class="story" data-date="2025-10-24">
+            <div class="head">
+              <button class="title">Bay Area ICE operations paused amid protests</button>
+              <a class="source" href="https://abc7news.com/live-updates/protest-planned-border-patrol-agents-begin-immigration-operation-san-francisco-president-trumps-direction-live-updates/18059194/" target="_blank" rel="noopener">ABC7 ↗</a>
+            </div>
+            <div class="summary">Planned enforcement draws demonstrations, highlighting friction between federal priorities and sanctuary policies.</div>
+          </div>
 
-<div class="story" data-date="2025-10-24">
-  <div class="head">
-    <button class="title">Border apprehensions fall to 50-year low</button>
-    <a class="source" href="https://www.bbc.com/news/articles/cp8wd8938e8o" target="_blank" rel="noopener">BBC ↗</a>
-  </div>
-  <div class="summary">Reported 238k crossings credited to stricter measures; humanitarian impacts remain a concern.</div>
-</div>
+          <div class="story" data-date="2025-10-24">
+            <div class="head">
+              <button class="title">Border apprehensions fall to 50-year low</button>
+              <a class="source" href="https://www.bbc.com/news/articles/cp8wd8938e8o" target="_blank" rel="noopener">BBC ↗</a>
+            </div>
+            <div class="summary">Reported 238k crossings credited to stricter measures; humanitarian impacts remain a concern.</div>
+          </div>
 
-<div class="story" data-date="2025-10-24">
-  <div class="head">
-    <button class="title">Facial recognition expanded at U.S. ports</button>
-    <a class="source" href="https://www.reuters.com/world/us/us-expands-facial-recognition-borders-track-non-citizens-2025-10-24/" target="_blank" rel="noopener">Reuters ↗</a>
-  </div>
-  <div class="summary">Biometric checks target overstay risk; privacy advocates question safeguards.</div>
-</div>
+          <div class="story" data-date="2025-10-24">
+            <div class="head">
+              <button class="title">Facial recognition expanded at U.S. ports</button>
+              <a class="source" href="https://www.reuters.com/world/us/us-expands-facial-recognition-borders-track-non-citizens-2025-10-24/" target="_blank" rel="noopener">Reuters ↗</a>
+            </div>
+            <div class="summary">Biometric checks target overstay risk; privacy advocates question safeguards.</div>
+          </div>
 
-<div class="story" data-date="2025-10-24">
-  <div class="head">
-    <button class="title">Drug-boat strikes proceed without war declaration</button>
-    <a class="source" href="https://www.nytimes.com/2025/10/24/us/politics/hegseth-drug-boat-strike.html" target="_blank" rel="noopener">NYT ↗</a>
-  </div>
-  <div class="summary">Operations against fentanyl traffickers in the Caribbean test executive authority and congressional oversight.</div>
-</div>
+          <div class="story" data-date="2025-10-24">
+            <div class="head">
+              <button class="title">Drug-boat strikes proceed without war declaration</button>
+              <a class="source" href="https://www.nytimes.com/2025/10/24/us/politics/hegseth-drug-boat-strike.html" target="_blank" rel="noopener">NYT ↗</a>
+            </div>
+            <div class="summary">Operations against fentanyl traffickers in the Caribbean test executive authority and congressional oversight.</div>
+          </div>
 
-<div class="story" data-date="2025-10-23">
-  <div class="head">
-    <button class="title">Police warn on Venezuelan gang rumors</button>
-    <a class="source" href="https://www.theguardian.com/us-news/2025/oct/23/venezuela-tren-de-aragua-gang-police" target="_blank" rel="noopener">Guardian ↗</a>
-  </div>
-  <div class="summary">Reports of Tren de Aragua plotting attacks stoke fears and debate over policy responses.</div>
-</div>
+          <div class="story" data-date="2025-10-23">
+            <div class="head">
+              <button class="title">Police warn on Venezuelan gang rumors</button>
+              <a class="source" href="https://www.theguardian.com/us-news/2025/oct/23/venezuela-tren-de-aragua-gang-police" target="_blank" rel="noopener">Guardian ↗</a>
+            </div>
+            <div class="summary">Reports of Tren de Aragua plotting attacks stoke fears and debate over policy responses.</div>
+          </div>
+
+          <small class="meta">State deployments and DHS/port-of-entry tech</small>
+          <div class="no-results">No border/security updates for this date.</div>
         </article>
 
         <!-- AMERICA FIRST -->
         <article class="card section" data-section="america">
           <h3>America First</h3>
 
+          <div class="story" data-date="2025-10-24">
+            <div class="head">
+              <button class="title">AFPI slams safety-net spending for non-citizens</button>
+              <a class="source" href="https://americafirstpolicy.com/" target="_blank" rel="noopener">AFPI ↗</a>
+            </div>
+            <div class="summary">Think tank urges redirecting emergency resources toward citizens and border control.</div>
+          </div>
+
+          <div class="story" data-date="2025-10-24">
+            <div class="head">
+              <button class="title">H-1B overhaul framed as “citizens-first” hiring</button>
+              <a class="source" href="https://www.greatandhra.com/articles/special-articles/white-house-reaffirms-america-first-in-h-1b-overhaul-150241" target="_blank" rel="noopener">Report ↗</a>
+            </div>
+            <div class="summary">Proposed changes aim to curb outsourcing and prioritize U.S. workers in high-skill roles.</div>
+          </div>
+
+          <div class="story" data-date="2025-10-24">
+            <div class="head">
+              <button class="title">JPMorgan to allow crypto as mortgage collateral</button>
+              <a class="source" href="https://www.bloomberg.com/news/articles/2025-10-24/jpmorgan-to-allow-crypto-as-mortgage-collateral" target="_blank" rel="noopener">Bloomberg ↗</a>
+            </div>
+            <div class="summary">Move toward digital-asset collateralization signals a post-regulatory shift in consumer finance.</div>
+          </div>
+
+          <div class="story" data-date="2025-10-24">
+            <div class="head">
+              <button class="title">U.S. credit downgraded to AA- by Scope Ratings</button>
+              <a class="source" href="https://www.reuters.com/markets/us/us-downgraded-aa-scope-ratings-2025-10-24/" target="_blank" rel="noopener">Reuters ↗</a>
+            </div>
+            <div class="summary">$38T federal debt, tariffs, and spending cited as drivers of the downgrade.</div>
+          </div>
+
           <div class="story" data-date="2025-09-08">
-  <div class="head">
-    <button class="title">E. Jean Carroll’s $83M verdict upheld on appeal</button>
-    <a class="source" href="https://www.nytimes.com/interactive/2025/09/08/nyregion/08carroll-appeal-doc.html" target="_blank" rel="noopener">NYT ↗</a>
-  </div>
-  <div class="summary">Court affirms defamation award for 2019 comments; no new trial ordered.</div>
-</div>
+            <div class="head">
+              <button class="title">E. Jean Carroll’s $83M verdict upheld on appeal</button>
+              <a class="source" href="https://www.nytimes.com/interactive/2025/09/08/nyregion/08carroll-appeal-doc.html" target="_blank" rel="noopener">NYT ↗</a>
+            </div>
+            <div class="summary">Court affirms defamation award for 2019 comments; no new trial ordered.</div>
+          </div>
 
-<div class="story" data-date="2025-10-24">
-  <div class="head">
-    <button class="title">AFPI slams safety-net spending for non-citizens</button>
-    <a class="source" href="https://americafirstpolicy.com/" target="_blank" rel="noopener">AFPI ↗</a>
-  </div>
-  <div class="summary">Think tank urges redirecting emergency resources toward citizens and border control.</div>
-</div>
-
-<div class="story" data-date="2025-10-24">
-  <div class="head">
-    <button class="title">H-1B overhaul framed as “citizens-first” hiring</button>
-    <a class="source" href="https://www.greatandhra.com/articles/special-articles/white-house-reaffirms-america-first-in-h-1b-overhaul-150241" target="_blank" rel="noopener">Report ↗</a>
-  </div>
-  <div class="summary">Proposed changes aim to curb outsourcing and prioritize U.S. workers in high-skill roles.</div>
-</div>
-
-<div class="story" data-date="2025-10-24">
-  <div class="head">
-    <button class="title">JPMorgan to allow crypto as mortgage collateral</button>
-    <a class="source" href="https://www.bloomberg.com/news/articles/2025-10-24/jpmorgan-to-allow-crypto-as-mortgage-collateral" target="_blank" rel="noopener">Bloomberg ↗</a>
-  </div>
-  <div class="summary">Banks move toward digital-asset collateralization marks a post-regulatory shift in consumer finance.</div>
-</div>
-
-<div class="story" data-date="2025-10-24">
-  <div class="head">
-    <button class="title">U.S. credit downgraded to AA- by Scope Ratings</button>
-    <a class="source" href="https://www.reuters.com/markets/us/us-downgraded-aa-scope-ratings-2025-10-24/" target="_blank" rel="noopener">Reuters ↗</a>
-  </div>
-  <div class="summary">$38T federal debt, tariffs, and spending cited as drivers of the downgrade.</div>
-</div>
+          <small class="meta">Treaty powers, labor/visa, finance & ratings</small>
+          <div class="no-results">No domestic policy features yet for this date.</div>
         </article>
 
         <!-- GLOBAL -->
         <article class="card section" data-section="global">
           <h3>Global Lens</h3>
 
+          <div class="story" data-date="2025-10-24">
+            <div class="head">
+              <button class="title">Maduro deploys defenses as carrier nears</button>
+              <a class="source" href="https://ca.news.yahoo.com/trump-could-destroy-cocaine-facilities-214628095.html" target="_blank" rel="noopener">Yahoo News ↗</a>
+            </div>
+            <div class="summary">Coastal alerts follow reported covert strikes on cartel facilities.</div>
+          </div>
+
+          <div class="story" data-date="2025-10-24">
+            <div class="head">
+              <button class="title">Machado backs U.S. pressure on Maduro</button>
+              <a class="source" href="https://www.cbsnews.com/video/what-president-trumps-venezuela-policy-could-mean-for-us-foreign-strategy/" target="_blank" rel="noopener">CBS News ↗</a>
+            </div>
+            <div class="summary">Opposition leader supports accountability tied to trafficking networks.</div>
+          </div>
+
           <div class="story" data-date="2025-10-23">
-  <div class="head">
-    <button class="title">Venezuela saber-rattling divides Trump base</button>
-    <a class="source" href="https://www.nytimes.com/2025/10/23/us/politics/trump-supporters-venezuela.html" target="_blank" rel="noopener">NYT ↗</a>
-  </div>
-  <div class="summary">Moves against drug routes revive intervention fatigue vs. border-first priorities.</div>
-</div>
+            <div class="head">
+              <button class="title">Venezuela saber-rattling divides Trump base</button>
+              <a class="source" href="https://www.nytimes.com/2025/10/23/us/politics/trump-supporters-venezuela.html" target="_blank" rel="noopener">NYT ↗</a>
+            </div>
+            <div class="summary">Moves against drug routes revive intervention fatigue vs. border-first priorities.</div>
+          </div>
 
-<div class="story" data-date="2025-10-24">
-  <div class="head">
-    <button class="title">Maduro deploys defenses as carrier nears</button>
-    <a class="source" href="https://ca.news.yahoo.com/trump-could-destroy-cocaine-facilities-214628095.html" target="_blank" rel="noopener">Yahoo News ↗</a>
-  </div>
-  <div class="summary">Coastal alerts follow reported covert strikes on cartel facilities.</div>
-</div>
+          <div class="story" data-date="2025-08-01">
+            <div class="head">
+              <button class="title">All 32 NATO allies hit 2% spending</button>
+              <a class="source" href="https://apnews.com/article/d9bb0df961326e6d738d537f4ba8dacd" target="_blank" rel="noopener">AP News ↗</a>
+            </div>
+            <div class="summary">Milestone reached; a smaller group aims for 3.5% target.</div>
+          </div>
 
-<div class="story" data-date="2025-10-24">
-  <div class="head">
-    <button class="title">Machado backs U.S. pressure on Maduro</button>
-    <a class="source" href="https://www.cbsnews.com/video/what-president-trumps-venezuela-policy-could-mean-for-us-foreign-strategy/" target="_blank" rel="noopener">CBS News ↗</a>
-  </div>
-  <div class="summary">Opposition leader supports accountability tied to trafficking networks.</div>
-</div>
+          <div class="story" data-date="2025-01-08">
+            <div class="head">
+              <button class="title">Milei advances Argentina privatizations</button>
+              <a class="source" href="https://www.reuters.com/world/americas/argentina-privatizes-state-metal-firm-milei-era-first-2025-01-08/" target="_blank" rel="noopener">Reuters ↗</a>
+            </div>
+            <div class="summary">Aggressive state-shrink agenda continues; markets watch deregulation pace.</div>
+          </div>
 
-<div class="story" data-date="2025-08-01">
-  <div class="head">
-    <button class="title">All 32 NATO allies hit 2% spending</button>
-    <a class="source" href="https://apnews.com/article/d9bb0df961326e6d738d537f4ba8dacd" target="_blank" rel="noopener">AP News ↗</a>
-  </div>
-  <div class="summary">Milestone reached; a smaller group aims for 3.5% target.</div>
-</div>
-
-<div class="story" data-date="2025-01-08">
-  <div class="head">
-    <button class="title">Milei advances Argentina privatizations</button>
-    <a class="source" href="https://www.reuters.com/world/americas/argentina-privatizes-state-metal-firm-milei-era-first-2025-01-08/" target="_blank" rel="noopener">Reuters ↗</a>
-  </div>
-  <div class="summary">Aggressive state-shrink agenda continues; markets watch deregulation pace.</div>
-</div>
-
+          <small class="meta">Defense spending trendlines and market reforms abroad</small>
+          <div class="no-results">No global highlights available for this date.</div>
         </article>
 
         <!-- JOURNAL -->
         <article class="card section" data-section="journal">
           <h3>Journal &amp; Ideas</h3>
 
+          <div class="story" data-date="2025-10-24">
+            <div class="head">
+              <button class="title">Generational debt from policy traps</button>
+              <a class="source" href="https://x.com/redpill_finance/status/1981689203915477092" target="_blank" rel="noopener">X Thread ↗</a>
+            </div>
+            <div class="summary">Critique of education/welfare incentives that funnel youth into loans and stagnation.</div>
+          </div>
+
+          <div class="story" data-date="2025-10-24">
+            <div class="head">
+              <button class="title">Music AI and the end of authenticity?</button>
+              <a class="source" href="https://www.theinformation.com/articles/openai-developing-ai-music-generator" target="_blank" rel="noopener">The Information ↗</a>
+            </div>
+            <div class="summary">Commercial AI songwriting raises questions about ownership, culture, and artist futures.</div>
+          </div>
+
+          <div class="story" data-date="2024-11-15">
+            <div class="head">
+              <button class="title">Election whales reportedly net $85M</button>
+              <a class="source" href="https://finance.yahoo.com/news/polymarket-whale-actually-made-85-050139914.html" target="_blank" rel="noopener">Yahoo Finance ↗</a>
+            </div>
+            <div class="summary">Blockchain-tracked profits spark debates on market integrity and regulation.</div>
+          </div>
+
           <div class="story" data-date="2024-10-24">
-  <div class="head">
-    <button class="title">Who is Polymarket’s $28M “Trump whale”?</button>
-    <a class="source" href="https://www.forbes.com/sites/dereksaul/2024/10/24/who-is-polymarkets-trump-whale-site-reveals-french-trader-bet-28-million-on-trump-win/" target="_blank" rel="noopener">Forbes ↗</a>
-  </div>
-  <div class="summary">A French trader’s huge wager raises questions about prediction-market influence.</div>
-</div>
+            <div class="head">
+              <button class="title">Who is Polymarket’s $28M “Trump whale”?</button>
+              <a class="source" href="https://www.forbes.com/sites/dereksaul/2024/10/24/who-is-polymarkets-trump-whale-site-reveals-french-trader-bet-28-million-on-trump-win/" target="_blank" rel="noopener">Forbes ↗</a>
+            </div>
+            <div class="summary">A French trader’s huge wager raises questions about prediction-market influence.</div>
+          </div>
 
-<div class="story" data-date="2024-11-15">
-  <div class="head">
-    <button class="title">Election whales reportedly net $85M</button>
-    <a class="source" href="https://finance.yahoo.com/news/polymarket-whale-actually-made-85-050139914.html" target="_blank" rel="noopener">Yahoo Finance ↗</a>
-  </div>
-  <div class="summary">Blockchain-tracked profits spark debates on market integrity and regulation.</div>
-</div>
+          <small class="meta">Send pitches to tips@somethingtoreport.com</small>
+          <div class="no-results">No long-form additions on this date.</div>
+        </article>
 
-<div class="story" data-date="2025-10-24">
-  <div class="head">
-    <button class="title">Generational debt from policy traps</button>
-    <a class="source" href="https://x.com/redpill_finance/status/1981689203915477092" target="_blank" rel="noopener">X Thread ↗</a>
-  </div>
-  <div class="summary">Critique of education/welfare incentives that funnel youth into loans and stagnation.</div>
-</div>
-
-<div class="story" data-date="2025-10-24">
-  <div class="head">
-    <button class="title">Music AI and the end of authenticity?</button>
-    <a class="source" href="https://www.theinformation.com/articles/openai-developing-ai-music-generator" target="_blank" rel="noopener">The Information ↗</a>
-  </div>
-  <div class="summary">Commercial AI songwriting raises questions about ownership, culture, and artist futures.</div>
-</div>
-
-    </section>
-
-    <!-- archive (dates accordion) -->
-    <details class="archive" id="archiveWrap">
-      <summary>Archive</summary>
-      <div class="archive-body">
-        <div class="archive-accordion" id="archive"></div>
       </div>
-    </details>
+
+      <!-- expand-all lives with the stories -->
+      <div class="expand-wrap">
+        <button class="btn" id="toggleAll" aria-pressed="false">Expand all stories</button>
+      </div>
+    </section>
 
     <!-- policy tracker -->
     <section aria-label="Policy Tracker">
@@ -429,10 +424,10 @@
         </thead>
         <tbody>
           <tr><td>CSU Direct Admissions (SB 640)</td><td><span class="badge">Signed</span></td><td>2025-10-10</td></tr>
-          <tr><td>SFSU–SFUSD Guarantee</td><td><span class="badge">Announced</span></td><td>2025-10-24</td></tr>
+          <tr><td>SFSU–SFUSD Local Guarantee</td><td><span class="badge">Announced</span></td><td>2025-10-24</td></tr>
           <tr><td>WHO Accord Resolution</td><td><span class="badge">In Senate</span></td><td>2025-02-10</td></tr>
-          <tr><td>Operation Lone Star</td><td><span class="badge">Ongoing</span></td><td>2024-06-20</td></tr>
-          <tr><td>Border Drug Strikes</td><td><span class="badge">Escalating</span></td><td>2025-10-24</td></tr>
+          <tr><td>Operation Lone Star</td><td><span class="badge">Ongoing</span></td><td>2025-10-24</td></tr>
+          <tr><td>Border Drug Boat Strikes</td><td><span class="badge">Escalating</span></td><td>2025-10-24</td></tr>
         </tbody>
       </table>
     </section>
@@ -474,61 +469,41 @@
     q.addEventListener("input", textFilter);
     clearBtn.addEventListener("click", ()=>{ q.value=""; textFilter(); q.focus(); });
 
-    // helpers for dates
+    // ---- DATE HELPERS ----
     const datesEl=$("#dates");
     const params=new URLSearchParams(location.search);
-    const preset=params.get("date");
-    const fmtDate=d=>{
-      const mm=String(d.getMonth()+1).padStart(2,'0');
-      const dd=String(d.getDate()).padStart(2,'0');
-      const yy=d.getFullYear();
-      return `${mm}-${dd}-${yy}`;
-    };
+    const preset=params.get("date");  // "MM-DD-YYYY" if present
+
+    const iso = (d)=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+    const labelFromDate = (d)=>`${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}-${d.getFullYear()}`;
     const normalizeIso=str=>{
       if(!str) return "";
       const parts=str.split(/[-/]/).map(s=>s.trim());
       if(parts.length!==3) return str;
-      if(parts[0].length===4){
-        return `${parts[0]}-${parts[1].padStart(2,'0')}-${parts[2].padStart(2,'0')}`;
+      // if label style MM-DD-YYYY → convert to ISO
+      if(parts[0].length===2 && parts[1].length===2 && parts[2].length===4){
+        return `${parts[2]}-${parts[0]}-${parts[1]}`;
       }
-      if(parts[2].length===4){
-        return `${parts[2]}-${parts[0].padStart(2,'0')}-${parts[1].padStart(2,'0')}`;
-      }
+      // ISO already: YYYY-MM-DD
+      if(parts[0].length===4) return `${parts[0]}-${parts[1].padStart(2,'0')}-${parts[2].padStart(2,'0')}`;
       return str;
     };
-    const labelFromIso=iso=>{
-      const [y,m,d]=iso.split("-");
-      return `${m}-${d}-${y}`;
-    };
 
-    // build date pills from stories on page
-    const stories=$$(".story");
-    const isoDates=[...new Set(stories.map(st=>normalizeIso(st.dataset.date)))].filter(Boolean).sort((a,b)=>b.localeCompare(a));
-    // make sure today's date is included so it always starts with today
-const today = new Date();
-const y = today.getFullYear();
-const m = String(today.getMonth() + 1).padStart(2, "0");
-const d = String(today.getDate()).padStart(2, "0");
-const todayIso = `${y}-${m}-${d}`;
-if (!isoDates.includes(todayIso)) {
-  isoDates.unshift(todayIso);  // put today at the front
-}
-const MAX_DAYS = 3;
-const pills = [];
-isoDates.slice(0, MAX_DAYS).forEach((iso, i) => {
-  const d = new Date(`${iso}T12:00:00`);
-  const mm = String(d.getMonth()+1).padStart(2,'0');
-  const dd = String(d.getDate()).padStart(2,'0');
-  const yyyy = d.getFullYear();
-  const label = `${mm}-${dd}-${yyyy}`;
-  const pill = document.createElement("button");
-  pill.type = "button";
-  pill.className = "pill";
-  pill.dataset.date = label;
-  pill.textContent = i === 0 ? `Latest: ${label}` : label;
-  datesEl.insertBefore(pill, stamp);
-  pills.push(pill);
-});
+    // Build EXACTLY three pills: today, yesterday, day-before
+    const today=new Date();
+    const day = (n)=>{const d=new Date(); d.setDate(today.getDate()-n); return d;};
+    const three=[day(0), day(1), day(2)];
+    const pills=[];
+    three.forEach((d,i)=>{
+      const pill=document.createElement("button");
+      pill.type="button";
+      pill.className="pill";
+      const label=labelFromDate(d);
+      pill.dataset.date=label;
+      pill.textContent=i===0?`Latest: ${label}`:label;
+      datesEl.insertBefore(pill, stamp);
+      pills.push(pill);
+    });
 
     // per-story expand/collapse
     function setStoryOpen(el, open){ el.classList.toggle("open", open); }
@@ -539,70 +514,50 @@ isoDates.slice(0, MAX_DAYS).forEach((iso, i) => {
       });
     });
 
-    // filter by date (archive does NOT auto-open)
+    // filter by date across ALL sections
     const sections=$$(".card.section");
-    function applyDateFilter(dateStr){
-      pills.forEach(p=>p.classList.toggle("active", p.dataset.date===dateStr));
-      const targetIso=normalizeIso(dateStr);
+    function applyDateFilter(labelDate){
+      // highlight active pill
+      pills.forEach(p=>p.classList.toggle("active", p.dataset.date===labelDate));
+      // convert MM-DD-YYYY → ISO for matching
+      const targetIso=normalizeIso(labelDate);
+
       sections.forEach(card=>{
         const list=$$(".story",card);
         let shown=0;
         list.forEach(st=>{
-          const storyIso=normalizeIso(st.dataset.date);
-          const match=storyIso===targetIso;
+          const storyIso = st.dataset.date; // must be YYYY-MM-DD in the HTML
+          const match = storyIso===targetIso;
           st.style.display = match ? "" : "none";
           if(match) shown++;
         });
-        $(".no-results",card).style.display = shown ? "none" : "block";
+        const empty=$(".no-results",card);
+        if(empty) empty.style.display = shown? "none":"block";
       });
-      const url=new URL(location.href); url.searchParams.set("date", dateStr); history.replaceState(null,"",url.toString());
-      // intentionally not auto-opening archive
+
+      // reflect in URL (bookmarkable)
+      const url=new URL(location.href);
+      url.searchParams.set("date", labelDate);
+      history.replaceState(null,"",url.toString());
     }
+
+    // hook pills
     pills.forEach(p=>p.addEventListener("click", ()=>applyDateFilter(p.dataset.date)));
-    const initial=preset && pills.some(p=>p.dataset.date===preset) ? preset : (pills[0]?.dataset.date || "");
+
+    // initial selection: from ?date=..., else first pill (today)
+    const initial = preset && pills.some(p=>p.dataset.date===preset) ? preset : (pills[0]?.dataset.date || "");
     if(initial){ applyDateFilter(initial); }
 
     // expand/collapse all
-   const toggleAll = $("#toggleAll");
-if (toggleAll) {
-  toggleAll.addEventListener("click", ()=>{
-    const open = toggleAll.getAttribute("aria-pressed")!=="true";
-    toggleAll.setAttribute("aria-pressed", String(open));
-    toggleAll.textContent = open ? "Collapse all stories" : "Expand all stories";
-    $$(".story").forEach(st=> setStoryOpen(st, open));
-  });
-}
-    // Archive: build accordion from visible stories
-    const archive=$("#archive");
-    const byDate={};
-    stories.forEach(st=>{
-      const iso=normalizeIso(st.dataset.date) || "undated";
-      const label = iso === "undated" ? "undated" : labelFromIso(iso);
-      (byDate[label] ||= []).push(st.querySelector(".title").textContent);
-    });
-    Object.keys(byDate).sort((a,b)=> b.localeCompare(a)).forEach(date=>{
-    // ensure "today" shows in Archive (even if there are no stories yet)
-const today = new Date();
-const y = today.getFullYear();
-const m2 = String(today.getMonth() + 1).padStart(2, "0");
-const d2 = String(today.getDate()).padStart(2, "0");
-const todayIso = `${y}-${m2}-${d2}`;
-const todayLabelForArchive = labelFromIso(todayIso);
-
-if (!byDate[todayLabelForArchive]) {
-  byDate[todayLabelForArchive] = ["(no items yet — add today's JSON)"];
-}
-
-      const details=document.createElement("details");
-      details.id = `a-${date}`;
-      const sum=document.createElement("summary");
-      sum.textContent=date;
-      const day=document.createElement("div");
-      day.className="day";
-      day.innerHTML = byDate[date].map(t=>`<div>• ${t}</div>`).join("");
-      details.append(sum, day);
-      archive.appendChild(details);
-    });
+    const toggleAll=$("#toggleAll");
+    if(toggleAll){
+      toggleAll.addEventListener("click", ()=>{
+        const open = toggleAll.getAttribute("aria-pressed")!=="true";
+        toggleAll.setAttribute("aria-pressed", String(open));
+        toggleAll.textContent = open ? "Collapse all stories" : "Expand all stories";
+        $$(".story").forEach(st=> setStoryOpen(st, open));
+      });
+    }
   </script>
 </body>
 </html>
