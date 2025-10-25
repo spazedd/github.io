@@ -4,19 +4,22 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <title>Something to Report</title>
-  <meta name="description" content="Headlines with sources, summaries, and a clean three-day layout." />
+  <meta name="description" content="Headlines with sources, fast summaries, and a clean archive." />
+  <!-- FONTS (restored) -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
   <script>(()=>{const m=localStorage.getItem("mode");if(m==="dark")document.documentElement.setAttribute("data-theme","dark");})();</script>
+
   <style>
     :root{
+      /* RESTORED COLORS */
       --bg:#f7f7f5; --fg:#1f2328; --muted:#5b6270;
       --brand:#8b0000; --brand-strong:#6f0000; --link:var(--brand);
       --card:#ffffff; --ring:#e5e7eb;
       --shadow:0 14px 40px rgba(139,0,0,.08), 0 6px 20px rgba(0,0,0,.06);
-      --radius:16px; --pad:clamp(16px,3vw,32px); --maxw:1180px;
-      --h1:clamp(32px,6vw,66px); --h3:clamp(17px,2.4vw,22px);
-      --body:clamp(15px,1.9vw,17px); --small:clamp(12px,1.7vw,14px);
+      --radius:16px; --pad:clamp(14px,3vw,22px); --maxw:840px;
+      --h1:clamp(28px,6vw,48px); --h3:clamp(16px,2.4vw,20px);
+      --body:clamp(14px,1.9vw,16px); --small:clamp(12px,1.7vw,14px);
     }
     html[data-theme="dark"]{
       --bg:#10141c; --fg:#e8ebf0; --muted:#a6b0be;
@@ -25,109 +28,129 @@
     }
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{margin:0;background:var(--bg);color:var(--fg);font:400 var(--body)/1.65 Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
+    body{margin:0;background:var(--bg);color:var(--fg);font:400 var(--body)/1.65 Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
     a{color:var(--link);text-decoration:none}
     a:hover{text-decoration:underline}
     .wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad)}
-    /* Controls */
-    .controls{position:sticky;top:0;z-index:50;backdrop-filter:blur(10px);background:color-mix(in oklab,var(--card) 85%,transparent);border-bottom:1px solid var(--ring)}
-    .controls .row{display:flex;align-items:center;gap:10px;padding:10px var(--pad)}
-    .search{flex:1;display:flex;gap:8px}
-    .search input{flex:1;height:44px;border:1px solid var(--ring);border-radius:12px;background:var(--card);color:var(--fg);padding:0 14px}
-    .btn{height:44px;border:1px solid var(--ring);border-radius:12px;background:var(--card);color:var(--fg);font-weight:700;padding:0 14px;cursor:pointer}
-    .clock{font-size:var(--small);color:var(--muted)}
-    /* Header */
-    header{padding:24px 0;border-bottom:1px solid var(--ring)}
-    .brand{font:900 var(--h1)/1.05 Merriweather,Georgia,serif;text-align:center;margin:0 0 6px}
-    .dek{text-align:center;color:var(--muted);margin:0 auto;max-width:600px}
-    /* Date Pills */
-    .dates{display:flex;gap:8px;align-items:center;margin:12px auto 0;max-width:var(--maxw)}
-    .pill{border:1px solid var(--ring);border-radius:999px;padding:8px 14px;background:var(--card);font-size:var(--small);font-weight:700;cursor:pointer}
-    .pill.active{outline:2px solid var(--brand)}
-    .stamp{margin-left:auto;font-size:var(--small);color:var(--muted)}
-    /* Breaking */
-    .panel{margin:14px auto 0;max-width:var(--maxw);background:var(--card);border:1px solid var(--ring);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
-    .panel .bar{padding:14px 18px;font-weight:800;color:var(--brand-strong);border-bottom:1px dashed var(--ring)}
-    .panel .body{padding:14px 18px;color:var(--muted);font-size:var(--small)}
-    /* Sections */
-    .sections{padding:20px 0}
-    .grid{display:grid;grid-template-columns:1fr;gap:20px}
-    @media(min-width:800px){.grid{grid-template-columns:repeat(2,1fr)}}
-    @media(min-width:1100px){.grid{grid-template-columns:repeat(3,1fr)}}
-    .card{background:var(--card);border:1px solid var(--ring);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px}
-    .card h3{margin:0 0 10px;font:800 var(--h3)/1.2 Inter;text-transform:uppercase;color:var(--brand-strong)}
-    .story{padding:10px 0;border-bottom:1px dashed var(--ring)}
+
+    /* top bar */
+    .controls{position:sticky;top:0;z-index:60;backdrop-filter:blur(12px);background:color-mix(in oklab,var(--card) 86%,transparent);border-bottom:1px solid var(--ring);padding:10px var(--pad)}
+    .controls .row{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;gap:10px}
+    .search{flex:1 1 auto;display:flex;gap:8px}
+    .search input{width:100%;height:42px;padding:0 14px;border:1px solid var(--ring);border-radius:12px;background:var(--card);color:var(--fg);outline:none}
+    .btn{display:inline-flex;align-items:center;justify-content:center;height:42px;padding:0 14px;gap:8px;background:var(--card);color:var(--fg);border:1px solid var(--ring);border-radius:12px;cursor:pointer;font-weight:600}
+    .btn:hover{box-shadow:0 10px 24px rgba(139,0,0,.12)}
+    .clock{font-size:var(--small);color:var(--muted);white-space:nowrap}
+
+    header{padding:calc(var(--pad) + 6px) 0 var(--pad);border-bottom:1px solid rgba(0,0,0,.06);background:radial-gradient(1200px 420px at 50% -220px,#fff 0,#f0f0f0 55%,#e9e9e9 100%) 0/cover,linear-gradient(120deg,rgba(139,0,0,.12),transparent)}
+    html[data-theme="dark"] header{border-bottom:1px solid rgba(255,255,255,.06);background:radial-gradient(1200px 420px at 50% -220px,#1f2536 0,#151c2a 60%,#0f1420 100%) 0/cover,linear-gradient(120deg,rgba(255,107,107,.18),transparent)}
+    .brand{font:900 var(--h1)/1.1 Merriweather,Georgia,serif;letter-spacing:.6px;text-transform:uppercase;margin:0 0 6px;text-align:center;color:var(--fg)}
+    .dek{text-align:center;color:var(--muted);font-size:var(--body);max-width:720px;margin:0 auto}
+
+    /* date pills */
+    .dates{display:flex;gap:8px;flex-wrap:nowrap;align-items:center;margin:14px auto 0;max-width:var(--maxw);overflow:auto;padding-bottom:4px}
+    .pill{display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:999px;cursor:pointer;white-space:nowrap;background:var(--card);border:1px solid var(--ring);color:var(--muted);font-size:var(--small);font-weight:700}
+    .pill.active{outline:2px solid var(--brand);color:var(--fg)}
+    .stamp{margin-left:auto;font-size:var(--small);color:var(--muted);flex:0 0 auto}
+
+    /* headline banner (BREAKING) */
+    .panel{margin:14px auto 0;max-width:var(--maxw);background:var(--card);color:var(--fg);border:1px solid var(--ring);border-radius:14px;box-shadow:var(--shadow);overflow:hidden}
+    .panel .bar{display:flex;gap:10px;align-items:center;padding:14px 16px;border-bottom:1px dashed var(--ring);font-weight:800;letter-spacing:.3px;color:var(--brand-strong)}
+    .panel .body{padding:14px 16px;font-size:var(--small);color:var(--muted)}
+    .hidden{display:none !important}
+
+    /* category accordions */
+    .sections{padding:16px 0 24px}
+    .cat { border:1px solid var(--ring); border-radius:14px; background:var(--card); box-shadow:var(--shadow); overflow:hidden }
+    .cat + .cat { margin-top:12px }
+    .cat > summary { list-style:none; display:flex; align-items:center; gap:10px; padding:14px 16px; cursor:pointer; font-weight:800; letter-spacing:.3px; color:var(--brand-strong); }
+    .cat > summary::-webkit-details-marker { display:none }
+    .cat[open] > summary { border-bottom:1px dashed var(--ring) }
+    .cat-title { flex:1 }
+    .cat-count { font-size:var(--small); color:var(--muted); background:color-mix(in oklab,var(--brand) 10%,transparent); border-radius:999px; padding:4px 10px; font-weight:700 }
+
+    .items { padding:4px 16px 10px }
+    .story{padding:10px 0;border-bottom:1px dashed var(--ring);border-radius:8px}
     .story:last-child{border-bottom:none}
-    .story .title{all:unset;cursor:pointer;font-weight:700}
-    .story .title:hover{text-decoration:underline}
+    .head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+    .story button.title{all:unset;cursor:pointer;color:var(--fg);font-weight:700;display:block}
+    .story button.title:hover{ text-decoration:underline }
+    .source{display:inline-flex;align-items:center;gap:6px;font-size:var(--small);font-weight:700;text-decoration:none;padding:4px 10px;border:1px solid var(--ring);border-radius:999px;background:var(--card)}
     .summary{display:none;margin-top:6px;color:var(--muted);font-size:var(--small)}
+    .story.open{background:color-mix(in oklab,var(--brand) 6%,transparent);padding:12px;border-radius:10px}
     .story.open .summary{display:block}
-    .source{display:inline-block;margin-top:6px;font-size:var(--small);padding:4px 10px;border:1px solid var(--ring);border-radius:999px}
-    .meta{font-size:var(--small);color:var(--muted);margin-top:8px;display:block}
-    .no-results{display:none;margin-top:6px;font-size:var(--small);color:var(--muted)}
-    /* Policy table */
-    .table{width:100%;border-collapse:collapse;margin-top:28px;background:var(--card);border:1px solid var(--ring);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
-    .table caption{padding:12px 16px;font-weight:800;color:var(--brand-strong);text-align:left}
-    .table th,.table td{padding:12px 16px;text-align:left;border-bottom:1px solid var(--ring)}
-    .table th{background:color-mix(in oklab,var(--brand) 6%,transparent)}
-    .badge{display:inline-block;padding:6px 10px;border-radius:999px;background:color-mix(in oklab,var(--brand) 18%,transparent);color:var(--brand);font-size:var(--small);font-weight:800}
-    .expand-wrap{text-align:center;margin:24px 0}
-    footer{text-align:center;padding:24px 0 36px;color:var(--muted);font-size:var(--small)}
+
+    .no-results{display:none;margin:6px 0 2px;color:var(--muted);font-size:var(--small)}
+
+    /* bottom expand-all */
+    .expand-wrap{display:flex;justify-content:center;margin:16px auto 26px;max-width:var(--maxw)}
+    .expand-wrap .btn{height:44px}
+
+    /* policy table */
+    .table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--ring);border-radius:14px;box-shadow:var(--shadow);overflow:hidden}
+    .table caption{padding:12px 16px;font-weight:800;text-align:left;color:var(--brand-strong);text-transform:uppercase}
+    .table th,.table td{text-align:left;padding:12px 16px;font-size:var(--body);border-bottom:1px solid var(--ring)}
+    .table th{font-weight:800;background:color-mix(in oklab,var(--brand) 6%,transparent)}
+    .table tr:last-child td{border-bottom:none}
+    .badge{display:inline-block;padding:6px 10px;border-radius:999px;background:color-mix(in oklab,var(--brand) 18%,transparent);color:var(--brand);font-size:var(--small);font-weight:800;letter-spacing:.2px;text-transform:uppercase}
+
+    footer{text-align:center;padding:22px 0 40px;color:var(--muted);font-size:var(--small)}
   </style>
 </head>
 <body>
-  <!-- Controls -->
+  <!-- sticky controls -->
   <div class="controls">
     <div class="row">
-      <div class="search"><input id="q" type="search" placeholder="Search headlines…"><button class="btn" id="clear">Clear</button></div>
+      <div class="search" role="search">
+        <input id="q" type="search" placeholder="Search headlines (title or summary)..." aria-label="Search headlines" />
+        <button class="btn" id="clear">Clear</button>
+      </div>
       <span class="clock" id="clock">Now — --:--</span>
-      <button class="btn" id="darkToggle" aria-pressed="false">🌙</button>
+      <button class="btn" id="darkToggle" aria-pressed="false" aria-label="Toggle dark mode">🌙</button>
     </div>
   </div>
 
-  <!-- Header -->
+  <!-- header -->
   <header>
     <div class="wrap">
       <h1 class="brand">Something to Report</h1>
-      <p class="dek">Daily briefings with sources and quick summaries — updated every morning.</p>
+      <p class="dek">Daily briefings with links to original sources, mobile-first layout, inline expands, and a simple JSON workflow.</p>
     </div>
   </header>
 
-  <!-- Dates -->
+  <!-- date pills + last updated -->
   <div class="wrap">
     <div class="dates" id="dates">
       <span class="stamp" id="stamp">Last updated --:--</span>
     </div>
   </div>
 
-  <!-- Breaking (hidden if empty) -->
+  <!-- breaking (hidden when empty) -->
   <div class="wrap">
-    <section class="panel" id="breakingPanel" hidden>
-      <div class="bar" id="breakingBar"></div>
+    <section class="panel breaking hidden" aria-label="Breaking" id="breaking">
+      <div class="bar" id="breakingTitle"></div>
       <div class="body" id="breakingBody"></div>
     </section>
-  </div>
 
-  <!-- Sections -->
-  <div class="wrap sections">
-    <div class="grid" id="sections">
-      <article class="card section" data-section="family"><h3>Family</h3><div class="list"></div><small class="meta">Family & parental policy updates.</small><div class="no-results">No family stories.</div></article>
-      <article class="card section" data-section="education"><h3>Education</h3><div class="list"></div><small class="meta">Admissions, funding, school choice.</small><div class="no-results">No education stories.</div></article>
-      <article class="card section" data-section="security"><h3>Security & Borders</h3><div class="list"></div><small class="meta">Defense, DHS, and state security efforts.</small><div class="no-results">No security stories.</div></article>
-      <article class="card section" data-section="america"><h3>America First</h3><div class="list"></div><small class="meta">Economy, jobs, and U.S. policy.</small><div class="no-results">No America stories.</div></article>
-      <article class="card section" data-section="global"><h3>Global Lens</h3><div class="list"></div><small class="meta">Foreign policy and world events.</small><div class="no-results">No global stories.</div></article>
-      <article class="card section" data-section="journal"><h3>Journal & Ideas</h3><div class="list"></div><small class="meta">Culture, opinion, and long reads.</small><div class="no-results">No journal stories.</div></article>
+    <!-- categories -->
+    <section class="sections">
+      <!-- built dynamically from JSON into <details class="cat"> blocks -->
+      <div id="cats"></div>
+    </section>
+
+    <!-- bottom expand/collapse -->
+    <div class="expand-wrap">
+      <button class="btn" id="toggleAll" aria-pressed="false">Expand all</button>
     </div>
-    <div class="expand-wrap"><button class="btn" id="toggleAll" aria-pressed="false">Expand all stories</button></div>
-  </div>
 
-  <!-- Policy Tracker -->
-  <div class="wrap">
-    <section aria-label="Policy Tracker">
-      <table class="table">
+    <!-- policy tracker (hidden when empty) -->
+    <section aria-label="Policy Tracker" id="policyWrap" class="hidden">
+      <table class="table" role="table" id="policyTable">
         <caption>Policy Tracker</caption>
-        <thead><tr><th>Topic</th><th>Status</th><th>Last Update</th></tr></thead>
-        <tbody id="policyBody"></tbody>
+        <thead>
+          <tr><th>Topic</th><th>Status</th><th>Last Update</th></tr>
+        </thead>
+        <tbody></tbody>
       </table>
     </section>
   </div>
@@ -135,66 +158,194 @@
   <footer>© <span id="year"></span> Something to Report</footer>
 
   <script>
-  const $=(s,el=document)=>el.querySelector(s);
-  const $$=(s,el=document)=>[...el.querySelectorAll(s)];
-  const pad=n=>String(n).padStart(2,"0");
-  const fmtTime=d=>d.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
-  const toIso=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
-  const toLabel=d=>`${pad(d.getMonth()+1)}-${pad(d.getDate())}-${d.getFullYear()}`;
-  const clock=$("#clock"), stamp=$("#stamp");
-  const tick=()=>clock.textContent=`Now — ${fmtTime(new Date())}`;
-  tick(); setInterval(tick,1000);
-  if(stamp) stamp.textContent=`Last updated ${fmtTime(new Date())}`;
-  $("#year").textContent=new Date().getFullYear();
+    const $=(s,el=document)=>el.querySelector(s);
+    const $$=(s,el=document)=>[...el.querySelectorAll(s)];
 
-  // Dark mode
-  const toggle=$("#darkToggle"), root=document.documentElement;
-  if(localStorage.getItem("mode")==="dark") toggle.setAttribute("aria-pressed","true");
-  toggle.addEventListener("click",()=>{const isDark=root.getAttribute("data-theme")==="dark";root.setAttribute("data-theme",isDark?"light":"dark");localStorage.setItem("mode",isDark?"light":"dark");toggle.setAttribute("aria-pressed",String(!isDark));});
+    // --- clock + footer year
+    const clock=$("#clock"), stamp=$("#stamp");
+    const fmtTime=d=>d.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+    const tick=()=>clock.textContent=`Now — ${fmtTime(new Date())}`;
+    tick(); setInterval(tick, 1000);
+    stamp.textContent=`Last updated ${fmtTime(new Date())}`;
+    $("#year").textContent=new Date().getFullYear();
 
-  // Search
-  const q=$("#q"), clearBtn=$("#clear");
-  function textFilter(){const term=q.value.trim().toLowerCase();$$(".card.section").forEach(card=>{card.style.display=card.innerText.toLowerCase().includes(term)? "":"none";});}
-  q.addEventListener("input",textFilter);clearBtn.addEventListener("click",()=>{q.value="";textFilter();q.focus();});
+    // --- dark mode
+    const toggle=$("#darkToggle"), root=document.documentElement;
+    const saved=localStorage.getItem("mode");
+    if(saved==="dark") toggle.setAttribute("aria-pressed","true");
+    toggle.addEventListener("click",()=>{
+      const isDark=root.getAttribute("data-theme")==="dark";
+      root.setAttribute("data-theme", isDark?"light":"dark");
+      localStorage.setItem("mode", isDark?"light":"dark");
+      toggle.setAttribute("aria-pressed", String(!isDark));
+    });
 
-  // Date pills
-  const datesEl=$("#dates");
-  const params=new URLSearchParams(location.search);
-  const preset=params.get("date");
-  const today=new Date();const day=n=>{const d=new Date();d.setDate(today.getDate()-n);return d;};
-  const three=[day(0),day(1),day(2)];
-  const pills=[];
-  three.forEach((d,i)=>{const pill=document.createElement("button");pill.type="button";pill.className="pill";const lbl=toLabel(d);pill.dataset.date=lbl;pill.textContent=i===0?`Latest: ${lbl}`:lbl;datesEl.insertBefore(pill,stamp);pills.push(pill);});
+    // --- date helpers
+    const datesEl=$("#dates");
+    const params=new URLSearchParams(location.search);
+    const preset=params.get("date");
+    const ymd=(d)=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+    const label=(iso)=>{const [y,m,d]=iso.split('-');return `${m}-${d}-${y}`};
 
-  // Fetch & render
-  async function fetchNews(dateLabel){const [mm,dd,yyyy]=dateLabel.split("-");const isoDate=`${yyyy}-${mm}-${dd}`;const url=`./data/news-${isoDate}.json`;const res=await fetch(url,{cache:"no-store"});if(!res.ok)throw new Error("Missing JSON for "+isoDate);return res.json();}
+    // build 3 date pills (today, -1, -2)
+    const today=new Date();
+    const isoList=[0,1,2].map(n=>{const d=new Date(today); d.setDate(d.getDate()-n); return ymd(d);});
+    const pills=[];
+    isoList.forEach((iso,i)=>{
+      const b=document.createElement('button');
+      b.type='button'; b.className='pill'; b.dataset.iso=iso;
+      b.textContent= i===0 ? `Latest: ${label(iso)}` : label(iso);
+      datesEl.insertBefore(b, $("#stamp"));
+      pills.push(b);
+    });
 
-  function renderCategory(catEl,items){const list=$(".list",catEl);list.innerHTML="";let shown=0;(items||[]).forEach(it=>{const wrap=document.createElement("div");wrap.className="story";const head=document.createElement("div");head.className="head";const btn=document.createElement("button");btn.className="title";btn.textContent=it.title||"(untitled)";const a=document.createElement("a");a.className="source";a.href=it.url||"#";a.target="_blank";a.rel="noopener";a.textContent=it.sourceLabel||"Source ↗";head.append(btn,a);const sum=document.createElement("div");sum.className="summary";sum.textContent=it.summary||"";wrap.append(head,sum);btn.addEventListener("click",()=>wrap.classList.toggle("open"));list.appendChild(wrap);shown++;});const empty=$(".no-results",catEl);if(empty)empty.style.display=shown?"none":"block";}
+    // state
+    let currentIso = (preset && isoList.includes(preset)) ? preset : isoList[0];
+    let currentData = null; // holds loaded JSON for current day
 
-  function renderPolicyTable(data){const tbody=$("#policyBody");if(!tbody||!data.policy)return;tbody.innerHTML="";data.policy.forEach(row=>{const tr=document.createElement("tr");tr.innerHTML=`<td>${row.topic}</td><td><span class='badge'>${row.status}</span></td><td>${row.lastUpdate}</td>`;tbody.appendChild(tr);});}
+    // search
+    const q=$("#q"), clearBtn=$("#clear");
+    function applyTextFilter(){
+      const term=q.value.trim().toLowerCase();
+      $$(".cat").forEach(cat=>{
+        const stories=[...cat.querySelectorAll(".story")];
+        let visibleCount=0;
+        stories.forEach(st=>{
+          const hay = (st.querySelector('.title')?.textContent || "") + " " + (st.querySelector('.summary')?.textContent || "");
+          const match = term==="" || hay.toLowerCase().includes(term);
+          st.style.display = match ? "" : "none";
+          if(match) visibleCount++;
+        });
+        const countEl=cat.querySelector('.cat-count');
+        if(countEl) countEl.textContent=String(visibleCount);
+        // hide whole category only if search term exists and nothing visible
+        cat.style.display = (term && visibleCount===0) ? "none" : "";
+      });
+    }
+    q.addEventListener("input", applyTextFilter);
+    clearBtn.addEventListener("click", ()=>{ q.value=""; applyTextFilter(); q.focus(); });
 
-  function renderAll(data){
-    const panel=$("#breakingPanel");
-    if(data.breaking&&data.breaking.title){panel.hidden=false;$("#breakingBar").textContent=data.breaking.title;$("#breakingBody").textContent=data.breaking.kicker||"";}
-    else{panel.hidden=true;}
-    const map={family:$('[data-section="family"]'),education:$('[data-section="education"]'),security:$('[data-section="security"]'),america:$('[data-section="america"]'),global:$('[data-section="global"]'),journal:$('[data-section="journal"]')};
-    Object.entries(map).forEach(([key,el])=>{renderCategory(el,data[key]||[]);});
-    renderPolicyTable(data);
-  }
+    // expand/collapse all
+    const toggleAll=$("#toggleAll");
+    toggleAll.addEventListener("click", ()=>{
+      const open = toggleAll.getAttribute("aria-pressed")!=="true";
+      toggleAll.setAttribute("aria-pressed", String(open));
+      toggleAll.textContent = open ? "Collapse all" : "Expand all";
+      $$(".cat").forEach(cat=> cat.open = open);
+    });
 
-  async function applyDate(dateLabel){
-    pills.forEach(p=>p.classList.toggle("active",p.dataset.date===dateLabel));
-    const url=new URL(location.href);url.searchParams.set("date",dateLabel);history.replaceState(null,"",url.toString());
-    try{const data=await fetchNews(dateLabel);renderAll(data);}catch(err){console.warn(err);renderAll({});}
-  }
+    // build categories DOM for a data object
+    function renderFromData(data){
+      const catsWrap=$("#cats");
+      catsWrap.innerHTML="";
 
-  pills.forEach(p=>p.addEventListener("click",()=>applyDate(p.dataset.date)));
-  const initial=preset&&pills.some(p=>p.dataset.date===preset)?preset:pills[0]?.dataset.date;
-  if(initial)applyDate(initial);
+      // Breaking (hide if empty)
+      const breakingSec=$("#breaking");
+      const bTitle=$("#breakingTitle");
+      const bBody=$("#breakingBody");
+      if(data && data.breaking && data.breaking.title){
+        bTitle.textContent = data.breaking.title || "Breaking";
+        bBody.textContent = data.breaking.body || "";
+        breakingSec.classList.remove("hidden");
+      }else{
+        breakingSec.classList.add("hidden");
+      }
 
-  // Expand/collapse all
-  const toggleAll=$("#toggleAll");
-  if(toggleAll){toggleAll.addEventListener("click",()=>{const open=toggleAll.getAttribute("aria-pressed")!=="true";toggleAll.setAttribute("aria-pressed",String(open));toggleAll.textContent=open?"Collapse all stories":"Expand all stories";$$(".story").forEach(st=>st.classList.toggle("open",open));});}
+      // categories order
+      const order = ["family","education","security","america","global","journal"];
+      order.forEach(key=>{
+        const items = (data && Array.isArray(data[key])) ? data[key] : [];
+        const det=document.createElement('details');
+        det.className="cat";
+        det.open = true;
+
+        const sum=document.createElement('summary');
+        const t=document.createElement('span'); t.className='cat-title'; t.textContent=key.charAt(0).toUpperCase()+key.slice(1);
+        const c=document.createElement('span'); c.className='cat-count'; c.textContent=String(items.length);
+        sum.append(t,c);
+
+        const body=document.createElement('div'); body.className='items';
+
+        if(items.length===0){
+          const p=document.createElement('div');
+          p.className='no-results';
+          p.textContent='No items for this date.';
+          body.appendChild(p);
+        }else{
+          items.forEach(it=>{
+            const st=document.createElement('div');
+            st.className='story';
+            const head=document.createElement('div'); head.className='head';
+            const btn=document.createElement('button'); btn.className='title'; btn.textContent=it.title || "Untitled";
+            btn.addEventListener('click', ()=> st.classList.toggle('open'));
+            head.appendChild(btn);
+            if(it.url){
+              const a=document.createElement('a'); a.className='source'; a.href=it.url; a.target="_blank"; a.rel="noopener";
+              a.textContent = it.sourceLabel || "Source ↗";
+              head.appendChild(a);
+            }
+            const sumy=document.createElement('div'); sumy.className='summary'; sumy.textContent = it.summary || "";
+            st.append(head,sumy);
+            body.appendChild(st);
+          });
+        }
+
+        det.append(sum,body);
+        catsWrap.appendChild(det);
+      });
+
+      // policy tracker (hide when empty)
+      const pwrap=$("#policyWrap");
+      const tbody=$("#policyTable tbody");
+      tbody.innerHTML="";
+      const rows = (data && Array.isArray(data.policy)) ? data.policy : [];
+      if(rows.length===0){ pwrap.classList.add("hidden"); }
+      else{
+        rows.forEach(r=>{
+          const tr=document.createElement('tr');
+          const td1=document.createElement('td'); td1.textContent=r.topic || "";
+          const td2=document.createElement('td'); const b=document.createElement('span'); b.className='badge'; b.textContent=r.status || ""; td2.appendChild(b);
+          const td3=document.createElement('td'); td3.textContent=r.updated || "";
+          tr.append(td1,td2,td3); tbody.appendChild(tr);
+        });
+        pwrap.classList.remove("hidden");
+      }
+
+      // re-apply search filter on new DOM
+      applyTextFilter();
+    }
+
+    // load JSON for a date
+    async function loadDay(iso){
+      currentIso = iso;
+      // highlight pill
+      $$(".pill").forEach(p=> p.classList.toggle("active", p.dataset.iso===iso));
+
+      try{
+        const res = await fetch(`./data/news-${iso}.json`, {cache:"no-store"});
+        if(!res.ok) throw new Error("no json");
+        const json = await res.json();
+        currentData = json;
+        renderFromData(json);
+      }catch(e){
+        // empty-day fallback
+        currentData = {
+          breaking:null,
+          policy:[],
+          family:[],education:[],security:[],america:[],global:[],journal:[]
+        };
+        renderFromData(currentData);
+      }
+
+      // update URL (?date=)
+      const url=new URL(location.href); url.searchParams.set("date", iso); history.replaceState(null,"",url.toString());
+    }
+
+    // hook pills
+    pills.forEach(p=> p.addEventListener("click", ()=> loadDay(p.dataset.iso)));
+
+    // initial day
+    loadDay(currentIso);
   </script>
 </body>
 </html>
