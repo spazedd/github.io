@@ -504,7 +504,15 @@
     // build date pills from stories on page
     const stories=$$(".story");
     const isoDates=[...new Set(stories.map(st=>normalizeIso(st.dataset.date)))].filter(Boolean).sort((a,b)=>b.localeCompare(a));
-    // --- show only a rolling 3-day window in pills ---
+    // make sure today's date is included so it always starts with today
+const today = new Date();
+const y = today.getFullYear();
+const m = String(today.getMonth() + 1).padStart(2, "0");
+const d = String(today.getDate()).padStart(2, "0");
+const todayIso = `${y}-${m}-${d}`;
+if (!isoDates.includes(todayIso)) {
+  isoDates.unshift(todayIso);  // put today at the front
+}
 const MAX_DAYS = 3;
 const pills = [];
 isoDates.slice(0, MAX_DAYS).forEach((iso, i) => {
