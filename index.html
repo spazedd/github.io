@@ -504,16 +504,23 @@
     // build date pills from stories on page
     const stories=$$(".story");
     const isoDates=[...new Set(stories.map(st=>normalizeIso(st.dataset.date)))].filter(Boolean).sort((a,b)=>b.localeCompare(a));
-    const pills=[];
-    isoDates.slice(0,4).forEach((iso,i)=>{
-      const d=new Date(`${iso}T12:00:00`);
-      const label=fmtDate(d);
-      const pill=document.createElement("button");
-      pill.type="button"; pill.className="pill"; pill.dataset.date=label;
-      pill.textContent= i===0 ? `Latest: ${label}` : label;
-      datesEl.insertBefore(pill, stamp);
-      pills.push(pill);
-    });
+    // --- show only a rolling 3-day window in pills ---
+const MAX_DAYS = 3;
+const pills = [];
+isoDates.slice(0, MAX_DAYS).forEach((iso, i) => {
+  const d = new Date(`${iso}T12:00:00`);
+  const mm = String(d.getMonth()+1).padStart(2,'0');
+  const dd = String(d.getDate()).padStart(2,'0');
+  const yyyy = d.getFullYear();
+  const label = `${mm}-${dd}-${yyyy}`;
+  const pill = document.createElement("button");
+  pill.type = "button";
+  pill.className = "pill";
+  pill.dataset.date = label;
+  pill.textContent = i === 0 ? `Latest: ${label}` : label;
+  datesEl.insertBefore(pill, stamp);
+  pills.push(pill);
+});
 
     // per-story expand/collapse
     function setStoryOpen(el, open){ el.classList.toggle("open", open); }
