@@ -204,10 +204,10 @@
   ],
 
   "policy": [
-    { "topic": "Federal Government Shutdown", "status": "Ongoing", "date": "2025-10-01" },
-    { "topic": "Compact for Academic Excellence", "status": "Rejected by Universities", "date": "2025-10-25" },
-    { "topic": "2025-2029 U.S. Border Patrol Strategy", "status": "Implemented", "date": "2025-09-19" },
-    { "topic": "Family-Based Immigration Guidance", "status": "Updated", "date": "2025-08-01" },
-    { "topic": "Public Education Funding Withheld", "status": "Ongoing", "date": "2025-08-27" }
+    { "topic": "Federal Government Shutdown", "status": "Ongoing", "date": "10/01/2025" },
+    { "topic": "Compact for Academic Excellence", "status": "Rejected by Universities", "date": "10/25/2025" },
+    { "topic": "2025-2029 U.S. Border Patrol Strategy", "status": "Implemented", "date": "09/19/2025" },
+    { "topic": "Family-Based Immigration Guidance", "status": "Updated", "date": "08/01/2025" },
+    { "topic": "Public Education Funding Withheld", "status": "Ongoing", "date": "08/27/2025" }
   ]
 }
