@@ -86,17 +86,6 @@
     .badge{display:inline-block;padding:6px 12px;border-radius:999px;background:color-mix(in oklab,var(--brand) 18%,transparent);color:var(--brand);font-size:var(--small);font-weight:700;letter-spacing:.3px;text-transform:uppercase}
 
     footer{text-align:center;padding:32px 0 48px;color:var(--muted);font-size:var(--small)}
-		/* Category accordion (click to expand like WebMD) */
-.cat{border:1px solid var(--ring);border-radius:var(--radius);background:var(--card);box-shadow:var(--shadow);overflow:hidden}
-.cat+.cat{margin-top:clamp(12px,2.2vw,18px)}
-.cat>summary{list-style:none;display:flex;align-items:center;gap:10px;padding:16px 18px;cursor:pointer;font-weight:800;letter-spacing:.3px;color:var(--brand-strong)}
-.cat>summary::-webkit-details-marker{display:none}
-.cat[open]>summary{border-bottom:1px dashed var(--ring)}
-.cat-title{flex:1}
-.cat-count{font-size:var(--small);color:var(--muted);background:color-mix(in oklab,var(--brand) 12%,transparent);border-radius:999px;padding:4px 10px;font-weight:700}
-.items{padding:10px 18px}
-.items .story{padding:12px 0;border-bottom:1px dashed var(--ring)}
-.items .story:last-child{border-bottom:none}
   </style>
 </head>
 <body>
@@ -567,71 +556,45 @@
         toggleAll.setAttribute("aria-pressed", String(open));
         toggleAll.textContent = open ? "Collapse all stories" : "Expand all stories";
         $$(".story").forEach(st=> setStoryOpen(st, open));
-    // ---------- CATEGORY ACCORDION UPGRADE ----------
-(function toAccordions(){
-  const container = document.getElementById('sections');
-  if(!container) return;
-  const sections = [...container.querySelectorAll('article.section')];
-
-  sections.forEach(sec=>{
-    const title = sec.querySelector('h3')?.textContent.trim() || 'Section';
-    const details = document.createElement('details');
-    details.className = 'cat';
-    details.setAttribute('data-section', sec.getAttribute('data-section') || '');
-
-    const summary = document.createElement('summary');
-    const t = document.createElement('span'); t.className='cat-title'; t.textContent = title;
-    const c = document.createElement('span'); c.className='cat-count'; c.textContent = '0';
-    summary.append(t,c);
-
-    const items = document.createElement('div');
-    items.className = 'items';
-    [...sec.querySelectorAll('.story')].forEach(st=>items.appendChild(st));
-
-    details.append(summary, items);
-    sec.replaceWith(details);
-  });
-})();
-
-// story title toggle
-document.querySelectorAll('.story .title').forEach(btn=>{
-  btn.addEventListener('click', ()=>{
-    const story = btn.closest('.story');
-    story.classList.toggle('open');
-  });
-});
-
-// update counts
-function updateCategoryCounts(){
-  document.querySelectorAll('details.cat').forEach(cat=>{
-    const items = cat.querySelectorAll('.items .story');
-    const visible = [...items].filter(n=>n.style.display!=='none');
-    const count = cat.querySelector('.cat-count');
-    if(count) count.textContent = String(visible.length);
-    if(visible.length===0) cat.open = false;
-  });
-}
-
-// patch applyDateFilter
-const _applyDateFilter = window.applyDateFilter;
-window.applyDateFilter = function(dateStr){
-  if(typeof _applyDateFilter==='function') _applyDateFilter(dateStr);
-  updateCategoryCounts();
-};
-
-// patch search filter
-const _textFilter = window.textFilter;
-window.textFilter = function(){
-  if(typeof _textFilter==='function') _textFilter();
-  updateCategoryCounts();
-};
-
-// open first category initially
-const firstCat=document.querySelector('details.cat');
-if(firstCat) firstCat.open=true;
-updateCategoryCounts();
       });
     }
   </script>
+  
+  <script>
+(async () => {
+  try {
+    const res = await fetch('data/news.json?v=' + Date.now()); // no cache
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    const stories = data.stories || {};
+
+    // Loop through each category in the JSON and insert stories
+    Object.entries(stories).forEach(([cat, items]) => {
+      const sec = document.querySelector(`.card.section[data-section="${cat}"]`);
+      if (!sec) return;
+      const target = sec.querySelector('.no-results')?.previousElementSibling || sec;
+
+      sec.querySelectorAll('.story').forEach(el => el.remove()); // remove old
+      items.forEach(s => {
+        const el = document.createElement('div');
+        el.className = 'story';
+        el.dataset.date = data.date;
+        el.innerHTML = `
+          <div class="head">
+            <button class="title">${s.title}</button>
+            <a class="source" href="${s.url}" target="_blank" rel="noopener">${s.sourceLabel}</a>
+          </div>
+          <div class="summary">${s.summary}</div>`;
+        el.querySelector('.title').addEventListener('click', () => el.classList.toggle('open'));
+        target.insertBefore(el, sec.querySelector('.no-results'));
+      });
+    });
+
+    console.log('Loaded JSON stories for', data.date);
+  } catch (err) {
+    console.error(' JSON load failed:', err);
+  }
+})();
+</script>
 </body>
 </html>
