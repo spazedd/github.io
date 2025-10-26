@@ -1,5 +1,3 @@
-Sure — here’s your code formatted properly into a valid, copy-and-pasteable JSON file (no wording changes, only proper JSON syntax and straight quotes):
-
 {
   "breaking": {
     "title": "Trump Oversees Historic Peace Deal Between Thailand and Cambodia",
@@ -182,19 +180,12 @@ Sure — here’s your code formatted properly into a valid, copy-and-pasteable 
       "url": "https://www.bbc.com/news/articles/c3w9x0x5deqo.amp"
     }
   ],
+  
   "policy": [
-    {
-      "topic": "US-China Trade Framework", "status": "Agreed ahead of Trump-Xi summit", "updated": "2025-10-26", },
-    },
-    {
-      "topic": "Thailand-Cambodia Ceasefire", "status": "Signed","updated": "2025-10-26", },
-
-    },
-    {
-      "topic": "Southeast Asia Trade and Minerals Deals", "status": "Signed","updated": "2025-10-26", },
-    },
-    {
-      "topic": "Government Shutdown Resolution","status": "Republicans consider nuclear option", "updated": "2025-10-26", },
+    {"topic": "US-China Trade Framework", "status": "Agreed ahead of Trump-Xi summit", "updated": "2025-10-26", },
+    {"topic": "Thailand-Cambodia Ceasefire", "status": "Signed","updated": "2025-10-26", },
+    {"topic": "Southeast Asia Trade and Minerals Deals", "status": "Signed","updated": "2025-10-26", }, 
+    {"topic": "Government Shutdown Resolution","status": "Republicans consider nuclear option", "updated": "2025-10-26", },
     ]
 }
 
