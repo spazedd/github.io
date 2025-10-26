@@ -1,0 +1,215 @@
+Sure — here’s your code formatted properly into a valid, copy-and-pasteable JSON file (no wording changes, only proper JSON syntax and straight quotes):
+
+{
+  "breaking": {
+    "title": "Trump Oversees Historic Peace Deal Between Thailand and Cambodia",
+    "kicker": "U.S. President brokers ceasefire amid Asian trade talks",
+    "url": "https://www.bbc.com/news/live/cvgkw8rvznet"
+  },
+  "family": [
+    {
+      "summary": "A family in New Jersey sues a funeral home after it displayed the wrong body at a memorial service, causing a relative to suffer a heart attack. This matters as it underscores the importance of accountability in sensitive services. The consequence is emotional trauma and potential legal ramifications for the industry. The analysis suggests flawed procedures in handling remains reflect broader bureaucratic inefficiencies. It may stem from incentives prioritizing speed over precision. The takeaway is that personal responsibility in operations safeguards family trust.",
+      "url": "https://nypost.com/2025/10/26/us-news/funeral-home-displays-wrong-body-at-memorial-service-leading-relative-to-suffer-heart-attack-kin/"
+    },
+    {
+      "summary": "Witnesses recount the tragic death of a visitor at Disney World, marking the third fatality in a month. This connects to family outings and safety in public spaces. The effect is heightened scrutiny on theme park protocols. The logical view is that policy oversights allow preventable risks. Perhaps it stems from incentives favoring attendance over maintenance. It suggests that disciplined enforcement enhances family security.",
+      "url": "https://nypost.com/2025/10/26/us-news/witnesses-recount-disney-world-death-after-3rd-fatality-in-month/"
+    },
+    {
+      "summary": "A podcast discusses historical and modern considerations for parenthood amid demographic shifts. This matters for family stability and societal values. The stakes involve economic pressures on households. The interpretation emphasizes responsibility in planning to counter moral confusion. It may reflect policy outcomes discouraging strong families. The data shows that pragmatic incentives yield better long-term health.",
+      "url": "https://www.thefp.com/p/raising-parents-with-emily-oster-ep"
+    },
+    {
+      "summary": "An article praises the joy of nighties as comfortable sleepwear, tying to traditional simplicity. This impacts daily well-being and rest. The consequence is improved personal harmony. The analysis favors practical habits over modern excesses. Perhaps it stems from choices promoting self-accountability. It indicates that logical decisions strengthen family bonds.",
+      "url": "https://www.spectator.co.uk/article/the-sheer-joy-of-nighties/"
+    },
+    {
+      "summary": "Hair straightening products linked to cancer via preservatives raise consumer health concerns. This is significant for beauty routines affecting families. The effect is potential risks to users. The view critiques regulatory flaws allowing harm. It suggests accountability in manufacturing prevents dangers. The policy rewards profits over results.",
+      "url": "https://www.nypost.com/2025/10/26/lifestyle/hair-straightening-products-linked-to-cancer/"
+    },
+    {
+      "summary": "Katie Herzog’s sobriety journey using science-based methods inspires recovery paths. This highlights alternatives to addiction. The consequence is motivation for families. The pragmatic approach values discipline over mandates. Perhaps it stems from innovative incentives. It suggests individual choices foster accountable health.",
+      "url": "https://www.thefp.com/p/honestly-with-bari-weiss-how-katie"
+    }
+  ],
+  "education": [
+    {
+      "summary": "Critique of ridiculous doctoral theses questions academic standards. This matters for credential value. The effect is devaluation of education. The analysis sees bureaucratic expansion prioritizing quantity. It may reflect incentives for triviality. The takeaway is discipline upholds societal values.",
+      "url": "https://www.spectator.co.uk/article/the-rise-of-ridiculous-doctorates/"
+    },
+    {
+      "summary": "Debates over school curricula on controversial topics divide communities. This shapes young minds and values. The stake is educational polarization. The logical view emphasizes facts and clarity. Perhaps it stems from activism over teaching. It suggests accountability fosters outcomes.",
+      "url": "https://www.nationalreview.com/2025/10/culture-war-over-school-curricula/"
+    },
+    {
+      "summary": "Gen Z voters in Michigan show divide from limited exposure to ideas. This impacts political education. The consequence is polarized electorate. The interpretation indicates critical thinking failures. It may reflect policy echo chambers. The data shows balanced education promotes responsibility.",
+      "url": "https://www.thefp.com/p/swing-state-debates-episode-five"
+    },
+    {
+      "summary": "Cornel West argues Plato counters modern nihilism in education. This renews interest in classics. The effect is philosophical depth. The view instills discipline through texts. Perhaps it stems from thought vacuums. It suggests values strengthen society.",
+      "url": "https://www.thefp.com/p/old-school-with-shilo-brooks-why"
+    },
+    {
+      "summary": "AI regulation stalls in Congress amid innovation ethics. This affects tech education policy. The consequence is unchecked progress. The pragmatic favors limited government. It may reflect economic incentives. The takeaway is accountability balances risks.",
+      "url": "https://www.nationalreview.com/2025/10/ai-regulation-stalls-in-congress/"
+    },
+    {
+      "summary": "Search for extraterrestrial life persists despite predictions. This ties to scientific education. The effect is exploration efforts. The analysis suggests cause-effect in inquiries. Perhaps it stems from curiosity incentives. It indicates disciplined pursuit yields insights.",
+      "url": "https://thehill.com/opinion/technology/5569827-fermi-paradox-intelligent-aliens/"
+    },
+    {
+      "summary": "Deep tech leadership opinion highlights Utah’s role in education innovation. This matters for future skills. The stake is global competitiveness. The logical ties to incentives driving progress. It may reflect policy supporting responsibility. The data shows pragmatic education rewards results.",
+      "url": "https://www.yahoo.com/news/articles/opinion-america-next-frontier-leading-150000635.html"
+    }
+  ],
+  "security": [
+    {
+      "summary": "Russian attack on Kyiv kills three, injures 31 including children. This matters for regional stability. The consequence is civilian suffering. The view calls for accountability in aggression. It may stem from leadership vacuums. It suggests pragmatic enforcement counters threats.",
+      "url": "https://www.reuters.com/world/four-children-among-14-injured-russias-air-attack-kyiv-ukraine-says-2025-10-26/"
+    },
+    {
+      "summary": "Tenth U.S. attack on boats off South America raises death toll to 43. This impacts drug smuggling security. The effect is escalated enforcement. The analysis sees lethal force as necessary. Perhaps it reflects policy on borders. The takeaway is discipline maintains safety.",
+      "url": "https://www.nationalreview.com/corner/tenth-u-s-attack-on-boats-of-south-america-raises-death-toll-to-43/"
+    },
+    {
+      "summary": "Trump moves closer to war in Venezuela amid tensions. This is critical for hemispheric security. The stake is potential conflict. The logical interpretation is economic incentives drive actions. It may stem from energy gaps. It indicates accountability prevents escalation.",
+      "url": "https://www.nationalreview.com/2025/10/trump-moves-closer-to-an-actual-war-in-venezuela/"
+    },
+    {
+      "summary": "Four killed in Cameroon protests ahead of election results. This affects political security. The consequence is instability. The pragmatic view critiques government excess. Perhaps it stems from policy short-sightedness. It suggests clarity aids resolutions.",
+      "url": "https://www.reuters.com/world/africa/four-killed-cameroon-protests-ahead-election-results-opposition-says-2025-10-26/"
+    },
+    {
+      "summary": "Air traffic controller shortages emerge from shutdown. This impacts transportation security. The effect is operational risks. The analysis emphasizes accountability in staffing. It may reflect bureaucratic flaws. It suggests clear policies improve results.",
+      "url": "https://www.reuters.com/business/world-at-work/air-traffic-controller-shortages-emerge-us-transportation-secretary-says-2025-10-26/"
+    },
+    {
+      "summary": "Louvre heist suspects arrested after tip on flee to Africa. This ties to cultural security. The consequence is recovered artifacts. The view favors international cooperation. Perhaps it stems from incentive misalignments. It indicates that pragmatic actions reward efficiency.",
+      "url": "https://nypost.com/2025/10/26/world-news/louvre-heist-suspects-arrested-after-french-police-tipped-on-plan-to-flee-to-africa/"
+    }
+  ],
+  "america": [
+    {
+      "summary": "Government shutdown threatens congressional spending power. This matters for governance norms. The effect is power shifts. The analysis suggests it undermines accountability. It may reflect short-term grabs. The policy rewards optics over balance.",
+      "url": "https://www.reuters.com/world/us/us-government-shutdown-threatens-spending-power-congress-2025-10-26/"
+    },
+    {
+      "summary": "Rand Paul suggests bipartisan panel for health subsidies. This impacts affordable care. The consequence is temporary reopenings. The pragmatic favors limited government. It may reflect incentive structures. The takeaway is responsibility tempers excess.",
+      "url": "https://thehill.com/policy/healthcare/5573921-rand-paul-affordable-care-act-subsidies-commission/"
+    },
+    {
+      "summary": "Chris Murphy warns of totalitarianism amid shutdown. This affects political discourse. The stake is democratic erosion. The logical view critiques excess activism. Perhaps it stems from policy vacuums. It suggests moral clarity restores balance.",
+      "url": "https://thehill.com/homenews/senate/5573805-murphy-trump-totalitarian-shutdown/"
+    },
+    {
+      "summary": "Washington Post praises Trump’s White House demolition. This highlights cultural shifts. The effect is transparency debates. The interpretation sees flawed logic in opposition. It may reflect bureaucratic hypocrisy. The data shows that choices impact trust.",
+      "url": "https://thehill.com/homenews/media/5574074-washington-post-praises-trump/"
+    },
+    {
+      "summary": "Republicans may go nuclear to end shutdown. This changes legislative rules. The consequence is single-party dominance. The analysis favors pragmatic resolutions. Perhaps it stems from incentive misalignments. It indicates accountability curbs excess.",
+      "url": "https://thehill.com/opinion/congress-blog/5572540-senate-republicans-nuclear-option/"
+    },
+    {
+      "summary": "Trump targets Democrats’ programs in budget cuts. This affects public services. The stake is widespread suffering. The view emphasizes discipline in spending. It may reflect policy outcomes. The takeaway is that prudent measures stabilize.",
+      "url": "https://thehill.com/opinion/campaign/5571851-budget-cuts-threaten-public-services/"
+    },
+    {
+      "summary": "Daylight saving time ends soon, questioning clock policies. This impacts daily life economics. The effect is adjustment costs. The logical ties to incentives for efficiency. Perhaps it stems from outdated traditions. It suggests values in consistency.",
+      "url": "https://thehill.com/homenews/state-watch/5559284-daylight-saving-time-ends-soon-what-happened-to-locking-the-clocks/"
+    },
+    {
+      "summary": "Media’s Nazi-symbol hunters take holiday on cases. This connects to cultural accountability. The consequence is selective outrage. The dry view exposes hypocrisy subtly. It may reflect ideological activism. The analysis suggests logic over emotion.",
+      "url": "https://www.nationalreview.com/2025/10/the-medias-nazi-symbol-hunters-take-a-holiday/"
+    }
+  ],
+  "global": [
+    {
+      "summary": "US and China agree framework for trade deal ahead of Trump-Xi summit. This matters for economic relations. The stake is tariff pauses. The analysis connects to incentives in negotiations. It may reflect pragmatic alliances. The policy suggests accountability counters dominance.",
+      "url": "https://www.bbc.com/news/articles/c1lqj5lz4geo.amp"
+    },
+    {
+      "summary": "Trump oversees Thailand-Cambodia peace deal. This impacts regional stability. The effect is normalized relations. The logical view emphasizes leadership roles. Perhaps it stems from policy outcomes. It indicates moral clarity aids resolutions.",
+      "url": "https://www.bbc.com/news/live/cvgkw8rvznet"
+    },
+    {
+      "summary": "Netanyahu says Israel decides foreign troops for Gaza ceasefire. This affects Middle East security. The consequence is controlled implementations. The interpretation is cause-effect in diplomacy. It may reflect energy and leadership gaps. The data shows that disciplined pursuit yields peace.",
+      "url": "https://www.reuters.com/world/middle-east/netanyahu-says-israel-will-determine-which-international-forces-are-unacceptable-2025-10-26/"
+    },
+    {
+      "summary": "Trump strikes deals on trade, minerals in Southeast Asia. This connects to global economics. The stake is reduced dependencies. The pragmatic favors limited government. Perhaps it stems from protectionist incentives. It suggests choices lead to accountable outcomes.",
+      "url": "https://www.reuters.com/world/china/us-sign-trade-deals-with-cambodia-malaysia-trump-says-2025-10-26/"
+    },
+    {
+      "summary": "Brazil and US to meet on tariff solutions, Lula says. This impacts international trade. The effect is economic burdens. The analysis sees policy connections. It may reflect short-sightedness. The takeaway is transparency rewards trust.",
+      "url": "https://www.reuters.com/world/americas/trump-says-he-could-work-out-some-deals-with-brazil-2025-10-26/"
+    },
+    {
+      "summary": "Dutch consider sending migrants to Uganda. This affects immigration security. The consequence is managed flows. The view critiques excess in policies. Perhaps it stems from bureaucratic issues. It indicates limited government pragmatically handles.",
+      "url": "https://www.spectator.co.uk/article/will-the-dutch-send-migrants-to-uganda/"
+    },
+    {
+      "summary": "Who won the 12-day war between Israel and Iran. This ties to geopolitical shifts. The effect is rewritten rules. The logical jab at flawed strategies. It may reflect moral consequences. It suggests clarity prevents confusion.",
+      "url": "https://www.spectator.co.uk/article/who-won-the-12-day-war/"
+    }
+  ],
+  "journal": [
+    {
+      "summary": "Pumpkinscapers make killing with fall porchscapes. This highlights cultural trends. The effect is seasonal commerce. The interpretation ties to family aesthetics. Perhaps it stems from community incentives. It indicates traditional practices reward harmony.",
+      "url": "https://www.wsj.com/style/pumpkinscapers-are-making-a-killing-this-fall-ac74baa8"
+    },
+    {
+      "summary": "Puglia region as pasta lover’s dream tourism. This connects to cultural heritage. The consequence is enhanced appreciation. The view is values inspire. It may reflect economic demands. The data shows innovation ties to values.",
+      "url": "https://www.wsj.com/lifestyle/travel/puglia-italy-pasta-tourism-3a8c9645"
+    },
+    {
+      "summary": "Engineer drives propeller-powered car in Nashville. This impacts tech oddities. The effect is joy spread. The analysis sees connections to incentives. Perhaps it stems from personal accountability. It suggests choices enhance results.",
+      "url": "https://www.wsj.com/lifestyle/cars/the-engineer-who-drives-a-propeller-powered-car-73ac01ad"
+    },
+    {
+      "summary": "Conde Nast shifts to glam events and experiences. This affects media economics. The consequence is model changes. The pragmatic critiques past policies. It may reflect accountability issues. The takeaway is adjustments necessary.",
+      "url": "https://www.wsj.com/business/media/conde-nast-business-9781b1e3"
+    },
+    {
+      "summary": "Lou Ureneck on healing power of nature. This ties to cultural well-being. The effect is personal connections. The logical favors discipline in habits. Perhaps it stems from societal consequences. It indicates responsibility promotes health.",
+      "url": "https://www.thefp.com/p/lou-ureneck-on-the-healing-power"
+    },
+    {
+      "summary": "Arts calendar for week of October 26. This connects to cultural events. The stake is engagement. The dry view is factual understatement. It may reflect observations. The analysis suggests logic exposes flaws subtly.",
+      "url": "https://www.wsj.com/arts-culture/fine-art/arts-calendar-happenings-for-the-week-of-october-26-airdigital-2d30f3a6"
+    },
+    {
+      "summary": "Positive news from Yorkshire to smile about. This highlights under-reported oddities. The effect is uplifted spirits. The interpretation is moral clarity in stories. Perhaps it stems from community values. It suggests tying back to family consequences.",
+      "url": "https://www.bbc.com/news/articles/c3w9x0x5deqo.amp"
+    }
+  ],
+  "policy": [
+    {
+      "topic": "US-China Trade Framework",
+      "status": "Agreed ahead of Trump-Xi summit",
+      "updated": "2025-10-26",
+      "url": "https://www.bbc.com/news/articles/c1lqj5lz4geo.amp",
+      "sourceLabel": "BBC"
+    },
+    {
+      "topic": "Thailand-Cambodia Ceasefire",
+      "status": "Signed under Trump oversight",
+      "updated": "2025-10-26",
+      "url": "https://www.reuters.com/world/china/trump-headlines-asean-summit-thailand-cambodia-sign-ceasefire-deal-2025-10-26/",
+      "sourceLabel": "Reuters"
+    },
+    {
+      "topic": "Southeast Asia Trade and Minerals Deals",
+      "status": "Signed by Trump with multiple countries",
+      "updated": "2025-10-26",
+      "url": "https://www.wsj.com/economy/trade/trump-reaches-trade-pacts-with-southeast-asian-nations-e51b3627",
+      "sourceLabel": "WSJ"
+    },
+    {
+      "topic": "Government Shutdown Resolution",
+      "status": "Republicans consider nuclear option",
+      "updated": "2025-10-26",
+      "url": "https://thehill.com/opinion/congress-blog/5572540-senate-republicans-nuclear-option/",
+      "sourceLabel": "The Hill"
+    },
+    {
+      "topic": "Health Subsidies Commission",
