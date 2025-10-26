@@ -184,32 +184,18 @@ Sure — here’s your code formatted properly into a valid, copy-and-pasteable 
   ],
   "policy": [
     {
-      "topic": "US-China Trade Framework",
-      "status": "Agreed ahead of Trump-Xi summit",
-      "updated": "2025-10-26",
-      "url": "https://www.bbc.com/news/articles/c1lqj5lz4geo.amp",
-      "sourceLabel": "BBC"
+      "topic": "US-China Trade Framework", "status": "Agreed ahead of Trump-Xi summit", "updated": "2025-10-26", },
     },
     {
-      "topic": "Thailand-Cambodia Ceasefire",
-      "status": "Signed under Trump oversight",
-      "updated": "2025-10-26",
-      "url": "https://www.reuters.com/world/china/trump-headlines-asean-summit-thailand-cambodia-sign-ceasefire-deal-2025-10-26/",
-      "sourceLabel": "Reuters"
+      "topic": "Thailand-Cambodia Ceasefire", "status": "Signed","updated": "2025-10-26", },
+
     },
     {
-      "topic": "Southeast Asia Trade and Minerals Deals",
-      "status": "Signed by Trump with multiple countries",
-      "updated": "2025-10-26",
-      "url": "https://www.wsj.com/economy/trade/trump-reaches-trade-pacts-with-southeast-asian-nations-e51b3627",
-      "sourceLabel": "WSJ"
+      "topic": "Southeast Asia Trade and Minerals Deals", "status": "Signed","updated": "2025-10-26", },
     },
     {
-      "topic": "Government Shutdown Resolution",
-      "status": "Republicans consider nuclear option",
-      "updated": "2025-10-26",
-      "url": "https://thehill.com/opinion/congress-blog/5572540-senate-republicans-nuclear-option/",
-      "sourceLabel": "The Hill"
-    },
-    {
-      "topic": "Health Subsidies Commission",
+      "topic": "Government Shutdown Resolution","status": "Republicans consider nuclear option", "updated": "2025-10-26", },
+    ]
+}
+
+   
