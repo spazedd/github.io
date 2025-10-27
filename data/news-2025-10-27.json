@@ -222,10 +222,10 @@
     }
   ],
   "policy": [
-    {"topic": "Government Shutdown Stalemate", "status": "Day 27 with unions demanding clean CR passage", "updated": "2025-10-27"},
-    {"topic": "Immigration Enforcement Expansion", "status": "ICE reports 3,000 arrests in Chicago operations", "updated": "2025-10-27" },
-    {"topic": "H-1B Visa Policy Tightening", "status": "New rules warned to undermine US competitiveness", "updated": "2025-10-27" },
-    {"topic": "Washington Parental Rights Law Challenge", "status": "Lawsuit filed to overturn Democratic overhaul", "updated": "2025-10-27" },
+    {"topic": "Government Shutdown Stalemate", "status": "Ongoing", "updated": "2025-10-27"},
+    {"topic": "Immigration Enforcement Expansion", "status": "3,000 arrests, ongoing", "updated": "2025-10-27" },
+    {"topic": "H-1B Visa Policy Tightening", "status": "Implemented", "updated": "2025-10-27" },
+    {"topic": "Washington Parental Rights Law Challenge", "status": "Filed", "updated": "2025-10-27" },
     {"topic": "Refugee Admissions Ban Extension", "status": "Indefinite halt with funding suspension ongoing", "updated": "2025-10-27" }
   ]
 }
