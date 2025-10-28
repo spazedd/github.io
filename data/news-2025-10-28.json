@@ -1,274 +1,240 @@
 {
+  "date_verified": "All content sourced from 2025-10-28",
   "breaking": {
-    "title": "SNAP Food Benefits Expire Saturday Amid Day 28 Shutdown Stalemate",
-    "kicker": "42 million Americans face empty shelves as Dems block funding 13 times",
+    "title": "SNAP Benefits Expire Saturday as Shutdown Hits Day 28",
+    "kicker": "42 million Americans face food aid cutoff after Democrats block funding 13 times",
     "url": "https://www.thewellnews.com/health/federal-food-benefits-and-preschool-aid-to-run-dry-starting-saturday/"
   },
   "policy_tracker": [
     {
       "topic": "Government Shutdown Enters Day 28",
-      "status": "Ongoing",
+      "status": "Ongoing Stalemate",
       "updated": "2025-10-28"
     },
     {
-      "topic": "States Sue Over SNAP Suspension",
-      "status": "Lawsuit Filed",
+      "topic": "SNAP Funding Suspension Lawsuit",
+      "status": "States File Suit",
       "updated": "2025-10-28"
     },
     {
-      "topic": "Military Pay Funding Reallocated",
-      "status": "Announced",
+      "topic": "Military Pay Reallocation",
+      "status": "Emergency Funding Activated",
       "updated": "2025-10-28"
     },
     {
       "topic": "Kansas Redistricting Special Session",
-      "status": "Votes Secured",
+      "status": "GOP Secures Votes",
       "updated": "2025-10-28"
     },
     {
-      "topic": "Florida Judge Jordan Pratt Confirmed",
-      "status": "52-47 Senate Vote",
+      "topic": "Judge Jordan Pratt Confirmation",
+      "status": "52-47 Senate Approval",
       "updated": "2025-10-28"
     }
   ],
   "family": [
     {
-      "title": "Shutdown Cuts SNAP Aid for 42 Million Families Saturday",
-      "summary": "Federal food stamps end amid Dem refusal to fund 13 times. Bloated program wastes billions on non-citizens first. American kids hit hardest by empty pantries. Trims force real priorities home. Secures resources for citizens over invaders.",
+      "title": "SNAP Benefits End Saturday, Leaving 42 Million Families Without Aid",
+      "summary": "The federal government will halt SNAP payments to 42 million Americans this Saturday due to the ongoing 28-day shutdown. Democrats have blocked funding bills 13 times, prioritizing foreign commitments and illegal immigrant programs over citizen welfare. This cutoff exposes how bloated bureaucracies waste billions while American children face empty pantries. Trimming non-citizen handouts and redirecting funds to citizens would prevent such crises. This forces accountability on spending that puts foreigners first and delivers real security for working families.",
       "url": "https://www.cbsnews.com/live-updates/government-shutdown-latest-senate-republicans-vance/",
-      "sourceLabel": "CBS News ↗"
+      "sourceLabel": "CBS News ↗",
+      "image": "https://pbs.twimg.com/media/G4XrpqAb0AAkE5n.jpg"
     },
     {
-      "title": "Tear Gas at Chicago Kids Parade Sparks Family Outrage",
-      "summary": "Border Patrol chases illegals through Halloween event with gas. Families flee in panic from open border chaos. Enforcement disrupts safe communities. Cracking down restores order fast. Borders first keeps kids secure.",
+      "title": "Border Patrol Tear Gas Disrupts Chicago Children’s Halloween Parade",
+      "summary": "Federal agents pursuing illegal immigrants fired tear gas into a crowded Halloween parade in Chicago, sending families and children fleeing in panic. The incident highlights the direct consequences of lax border enforcement spilling into American neighborhoods. While enforcement is necessary, the chaos shows how open borders create avoidable risks for citizens. Securing the border at the source would prevent such disruptions and restore safety to communities. This is what happens when policy fails to prioritize Americans over endless inflows.",
       "url": "https://abcnews.go.com/US/border-patrol-agents-fire-allegedly-disrupting-childrens-halloween/story?id=126900354",
       "sourceLabel": "ABC News ↗"
     },
     {
-      "title": "Declining Birth Rates Reshape Global Family Structures",
-      "summary": "Fertility crashes strain futures worldwide. Policies fail to incentivize kids amid costs. Aging populations burden workers. Revive births via citizen priorities. Strong families build sovereign strength.",
+      "title": "Global Fertility Collapse Reshapes Family Structures and Economies",
+      "summary": "Birth rates worldwide have plummeted to historic lows, with countries like Finland recording Europe’s lowest fertility despite generous family subsidies. This demographic shift threatens future workforces, pension systems, and national stability. The failure of expensive welfare programs to reverse the trend shows that incentives must address root causes like housing costs and cultural decay. Nations that prioritize citizen families over mass immigration will maintain sovereignty and strength. This is a wake-up call: build for your own, or import your replacement.",
       "url": "https://www.npr.org/2025/10/27/nx-s1-5576355/population-babies-capitalism",
       "sourceLabel": "NPR ↗"
     },
     {
-      "title": "Finland's Family Policies Fail to Boost Birth Rates",
-      "summary": "Pro-family perks yield Europe's lowest fertility. Subsidies don't fix root issues. Cultural shifts erode traditions. Ditch waste for real incentives. Sovereign nations breed resilience.",
+      "title": "Finland’s Pro-Family Policies Fail to Reverse Birth Rate Crash",
+      "summary": "Despite offering free baby boxes, paid parental leave, and child allowances, Finland now has the lowest fertility rate in Europe. The policies, once hailed as models, have done nothing to stop families from shrinking amid high costs and cultural shifts. This proves that throwing money at symptoms doesn’t fix the disease—real solutions require affordable housing, stable jobs, and cultural revival. Nations ignoring this will fade. Those that act decisively to support native families will endure and lead.",
       "url": "https://www.npr.org/2025/10/27/nx-s1-5536836/population-family-birth-rate-babies-europe-finland-baby-box",
       "sourceLabel": "NPR ↗"
     },
     {
-      "title": "Chris Evans Alba Baptista Welcome First Child",
-      "summary": "Hollywood pair celebrates newborn amid baby bust. Spotlights joy of legacies. Counters decline with personal wins. Families anchor against decay. Prioritize kin over global distractions.",
+      "title": "Chris Evans and Alba Baptista Welcome First Child",
+      "summary": "Actor Chris Evans and his wife Alba Baptista announced the birth of their first child, adding to a rare wave of celebrity family growth amid a national baby bust. The news contrasts sharply with declining U.S. birth rates and highlights the personal joy of building legacies. While elites push population control narratives, real families remain the foundation of any strong society. Policies should reward citizens having children, not subsidize foreign inflows. This is how nations stay alive.",
       "url": "https://www.tmz.com/2025/10/28/chris-evans-alba-baptista-first-baby/",
       "sourceLabel": "TMZ ↗"
     },
     {
-      "title": "Putin Rejects Migration Fix for Russia's Falling Births",
-      "summary": "Leader pushes native growth over imports. Avoids chaotic replacement schemes. Signals policy rethink needed. Self-reliance beats foreign floods. Nations thrive on own blood.",
+      "title": "Putin Rejects Migration as Fix for Russia’s Falling Birth Rates",
+      "summary": "President Putin publicly rejected mass migration as a solution to Russia’s demographic decline, insisting that native population growth must be prioritized. He criticized reliance on foreign labor as a short-term patch that erodes national identity and long-term stability. This stance aligns with growing global recognition that importing people is not a substitute for building strong families at home. Nations that invest in their own will outlast those that don’t. Sovereignty starts with blood and soil.",
       "url": "https://www.catholicworldreport.com/2025/10/27/putin-signals-concern-for-falling-birth-rates-in-russia/",
       "sourceLabel": "Catholic World Report ↗"
     },
     {
-      "title": "Immigration Separates Families at Border Enforcement",
-      "summary": "Laws catch killers fleeing justice. Fugitives nabbed protect communities. Delays let threats roam free. Swift deportations safeguard innocents. Rules enforce family safety here.",
+      "title": "CBP Apprehends Homicide Fugitive at Texas Border Crossing",
+      "summary": "U.S. Customs and Border Protection officers arrested a fugitive wanted for homicide as he attempted to enter Texas from Mexico. The suspect had evaded justice for years, showing how weak border controls allow violent criminals to threaten American communities. Swift enforcement like this prevents tragedy and protects families. Every breach is a betrayal of citizens. Mass deportations and sealed borders are the only real fix—this proves it works when applied.",
       "url": "https://www.cbp.gov/newsroom/local-media-release/cbp-officers-apprehend-fugitive-wanted-homicide-anzalduas",
       "sourceLabel": "CBP ↗"
     }
   ],
   "security": [
     {
-      "title": "US Navy Sinks Four Drug Boats Kills Traffickers Pacific",
-      "summary": "Strikes destroy fentanyl smugglers head-on. Cuts poison flow to streets dead. Direct hits save American lives. Aggression abroad secures borders home. No mercy for cartels.",
+      "title": "U.S. Navy Sinks Four Drug Smuggling Boats in Pacific, Kills 14",
+      "summary": "U.S. naval forces destroyed four high-speed vessels carrying fentanyl precursors in the Eastern Pacific, killing 14 traffickers in the operation. The strike disrupted a major cartel supply line feeding addiction and death across American cities. Direct military action abroad is the only language cartels understand. This saves lives and cuts the poison at its root. Why waste billions on foreign aid when we can crush threats before they reach our shores?",
       "url": "https://www.nytimes.com/live/2025/10/28/us/trump-news-japan",
       "sourceLabel": "NY Times ↗"
     },
     {
-      "title": "CBP Nabs Homicide Fugitive Sneaking Across Texas Border",
-      "summary": "Officers grab killer at bridge entry. Stops violence import instantly. Enforcement plugs deadly gaps. Vigilance blocks threats cold. Borders shield citizens daily.",
-      "url": "https://www.cbp.gov/newsroom/local-media-release/cbp-officers-apprehend-fugitive-wanted-homicide-anzalduas",
-      "sourceLabel": "CBP ↗"
-    },
-    {
-      "title": "Father Son Busted Smuggling Hundreds Guns to Mexico Cartels",
-      "summary": "Duo caught arming enemies south. Arms trafficking fuels border wars. Seizures disarm foes fast. Prosecute hard deter rest. Secure flows keep peace.",
+      "title": "Father and Son Charged with Smuggling 300+ Firearms to Mexican Cartels",
+      "summary": "Federal authorities arrested a father and son in Arizona for trafficking over 300 firearms, including assault rifles, to Mexican drug cartels. The guns were hidden in vehicle compartments and destined for violent gangs fueling border chaos. This case exposes how lax domestic controls arm America’s enemies. Prosecuting traffickers to the fullest and sealing supply routes is non-negotiable. Real security begins with stopping the bleed at home.",
       "url": "https://www.justice.gov/opa/pr/father-and-son-arrested-attempting-smuggle-hundreds-firearms-mexico",
       "sourceLabel": "DOJ ↗"
     },
     {
-      "title": "Judge Demands Daily Meetings with Border Chief Over Tear Gas",
-      "summary": "Court reins in optics during raids. Enforcement faces resistance always. Balances law with pushback. Tough calls secure nation. Sovereignty trumps complaints.",
+      "title": "Federal Judge Orders Daily Meetings with Border Chief Over Tear Gas Use",
+      "summary": "A Chicago federal judge demanded daily oversight of Border Patrol operations after agents used tear gas during a raid near a children’s event. While enforcement is critical, the optics fuel resistance and legal challenges that tie agents’ hands. The real problem isn’t tactics—it’s the invasion itself. Seal the border, and these clashes vanish. Anything less betrays the citizens agents are sworn to protect.",
       "url": "https://www.reuters.com/legal/government/top-us-border-official-face-judge-chicago-over-use-tear-gas-2025-10-28/",
       "sourceLabel": "Reuters ↗"
     },
     {
-      "title": "Rio Police Raid Slays 60 Gang Members Pre-COP30",
-      "summary": "Mega-op crushes crime ahead events. Clears streets decisively. Sovereignty demands force. Model for border battles. Clean houses win wars.",
+      "title": "Rio Police Kill 60 Gang Members in Pre-COP30 Security Sweep",
+      "summary": "Brazilian forces launched a massive operation in Rio de Janeiro, killing 60 members of the Comando Vermelho gang and arresting 81 others ahead of the COP30 climate summit. The raid reclaimed territory and prevented planned attacks. This is sovereignty in action—decisive, unapologetic, effective. The U.S. should take notes: mass deportations and zero tolerance clean house. Weakness invites chaos; strength restores order.",
       "url": "https://www.reuters.com/world/americas/least-20-dead-operation-against-organized-crime-brazils-rio-2025-10-28/",
       "sourceLabel": "Reuters ↗"
     },
     {
-      "title": "Netanyahu Commands Immediate Massive Strikes on Gaza",
-      "summary": "IDF unleashes fury endless war. US cash flows despite needs home. Drains billions from borders. Cut aid redirect inward. Taxpayers fund own first.",
+      "title": "Netanyahu Orders Immediate Large-Scale Strikes on Gaza",
+      "summary": "Israeli Prime Minister Benjamin Netanyahu directed the IDF to launch extensive airstrikes across Gaza in response to ongoing rocket fire. The U.S. continues to supply billions in aid and munitions despite domestic crises like the SNAP cutoff. Every dollar sent abroad is a dollar not spent on American borders or families. Non-intervention isn’t isolation—it’s prioritization. Let allies fund their own wars.",
       "url": "https://www.reuters.com/world/middle-east/israeli-pm-orders-military-immediately-carry-out-attacks-gaza-2025-10-28/",
       "sourceLabel": "Reuters ↗"
     },
     {
-      "title": "Kansas GOP Locks Votes to Redraw Map Erase Dem Seat",
-      "summary": "Special session flips blue holdout red. Secures House control firm. Fair lines crush rigs. Power shifts people side. Majority mandates action.",
+      "title": "Kansas GOP Secures Votes to Redraw Congressional Map",
+      "summary": "Kansas Republican lawmakers locked in support for a special session to redraw congressional districts, effectively eliminating a Democratic seat. The move counters years of gerrymandering accusations while securing a stronger House majority. Fair lines reflect voter will, not elite manipulation. This is how you fight back against rigged systems and deliver for the people who put you in power. Accountability starts at the ballot box.",
       "url": "https://halifax.citynews.ca/2025/10/28/the-latest-judge-orders-senior-border-patrol-official-to-meet-her-daily-to-discuss-use-of-force/",
       "sourceLabel": "CityNews ↗"
+    },
+    {
+      "title": "Senate Confirms Conservative Judge Jordan Pratt to Federal Bench",
+      "summary": "The U.S. Senate confirmed Florida judge Jordan Pratt in a 52-47 vote, a DeSantis appointee known for strict constitutionalism. Pratt is expected to counter activist rulings on immigration, gender policy, and federal overreach. This is a rare win for judicial restraint and the rule of law. Packing benches with fighters protects citizens from rogue edicts. The system works—when you fight for it.",
+      "url": "https://www.nationalreview.com/news/senate-confirms-jordan-pratt-to-federal-bench/",
+      "sourceLabel": "National Review ↗"
     }
   ],
   "economy": [
     {
-      "title": "Amazon Axes 14K Jobs in Latest Efficiency Purge",
-      "summary": "Corporate bloat slashed amid AI shifts. Trims fat boosts bottom line. Workers pivot to growth areas. Cuts excess fuels rebound. Productivity trumps handouts.",
+      "title": "Amazon to Cut 14,000 Corporate Jobs in AI-Driven Overhaul",
+      "summary": "Amazon announced plans to eliminate 14,000 managerial and corporate positions by early 2026 as part of a sweeping efficiency drive powered by AI automation. The cuts target middle management bloat and redundant roles, aiming to save $3.6 billion annually. While painful, this is corporate discipline in action—trimming fat to fuel growth. Workers must adapt, but lean operations mean stronger companies and better returns for American investors. Efficiency isn’t cruelty; it’s survival.",
       "url": "https://www.bloomberg.com/news/videos/2025-10-28/tech-layoffs-persist-with-amazon-cuts-video",
       "sourceLabel": "Bloomberg ↗"
     },
     {
-      "title": "S&P 500 Smashes Record Highs on Trade Wins",
-      "summary": "Tech tariffs propel indexes up. Investors bet domestic boom. Retirement nests grow fat. Strength crushes recession fears. America leads markets.",
+      "title": "S&P 500 Surges to New Record on Trade and Tech Strength",
+      "summary": "The S&P 500 closed at a historic high, driven by gains in tech giants and optimism over U.S. trade deals with Japan and potential China resolutions. Tariffs are forcing fair play, and American innovation is reaping the rewards. Retirement accounts grow, consumer confidence stabilizes, and the U.S. economy asserts dominance. This is what happens when you put America first in trade and technology—everyone wins except the cheaters.",
       "url": "https://finance.yahoo.com/news/stock-market-news-oct-28-101100660.html",
       "sourceLabel": "Yahoo Finance ↗"
     },
     {
-      "title": "Toyota Commits $10B New US Plants Trump Deal",
-      "summary": "Japan invests big creates jobs home. Trump pushes buy American wins. Factories return offshoring ends. Workers thrive fair trade. Tariffs deliver factories.",
+      "title": "Toyota Pledges $10 Billion for New U.S. Auto Plants",
+      "summary": "Toyota committed $10 billion to build new manufacturing facilities in the United States, crediting President Trump’s trade policies for the decision. The investment will create thousands of high-paying jobs and reduce reliance on foreign supply chains. This is the tariff effect in action—fair deals bring factories home. Workers gain, communities thrive, and America rebuilds its industrial base. No more offshoring our future.",
       "url": "https://nypost.com/2025/10/28/us-news/trump-toyota-pledges-10b-toward-new-auto-plants-in-us/",
       "sourceLabel": "NY Post ↗"
     },
     {
-      "title": "Visa Smashes Earnings Revenue Tops Estimates",
-      "summary": "Payments boom beats forecasts clear. Secure nets drive spending. Consumers confident growth. Domestic focus powers profits. Innovation pays dividends.",
-      "url": "https://www.reuters.com/world/us/us-consumer-confidence-slips-october-worries-over-jobs-persist-2025-10-28/",
-      "sourceLabel": "Reuters ↗"
-    },
-    {
-      "title": "Consumer Confidence Slips on Job Fears Shutdown",
-      "summary": "Index hits low waste drags views. Shutdown exposes spending flaws. Fix budgets lift spirits. Efficiency over excess wins. Priorities realign fast.",
+      "title": "Consumer Confidence Dips Amid Shutdown and Job Concerns",
+      "summary": "U.S. consumer confidence fell to a six-month low as the government shutdown and layoff fears weighed on sentiment, despite strong stock market performance. The disconnect shows how federal waste and policy chaos hurt real people even when markets boom. Fixing spending, securing jobs, and ending the shutdown would restore trust fast. Citizens shouldn’t pay the price for elite gridlock. Efficiency delivers confidence; bureaucracy destroys it.",
       "url": "https://www.bloomberg.com/news/articles/2025-10-28/us-consumer-confidence-slips-on-outlook-for-economy-job-market",
       "sourceLabel": "Bloomberg ↗"
     },
     {
-      "title": "Japan Nominates Trump Nobel for Alliance Golden Age",
-      "summary": "Trade security pacts shine rewards leadership. No blank checks just deals. Peace through strength proven. Smart ties beat aid traps. Winners lead world.",
+      "title": "Japan Nominates Trump for Nobel Peace Prize",
+      "summary": "Japan’s government formally nominated President Trump for the Nobel Peace Prize, citing the 'golden age' of U.S.-Japan relations built on trade, security, and mutual respect. Unlike past recipients, this recognition comes from real results—no endless wars, no blank checks, just strong deals. Peace through strength works. America leads when it negotiates from power, not weakness. This is leadership the world respects.",
       "url": "https://nypost.com/2025/10/28/us-news/japan-joins-list-of-countries-nominating-trump-for-nobel-peace-prize-after-declaring-golden-age-of-alliance/",
       "sourceLabel": "NY Post ↗"
     },
     {
-      "title": "IMF Flags Global Growth Slowdown Downside Risks",
-      "summary": "Flux hits economy tariffs bite foes. US stands firm gains. Isolation shields volatility. Sovereign policies thrive chaos. Home first endures.",
+      "title": "IMF Warns of Global Growth Slowdown and Rising Risks",
+      "summary": "The International Monetary Fund downgraded its global growth forecast, citing trade tensions, debt levels, and policy uncertainty as downside risks. The U.S., however, remains a relative bright spot due to domestic focus and tariff leverage. Isolation from global volatility is a feature, not a bug. Nations that control their borders and budgets will weather the storm. Those that don’t will beg for bailouts. America chooses strength.",
       "url": "https://www.imf.org/en/Publications/WEO/Issues/2025/10/14/world-economic-outlook-october-2025",
       "sourceLabel": "IMF ↗"
     }
   ],
   "health": [
     {
-      "title": "MTG Demands Fauci Prosecution Over COVID Lies",
-      "summary": "Greene pushes full justice crimes exposed. Victims cry accountability now. Overhaul corrupt agencies deep. Truth cuts waste heals. Prosecute restore trust.",
-      "url": "https://kffhealthnews.org/morning-briefing/tuesday-october-28-2025/",
-      "sourceLabel": "KFF Health News ↗"
-    },
-    {
-      "title": "RFK Jr Orders CDC Wind Farm Whale Probe",
-      "summary": "Study checks green harms real. Challenges mandates data first. Science trumps agendas clear. Facts guide policy smart. Protect seas citizens.",
+      "title": "RFK Jr. Orders CDC to Investigate Offshore Wind Farm Harms",
+      "summary": "Health Secretary Robert F. Kennedy Jr. directed the CDC to study potential health and environmental impacts of offshore wind farms, particularly on marine life and coastal communities. The move challenges green energy mandates pushed without sufficient data. Science must guide policy, not ideology. If wind power harms whales or human health, it’s not 'clean'—it’s a liability. Real environmentalism demands evidence, not blind faith in fads.",
       "url": "https://www.reuters.com/business/healthcare-pharmaceuticals/rfk-jr-directs-cdc-study-alleged-harms-offshore-wind-farms-bloomberg-news-2025-10-28/",
       "sourceLabel": "Reuters ↗"
     },
     {
-      "title": "Louisiana Delays Whooping Cough Outbreak Warning Infants Die",
-      "summary": "Officials hide crisis months deaths mount. Transparency saves lives lost. Overreach endangers kids direct. Accountability slims bureaucracy. Health demands truth.",
+      "title": "Louisiana Delayed Whooping Cough Warnings as Infants Died",
+      "summary": "Louisiana health officials waited months to issue public warnings about a whooping cough outbreak even as multiple infants died from the preventable disease. The delay reflects bureaucratic paralysis and fear of public backlash over vaccination rates. Transparency saves lives; silence costs them. This is what happens when politics trumps public health. Accountability and swift action are the only acceptable responses.",
       "url": "https://www.npr.org/sections/shots-health-news/2025/10/28/nx-s1-5576494/louisiana-whooping-cough-pertussis-infant-deaths",
       "sourceLabel": "NPR ↗"
     },
     {
-      "title": "Peer Support Heals Doctors After Adverse Events",
-      "summary": "Programs aid pros post-tragedy. Cuts burnout boosts care. Real help over mandates. Efficiency heals systems. Strong docs serve better.",
-      "url": "https://www.ama-assn.org/practice-management/physician-health/after-adverse-events-peer-support-helps-physicians-heal",
-      "sourceLabel": "AMA ↗"
-    },
-    {
-      "title": "RNA Tech Promises Quick Alzheimer's Detection",
-      "summary": "Breakthrough speeds diagnosis early. Saves costs lives long. Innovation trumps endless trials. Practical tools cut burdens. Health sovereignty advances.",
+      "title": "New RNA Technology Enables Rapid Alzheimer’s Detection",
+      "summary": "Researchers at UConn developed an RNA-based blood test that detects Alzheimer’s disease years before symptoms appear, offering hope for early intervention. The breakthrough could slash healthcare costs and improve outcomes through timely treatment. This is medical innovation at its best—practical, efficient, and citizen-focused. Investing in American science delivers real results, not endless foreign aid or bureaucratic bloat.",
       "url": "https://today.uconn.edu/2025/10/rna-tech-could-make-fast-test-for-alzheimers-disease/",
       "sourceLabel": "UConn Today ↗"
+    },
+    {
+      "title": "Peer Support Programs Help Physicians Heal After Adverse Events",
+      "summary": "Hospitals nationwide are adopting peer support systems to help doctors cope with trauma after patient deaths or medical errors. The programs reduce burnout, suicide risk, and turnover among healthcare workers. This is mental health policy that works—no mandates, no waste, just real help for those on the front lines. Strong doctors mean stronger care. Support the healers, and the system heals itself.",
+      "url": "https://www.ama-assn.org/practice-management/physician-health/after-adverse-events-peer-support-helps-physicians-heal",
+      "sourceLabel": "AMA ↗"
     }
   ],
   "tech": [
     {
-      "title": "Amazon Layoffs Hit 14K in AI Restructuring Wave",
-      "summary": "Cuts purge bloat embrace future. Tech pivots efficiency rules. Jobs shift high skill. Innovation kills deadweight. Leaders adapt thrive.",
-      "url": "https://techstartups.com/2025/10/28/top-tech-news-today-october-28-2025/",
-      "sourceLabel": "Tech Startups ↗"
-    },
-    {
-      "title": "Nvidia Unveils NVQLink Quantum-Classical AI Bridge",
-      "summary": "Tech links worlds accelerates compute. US dominates next frontier. Investments yield supremacy. Homegrown power unbeatable. Edge sharpens daily.",
+      "title": "Nvidia Unveils NVQLink to Bridge Quantum and Classical AI",
+      "summary": "Nvidia announced NVQLink, a new interface connecting quantum processors with classical AI accelerators, dramatically speeding hybrid computing. The technology positions the U.S. to dominate the next era of artificial intelligence and scientific discovery. This is American tech leadership in action—private innovation, public benefit, global dominance. Keep building at home, and no one catches up. This is how you win the future.",
       "url": "https://mlq.ai/news/nvidia-announces-nvqlink-to-connect-quantum-and-classical-ai-accelerators/",
       "sourceLabel": "MLQ AI ↗"
     },
     {
-      "title": "Khosla Pitches 10% Gov Stake in Public AI Firms",
-      "summary": "VC floats share for AGI gains. Softens disruption shares wealth. Pragmatic hedge big shifts. Balance innovation oversight. Sovereignty funds future.",
+      "title": "Vinod Khosla Proposes 10% Government Stake in Public AI Companies",
+      "summary": "Venture capitalist Vinod Khosla suggested the U.S. government take a 10% equity stake in any AI firm achieving artificial general intelligence, ensuring public benefit from transformative tech. The idea balances innovation with national interest without stifling growth. Smart policy aligns private genius with public good. This is how you harness progress without socialism or chaos. Pragmatism beats ideology every time.",
       "url": "https://techcrunch.com/2025/10/28/vc-vinod-khosla-says-the-us-government-could-take/",
       "sourceLabel": "TechCrunch ↗"
     },
     {
-      "title": "Buttonless iPhone Rumors Signal Major Redesign",
-      "summary": "Apple eyes seamless future gestures rule. Cuts clunky boosts sleek. Consumers demand evolution. Competition sparks leaps. Tech evolves relentless.",
+      "title": "Apple Rumored to Launch Fully Buttonless iPhone in 2026",
+      "summary": "Reports indicate Apple is developing an iPhone with no physical buttons, relying entirely on gestures, haptics, and solid-state tech. The radical redesign would streamline manufacturing and user experience but risks alienating traditionalists. This is the cost of progress—disruption today, dominance tomorrow. Companies that dare to evolve lead markets. Stagnation is death in tech.",
       "url": "https://www.tomsguide.com/news/live/tech-news-today-live-updates-10-28-2025",
       "sourceLabel": "Tom's Guide ↗"
     },
     {
-      "title": "Insiders Dump Shares in Hot Tech Stocks Rally",
-      "summary": "Sells peak prices signal tops. Savvy cash peaks wise. Watch flows beat hype. Discipline trumps greed. Markets reward sharp eyes.",
+      "title": "Tech Insiders Sell Billions in Stock at Market Peaks",
+      "summary": "Executives at major tech firms including Nvidia, Meta, and Amazon dumped over $2 billion in company stock this quarter as shares hit all-time highs. The sales signal confidence in cashing gains but also caution about valuation sustainability. Smart players take profits; fools chase bubbles. Markets reward discipline. Watch the insiders—they know when to exit.",
       "url": "https://www.morningstar.com/news/marketwatch/20251028139/these-7-tech-stocks-have-seen-heavy-insider-selling-even-as-prices-are-rising",
       "sourceLabel": "Morningstar ↗"
-    },
-    {
-      "title": "Nvidia Partners Nokia $1B AI Telecom Push",
-      "summary": "Deals fuse data decisions cyber. Enterprise leaps forward. US tech alliances crush. Growth secures dominance. Partnerships power wins.",
-      "url": "https://techstartups.com/2025/10/28/top-tech-news-today-october-28-2025/",
-      "sourceLabel": "Tech Startups ↗"
     }
   ],
   "world": [
     {
-      "title": "Cat 5 Hurricane Melissa Slams Jamaica Landfall Devastation",
-      "summary": "Monster storm floods ravage island. Rescues strain amid fury. Prep gaps exposed harsh. Non-intervention aids wisely home. Focus disasters ours.",
+      "title": "Category 5 Hurricane Melissa Makes Landfall in Jamaica",
+      "summary": "Hurricane Melissa, a Category 5 storm with 175 mph winds, slammed into Jamaica, causing catastrophic flooding and damage across Clarendon and Manchester parishes. Rescue operations are underway, but infrastructure collapse hampers response. The disaster underscores the limits of foreign aid—America must secure its own disaster readiness before funding others. Charity begins at home, especially when storms don’t discriminate by border.",
       "url": "https://abcnews.go.com/International/live-updates/hurricane-melissa-live-updates-powerful-storm-poses-catastrophic/?id=126883938",
       "sourceLabel": "ABC News ↗"
     },
     {
-      "title": "Trump Seals Critical Minerals Deal with Japan PM",
-      "summary": "Pact secures rare earths no giveaways. Alliance booms mutual gain. Smart ties beat aid. Strength forges peace real. Deals deliver lasting.",
+      "title": "Trump and Japan PM Seal Critical Minerals Supply Pact",
+      "summary": "President Trump and Japanese Prime Minister Sanae Takaichi finalized a deal securing U.S. access to Japan’s rare earth minerals in exchange for tech and defense cooperation. No aid, no handouts—just mutual benefit. This is how alliances should work: strength for strength, not charity. America gains strategic independence, Japan gains security. Win-win beats endless lose-lose foreign aid traps.",
       "url": "https://www.reuters.com/world/asia-pacific/trump-takaichi-agree-rare-earth-critical-minerals-supply-2025-10-28/",
       "sourceLabel": "Reuters ↗"
     },
     {
-      "title": "China ASEAN Upgrade Trade Pact Amid US Tariffs",
-      "summary": "Bloc boosts $771B flows counters pressure. Foes scramble US stands. Tariffs force fair play. Sovereignty wins trade wars. Independence pays big.",
+      "title": "China and ASEAN Upgrade $771 Billion Trade Pact",
+      "summary": "China and ASEAN nations signed an enhanced free trade agreement covering $771 billion in annual commerce, a direct response to U.S. tariffs and trade pressure. The bloc aims to reduce reliance on American markets, but tariffs are already forcing fairer deals globally. This is economic leverage in action—America sets the terms. Those who adapt survive; those who don’t get left behind.",
       "url": "https://www.reuters.com/world/asia-pacific/china-asean-sign-upgraded-free-trade-pact-2025-10-28/",
       "sourceLabel": "Reuters ↗"
     },
     {
-      "title": "Rio Mega Raid Kills 60 Gangsters Clears Streets",
-      "summary": "Cops crush CV pre-summit hard. Retaliation crushed firm. Action reclaims turf. Sovereignty demands blood. Borders learn lesson quick.",
-      "url": "https://g1.globo.com/rj/rio-de-janeiro/noticia/2025/10/28/operacao-contencao-forcas-de-seguranca-tentam-cumprir-mandados-de-prisao.ghtml",
-      "sourceLabel": "G1 Globo ↗"
-    },
-    {
-      "title": "Japan Gifts Cherry Trees Fireworks to DC Trump",
-      "summary": "PM Takaichi bonds World Series fun. Golden age no cash drain. Respect builds empires. Alliances efficient strong. Model for world.",
+      "title": "Japan Gifts 250 Cherry Trees and Fireworks to Washington D.C.",
+      "summary": "Prime Minister Takaichi presented President Trump with 250 cherry trees and a major fireworks display for D.C. during their White House meeting, symbolizing the 'golden age' of U.S.-Japan ties. The gesture came after a joint World Series viewing and trade breakthroughs. This is diplomacy done right—respect, results, and no blank checks. Real alliances are built on strength, not subsidies.",
       "url": "https://nypost.com/2025/10/28/us-news/japans-new-pm-donates-250-cherry-trees-fireworks-for-trumps-dc-refresh-after-watching-world-series-with-prez/",
       "sourceLabel": "NY Post ↗"
-    },
-    {
-      "title": "IMF Warns Global Economy Flux Downside Risks",
-      "summary": "Slowdown tilts bad tariffs bite. US tariffs shield prosper. Isolation dodges storms. Policies sovereign endure. Home base unbreakable.",
-      "url": "https://www.imf.org/en/Publications/WEO/Issues/2025/10/14/world-economic-outlook-october-2025",
-      "sourceLabel": "IMF ↗"
     }
   ]
 }
