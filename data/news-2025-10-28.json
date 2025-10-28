@@ -1,237 +1,274 @@
 {
   "breaking": {
-    "title": "Amazon Slashes 30,000 Corporate Jobs in Major Restructuring",
-    "kicker": "Efficiency drive hits white-collar workforce hard",
-    "url": "https://x.com/unusual_whales/status/1982957411812905437"
+    "title": "SNAP Food Benefits Expire Saturday Amid Day 28 Shutdown Stalemate",
+    "kicker": "42 million Americans face empty shelves as Dems block funding 13 times",
+    "url": "https://www.thewellnews.com/health/federal-food-benefits-and-preschool-aid-to-run-dry-starting-saturday/"
   },
   "policy_tracker": [
-    {"topic": "Military Pay Funding During Shutdown", "status": "Announced", "updated": "2025-10-28" },
-    {"topic": "SNAP Benefits Cutoff Imminent", "status": "Pending", "updated": "2025-10-28" },
-    {"topic": "Kansas Special Session for Redistricting", "status": "Called", "updated": "2025-10-28" },
-    {"topic": "ICE Leadership Overhaul for Deportations", "status": "Ongoing", "updated": "2025-10-28" },
-    {"topic": "Florida Federal Judge Confirmation", "status": "Confirmed", "updated": "2025-10-28" }
-],
+    {
+      "topic": "Government Shutdown Enters Day 28",
+      "status": "Ongoing",
+      "updated": "2025-10-28"
+    },
+    {
+      "topic": "States Sue Over SNAP Suspension",
+      "status": "Lawsuit Filed",
+      "updated": "2025-10-28"
+    },
+    {
+      "topic": "Military Pay Funding Reallocated",
+      "status": "Announced",
+      "updated": "2025-10-28"
+    },
+    {
+      "topic": "Kansas Redistricting Special Session",
+      "status": "Votes Secured",
+      "updated": "2025-10-28"
+    },
+    {
+      "topic": "Florida Judge Jordan Pratt Confirmed",
+      "status": "52-47 Senate Vote",
+      "updated": "2025-10-28"
+    }
+  ],
   "family": [
     {
-      "title": "SNAP Benefits End Saturday, Millions of Families Affected",
-      "summary": "Federal food aid for 42 million runs dry Saturday amid shutdown. Democrats block funding 13 times prioritizing illegals. Families face empty shelves as waste to foreigners exposed. This forces accountability on bloated programs. Cutting handouts to non-citizens secures resources for American kids.",
-      "url": "https://www.thewellnews.com/health/federal-food-benefits-and-preschool-aid-to-run-dry-starting-saturday/",
-      "sourceLabel": "The Well News ↗",
-      "image": "https://pbs.twimg.com/media/G4XrpqAb0AAkE5n.jpg"
+      "title": "Shutdown Cuts SNAP Aid for 42 Million Families Saturday",
+      "summary": "Federal food stamps end amid Dem refusal to fund 13 times. Bloated program wastes billions on non-citizens first. American kids hit hardest by empty pantries. Trims force real priorities home. Secures resources for citizens over invaders.",
+      "url": "https://www.cbsnews.com/live-updates/government-shutdown-latest-senate-republicans-vance/",
+      "sourceLabel": "CBS News ↗"
     },
     {
-      "title": "Florida Sheriff Extradites Child Killer Back to Kentucky",
-      "summary": "Marion County Sheriff hunts down parole-violating murderer of 6-year-old. Demands Kentucky keep him locked away forever. Protects Florida families from predators. Tough enforcement deters crime. Real leadership puts kids over catch-and-release nonsense.",
-      "url": "https://x.com/EricLDaugh/status/1983240914505011450",
-      "sourceLabel": "EricLDaugh X ↗"
-    },
-    {
-      "title": "Border Patrol Tears Up Chicago Kids' Halloween Parade",
-      "summary": "Agents use tear gas chasing illegals, disrupting family event. Locals rage at feds prioritizing enforcement over safety. Highlights chaos from open borders. Securing neighborhoods first keeps communities intact. Draining swamps abroad wastes time here.",
+      "title": "Tear Gas at Chicago Kids Parade Sparks Family Outrage",
+      "summary": "Border Patrol chases illegals through Halloween event with gas. Families flee in panic from open border chaos. Enforcement disrupts safe communities. Cracking down restores order fast. Borders first keeps kids secure.",
       "url": "https://abcnews.go.com/US/border-patrol-agents-fire-allegedly-disrupting-childrens-halloween/story?id=126900354",
       "sourceLabel": "ABC News ↗"
     },
     {
-      "title": "New York Governor Poll Shows GOP Flip Possible",
-      "summary": "Elise Stefanik leads Hochul 43-42 in shock poll. Republicans eye flipping blue stronghold. Promises real family policies over decay. Victory crushes elite overreach. Electing fighters delivers for working parents.",
-      "url": "https://x.com/EricLDaugh/status/1983238418785353931",
-      "sourceLabel": "EricLDaugh X ↗"
+      "title": "Declining Birth Rates Reshape Global Family Structures",
+      "summary": "Fertility crashes strain futures worldwide. Policies fail to incentivize kids amid costs. Aging populations burden workers. Revive births via citizen priorities. Strong families build sovereign strength.",
+      "url": "https://www.npr.org/2025/10/27/nx-s1-5576355/population-babies-capitalism",
+      "sourceLabel": "NPR ↗"
     },
     {
-      "title": "New Jersey Governor Race Tightens for Republican",
-      "summary": "Jack Ciattarelli trails Sherrill by 3 but leads neighbors 53-47. GOP surge in blue state. Focuses on family costs from bad policies. Momentum builds for change. Putting locals over DC dictates wins big.",
-      "url": "https://x.com/EricLDaugh/status/1983246268022264052",
-      "sourceLabel": "EricLDaugh X ↗"
+      "title": "Finland's Family Policies Fail to Boost Birth Rates",
+      "summary": "Pro-family perks yield Europe's lowest fertility. Subsidies don't fix root issues. Cultural shifts erode traditions. Ditch waste for real incentives. Sovereign nations breed resilience.",
+      "url": "https://www.npr.org/2025/10/27/nx-s1-5536836/population-family-birth-rate-babies-europe-finland-baby-box",
+      "sourceLabel": "NPR ↗"
     },
     {
-      "title": "Chris Evans Welcomes First Child with Alba Baptista",
-      "summary": "Actor couple celebrates newborn amid family boom news. Highlights joy of building legacies. Counters declining births trend. Strong families anchor society. Incentives here beat foreign distractions.",
+      "title": "Chris Evans Alba Baptista Welcome First Child",
+      "summary": "Hollywood pair celebrates newborn amid baby bust. Spotlights joy of legacies. Counters decline with personal wins. Families anchor against decay. Prioritize kin over global distractions.",
       "url": "https://www.tmz.com/2025/10/28/chris-evans-alba-baptista-first-baby/",
       "sourceLabel": "TMZ ↗"
     },
     {
-      "title": "Declining Births Shrink Populations, Reshape Economies",
-      "summary": "Global fertility crash alters family norms and workforces. Fewer kids strain futures. Ties to policy failures on incentives. Reviving births secures generations. America leads by prioritizing citizens.",
-      "url": "https://www.npr.org/2025/10/27/nx-s1-5576355/population-babies-capitalism",
-      "sourceLabel": "NPR ↗"
+      "title": "Putin Rejects Migration Fix for Russia's Falling Births",
+      "summary": "Leader pushes native growth over imports. Avoids chaotic replacement schemes. Signals policy rethink needed. Self-reliance beats foreign floods. Nations thrive on own blood.",
+      "url": "https://www.catholicworldreport.com/2025/10/27/putin-signals-concern-for-falling-birth-rates-in-russia/",
+      "sourceLabel": "Catholic World Report ↗"
+    },
+    {
+      "title": "Immigration Separates Families at Border Enforcement",
+      "summary": "Laws catch killers fleeing justice. Fugitives nabbed protect communities. Delays let threats roam free. Swift deportations safeguard innocents. Rules enforce family safety here.",
+      "url": "https://www.cbp.gov/newsroom/local-media-release/cbp-officers-apprehend-fugitive-wanted-homicide-anzalduas",
+      "sourceLabel": "CBP ↗"
     }
   ],
   "security": [
     {
-      "title": "US Navy Sinks Drug Boats, Kills 14 Traffickers",
-      "summary": "Strikes hit Pacific vessels smuggling fentanyl. Mexico rescues sole survivor. Cuts supply lines poisoning streets. Direct action saves lives. Ending cartels protects borders over diplomacy games.",
-      "url": "https://www.reuters.com/world/us/us-military-strikes-suspected-drug-vessels-eastern-pacific-2025-10-28/",
-      "sourceLabel": "Reuters ↗"
+      "title": "US Navy Sinks Four Drug Boats Kills Traffickers Pacific",
+      "summary": "Strikes destroy fentanyl smugglers head-on. Cuts poison flow to streets dead. Direct hits save American lives. Aggression abroad secures borders home. No mercy for cartels.",
+      "url": "https://www.nytimes.com/live/2025/10/28/us/trump-news-japan",
+      "sourceLabel": "NY Times ↗"
     },
     {
-      "title": "ICE Raids Democrat Rep's Home Over Campaign Theft",
-      "summary": "Oklahoma Rep. Ajay Pittman hit for criminal fund misuse. Another corrupt pol exposed. Accountability hits elites too. Cleaning house restores trust. No passes for thieves in power.",
-      "url": "https://x.com/EricLDaugh/status/1983263943658213423",
-      "sourceLabel": "EricLDaugh X ↗"
+      "title": "CBP Nabs Homicide Fugitive Sneaking Across Texas Border",
+      "summary": "Officers grab killer at bridge entry. Stops violence import instantly. Enforcement plugs deadly gaps. Vigilance blocks threats cold. Borders shield citizens daily.",
+      "url": "https://www.cbp.gov/newsroom/local-media-release/cbp-officers-apprehend-fugitive-wanted-homicide-anzalduas",
+      "sourceLabel": "CBP ↗"
     },
     {
-      "title": "Judge Orders Chicago ICE Boss to Court Daily",
-      "summary": "Over tear gas at parade during raids. Feds enforce laws amid resistance. Balances security and optics. Cracking down deters invasions. Sovereignty demands tough calls.",
+      "title": "Father Son Busted Smuggling Hundreds Guns to Mexico Cartels",
+      "summary": "Duo caught arming enemies south. Arms trafficking fuels border wars. Seizures disarm foes fast. Prosecute hard deter rest. Secure flows keep peace.",
+      "url": "https://www.justice.gov/opa/pr/father-and-son-arrested-attempting-smuggle-hundreds-firearms-mexico",
+      "sourceLabel": "DOJ ↗"
+    },
+    {
+      "title": "Judge Demands Daily Meetings with Border Chief Over Tear Gas",
+      "summary": "Court reins in optics during raids. Enforcement faces resistance always. Balances law with pushback. Tough calls secure nation. Sovereignty trumps complaints.",
       "url": "https://www.reuters.com/legal/government/top-us-border-official-face-judge-chicago-over-use-tear-gas-2025-10-28/",
       "sourceLabel": "Reuters ↗"
     },
     {
-      "title": "Kansas GOP Calls Session to Erase Dem Seat",
-      "summary": "Senate secures votes for new map gaining +1. Flips blue holdout red. Fair lines counter gerrymander lies. Secures House majority. Power to people over rigs.",
-      "url": "https://x.com/EricLDaugh/status/1983257297078878319",
-      "sourceLabel": "EricLDaugh X ↗"
+      "title": "Rio Police Raid Slays 60 Gang Members Pre-COP30",
+      "summary": "Mega-op crushes crime ahead events. Clears streets decisively. Sovereignty demands force. Model for border battles. Clean houses win wars.",
+      "url": "https://www.reuters.com/world/americas/least-20-dead-operation-against-organized-crime-brazils-rio-2025-10-28/",
+      "sourceLabel": "Reuters ↗"
     },
     {
-      "title": "Netanyahu Orders Massive Gaza Strikes Immediately",
-      "summary": "IDF hits hard amid endless conflict. US aid flows despite domestic needs. Drains resources from borders. Non-intervention frees billions for home. Prioritizing allies betrays taxpayers.",
-      "url": "https://x.com/LeadingReport/status/1983230101375594883",
-      "sourceLabel": "LeadingReport X ↗"
+      "title": "Netanyahu Commands Immediate Massive Strikes on Gaza",
+      "summary": "IDF unleashes fury endless war. US cash flows despite needs home. Drains billions from borders. Cut aid redirect inward. Taxpayers fund own first.",
+      "url": "https://www.reuters.com/world/middle-east/israeli-pm-orders-military-immediately-carry-out-attacks-gaza-2025-10-28/",
+      "sourceLabel": "Reuters ↗"
     },
     {
-      "title": "Michael Knowles Exposes Leftist Violence Coverup",
-      "summary": "Testifies on Antifa attacks, BLM riots ignored. Data hides trans school shootings. One-sided stats fuel division. Truth bombs dismantle narratives. Justice demands equal accountability.",
-      "url": "https://x.com/EricLDaugh/status/1983255826128134447",
-      "sourceLabel": "EricLDaugh X ↗"
-    },
-    {
-      "title": "Florida Confirms Conservative Judge to Cancel Woke Rulings",
-      "summary": "Senate approves Jordan Pratt 52-47. DeSantis pick balances courts. Counters activist benches. Restores rule of law. Fighters on bench protect rights.",
-      "url": "https://x.com/EricLDaugh/status/1983259806350590288",
-      "sourceLabel": "EricLDaugh X ↗"
+      "title": "Kansas GOP Locks Votes to Redraw Map Erase Dem Seat",
+      "summary": "Special session flips blue holdout red. Secures House control firm. Fair lines crush rigs. Power shifts people side. Majority mandates action.",
+      "url": "https://halifax.citynews.ca/2025/10/28/the-latest-judge-orders-senior-border-patrol-official-to-meet-her-daily-to-discuss-use-of-force/",
+      "sourceLabel": "CityNews ↗"
     }
   ],
   "economy": [
     {
-      "title": "S&P 500 Hits Historic 6900 Milestone",
-      "summary": "Index surges past record on tech strength. Investors reward growth over gloom. Boosts retirement savings. Tariffs fuel domestic boom. Strength at home crushes doubters.",
-      "url": "https://x.com/unusual_whales/status/1983237830383153471",
-      "sourceLabel": "unusual_whales X ↗"
+      "title": "Amazon Axes 14K Jobs in Latest Efficiency Purge",
+      "summary": "Corporate bloat slashed amid AI shifts. Trims fat boosts bottom line. Workers pivot to growth areas. Cuts excess fuels rebound. Productivity trumps handouts.",
+      "url": "https://www.bloomberg.com/news/videos/2025-10-28/tech-layoffs-persist-with-amazon-cuts-video",
+      "sourceLabel": "Bloomberg ↗"
     },
     {
-      "title": "Toyota Pledges $10B for New US Auto Plants",
-      "summary": "Firm commits amid Trump trade wins. Creates jobs, buys American. Trump: Go buy Toyota. Fair deals bring factories home. Workers win big over offshoring.",
+      "title": "S&P 500 Smashes Record Highs on Trade Wins",
+      "summary": "Tech tariffs propel indexes up. Investors bet domestic boom. Retirement nests grow fat. Strength crushes recession fears. America leads markets.",
+      "url": "https://finance.yahoo.com/news/stock-market-news-oct-28-101100660.html",
+      "sourceLabel": "Yahoo Finance ↗"
+    },
+    {
+      "title": "Toyota Commits $10B New US Plants Trump Deal",
+      "summary": "Japan invests big creates jobs home. Trump pushes buy American wins. Factories return offshoring ends. Workers thrive fair trade. Tariffs deliver factories.",
       "url": "https://nypost.com/2025/10/28/us-news/trump-toyota-pledges-10b-toward-new-auto-plants-in-us/",
       "sourceLabel": "NY Post ↗"
     },
     {
-      "title": "Visa Crushes Earnings with $10.7B Revenue",
-      "summary": "Beats estimates on payments boom. Adj EPS tops forecasts. Fuels consumer spending. Secure transactions drive growth. Domestic focus powers prosperity.",
-      "url": "https://x.com/unusual_whales/status/1983266258125774931",
-      "sourceLabel": "unusual_whales X ↗"
-    },
-    {
-      "title": "Consumer Confidence Dips on Job Worries",
-      "summary": "Index at six-month low amid shutdown. Fears linger despite markets high. Highlights waste impacts. Fixing spending secures futures. Efficiency over excess.",
+      "title": "Visa Smashes Earnings Revenue Tops Estimates",
+      "summary": "Payments boom beats forecasts clear. Secure nets drive spending. Consumers confident growth. Domestic focus powers profits. Innovation pays dividends.",
       "url": "https://www.reuters.com/world/us/us-consumer-confidence-slips-october-worries-over-jobs-persist-2025-10-28/",
       "sourceLabel": "Reuters ↗"
     },
     {
-      "title": "Nvidia CEO Denies AI Bubble at All-Time High",
-      "summary": "Stock tops $200 as Huang touts real demand. Partnerships fuel surge. Innovation pays off big. Leading tech keeps US ahead. Investments yield strength.",
-      "url": "https://x.com/unusual_whales/status/1983248744696152200",
-      "sourceLabel": "unusual_whales X ↗"
+      "title": "Consumer Confidence Slips on Job Fears Shutdown",
+      "summary": "Index hits low waste drags views. Shutdown exposes spending flaws. Fix budgets lift spirits. Efficiency over excess wins. Priorities realign fast.",
+      "url": "https://www.bloomberg.com/news/articles/2025-10-28/us-consumer-confidence-slips-on-outlook-for-economy-job-market",
+      "sourceLabel": "Bloomberg ↗"
     },
     {
-      "title": "25% Workers See No Advancement Opportunities",
-      "summary": "Gallup finds stagnation in jobs. Hurts morale, productivity. Reforms needed for mobility. Cutting regs unlocks paths. Real growth lifts all.",
-      "url": "https://x.com/unusual_whales/status/1983246638471639140",
-      "sourceLabel": "unusual_whales X ↗"
-    },
-    {
-      "title": "Japan Nominates Trump for Nobel Peace Prize",
-      "summary": "Cites golden alliance age. Trade, security strengthened. Rewards strong leadership. Deals deliver peace through strength. America leads winners.",
+      "title": "Japan Nominates Trump Nobel for Alliance Golden Age",
+      "summary": "Trade security pacts shine rewards leadership. No blank checks just deals. Peace through strength proven. Smart ties beat aid traps. Winners lead world.",
       "url": "https://nypost.com/2025/10/28/us-news/japan-joins-list-of-countries-nominating-trump-for-nobel-peace-prize-after-declaring-golden-age-of-alliance/",
       "sourceLabel": "NY Post ↗"
+    },
+    {
+      "title": "IMF Flags Global Growth Slowdown Downside Risks",
+      "summary": "Flux hits economy tariffs bite foes. US stands firm gains. Isolation shields volatility. Sovereign policies thrive chaos. Home first endures.",
+      "url": "https://www.imf.org/en/Publications/WEO/Issues/2025/10/14/world-economic-outlook-october-2025",
+      "sourceLabel": "IMF ↗"
     }
   ],
   "health": [
     {
-      "title": "MTG Demands Prosecution of Anthony Fauci",
-      "summary": "Rep. Greene calls out COVID lies, crimes. Pushes full accountability. Victims demand justice. Overhauling agencies cuts corruption. Truth heals divisions.",
-      "url": "https://x.com/LeadingReport/status/1983258894857093120",
-      "sourceLabel": "LeadingReport X ↗"
+      "title": "MTG Demands Fauci Prosecution Over COVID Lies",
+      "summary": "Greene pushes full justice crimes exposed. Victims cry accountability now. Overhaul corrupt agencies deep. Truth cuts waste heals. Prosecute restore trust.",
+      "url": "https://kffhealthnews.org/morning-briefing/tuesday-october-28-2025/",
+      "sourceLabel": "KFF Health News ↗"
     },
     {
-      "title": "RFK Jr Orders CDC Probe on Wind Farm Harms",
-      "summary": "Directs study amid whale death claims. Challenges green mandates. Science over agendas. Real data guides policy. Protecting nature prioritizes facts.",
+      "title": "RFK Jr Orders CDC Wind Farm Whale Probe",
+      "summary": "Study checks green harms real. Challenges mandates data first. Science trumps agendas clear. Facts guide policy smart. Protect seas citizens.",
       "url": "https://www.reuters.com/business/healthcare-pharmaceuticals/rfk-jr-directs-cdc-study-alleged-harms-offshore-wind-farms-bloomberg-news-2025-10-28/",
       "sourceLabel": "Reuters ↗"
     },
     {
-      "title": "STAYC's Isa Out with COVID and Flu Double Hit",
-      "summary": "K-pop star takes break after dual diagnosis. Reminds vigilance needed. Hits amid mandates fade. Personal choice beats force. Health freedom works.",
-      "url": "https://www.soompi.com/article/1793686wpp/staycs-isa-to-take-break-after-being-diagnosed-with-both-covid-19-and-type-a-influenza",
-      "sourceLabel": "Soompi ↗"
+      "title": "Louisiana Delays Whooping Cough Outbreak Warning Infants Die",
+      "summary": "Officials hide crisis months deaths mount. Transparency saves lives lost. Overreach endangers kids direct. Accountability slims bureaucracy. Health demands truth.",
+      "url": "https://www.npr.org/sections/shots-health-news/2025/10/28/nx-s1-5576494/louisiana-whooping-cough-pertussis-infant-deaths",
+      "sourceLabel": "NPR ↗"
     },
     {
-      "title": "SNAP Cuts Spark Obesity Debate in Welfare",
-      "summary": "70% recipients overweight despite aid. Funds misused on junk. Reform targets real needs. Accountability slims waste. Healthy citizens build strength.",
-      "url": "https://x.com/Cernovich/status/1983249257638543452",
-      "sourceLabel": "Cernovich X ↗"
+      "title": "Peer Support Heals Doctors After Adverse Events",
+      "summary": "Programs aid pros post-tragedy. Cuts burnout boosts care. Real help over mandates. Efficiency heals systems. Strong docs serve better.",
+      "url": "https://www.ama-assn.org/practice-management/physician-health/after-adverse-events-peer-support-helps-physicians-heal",
+      "sourceLabel": "AMA ↗"
+    },
+    {
+      "title": "RNA Tech Promises Quick Alzheimer's Detection",
+      "summary": "Breakthrough speeds diagnosis early. Saves costs lives long. Innovation trumps endless trials. Practical tools cut burdens. Health sovereignty advances.",
+      "url": "https://today.uconn.edu/2025/10/rna-tech-could-make-fast-test-for-alzheimers-disease/",
+      "sourceLabel": "UConn Today ↗"
     }
   ],
   "tech": [
     {
-      "title": "Nvidia Partners Palantir, Crowdstrike for AI Push",
-      "summary": "Deals turn data into decisions, boost cyber. Huang unveils at conference. Drives enterprise adoption. US tech dominance grows. Innovation secures edge.",
-      "url": "https://x.com/unusual_whales/status/1983227110849392692",
-      "sourceLabel": "unusual_whales X ↗"
+      "title": "Amazon Layoffs Hit 14K in AI Restructuring Wave",
+      "summary": "Cuts purge bloat embrace future. Tech pivots efficiency rules. Jobs shift high skill. Innovation kills deadweight. Leaders adapt thrive.",
+      "url": "https://techstartups.com/2025/10/28/top-tech-news-today-october-28-2025/",
+      "sourceLabel": "Tech Startups ↗"
     },
     {
-      "title": "Apple Wallet Adds Passport Digital ID for TSA",
-      "summary": "US users scan passports for domestic flights. Speeds travel securely. Convenience meets verification. Tech streamlines without overreach. Efficiency wins daily.",
-      "url": "https://x.com/unusual_whales/status/1983236572129689940",
-      "sourceLabel": "unusual_whales X ↗"
+      "title": "Nvidia Unveils NVQLink Quantum-Classical AI Bridge",
+      "summary": "Tech links worlds accelerates compute. US dominates next frontier. Investments yield supremacy. Homegrown power unbeatable. Edge sharpens daily.",
+      "url": "https://mlq.ai/news/nvidia-announces-nvqlink-to-connect-quantum-and-classical-ai-accelerators/",
+      "sourceLabel": "MLQ AI ↗"
     },
     {
-      "title": "CoreWeave Lands US Gov AI Cloud Deal",
-      "summary": "Enterprise service powers federal ops. Boosts domestic compute. Keeps data home. Sovereignty in cloud critical. Homegrown tech shields secrets.",
-      "url": "https://x.com/unusual_whales/status/1983233618115006716",
-      "sourceLabel": "unusual_whales X ↗"
+      "title": "Khosla Pitches 10% Gov Stake in Public AI Firms",
+      "summary": "VC floats share for AGI gains. Softens disruption shares wealth. Pragmatic hedge big shifts. Balance innovation oversight. Sovereignty funds future.",
+      "url": "https://techcrunch.com/2025/10/28/vc-vinod-khosla-says-the-us-government-could-take/",
+      "sourceLabel": "TechCrunch ↗"
     },
     {
-      "title": "Tesla Preps Internal CEOs if Musk Pay Fails",
-      "summary": "Board eyes successors amid vote drama. Ensures leadership continuity. Stability fuels growth. Merit picks drive success. No kings in business.",
-      "url": "https://www.reuters.com/business/autos-transportation/tesla-eyes-internal-ceo-candidates-if-musk-steps-down-over-pay-vote-bloomberg-2025-10-28/",
-      "sourceLabel": "Reuters ↗"
+      "title": "Buttonless iPhone Rumors Signal Major Redesign",
+      "summary": "Apple eyes seamless future gestures rule. Cuts clunky boosts sleek. Consumers demand evolution. Competition sparks leaps. Tech evolves relentless.",
+      "url": "https://www.tomsguide.com/news/live/tech-news-today-live-updates-10-28-2025",
+      "sourceLabel": "Tom's Guide ↗"
+    },
+    {
+      "title": "Insiders Dump Shares in Hot Tech Stocks Rally",
+      "summary": "Sells peak prices signal tops. Savvy cash peaks wise. Watch flows beat hype. Discipline trumps greed. Markets reward sharp eyes.",
+      "url": "https://www.morningstar.com/news/marketwatch/20251028139/these-7-tech-stocks-have-seen-heavy-insider-selling-even-as-prices-are-rising",
+      "sourceLabel": "Morningstar ↗"
+    },
+    {
+      "title": "Nvidia Partners Nokia $1B AI Telecom Push",
+      "summary": "Deals fuse data decisions cyber. Enterprise leaps forward. US tech alliances crush. Growth secures dominance. Partnerships power wins.",
+      "url": "https://techstartups.com/2025/10/28/top-tech-news-today-october-28-2025/",
+      "sourceLabel": "Tech Startups ↗"
     }
   ],
   "world": [
     {
-      "title": "Category 5 Hurricane Melissa Devastates Jamaica",
-      "summary": "Cat 5 slams island, floods ravage Clarendon. Rescue ops strain resources. Highlights disaster prep gaps. Non-intervention lets us aid wisely. Focus home first.",
-      "url": "https://x.com/EricLDaugh/status/1983237574643572748",
-      "sourceLabel": "EricLDaugh X ↗"
+      "title": "Cat 5 Hurricane Melissa Slams Jamaica Landfall Devastation",
+      "summary": "Monster storm floods ravage island. Rescues strain amid fury. Prep gaps exposed harsh. Non-intervention aids wisely home. Focus disasters ours.",
+      "url": "https://abcnews.go.com/International/live-updates/hurricane-melissa-live-updates-powerful-storm-poses-catastrophic/?id=126883938",
+      "sourceLabel": "ABC News ↗"
     },
     {
-      "title": "Trump Hosts Japan PM Sanae Takaichi on Carrier",
-      "summary": "Alliance at strongest, trade booms. Cherry trees, fireworks gifted. Strong ties without endless cash. Mutual respect builds peace. Smart deals over aid traps.",
+      "title": "Trump Seals Critical Minerals Deal with Japan PM",
+      "summary": "Pact secures rare earths no giveaways. Alliance booms mutual gain. Smart ties beat aid. Strength forges peace real. Deals deliver lasting.",
+      "url": "https://www.reuters.com/world/asia-pacific/trump-takaichi-agree-rare-earth-critical-minerals-supply-2025-10-28/",
+      "sourceLabel": "Reuters ↗"
+    },
+    {
+      "title": "China ASEAN Upgrade Trade Pact Amid US Tariffs",
+      "summary": "Bloc boosts $771B flows counters pressure. Foes scramble US stands. Tariffs force fair play. Sovereignty wins trade wars. Independence pays big.",
+      "url": "https://www.reuters.com/world/asia-pacific/china-asean-sign-upgraded-free-trade-pact-2025-10-28/",
+      "sourceLabel": "Reuters ↗"
+    },
+    {
+      "title": "Rio Mega Raid Kills 60 Gangsters Clears Streets",
+      "summary": "Cops crush CV pre-summit hard. Retaliation crushed firm. Action reclaims turf. Sovereignty demands blood. Borders learn lesson quick.",
+      "url": "https://g1.globo.com/rj/rio-de-janeiro/noticia/2025/10/28/operacao-contencao-forcas-de-seguranca-tentam-cumprir-mandados-de-prisao.ghtml",
+      "sourceLabel": "G1 Globo ↗"
+    },
+    {
+      "title": "Japan Gifts Cherry Trees Fireworks to DC Trump",
+      "summary": "PM Takaichi bonds World Series fun. Golden age no cash drain. Respect builds empires. Alliances efficient strong. Model for world.",
       "url": "https://nypost.com/2025/10/28/us-news/japans-new-pm-donates-250-cherry-trees-fireworks-for-trumps-dc-refresh-after-watching-world-series-with-prez/",
       "sourceLabel": "NY Post ↗"
     },
     {
-      "title": "Rio Mega-Op Kills 60 Gang Members",
-      "summary": "Forces raid CV strongholds, 81 arrested. Retaliation blocks roads. Brazil fights back hard. Sovereignty demands action. Lessons for border wars.",
-      "url": "https://g1.globo.com/rj/rio-de-janeiro/noticia/2025/10/28/operacao-contencao-forcas-de-seguranca-tentam-cumprir-mandados-de-prisao.ghtml",
-      "sourceLabel": "G1 ↗"
-    },
-    {
-      "title": "High City PM Carney Advances ASEAN Ties",
-      "summary": "Canada PM pushes trade, security pacts. Diverts from domestic fixes. Uneven deals burden taxpayers. Stick to borders over globo blocs. Independence pays.",
-      "url": "https://www.pm.gc.ca/en/news/news-releases/2025/10/27/prime-minister-carney-advances-new-trade-economic-and",
-      "sourceLabel": "PM Canada ↗"
-    },
-    {
-      "title": "Pakistan Needs Reforms for Growth, Flood Recovery",
-      "summary": "World Bank urges stability post 3% GDP rise. Endless aid cycles fail. Self-reliance key. Cut foreign checks, build ours. Leads by example.",
-      "url": "https://www.worldbank.org/en/news/press-release/2025/10/27/-pakistan-sustained-reforms-needed-for-inclusive-growth-economic-stability-and-flood-recovery",
-      "sourceLabel": "World Bank ↗"
-    },
-    {
-      "title": "Europe Wind Power Cuts Energy Costs Study",
-      "summary": "UCL finds renewables slash bills vs fossils. Green done right saves. But mandates waste. Practical energy secures independence. Balance wins.",
-      "url": "https://www.theguardian.com/environment/2025/oct/28/wind-power-cut-uk-energy-costs-ucl-study",
-      "sourceLabel": "Guardian ↗"
+      "title": "IMF Warns Global Economy Flux Downside Risks",
+      "summary": "Slowdown tilts bad tariffs bite. US tariffs shield prosper. Isolation dodges storms. Policies sovereign endure. Home base unbreakable.",
+      "url": "https://www.imf.org/en/Publications/WEO/Issues/2025/10/14/world-economic-outlook-october-2025",
+      "sourceLabel": "IMF ↗"
     }
   ]
 }
