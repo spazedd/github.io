@@ -78,6 +78,7 @@
       border: none; border-radius: 6px;
       font-size: 0.9rem; font-weight: 600;
       cursor: pointer; transition: all 0.2s;
+      /* no color changes here by request */
     }
 
     /* ==== Date Pills & Stamp ==== */
@@ -129,13 +130,17 @@
     .news-toggle:hover { opacity: 0.8; }
     .news-toggle i { transition: transform 0.3s; font-size: 0.9rem; }
 
+    /* Smooth, GPU-friendly open/close (no color changes) */
     .news-panel {
       max-height: 0; overflow: hidden; opacity: 0;
-      transition: max-height 0.4s ease, opacity 0.3s ease, padding 0.3s;
+      transition: max-height 0.4s ease, opacity 0.3s ease, padding 0.3s, transform 0.35s ease;
       padding: 0 1rem;
+      transform: translateY(10px);
+      will-change: transform, opacity;
     }
     .news-panel.open {
       max-height: 40rem; opacity: 1; padding: 1rem 1rem 0.5rem;
+      transform: translateY(0);
     }
 
     .summary { font-size: 0.95rem; margin-bottom: 0.8rem; }
@@ -163,6 +168,11 @@
       border-top: 1px solid; opacity: 0.7;
     }
     footer a { font-weight: 600; }
+
+    /* Motion safety for users who prefer less motion */
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+    }
   </style>
 </head>
 
@@ -267,18 +277,25 @@
     $('#year').textContent = new Date().getFullYear();
 
     // ===== Dark Mode =====
+    const themeMeta = document.querySelector('meta[name="theme-color"]');
     const darkToggle = document.getElementById('dark-mode-toggle');
-    darkToggle.addEventListener('click', () => {
-      document.body.classList.toggle('dark');
-      document.body.classList.toggle('light');
-      darkToggle.textContent = document.body.classList.contains('dark') ? 'Light Mode' : 'Dark Mode';
-      localStorage.setItem('mode', document.body.classList.contains('dark') ? 'dark' : 'light');
-    });
+
+    function applyTheme(isDark){
+      document.body.classList.toggle('dark', isDark);
+      document.body.classList.toggle('light', !isDark);
+      darkToggle.textContent = isDark ? 'Light Mode' : 'Dark Mode';
+      localStorage.setItem('mode', isDark ? 'dark' : 'light');
+      if (themeMeta) themeMeta.setAttribute('content', isDark ? '#0f0f0f' : '#fafafa');
+    }
+
     // Respect saved mode
-    (()=>{
-      const m=localStorage.getItem('mode');
-      if(m==='dark'){ document.body.classList.remove('light'); document.body.classList.add('dark'); darkToggle.textContent='Light Mode'; }
-    })();
+    (()=>{ applyTheme(localStorage.getItem('mode') === 'dark'); })();
+    darkToggle.addEventListener('click', () => applyTheme(!document.body.classList.contains('dark')));
+
+    // iOS PWA resume: re-apply theme in case Safari paused rendering
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) applyTheme(localStorage.getItem('mode') === 'dark');
+    });
 
     // ===== Date pills (today / yesterday / day before) =====
     const datesEl = document.getElementById('dates');
@@ -350,10 +367,13 @@
         panel.appendChild(summary);
         panel.appendChild(link);
 
-        // Optional image (lazy)
+        // Optional image (lazy + async decode)
         if(it.image){
           const thumb=document.createElement('div'); thumb.className='thumb';
-          const img=document.createElement('img'); img.setAttribute('data-src', it.image);
+          const img=document.createElement('img');
+          img.setAttribute('data-src', it.image);
+          img.loading = 'lazy';
+          img.decoding = 'async';
           thumb.appendChild(img); panel.appendChild(thumb);
         }
 
@@ -439,24 +459,21 @@
     const initial = preset && pills.some(p=>p.dataset.date===preset) ? preset : pills[0]?.dataset.date;
     if(initial) applyDate(initial);
 
-    // ===== Expand/Collapse All =====
+    // ===== Expand/Collapse All (batched) =====
     const expandBtn = document.getElementById('expand-all');
     expandBtn.addEventListener('click', () => {
       const allPanels = document.querySelectorAll('.news-panel');
       const allIcons = document.querySelectorAll('.news-toggle i');
       const isOpen = expandBtn.textContent.includes('Expand');
 
-      allPanels.forEach((panel, i) => {
-        if (isOpen) {
-          panel.classList.add('open');
-          if(allIcons[i]) allIcons[i].style.transform = 'rotate(180deg)';
-        } else {
-          panel.classList.remove('open');
-          if(allIcons[i]) allIcons[i].style.transform = 'rotate(0deg)';
-        }
+      // Batch DOM writes to avoid layout thrash
+      requestAnimationFrame(() => {
+        allPanels.forEach((panel, i) => {
+          panel.classList.toggle('open', isOpen);
+          if(allIcons[i]) allIcons[i].style.transform = isOpen ? 'rotate(180deg)' : 'rotate(0deg)';
+        });
+        expandBtn.textContent = isOpen ? 'Collapse All' : 'Expand All';
       });
-
-      expandBtn.textContent = isOpen ? 'Collapse All' : 'Expand All';
     });
 
     // Smooth back to top
