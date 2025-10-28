@@ -1,332 +1,424 @@
-<!doctype html>
-<html lang="en" data-theme="light">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>SomethingToReport</title>
-  <meta name="description" content="Headlines with sources, fast summaries, three-day view, and a clean policy tracker." />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
-  <script>(()=>{const m=localStorage.getItem("mode");if(m==="dark")document.documentElement.setAttribute("data-theme","dark");})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Something to Report – Daily Briefings</title>
+
+  <!-- SEO / Social -->
+  <meta property="og:title" content="Something to Report – Daily Briefings">
+  <meta property="og:description" content="Your daily 3-sentence news. Click to read.">
+  <meta property="og:image" content="https://somethingtoreport.com/og-image.jpg">
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- === A2HS additions (start) === -->
+  <link rel="manifest" href="/manifest.webmanifest">
+  <meta name="theme-color" content="#0f0f0f">
+  <!-- iOS full-screen (optional icon provided; iOS can auto-generate if you remove this line) -->
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Something to Report">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <!-- === A2HS additions (end) === -->
 
   <style>
-    :root{
-      --bg:#f7f7f5; --fg:#1f2328; --muted:#5b6270;
-      --brand:#8b0000; --brand-strong:#6f0000; --link:var(--brand);
-      --card:#ffffff; --ring:#e5e7eb;
-      --shadow:0 14px 40px rgba(139,0,0,.08), 0 6px 20px rgba(0,0,0,.06);
-      --radius:16px; --pad:clamp(16px,3vw,32px); --maxw:1180px;
-      --h1:clamp(32px,6vw,66px); --h3:clamp(17px,2.4vw,22px);
-      --body:clamp(15px,1.9vw,17px); --small:clamp(12px,1.7vw,14px);
+    /* ==== Reset & Base ==== */
+    *, *::before, *::after { box-sizing: border-box; margin:0; padding:0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      transition: background 0.3s, color 0.3s;
     }
-    html[data-theme="dark"]{
-      --bg:#10141c; --fg:#e8ebf0; --muted:#a6b0be;
-      --card:#161d2b; --ring:#263149; --link:#ff7b73; --brand:#ff6b6b; --brand-strong:#ff8a8a;
-      --shadow:0 18px 48px rgba(10,10,10,.45);
+    a { text-decoration: none; color: inherit; }
+
+    /* ==== Light Mode ==== */
+    .light { background: #fafafa; color: #111; }
+    .light .category { border-left-color: #000; }
+    .light .news-toggle { color: #000; }
+    .light .read-more { background: #000; color: #fff; }
+    .light .read-more:hover { background: #333; }
+    .light .controls button { background: #eee; }
+    .light .controls button:hover { background: #ddd; }
+    .light .pill { background:#fff; border-color:#ddd; color:#333; }
+    .light .pill.active { outline:2px solid #000; }
+    .light .breaking { background:#fff; border-color:#ddd; }
+
+    /* ==== Dark Mode ==== */
+    .dark { background: #0f0f0f; color: #eee; }
+    .dark .category { border-left-color: #fff; }
+    .dark .news-toggle { color: #fff; }
+    .dark .read-more { background: #fff; color: #000; }
+    .dark .read-more:hover { background: #ccc; }
+    .dark .controls button { background: #222; color: #fff; }
+    .dark .controls button:hover { background: #333; }
+    .dark .pill { background:#1b1b1b; border-color:#333; color:#eee; }
+    .dark .pill.active { outline:2px solid #fff; }
+    .dark .breaking { background:#161616; border-color:#2a2a2a; }
+
+    /* ==== Header ==== */
+    header {
+      text-align: center;
+      padding: 2.5rem 1rem 1.5rem;
+      border-bottom: 1px solid;
     }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{margin:0;background:var(--bg);color:var(--fg);font:400 var(--body)/1.65 Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
-    a{color:var(--link);text-decoration:none}
-    a:hover{text-decoration:underline}
-    .wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad)}
+    header h1 { font-weight: 300; font-size: 2.2rem; letter-spacing: -0.03em; }
+    header .timestamp { font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.7; }
 
-    .controls{position:sticky;top:0;z-index:60;backdrop-filter:blur(12px);background:color-mix(in oklab,var(--card) 78%,transparent);border-bottom:1px solid var(--ring);padding:12px var(--pad)}
-    .controls .row{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-    .search{flex:1 1 280px;display:flex;gap:10px}
-    .search input{width:100%;height:46px;padding:0 16px;border:1px solid var(--ring);border-radius:14px;background:var(--card);color:var(--fg);outline:none;box-shadow:inset 0 1px 2px rgba(0,0,0,.06)}
-    .btn{display:inline-flex;align-items:center;justify-content:center;height:46px;padding:0 16px;gap:8px;background:var(--card);color:var(--fg);border:1px solid var(--ring);border-radius:14px;cursor:pointer;user-select:none;font-weight:600;transition:transform .2s ease,box-shadow .2s ease}
-    .btn:hover{box-shadow:0 10px 24px rgba(139,0,0,.12)}
-    .btn:active{transform:translateY(1px)}
-    .clock{font-size:var(--small);color:var(--muted);padding:8px 0 8px 6px;white-space:nowrap}
+    /* ==== Controls (Dark Mode + Expand All) ==== */
+    .controls {
+      text-align: center;
+      padding: 1rem;
+      display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;
+    }
+    .controls button {
+      padding: 0.6rem 1.2rem;
+      border: none; border-radius: 6px;
+      font-size: 0.9rem; font-weight: 600;
+      cursor: pointer; transition: all 0.2s;
+    }
 
-    header{padding:calc(var(--pad) + 10px) 0 var(--pad);border-bottom:1px solid rgba(0,0,0,.06);background:radial-gradient(1400px 520px at 50% -260px,#fff 0,#f0f0f0 55%,#e9e9e9 100%) 0/cover,linear-gradient(120deg,rgba(139,0,0,.15),transparent)}
-    html[data-theme="dark"] header{border-bottom:1px solid rgba(255,255,255,.06);background:radial-gradient(1400px 520px at 50% -260px,#1f2536 0,#151c2a 60%,#0f1420 100%) 0/cover,linear-gradient(120deg,rgba(255,107,107,.18),transparent)}
-    .brand{font:900 var(--h1)/1.05 Merriweather,Georgia,serif;letter-spacing:.6px;text-transform:uppercase;margin:0 0 12px;text-align:center;color:var(--fg);text-shadow:0 14px 30px rgba(139,0,0,.18)}
-    .dek{text-align:center;color:var(--muted);font-size:var(--body);max-width:920px;margin:0 auto;font-weight:500}
+    /* ==== Date Pills & Stamp ==== */
+    .dates {
+      max-width: 1400px; margin: 0 auto; padding: 0 1rem 1rem;
+      display:flex; gap:.5rem; align-items:center; flex-wrap:wrap; justify-content:center;
+    }
+    .pill {
+      display:inline-flex; align-items:center; gap:.5rem;
+      padding:.5rem .9rem; border:1px solid; border-radius:999px; cursor:pointer;
+      font-size:.85rem; font-weight:600; transition: box-shadow .2s ease, transform .2s ease;
+    }
+    .pill:hover { box-shadow: 0 6px 18px rgba(0,0,0,.12); transform: translateY(-1px); }
+    .stamp { font-size:.85rem; opacity:.7; margin-left:.5rem; white-space:nowrap; }
 
-    .dates{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:16px auto 0;max-width:var(--maxw)}
-    .pill{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;cursor:pointer;white-space:nowrap;background:var(--card);border:1px solid var(--ring);color:var(--muted);font-size:var(--small);font-weight:600;transition:transform .2s ease,box-shadow .2s ease}
-    .pill:hover{box-shadow:0 10px 24px rgba(139,0,0,.08)}
-    .pill.active{outline:2px solid var(--brand);color:var(--fg)}
-    .stamp{margin-left:auto;font-size:var(--small);color:var(--muted)}
+    /* ==== Breaking Banner ==== */
+    .breaking {
+      max-width: 1400px; margin: 0 auto 0; padding: .9rem 1rem;
+      border:1px solid; border-radius: 10px;
+    }
+    .breaking .bar { font-weight:700; margin-bottom:.25rem; }
+    .breaking .body a { text-decoration: underline; }
 
-    .panel{margin:18px auto 0;max-width:var(--maxw);background:var(--card);color:var(--fg);border:1px solid var(--ring);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
-    .panel .bar{display:flex;gap:10px;align-items:center;padding:16px 20px;border-bottom:1px dashed var(--ring);font-size:clamp(16px,2.2vw,19px);font-weight:700;letter-spacing:.4px;color:var(--brand-strong)}
-    .panel .body{padding:16px 20px;font-size:var(--small);color:var(--muted)}
+    /* ==== Category Grid (3 per row on desktop) ==== */
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      padding: 2rem 1rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .category {
+      border-left: 4px solid;
+      padding-left: 1rem;
+    }
+    .category h2 {
+      font-weight: 400; font-size: 1.3rem; margin-bottom: 1rem;
+      text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.8;
+    }
 
-    .sections{padding:20px 0 32px}
-    .grid{display:grid;grid-template-columns:1fr;gap:clamp(14px,2.6vw,24px)}
-    @media(min-width:720px){.grid{grid-template-columns:repeat(2,1fr)}}
-    @media(min-width:1040px){.grid{grid-template-columns:repeat(3,1fr)}}
-    .card{background:var(--card);border:1px solid var(--ring);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px 20px 14px;display:flex;flex-direction:column;min-height:100%}
-    .card h3{margin:0 0 12px;font:800 var(--h3)/1.2 Inter,system-ui;color:var(--brand-strong);text-transform:uppercase;letter-spacing:.4px}
+    /* ==== News Item ==== */
+    .news-item { margin-bottom: 1.2rem; }
+    .news-toggle {
+      cursor: pointer; display: flex; align-items: center; gap: 0.5rem;
+      font-weight: 400; font-size: 1.05rem; padding: 0.4rem 0;
+      transition: color 0.2s;
+    }
+    .news-toggle:hover { opacity: 0.8; }
+    .news-toggle i { transition: transform 0.3s; font-size: 0.9rem; }
 
-    .story{padding:12px 0;border-bottom:1px dashed var(--ring);transition:background .2s ease;border-radius:8px}
-    .story:last-child{border-bottom:none}
-    .head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
-    .story button.title{all:unset;cursor:pointer;color:var(--fg);font-weight:600;display:block}
-    .story button.title:hover{text-decoration:underline}
-    .source{display:inline-flex;align-items:center;gap:6px;font-size:var(--small);font-weight:700;text-decoration:none;padding:4px 10px;border:1px solid var(--ring);border-radius:999px;background:var(--card)}
-    .source:hover{text-decoration:none;box-shadow:0 4px 14px rgba(139,0,0,.12)}
-    .summary{display:none;margin-top:8px;color:var(--muted);font-size:var(--small)}
-    .story.open{background:color-mix(in oklab,var(--brand) 6%,transparent);padding:16px 12px;border-radius:12px}
-    .story.open .summary{display:block}
-    .meta{display:block;font-size:var(--small);color:var(--muted);margin-top:auto;padding-top:14px}
-    .no-results{display:none;margin:10px 0 0;color:var(--muted);font-size:var(--small)}
+    .news-panel {
+      max-height: 0; overflow: hidden; opacity: 0;
+      transition: max-height 0.4s ease, opacity 0.3s ease, padding 0.3s;
+      padding: 0 1rem;
+    }
+    .news-panel.open {
+      max-height: 40rem; opacity: 1; padding: 1rem 1rem 0.5rem;
+    }
 
-    .expand-wrap{display:flex;justify-content:center;margin-top:24px}
+    .summary { font-size: 0.95rem; margin-bottom: 0.8rem; }
+    .read-more {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      font-size: 0.85rem; font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
 
-    .table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--ring);border-radius:var(--radius);box-shadow:var(--shadow);margin-top:28px;overflow:hidden}
-    .table caption{padding:14px 18px;font-weight:700;text-align:left;color:var(--brand-strong);text-transform:uppercase}
-    .table th,.table td{text-align:left;padding:14px 18px;font-size:var(--body);border-bottom:1px solid var(--ring)}
-    .table th{font-weight:700;background:color-mix(in oklab,var(--brand) 6%,transparent);letter-spacing:.2px}
-    .table tr:last-child td{border-bottom:none}
-    .badge{display:inline-block;padding:6px 12px;border-radius:999px;background:color-mix(in oklab,var(--brand) 18%,transparent);color:var(--brand);font-size:var(--small);font-weight:700;letter-spacing:.3px;text-transform:uppercase}
+    .thumb img {
+      width: 100%; height: auto; display: block;
+      margin-top: 0.8rem; border-radius: 6px;
+      opacity: 0; transition: opacity 0.4s;
+    }
+    .thumb img.loaded { opacity: 0.9; }
 
-    footer{text-align:center;padding:32px 0 48px;color:var(--muted);font-size:var(--small)}
+    /* ==== Empty state ==== */
+    .no-results { opacity:.6; font-size:.9rem; padding:.3rem 0; display:none; }
+
+    /* ==== Footer ==== */
+    footer {
+      text-align: center; padding: 2rem 1rem; font-size: 0.85rem;
+      border-top: 1px solid; opacity: 0.7;
+    }
+    footer a { font-weight: 600; }
   </style>
 </head>
-<body>
-  <!-- sticky controls -->
-  <div class="controls">
-    <div class="row">
-      <div class="search" role="search">
-        <input id="q" type="search" placeholder="Search headlines…" aria-label="Search headlines" />
-        <button class="btn" id="clear">Clear</button>
-      </div>
-      <span class="clock" id="clock">Now — --:--</span>
-      <button class="btn" id="darkToggle" aria-pressed="false" aria-label="Toggle dark mode">🌙</button>
-    </div>
-  </div>
 
-  <!-- header -->
+<body class="light">
+
+  <!-- Header -->
   <header>
-    <div class="wrap">
-      <h1 class="brand">Something to Report</h1>
-      <p class="dek">Daily briefings with links to original sources, mobile-first layout, inline expands, and a tight three-day view.</p>
-    </div>
+    <h1>Something to Report</h1>
+    <div class="timestamp" id="current-time"></div>
   </header>
 
-  <!-- date pills + last updated -->
-  <div class="wrap">
-    <div class="dates" id="dates">
-      <span class="stamp" id="stamp">Last updated --:--</span>
+  <!-- Controls -->
+  <div class="controls">
+    <button id="expand-all">Expand All</button>
+    <button id="dark-mode-toggle">Dark Mode</button>
+  </div>
+
+  <!-- Date pills + stamp -->
+  <div class="dates" id="dates">
+    <span class="stamp" id="stamp">Last updated --:--</span>
+  </div>
+
+  <!-- Breaking -->
+  <div class="breaking" id="breaking" style="display:none;">
+    <div class="bar" id="breakingBar"></div>
+    <div class="body" id="breakingBody"></div>
+  </div>
+
+  <!-- Categories Grid -->
+  <div class="categories">
+
+    <!-- CATEGORY: Family -->
+    <div class="category" data-section="family">
+      <h2>Family</h2>
+      <div class="list"></div>
+      <div class="no-results">No family-focused briefings for this date.</div>
     </div>
+
+    <!-- CATEGORY: Security -->
+    <div class="category" data-section="security">
+      <h2>Security</h2>
+      <div class="list"></div>
+      <div class="no-results">No security updates for this date.</div>
+    </div>
+
+    <!-- CATEGORY: Economy -->
+    <div class="category" data-section="economy">
+      <h2>Economy</h2>
+      <div class="list"></div>
+      <div class="no-results">No economy items for this date.</div>
+    </div>
+
+    <!-- CATEGORY: Health -->
+    <div class="category" data-section="health">
+      <h2>Health</h2>
+      <div class="list"></div>
+      <div class="no-results">No health items for this date.</div>
+    </div>
+
+    <!-- CATEGORY: Tech -->
+    <div class="category" data-section="tech">
+      <h2>Tech</h2>
+      <div class="list"></div>
+      <div class="no-results">No tech items for this date.</div>
+    </div>
+
+    <!-- CATEGORY: World -->
+    <div class="category" data-section="world">
+      <h2>World</h2>
+      <div class="list"></div>
+      <div class="no-results">No world items for this date.</div>
+    </div>
+
   </div>
 
-  <!-- breaking -->
-  <div class="wrap">
-    <section class="panel breaking" aria-label="Breaking">
-      <div class="bar" id="breakingBar">BREAKING: Placeholder — add to JSON to drive this</div>
-      <div class="body" id="breakingBody">Short kicker line here. Add a source link once confirmed.</div>
-    </section>
+  <!-- Footer -->
+  <footer>
+    <p>Send tips: <a href="mailto:tips@somethingtoreport.com">tips@somethingtoreport.com</a></p>
+    <p>© <span id="year"></span> Something to Report | <a href="#top">Back to Top</a></p>
+  </footer>
 
-    <!-- sections (EMPTY SHELLS; JS will render stories) -->
-    <section class="sections">
-      <div class="grid" id="sections">
-        <article class="card section" data-section="family">
-          <h3>Family</h3>
-          <div class="list"></div>
-          <small class="meta">Policies impacting family structure and independence</small>
-          <div class="no-results">No family-focused briefings for this date yet.</div>
-        </article>
-
-        <article class="card section" data-section="education">
-          <h3>Education</h3>
-          <div class="list"></div>
-          <small class="meta">Admissions, funding, school choice, and campus trends</small>
-          <div class="no-results">No education headlines for this date.</div>
-        </article>
-
-        <article class="card section" data-section="security">
-          <h3>Security &amp; Borders</h3>
-          <div class="list"></div>
-          <small class="meta">State deployments and DHS/port-of-entry tech</small>
-          <div class="no-results">No border/security updates for this date.</div>
-        </article>
-
-        <article class="card section" data-section="america">
-          <h3>America First</h3>
-          <div class="list"></div>
-          <small class="meta">Treaty powers, labor/visa, finance & ratings</small>
-          <div class="no-results">No domestic policy features yet for this date.</div>
-        </article>
-
-        <article class="card section" data-section="global">
-          <h3>Global Lens</h3>
-          <div class="list"></div>
-          <small class="meta">Defense spending trendlines and market reforms abroad</small>
-          <div class="no-results">No global highlights available for this date.</div>
-        </article>
-
-        <article class="card section" data-section="journal">
-          <h3>Journal &amp; Ideas</h3>
-          <div class="list"></div>
-          <small class="meta">Send pitches to tips@somethingtoreport.com</small>
-          <div class="no-results">No long-form additions on this date.</div>
-        </article>
-      </div>
-
-      <div class="expand-wrap">
-        <button class="btn" id="toggleAll" aria-pressed="false">Expand all stories</button>
-      </div>
-    </section>
-
-    <!-- policy tracker (driven by JSON, hidden when empty) -->
-    <section aria-label="Policy Tracker" id="policySection" style="display:none;">
-      <table class="table" role="table">
-        <caption>Policy Tracker</caption>
-        <thead>
-          <tr><th>Topic</th><th>Status</th><th>Last Update</th></tr>
-        </thead>
-        <tbody id="policyBody"></tbody>
-      </table>
-    </section>
-  </div>
-
-  <footer>© <span id="year"></span> Something to Report</footer>
-
+  <!-- Scripts -->
   <script>
-    // ---------- tiny helpers ----------
+    // ===== Helpers =====
     const $=(s,el=document)=>el.querySelector(s);
     const $$=(s,el=document)=>[...el.querySelectorAll(s)];
     const pad=n=>String(n).padStart(2,'0');
     const toISO=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
     const toLabel=d=>`${pad(d.getMonth()+1)}-${pad(d.getDate())}-${d.getFullYear()}`;
-
-    // ---------- clock + footer year ----------
-    const clock=$("#clock"), stamp=$("#stamp");
     const fmtTime=d=>d.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
-    const tick=()=>clock.textContent=`Now — ${fmtTime(new Date())}`;
-    tick(); setInterval(tick,1000);
-    $("#year").textContent=new Date().getFullYear();
 
-    // ---------- dark mode ----------
-    const toggle=$("#darkToggle"), root=document.documentElement;
-    if(localStorage.getItem("mode")==="dark") toggle.setAttribute("aria-pressed","true");
-    toggle.addEventListener("click",()=>{
-      const isDark=root.getAttribute("data-theme")==="dark";
-      root.setAttribute("data-theme", isDark?"light":"dark");
-      localStorage.setItem("mode", isDark?"light":"dark");
-      toggle.setAttribute("aria-pressed", String(!isDark));
+    // Current time in header
+    const setHeaderTime=()=>{
+      const now=new Date();
+      $('#current-time').textContent = now.toLocaleDateString('en-US',{
+        weekday:'long', month:'long', day:'numeric', year:'numeric'
+      }) + ' — ' + fmtTime(now);
+    };
+    setHeaderTime(); setInterval(setHeaderTime, 30_000);
+
+    // Footer year
+    $('#year').textContent = new Date().getFullYear();
+
+    // ===== Dark Mode =====
+    const darkToggle = document.getElementById('dark-mode-toggle');
+    darkToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+      document.body.classList.toggle('light');
+      darkToggle.textContent = document.body.classList.contains('dark') ? 'Light Mode' : 'Dark Mode';
+      localStorage.setItem('mode', document.body.classList.contains('dark') ? 'dark' : 'light');
     });
+    // Respect saved mode
+    (()=>{
+      const m=localStorage.getItem('mode');
+      if(m==='dark'){ document.body.classList.remove('light'); document.body.classList.add('dark'); darkToggle.textContent='Light Mode'; }
+    })();
 
-    // ---------- search (keeps your layout) ----------
-    const q=$("#q"), clearBtn=$("#clear");
-    function textFilter(){
-      const term=q.value.trim().toLowerCase();
-      $$(".card.section").forEach(card=>{
-        const hit = card.innerText.toLowerCase().includes(term);
-        card.style.display = hit ? "" : "none";
-      });
-    }
-    q.addEventListener("input", textFilter);
-    clearBtn.addEventListener("click", ()=>{ q.value=""; textFilter(); q.focus(); });
-
-    // ---------- date pills (today / yesterday / day before) ----------
+    // ===== Date pills (today / yesterday / day before) =====
+    const datesEl = document.getElementById('dates');
+    const stampEl = document.getElementById('stamp');
     const params=new URLSearchParams(location.search);
-    const preset=params.get("date"); // MM-DD-YYYY
-    const datesEl=$("#dates");
+    const preset=params.get('date'); // MM-DD-YYYY
     const today=new Date();
     const d0=new Date(today), d1=new Date(today), d2=new Date(today);
     d1.setDate(today.getDate()-1); d2.setDate(today.getDate()-2);
     const days=[d0,d1,d2];
     const pills=[];
     days.forEach((d,i)=>{
-      const pill=document.createElement("button");
-      pill.type="button"; pill.className="pill";
+      const pill=document.createElement('button');
+      pill.type='button'; pill.className='pill';
       const label=toLabel(d);
       pill.dataset.date=label;
       pill.textContent = i===0 ? `Latest: ${label}` : label;
-      datesEl.insertBefore(pill, $("#stamp"));
+      datesEl.insertBefore(pill, stampEl);
       pills.push(pill);
     });
 
-    // ---------- fetch daily JSON ----------
-    // Expected path per day: /data/news-YYYY-MM-DD.json
+    // ===== Fetch daily JSON =====
     async function fetchNewsByLabel(dateLabel){
-      const [mm,dd,yyyy]=dateLabel.split("-");
+      const [mm,dd,yyyy]=dateLabel.split('-');
       const iso=`${yyyy}-${mm}-${dd}`;
       const url=`/data/news-${iso}.json`;
-      const res=await fetch(url,{cache:"no-store"});
+      const res=await fetch(url,{cache:'no-store'});
       if(!res.ok) throw new Error(`Missing JSON: ${url}`);
       return res.json();
     }
 
-    // ---------- renderers ----------
-    function renderStories(catEl, items){
-      const list=$(".list",catEl);
-      list.innerHTML="";
-      let shown=0;
+    // ===== Renderers =====
+    function clearLists(){
+      $$('.category').forEach(cat=>{
+        const list=$('.list',cat); if(list) list.innerHTML='';
+        const empty=$('.no-results',cat); if(empty) empty.style.display='none';
+      });
+    }
+
+    function renderSection(sectionKey, items){
+      const cat = $(`.category[data-section="${sectionKey}"]`);
+      if(!cat) return;
+      const list = $('.list',cat);
+      list.innerHTML = '';
+      let shown = 0;
+
       (items||[]).forEach(it=>{
-        const wrap=document.createElement("div");
-        wrap.className="story";
-        const head=document.createElement("div"); head.className="head";
-        const btn=document.createElement("button"); btn.className="title"; btn.textContent=it.title||"(untitled)";
-        const a=document.createElement("a"); a.className="source"; a.href=it.url||"#"; a.target="_blank"; a.rel="noopener"; a.textContent=it.sourceLabel||"Source ↗";
-        head.append(btn,a);
-        const sum=document.createElement("div"); sum.className="summary"; sum.textContent=it.summary||"";
-        wrap.append(head,sum);
-        btn.addEventListener("click",()=>wrap.classList.toggle("open"));
-        list.appendChild(wrap);
+        const item = document.createElement('div');
+        item.className='news-item';
+
+        const h = document.createElement('h3');
+        h.className='news-toggle';
+        h.innerHTML = `<i class="fas fa-chevron-down"></i> ${it.title || '(untitled)'}`;
+
+        const panel = document.createElement('div');
+        panel.className='news-panel';
+
+        const summary = document.createElement('p');
+        summary.className='summary';
+        summary.textContent = it.summary || '';
+
+        const link = document.createElement('a');
+        link.href = it.url || '#';
+        link.target = '_blank';
+        link.rel = 'noopener';
+        link.className='read-more';
+        link.textContent = it.sourceLabel || 'Source';
+
+        panel.appendChild(summary);
+        panel.appendChild(link);
+
+        // Optional image (lazy)
+        if(it.image){
+          const thumb=document.createElement('div'); thumb.className='thumb';
+          const img=document.createElement('img'); img.setAttribute('data-src', it.image);
+          thumb.appendChild(img); panel.appendChild(thumb);
+        }
+
+        item.appendChild(h);
+        item.appendChild(panel);
+        list.appendChild(item);
+
+        // toggle
+        h.addEventListener('click', ()=>{
+          const icon = h.querySelector('i');
+          panel.classList.toggle('open');
+          icon.style.transform = panel.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)';
+        });
+
         shown++;
       });
-      const empty=$(".no-results",catEl);
-      if(empty) empty.style.display= shown ? "none" : "block";
+
+      const empty=$('.no-results',cat);
+      if(empty) empty.style.display = shown ? 'none' : 'block';
     }
 
     function renderAll(data){
-      // Breaking (optional)
-      const bar=$("#breakingBar"), body=$("#breakingBody");
+      // Breaking
+      const wrap = document.getElementById('breaking');
+      const bar = document.getElementById('breakingBar');
+      const body = document.getElementById('breakingBody');
       if(data.breaking && (data.breaking.title || data.breaking.kicker)){
-        bar.textContent = data.breaking.title || "BREAKING";
+        bar.textContent = data.breaking.title || 'BREAKING';
         body.innerHTML = data.breaking.url
-          ? `<a href="${data.breaking.url}" target="_blank" rel="noopener">${data.breaking.kicker||"Open source ↗"}</a>`
-          : (data.breaking.kicker || "");
-      }else{
-        bar.textContent="BREAKING: Placeholder — add to JSON to drive this";
-        body.textContent="Short kicker line here. Add a source link once confirmed.";
+          ? `<a href="${data.breaking.url}" target="_blank" rel="noopener">${data.breaking.kicker || 'Open source ↗'}</a>`
+          : (data.breaking.kicker || '');
+        wrap.style.display='';
+      } else {
+        wrap.style.display='none';
       }
 
-      // Categories
-      const sectionsMap={
-        family:   $('[data-section="family"]'),
-        education:$('[data-section="education"]'),
-        security: $('[data-section="security"]'),
-        america:  $('[data-section="america"]'),
-        global:   $('[data-section="global"]'),
-        journal:  $('[data-section="journal"]'),
+      // Sections map (match your original layout)
+      const sections = {
+        family:  data.family  || [],
+        security:data.security|| [],
+        economy: data.economy || [],
+        health:  data.health  || [],
+        tech:    data.tech    || [],
+        world:   data.world   || []
       };
-      Object.entries(sectionsMap).forEach(([k,el])=>renderStories(el, data[k] || []));
 
-      // Policy Tracker (hide when empty)
-      const policySec=$("#policySection");
-      const tbody=$("#policyBody");
-      tbody.innerHTML="";
-      if(Array.isArray(data.policy)&&data.policy.length){
-        data.policy.forEach(row=>{
-          const tr=document.createElement("tr");
-          const td1=document.createElement("td"); td1.textContent=row.topic||"";
-          const td2=document.createElement("td"); td2.innerHTML=`<span class="badge">${row.status||""}</span>`;
-          const td3=document.createElement("td"); td3.textContent=row.updated||"";
-          tr.append(td1,td2,td3);
-          tbody.appendChild(tr);
-        });
-        policySec.style.display="";
-      }else{
-        policySec.style.display="none";
-      }
+      Object.entries(sections).forEach(([k,arr])=>renderSection(k, arr));
+
+      // Lazy load images
+      $$('img[data-src]').forEach(img=>{
+        img.src = img.dataset.src;
+        img.onload = () => img.classList.add('loaded');
+      });
     }
 
-    // ---------- controller: apply a date ----------
+    // ===== Controller: apply a date =====
     async function applyDate(label){
-      // highlight pill
-      pills.forEach(p=>p.classList.toggle("active", p.dataset.date===label));
+      // highlight
+      pills.forEach(p=>p.classList.toggle('active', p.dataset.date===label));
       // URL + stamp
-      const url=new URL(location.href); url.searchParams.set("date", label); history.replaceState(null,"",url.toString());
-      stamp.textContent = `Last updated ${fmtTime(new Date())}`;
+      const url=new URL(location.href); url.searchParams.set('date', label); history.replaceState(null,'',url.toString());
+      stampEl.textContent = `Last updated ${fmtTime(new Date())}`;
+
       // fetch + render
+      clearLists();
       try{
         const json=await fetchNewsByLabel(label);
         renderAll(json);
@@ -334,25 +426,54 @@
         console.warn(e.message);
         renderAll({}); // empty
       }
+
+      // Reset expand-all button label
+      const expandBtn = document.getElementById('expand-all');
+      if(expandBtn) expandBtn.textContent = 'Expand All';
     }
 
-    // hook pills
-    pills.forEach(p=>p.addEventListener("click", ()=>applyDate(p.dataset.date)));
+    // Hook pills
+    pills.forEach(p=>p.addEventListener('click', ()=>applyDate(p.dataset.date)));
 
-    // initial selection
+    // Initial selection
     const initial = preset && pills.some(p=>p.dataset.date===preset) ? preset : pills[0]?.dataset.date;
     if(initial) applyDate(initial);
 
-    // expand/collapse all
-    const toggleAll=$("#toggleAll");
-    if(toggleAll){
-      toggleAll.addEventListener("click", ()=>{
-        const open = toggleAll.getAttribute("aria-pressed")!=="true";
-        toggleAll.setAttribute("aria-pressed", String(open));
-        toggleAll.textContent = open ? "Collapse all stories" : "Expand all stories";
-        $$(".story").forEach(st=> st.classList.toggle("open", open));
+    // ===== Expand/Collapse All =====
+    const expandBtn = document.getElementById('expand-all');
+    expandBtn.addEventListener('click', () => {
+      const allPanels = document.querySelectorAll('.news-panel');
+      const allIcons = document.querySelectorAll('.news-toggle i');
+      const isOpen = expandBtn.textContent.includes('Expand');
+
+      allPanels.forEach((panel, i) => {
+        if (isOpen) {
+          panel.classList.add('open');
+          if(allIcons[i]) allIcons[i].style.transform = 'rotate(180deg)';
+        } else {
+          panel.classList.remove('open');
+          if(allIcons[i]) allIcons[i].style.transform = 'rotate(0deg)';
+        }
+      });
+
+      expandBtn.textContent = isOpen ? 'Collapse All' : 'Expand All';
+    });
+
+    // Smooth back to top
+    document.querySelector('a[href="#top"]')?.addEventListener('click', e => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+
+  <!-- === A2HS additions: service worker registration (start) === -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(console.error);
       });
     }
   </script>
+  <!-- === A2HS additions: service worker registration (end) === -->
 </body>
 </html>
