@@ -5,27 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Something to Report – Daily Briefings</title>
 
-  <!-- SEO -->
-  <meta name="description" content="Daily briefings with sources and fast summaries.">
+  <!-- SEO / Social -->
   <meta property="og:title" content="Something to Report – Daily Briefings">
   <meta property="og:description" content="Your daily 3-sentence news. Click to read.">
   <meta property="og:image" content="https://somethingtoreport.com/og-image.jpg">
 
-  <!-- Browser hints -->
-  <meta name="theme-color" content="#0f0f0f">
-  <meta name="color-scheme" content="light dark">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <!-- Fonts (unchanged family) -->
+  <!-- Fonts & Icons -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-  <!-- PWA -->
+  <!-- === A2HS additions (start) === -->
   <link rel="manifest" href="/manifest.webmanifest">
+  <meta name="theme-color" content="#0f0f0f">
+  <!-- iOS full-screen (optional icon provided; iOS can auto-generate if you remove this line) -->
   <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="Something to Report">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <!-- === A2HS additions (end) === -->
 
   <style>
     /* ==== Reset & Base ==== */
@@ -70,7 +67,7 @@
     header h1 { font-weight: 300; font-size: 2.2rem; letter-spacing: -0.03em; }
     header .timestamp { font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.7; }
 
-    /* ==== Controls ==== */
+    /* ==== Controls (Dark Mode + Expand All) ==== */
     .controls {
       text-align: center;
       padding: 1rem;
@@ -81,13 +78,15 @@
       border: none; border-radius: 6px;
       font-size: 0.9rem; font-weight: 600;
       cursor: pointer; transition: all 0.2s;
-      color: inherit; /* keep your text colors */
+      /* no color changes here by request */
     }
 
     /* ==== Date Pills & Stamp ==== */
     .dates {
       max-width: 1400px; margin: 0 auto; padding: 0 1rem 1rem;
       display:flex; gap:.5rem; align-items:center; flex-wrap:wrap; justify-content:center;
+      /* CLS fix: keep row height stable while pills are injected */
+      min-height: 44px;
     }
     .pill {
       display:inline-flex; align-items:center; gap:.5rem;
@@ -101,11 +100,14 @@
     .breaking {
       max-width: 1400px; margin: 0 auto 0; padding: .9rem 1rem;
       border:1px solid; border-radius: 10px;
+      /* CLS fix: reserve space even before data arrives */
+      min-height: 64px;
     }
+
     .breaking .bar { font-weight:700; margin-bottom:.25rem; }
     .breaking .body a { text-decoration: underline; }
 
-    /* ==== Category Grid ==== */
+    /* ==== Category Grid (3 per row on desktop) ==== */
     .categories {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -117,9 +119,6 @@
     .category {
       border-left: 4px solid;
       padding-left: 1rem;
-      /* Big mobile win: skip rendering off-screen cards until needed */
-      content-visibility: auto;
-      contain-intrinsic-size: 600px; /* placeholder to prevent jump */
     }
     .category h2 {
       font-weight: 400; font-size: 1.3rem; margin-bottom: 1rem;
@@ -133,16 +132,10 @@
       font-weight: 400; font-size: 1.05rem; padding: 0.4rem 0;
       transition: color 0.2s;
     }
-    .news-toggle:hover { opacity: 0.8; }
+    /* CLS fix: fix icon width so font swap doesn’t shift text */
+    .news-toggle i { width: 0.9rem; flex: 0 0 0.9rem; text-align:center; transition: transform 0.3s; font-size: 0.9rem; }
 
-    /* inline chevron (replaces Font Awesome) */
-    .chev {
-      width: .9rem; height: .9rem;
-      flex: 0 0 .9rem;
-      transition: transform .3s ease;
-    }
-
-    /* Smooth, GPU-friendly open/close */
+    /* Smooth, GPU-friendly open/close (no color changes) */
     .news-panel {
       max-height: 0; overflow: hidden; opacity: 0;
       transition: max-height 0.4s ease, opacity 0.3s ease, padding 0.3s, transform 0.35s ease;
@@ -164,13 +157,23 @@
       margin-bottom: 0.5rem;
     }
 
-    /* Reserve space for optional images (reduce layout shift) */
-    .thumb { width: 100%; }
-    .thumb img {
-      width: 100%; height: auto; display: block;
-      margin-top: 0.8rem; border-radius: 6px;
-      opacity: 0; transition: opacity 0.4s;
+    /* CLS fix: reserve image area before load */
+    .thumb {
+      position: relative;
+      width: 100%;
       aspect-ratio: 16/9;
+      border-radius: 6px;
+      overflow: hidden;
+      /* subtle placeholder so layout height is fixed */
+      background: currentColor;
+      opacity: 0.06;
+    }
+    .thumb img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      opacity: 0; transition: opacity 0.4s;
     }
     .thumb img.loaded { opacity: 0.9; }
 
@@ -184,7 +187,7 @@
     }
     footer a { font-weight: 600; }
 
-    /* Motion safety */
+    /* Motion safety for users who prefer less motion */
     @media (prefers-reduced-motion: reduce) {
       * { animation: none !important; transition: none !important; }
     }
@@ -211,59 +214,57 @@
   </div>
 
   <!-- Breaking -->
-  <div class="breaking" id="breaking" style="display:none;">
+  <div class="breaking" id="breaking" style="visibility:hidden;">
     <div class="bar" id="breakingBar"></div>
     <div class="body" id="breakingBody"></div>
   </div>
 
-  <main id="main" role="main">
-    <!-- Categories Grid -->
-    <div class="categories">
+  <!-- Categories Grid -->
+  <div class="categories">
 
-      <!-- CATEGORY: Family -->
-      <div class="category" data-section="family">
-        <h2>Family</h2>
-        <div class="list"></div>
-        <div class="no-results">No family-focused briefings for this date.</div>
-      </div>
-
-      <!-- CATEGORY: Security -->
-      <div class="category" data-section="security">
-        <h2>Security</h2>
-        <div class="list"></div>
-        <div class="no-results">No security updates for this date.</div>
-      </div>
-
-      <!-- CATEGORY: Economy -->
-      <div class="category" data-section="economy">
-        <h2>Economy</h2>
-        <div class="list"></div>
-        <div class="no-results">No economy items for this date.</div>
-      </div>
-
-      <!-- CATEGORY: Health -->
-      <div class="category" data-section="health">
-        <h2>Health</h2>
-        <div class="list"></div>
-        <div class="no-results">No health items for this date.</div>
-      </div>
-
-      <!-- CATEGORY: Tech -->
-      <div class="category" data-section="tech">
-        <h2>Tech</h2>
-        <div class="list"></div>
-        <div class="no-results">No tech items for this date.</div>
-      </div>
-
-      <!-- CATEGORY: World -->
-      <div class="category" data-section="world">
-        <h2>World</h2>
-        <div class="list"></div>
-        <div class="no-results">No world items for this date.</div>
-      </div>
-
+    <!-- CATEGORY: Family -->
+    <div class="category" data-section="family">
+      <h2>Family</h2>
+      <div class="list"></div>
+      <div class="no-results">No family-focused briefings for this date.</div>
     </div>
-  </main>
+
+    <!-- CATEGORY: Security -->
+    <div class="category" data-section="security">
+      <h2>Security</h2>
+      <div class="list"></div>
+      <div class="no-results">No security updates for this date.</div>
+    </div>
+
+    <!-- CATEGORY: Economy -->
+    <div class="category" data-section="economy">
+      <h2>Economy</h2>
+      <div class="list"></div>
+      <div class="no-results">No economy items for this date.</div>
+    </div>
+
+    <!-- CATEGORY: Health -->
+    <div class="category" data-section="health">
+      <h2>Health</h2>
+      <div class="list"></div>
+      <div class="no-results">No health items for this date.</div>
+    </div>
+
+    <!-- CATEGORY: Tech -->
+    <div class="category" data-section="tech">
+      <h2>Tech</h2>
+      <div class="list"></div>
+      <div class="no-results">No tech items for this date.</div>
+    </div>
+
+    <!-- CATEGORY: World -->
+    <div class="category" data-section="world">
+      <h2>World</h2>
+      <div class="list"></div>
+      <div class="no-results">No world items for this date.</div>
+    </div>
+
+  </div>
 
   <!-- Footer -->
   <footer>
@@ -271,6 +272,7 @@
     <p>© <span id="year"></span> Something to Report | <a href="#top">Back to Top</a></p>
   </footer>
 
+  <!-- Scripts -->
   <script>
     // ===== Helpers =====
     const $=(s,el=document)=>el.querySelector(s);
@@ -308,12 +310,12 @@
     (()=>{ applyTheme(localStorage.getItem('mode') === 'dark'); })();
     darkToggle.addEventListener('click', () => applyTheme(!document.body.classList.contains('dark')));
 
-    // iOS PWA resume: re-apply theme after tab/app resume
+    // iOS PWA resume: re-apply theme in case Safari paused rendering
     document.addEventListener('visibilitychange', () => {
       if (!document.hidden) applyTheme(localStorage.getItem('mode') === 'dark');
     });
 
-    // ===== Date pills =====
+    // ===== Date pills (today / yesterday / day before) =====
     const datesEl = document.getElementById('dates');
     const stampEl = document.getElementById('stamp');
     const params=new URLSearchParams(location.search);
@@ -364,15 +366,7 @@
 
         const h = document.createElement('h3');
         h.className='news-toggle';
-        h.appendChild((()=>{
-          const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
-          svg.setAttribute('viewBox','0 0 24 24'); svg.classList.add('chev');
-          const p=document.createElementNS('http://www.w3.org/2000/svg','path');
-          p.setAttribute('d','M7 10l5 5 5-5');
-          p.setAttribute('fill','none'); p.setAttribute('stroke','currentColor'); p.setAttribute('stroke-width','2'); p.setAttribute('stroke-linecap','round'); p.setAttribute('stroke-linejoin','round');
-          svg.appendChild(p); return svg;
-        })());
-        h.appendChild(document.createTextNode(' ' + (it.title || '(untitled)')));
+        h.innerHTML = `<i class="fas fa-chevron-down"></i> ${it.title || '(untitled)'}`;
 
         const panel = document.createElement('div');
         panel.className='news-panel';
@@ -391,14 +385,13 @@
         panel.appendChild(summary);
         panel.appendChild(link);
 
-        // Optional image (lazy + async decode)
+        // Optional image (lazy + async decode) with reserved space
         if(it.image){
           const thumb=document.createElement('div'); thumb.className='thumb';
           const img=document.createElement('img');
           img.setAttribute('data-src', it.image);
           img.loading = 'lazy';
           img.decoding = 'async';
-          img.alt = it.title ? `Image for: ${it.title}` : '';
           thumb.appendChild(img); panel.appendChild(thumb);
         }
 
@@ -408,10 +401,9 @@
 
         // toggle
         h.addEventListener('click', ()=>{
-          const icon = h.querySelector('.chev');
-          const open = !panel.classList.contains('open');
-          panel.classList.toggle('open', open);
-          if(icon) icon.style.transform = open ? 'rotate(180deg)' : 'rotate(0deg)';
+          const icon = h.querySelector('i');
+          panel.classList.toggle('open');
+          icon.style.transform = panel.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)';
         });
 
         shown++;
@@ -422,7 +414,7 @@
     }
 
     function renderAll(data){
-      // Breaking
+      // Breaking (CLS-safe)
       const wrap = document.getElementById('breaking');
       const bar = document.getElementById('breakingBar');
       const body = document.getElementById('breakingBody');
@@ -431,12 +423,15 @@
         body.innerHTML = data.breaking.url
           ? `<a href="${data.breaking.url}" target="_blank" rel="noopener">${data.breaking.kicker || 'Open source ↗'}</a>`
           : (data.breaking.kicker || '');
-        wrap.style.display='';
+        wrap.style.visibility='visible';
       } else {
-        wrap.style.display='none';
+        // keep space but hide visually to avoid layout jump
+        bar.textContent = '';
+        body.textContent = '';
+        wrap.style.visibility='hidden';
       }
 
-      // Sections
+      // Sections map (match your original layout)
       const sections = {
         family:  data.family  || [],
         security:data.security|| [],
@@ -445,9 +440,10 @@
         tech:    data.tech    || [],
         world:   data.world   || []
       };
+
       Object.entries(sections).forEach(([k,arr])=>renderSection(k, arr));
 
-      // Lazy load images
+      // Lazy load images (fade-in only; layout already reserved)
       $$('img[data-src]').forEach(img=>{
         img.src = img.dataset.src;
         img.onload = () => img.classList.add('loaded');
@@ -457,7 +453,6 @@
     // ===== Controller: apply a date =====
     async function applyDate(label){
       // highlight
-      const pills = $$('.pill', datesEl);
       pills.forEach(p=>p.classList.toggle('active', p.dataset.date===label));
       // URL + stamp
       const url=new URL(location.href); url.searchParams.set('date', label); history.replaceState(null,'',url.toString());
@@ -479,21 +474,20 @@
     }
 
     // Hook pills
-    (function(){
-      const all = $$('.pill', datesEl);
-      all.forEach(p=>p.addEventListener('click', ()=>applyDate(p.dataset.date)));
-      const preset = new URLSearchParams(location.search).get('date');
-      const initial = preset && all.some(p=>p.dataset.date===preset) ? preset : all[0]?.dataset.date;
-      if(initial) applyDate(initial);
-    })();
+    pills.forEach(p=>p.addEventListener('click', ()=>applyDate(p.dataset.date)));
+
+    // Initial selection
+    const initial = preset && pills.some(p=>p.dataset.date===preset) ? preset : pills[0]?.dataset.date;
+    if(initial) applyDate(initial);
 
     // ===== Expand/Collapse All (batched) =====
     const expandBtn = document.getElementById('expand-all');
     expandBtn.addEventListener('click', () => {
       const allPanels = document.querySelectorAll('.news-panel');
-      const allIcons = document.querySelectorAll('.chev');
+      const allIcons = document.querySelectorAll('.news-toggle i');
       const isOpen = expandBtn.textContent.includes('Expand');
 
+      // Batch DOM writes to avoid layout thrash
       requestAnimationFrame(() => {
         allPanels.forEach((panel, i) => {
           panel.classList.toggle('open', isOpen);
@@ -510,7 +504,7 @@
     });
   </script>
 
-  <!-- Service worker registration (unchanged) -->
+  <!-- === A2HS additions: service worker registration (start) === -->
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
@@ -518,5 +512,6 @@
       });
     }
   </script>
+  <!-- === A2HS additions: service worker registration (end) === -->
 </body>
 </html>
