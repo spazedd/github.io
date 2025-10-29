@@ -130,18 +130,21 @@
     .news-toggle:hover { opacity: 0.8; }
     .news-toggle i { transition: transform 0.3s; font-size: 0.9rem; }
 
-    /* === GPU-friendly open/close (replaces max-height animation) === */
+    /* === Middle-ground animation: height + opacity (150ms) === */
     .news-panel {
       height: 0;
-      overflow: hidden;
       opacity: 0;
-      transform: translateY(6px);
-      transition: height .28s ease, opacity .2s ease, transform .2s ease;
-      padding: 0 1rem; /* vertical padding applied during open in JS */
+      overflow: hidden;
+      padding: 0 1rem;
+      transform: translateY(4px);
+      transition: height .15s ease, opacity .15s ease, transform .15s ease;
       will-change: height, opacity, transform;
     }
-    .news-panel.opening,
-    .news-panel.closing { /* helper states during animation */ }
+    .news-panel.open {
+      /* height is controlled via JS for smooth sizing */
+      opacity: 1;
+      transform: translateY(0);
+    }
 
     .summary { font-size: 0.95rem; margin-bottom: 0.8rem; }
     .read-more {
@@ -169,13 +172,10 @@
     }
     footer a { font-weight: 600; }
 
-    /* Motion safety for users who prefer less motion */
+    /* Respect users who prefer less motion */
     @media (prefers-reduced-motion: reduce) {
       * { animation: none !important; transition: none !important; }
     }
-
-    /* When low FPS is detected, disable transitions for instant toggles */
-    .low-power * { transition: none !important; animation: none !important; }
   </style>
 </head>
 
@@ -282,7 +282,6 @@
     // ===== Dark Mode =====
     const themeMeta = document.querySelector('meta[name="theme-color"]');
     const darkToggle = document.getElementById('dark-mode-toggle');
-
     function applyTheme(isDark){
       document.body.classList.toggle('dark', isDark);
       document.body.classList.toggle('light', !isDark);
@@ -290,12 +289,8 @@
       localStorage.setItem('mode', isDark ? 'dark' : 'light');
       if (themeMeta) themeMeta.setAttribute('content', isDark ? '#0f0f0f' : '#fafafa');
     }
-
-    // Respect saved mode
     (()=>{ applyTheme(localStorage.getItem('mode') === 'dark'); })();
     darkToggle.addEventListener('click', () => applyTheme(!document.body.classList.contains('dark')));
-
-    // iOS PWA resume: re-apply theme in case Safari paused rendering
     document.addEventListener('visibilitychange', () => {
       if (!document.hidden) applyTheme(localStorage.getItem('mode') === 'dark');
     });
@@ -330,70 +325,42 @@
       return res.json();
     }
 
-    // ===== PERF HELPERS: instant/smooth toggles =====
-    const isIosStandalone = (window.navigator.standalone === true) ||
-      window.matchMedia?.('(display-mode: standalone)').matches;
+    // ===== Smooth height animation helper =====
+    function animatePanel(panel, open) {
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      panel.classList.toggle('open', open);
 
-    // Adaptive low-power: if FPS is consistently low, disable transitions (instant toggles)
-    (function adaptivePerf(){
-      let frames = 0, start = performance.now();
-      function sample(now){
-        frames++;
-        if (now - start >= 800) {
-          const fps = Math.round(frames * 1000 / (now - start));
-          document.body.classList.toggle('low-power', fps < 46);
-          frames = 0; start = now;
-        }
-        requestAnimationFrame(sample);
-      }
-      requestAnimationFrame(sample);
-    })();
-
-    function preferInstantTransitions(){
-      return isIosStandalone ||
-             document.body.classList.contains('low-power') ||
-             window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    }
-
-    function togglePanel(panel, open){
-      // instant mode for LPM / PWA / reduced motion
-      if (preferInstantTransitions()) {
-        panel.style.transition = 'none';
-        panel.style.height = open ? 'auto' : '0px';
-        panel.style.opacity = open ? '1' : '0';
-        panel.style.transform = open ? 'translateY(0)' : 'translateY(6px)';
-        panel.style.paddingTop = open ? '1rem' : '0';
-        panel.style.paddingBottom = open ? '0.5rem' : '0';
-        // restore transitions next tick
-        requestAnimationFrame(()=> panel.style.transition = '');
+      if (reduce) {
+        // No animation for reduced-motion users
+        panel.style.height = open ? panel.scrollHeight + 'px' : '0px';
+        if (open) panel.style.height = 'auto';
         return;
       }
 
-      // animated mode (height-based, GPU-friendly)
-      const currentH = panel.style.height === 'auto'
-        ? panel.scrollHeight
-        : parseFloat(panel.style.height || '0');
+      // Measure start & end heights
+      const startHeight = panel.getBoundingClientRect().height;
+      // Set to target to measure scrollHeight (need content visible to get correct value)
+      panel.style.height = 'auto';
+      const endHeight = open ? panel.scrollHeight : 0;
 
-      const targetH = open ? panel.scrollHeight : 0;
+      // Revert to start height to start the transition
+      panel.style.height = startHeight + 'px';
 
-      // ensure starting values
-      panel.style.height = currentH + 'px';
-      panel.style.opacity = open ? '1' : '0';
-      panel.style.transform = open ? 'translateY(0)' : 'translateY(6px)';
-      panel.style.paddingTop = open ? '1rem' : '0';
-      panel.style.paddingBottom = open ? '0.5rem' : '0';
-
-      // animate to target on next frame
-      requestAnimationFrame(()=>{
-        panel.style.height = targetH + 'px';
+      // Next frame, go to end height
+      requestAnimationFrame(() => {
+        panel.style.height = endHeight + 'px';
       });
 
-      const onDone = (e)=>{
-        if (e.propertyName !== 'height') return;
-        if (open) panel.style.height = 'auto';
-        panel.removeEventListener('transitionend', onDone);
+      // When transition ends and we're open, lock height to auto
+      const tidy = (e) => {
+        if (e.propertyName === 'height') {
+          panel.removeEventListener('transitionend', tidy);
+          if (open) {
+            panel.style.height = 'auto';
+          }
+        }
       };
-      panel.addEventListener('transitionend', onDone);
+      panel.addEventListener('transitionend', tidy, { once: true });
     }
 
     // ===== Renderers =====
@@ -450,12 +417,12 @@
         item.appendChild(panel);
         list.appendChild(item);
 
-        // toggle (uses smooth/instant logic)
+        // toggle (uses smooth height animation)
         h.addEventListener('click', ()=>{
           const icon = h.querySelector('i');
-          const isOpen = panel.style.height === 'auto' || parseFloat(panel.style.height || '0') > 0;
-          togglePanel(panel, !isOpen);
-          icon.style.transform = !isOpen ? 'rotate(180deg)' : 'rotate(0deg)';
+          const open = !panel.classList.contains('open');
+          animatePanel(panel, open);
+          icon.style.transform = open ? 'rotate(180deg)' : 'rotate(0deg)';
         });
 
         shown++;
@@ -529,20 +496,19 @@
     const initial = preset && pills.some(p=>p.dataset.date===preset) ? preset : pills[0]?.dataset.date;
     if(initial) applyDate(initial);
 
-    // ===== Expand/Collapse All (batched) =====
+    // ===== Expand/Collapse All (uses same animation) =====
     const expandBtn = document.getElementById('expand-all');
     expandBtn.addEventListener('click', () => {
-      const allPanels = document.querySelectorAll('.news-panel');
-      const allIcons = document.querySelectorAll('.news-toggle i');
-      const openAll = expandBtn.textContent.includes('Expand');
+      const panels = document.querySelectorAll('.news-panel');
+      const icons = document.querySelectorAll('.news-toggle i');
+      const isOpen = expandBtn.textContent.includes('Expand');
 
-      // Batch DOM writes to avoid layout thrash
       requestAnimationFrame(() => {
-        allPanels.forEach((panel, i) => {
-          togglePanel(panel, openAll);
-          if(allIcons[i]) allIcons[i].style.transform = openAll ? 'rotate(180deg)' : 'rotate(0deg)';
+        panels.forEach((panel, i) => {
+          animatePanel(panel, isOpen);
+          if (icons[i]) icons[i].style.transform = isOpen ? 'rotate(180deg)' : 'rotate(0deg)';
         });
-        expandBtn.textContent = openAll ? 'Collapse All' : 'Expand All';
+        expandBtn.textContent = isOpen ? 'Collapse All' : 'Expand All';
       });
     });
 
