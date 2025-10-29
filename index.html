@@ -11,24 +11,21 @@
   <meta property="og:description" content="Your daily 3-sentence news. Click to read.">
   <meta property="og:image" content="https://somethingtoreport.com/og-image.jpg">
 
-  <!-- Performance hints (faster font/icon setup) -->
+  <!-- Browser hints -->
+  <meta name="theme-color" content="#0f0f0f">
+  <meta name="color-scheme" content="light dark">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
 
-  <!-- Fonts & Icons -->
+  <!-- Fonts (unchanged family) -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-  <!-- === A2HS additions (start) === -->
+  <!-- PWA -->
   <link rel="manifest" href="/manifest.webmanifest">
-  <meta name="theme-color" content="#0f0f0f">
-  <!-- iOS full-screen (optional icon provided; iOS can auto-generate if you remove this line) -->
   <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="Something to Report">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <!-- === A2HS additions (end) === -->
 
   <style>
     /* ==== Reset & Base ==== */
@@ -73,7 +70,7 @@
     header h1 { font-weight: 300; font-size: 2.2rem; letter-spacing: -0.03em; }
     header .timestamp { font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.7; }
 
-    /* ==== Controls (Dark Mode + Expand All) ==== */
+    /* ==== Controls ==== */
     .controls {
       text-align: center;
       padding: 1rem;
@@ -84,7 +81,7 @@
       border: none; border-radius: 6px;
       font-size: 0.9rem; font-weight: 600;
       cursor: pointer; transition: all 0.2s;
-      color: inherit; /* keep your existing text color (prevents blue buttons) */
+      color: inherit; /* keep your text colors */
     }
 
     /* ==== Date Pills & Stamp ==== */
@@ -108,7 +105,7 @@
     .breaking .bar { font-weight:700; margin-bottom:.25rem; }
     .breaking .body a { text-decoration: underline; }
 
-    /* ==== Category Grid (3 per row on desktop) ==== */
+    /* ==== Category Grid ==== */
     .categories {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -120,6 +117,9 @@
     .category {
       border-left: 4px solid;
       padding-left: 1rem;
+      /* Big mobile win: skip rendering off-screen cards until needed */
+      content-visibility: auto;
+      contain-intrinsic-size: 600px; /* placeholder to prevent jump */
     }
     .category h2 {
       font-weight: 400; font-size: 1.3rem; margin-bottom: 1rem;
@@ -134,9 +134,15 @@
       transition: color 0.2s;
     }
     .news-toggle:hover { opacity: 0.8; }
-    .news-toggle i { transition: transform 0.3s; font-size: 0.9rem; }
 
-    /* Smooth, GPU-friendly open/close (keeps visuals) */
+    /* inline chevron (replaces Font Awesome) */
+    .chev {
+      width: .9rem; height: .9rem;
+      flex: 0 0 .9rem;
+      transition: transform .3s ease;
+    }
+
+    /* Smooth, GPU-friendly open/close */
     .news-panel {
       max-height: 0; overflow: hidden; opacity: 0;
       transition: max-height 0.4s ease, opacity 0.3s ease, padding 0.3s, transform 0.35s ease;
@@ -158,13 +164,13 @@
       margin-bottom: 0.5rem;
     }
 
-    /* Reserve space for optional thumbnails to reduce layout shift */
+    /* Reserve space for optional images (reduce layout shift) */
     .thumb { width: 100%; }
     .thumb img {
       width: 100%; height: auto; display: block;
       margin-top: 0.8rem; border-radius: 6px;
       opacity: 0; transition: opacity 0.4s;
-      aspect-ratio: 16/9; /* reserve space without knowing exact size */
+      aspect-ratio: 16/9;
     }
     .thumb img.loaded { opacity: 0.9; }
 
@@ -178,7 +184,7 @@
     }
     footer a { font-weight: 600; }
 
-    /* Motion safety for users who prefer less motion */
+    /* Motion safety */
     @media (prefers-reduced-motion: reduce) {
       * { animation: none !important; transition: none !important; }
     }
@@ -210,7 +216,6 @@
     <div class="body" id="breakingBody"></div>
   </div>
 
-  <!-- Main content landmark (accessibility; no visual change) -->
   <main id="main" role="main">
     <!-- Categories Grid -->
     <div class="categories">
@@ -266,7 +271,6 @@
     <p>© <span id="year"></span> Something to Report | <a href="#top">Back to Top</a></p>
   </footer>
 
-  <!-- Scripts -->
   <script>
     // ===== Helpers =====
     const $=(s,el=document)=>el.querySelector(s);
@@ -304,12 +308,12 @@
     (()=>{ applyTheme(localStorage.getItem('mode') === 'dark'); })();
     darkToggle.addEventListener('click', () => applyTheme(!document.body.classList.contains('dark')));
 
-    // iOS PWA resume: re-apply theme in case Safari paused rendering
+    // iOS PWA resume: re-apply theme after tab/app resume
     document.addEventListener('visibilitychange', () => {
       if (!document.hidden) applyTheme(localStorage.getItem('mode') === 'dark');
     });
 
-    // ===== Date pills (today / yesterday / day before) =====
+    // ===== Date pills =====
     const datesEl = document.getElementById('dates');
     const stampEl = document.getElementById('stamp');
     const params=new URLSearchParams(location.search);
@@ -360,7 +364,15 @@
 
         const h = document.createElement('h3');
         h.className='news-toggle';
-        h.innerHTML = `<i class="fas fa-chevron-down"></i> ${it.title || '(untitled)'}`;
+        h.appendChild((()=>{
+          const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
+          svg.setAttribute('viewBox','0 0 24 24'); svg.classList.add('chev');
+          const p=document.createElementNS('http://www.w3.org/2000/svg','path');
+          p.setAttribute('d','M7 10l5 5 5-5');
+          p.setAttribute('fill','none'); p.setAttribute('stroke','currentColor'); p.setAttribute('stroke-width','2'); p.setAttribute('stroke-linecap','round'); p.setAttribute('stroke-linejoin','round');
+          svg.appendChild(p); return svg;
+        })());
+        h.appendChild(document.createTextNode(' ' + (it.title || '(untitled)')));
 
         const panel = document.createElement('div');
         panel.className='news-panel';
@@ -396,9 +408,10 @@
 
         // toggle
         h.addEventListener('click', ()=>{
-          const icon = h.querySelector('i');
-          panel.classList.toggle('open');
-          icon.style.transform = panel.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)';
+          const icon = h.querySelector('.chev');
+          const open = !panel.classList.contains('open');
+          panel.classList.toggle('open', open);
+          if(icon) icon.style.transform = open ? 'rotate(180deg)' : 'rotate(0deg)';
         });
 
         shown++;
@@ -423,7 +436,7 @@
         wrap.style.display='none';
       }
 
-      // Sections map (match your original layout)
+      // Sections
       const sections = {
         family:  data.family  || [],
         security:data.security|| [],
@@ -432,10 +445,9 @@
         tech:    data.tech    || [],
         world:   data.world   || []
       };
-
       Object.entries(sections).forEach(([k,arr])=>renderSection(k, arr));
 
-      // Lazy load images (also add loaded fade-in)
+      // Lazy load images
       $$('img[data-src]').forEach(img=>{
         img.src = img.dataset.src;
         img.onload = () => img.classList.add('loaded');
@@ -445,6 +457,7 @@
     // ===== Controller: apply a date =====
     async function applyDate(label){
       // highlight
+      const pills = $$('.pill', datesEl);
       pills.forEach(p=>p.classList.toggle('active', p.dataset.date===label));
       // URL + stamp
       const url=new URL(location.href); url.searchParams.set('date', label); history.replaceState(null,'',url.toString());
@@ -466,20 +479,21 @@
     }
 
     // Hook pills
-    pills.forEach(p=>p.addEventListener('click', ()=>applyDate(p.dataset.date)));
-
-    // Initial selection
-    const initial = preset && pills.some(p=>p.dataset.date===preset) ? preset : pills[0]?.dataset.date;
-    if(initial) applyDate(initial);
+    (function(){
+      const all = $$('.pill', datesEl);
+      all.forEach(p=>p.addEventListener('click', ()=>applyDate(p.dataset.date)));
+      const preset = new URLSearchParams(location.search).get('date');
+      const initial = preset && all.some(p=>p.dataset.date===preset) ? preset : all[0]?.dataset.date;
+      if(initial) applyDate(initial);
+    })();
 
     // ===== Expand/Collapse All (batched) =====
     const expandBtn = document.getElementById('expand-all');
     expandBtn.addEventListener('click', () => {
       const allPanels = document.querySelectorAll('.news-panel');
-      const allIcons = document.querySelectorAll('.news-toggle i');
+      const allIcons = document.querySelectorAll('.chev');
       const isOpen = expandBtn.textContent.includes('Expand');
 
-      // Batch DOM writes to avoid layout thrash
       requestAnimationFrame(() => {
         allPanels.forEach((panel, i) => {
           panel.classList.toggle('open', isOpen);
@@ -496,7 +510,7 @@
     });
   </script>
 
-  <!-- === A2HS additions: service worker registration (start) === -->
+  <!-- Service worker registration (unchanged) -->
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
@@ -504,6 +518,5 @@
       });
     }
   </script>
-  <!-- === A2HS additions: service worker registration (end) === -->
 </body>
 </html>
