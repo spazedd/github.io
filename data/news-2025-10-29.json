@@ -1,9 +1,37 @@
 {
+  "date_verified": "All content sourced from 2025-10-29",
   "breaking": {
-    "title": "BREAKING: Israel Strikes Kill 104 in Gaza After Soldier Death, Ceasefire Holds",
+    "title": "Israel Strikes Kill 104 in Gaza After Soldier Death, Ceasefire Holds",
     "kicker": "Deadliest day since truce as IDF targets militants amid tensions",
     "url": "https://www.reuters.com/world/middle-east/trump-says-gaza-ceasefire-holds-israel-has-right-hit-back-if-attacked-2025-10-29/"
   },
+  "policy_tracker": [
+    {
+      "topic": "Federal Reserve Cuts Key Interest Rate by 25 Basis Points",
+      "status": "Implemented",
+      "updated": "2025-10-29"
+    },
+    {
+      "topic": "ICE Continues Criminal Alien Arrests Amid Government Shutdown",
+      "status": "Ongoing",
+      "updated": "2025-10-29"
+    },
+    {
+      "topic": "FDA Accelerates Biosimilar Approvals to Reduce Drug Costs",
+      "status": "Issued",
+      "updated": "2025-10-29"
+    },
+    {
+      "topic": "CBO Projects Shutdown Costs Economy Up to $14 Billion",
+      "status": "Updated",
+      "updated": "2025-10-29"
+    },
+    {
+      "topic": "DHS Prioritizes Public Safety Over Shutdown Obstacles",
+      "status": "Active",
+      "updated": "2025-10-29"
+    }
+  ],
   "family": [
     {
       "title": "Appeals Court Overturns $213M Verdict in 'Take Care of Maya' Case",
