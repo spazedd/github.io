@@ -1,86 +1,220 @@
 {
+  "date_verified": "All content sourced from 2025-10-29",
   "breaking": {
-    "title": "Israel Strikes Kill 104 in Gaza After Soldier Death, Ceasefire Holds",
-    "kicker": "Deadliest day since truce as IDF targets militants amid tensions",
-    "url": "https://www.reuters.com/world/middle-east/trump-says-gaza-ceasefire-holds-israel-has-right-hit-back-if-attacked-2025-10-29/"
+    "title": "Hurricane Melissa Slams Cuba After Historic Jamaica Landfall",
+    "kicker": "Cat 5 storm kills dozens, floods devastate Caribbean amid U.S. aid scrutiny.",
+    "url": "https://www.reuters.com/sustainability/climate-energy/hurricane-melissa-hits-cuba-hours-after-devastating-jamaica-2025-10-29/"
   },
   "policy_tracker": [
-    { "topic": "Federal Reserve Cuts Key Interest Rate by 25 Basis Points", "status": "Implemented", "updated": "2025-10-29" },
-    { "topic": "ICE Continues Criminal Alien Arrests Amid Government Shutdown", "status": "Ongoing", "updated": "2025-10-29" },
-    { "topic": "FDA Accelerates Biosimilar Approvals to Reduce Drug Costs", "status": "Issued", "updated": "2025-10-29" },
-    { "topic": "CBO Projects Shutdown Costs Economy Up to $14 Billion", "status": "Updated", "updated": "2025-10-29" },
-    { "topic": "DHS Prioritizes Public Safety Over Shutdown Obstacles", "status": "Active", "updated": "2025-10-29" }
+    { "topic": "Government Shutdown", "status": "Day 29: SNAP benefits for 42M at risk of lapsing.", "updated": "2025-10-29" },
+    { "topic": "Federal Reserve Rates", "status": "Cut 25bps to 3.75-4%; Powell signals pause amid data fog.", "updated": "2025-10-29" },
+    { "topic": "Trump-South Korea Trade", "status": "Deal finalized; Trump receives highest honor.", "updated": "2025-10-29" },
+    { "topic": "Israel Aid & Gaza", "status": "Strikes kill 100+ testing ceasefire; scrutiny on U.S. funding.", "updated": "2025-10-29" },
+    { "topic": "FBI Jack Smith Probe", "status": "Trump demands immediate investigation into Republican targeting.", "updated": "2025-10-29" },
+    { "topic": "Immigration Enforcement", "status": "Memphis surge: 1700 arrests including 126 gang members.", "updated": "2025-10-29" }
   ],
   "family": [
     {
-      "title": "Appeals Court Overturns $213M Verdict in 'Take Care of Maya' Case",
-      "summary": "Florida's 2nd District Court of Appeal reversed most of a $213.5 million jury award against Johns Hopkins All Children's Hospital in the 'Take Care of Maya' case that inspired a Netflix documentary. The 2016 incident involved a hospital report of suspected medical child abuse for 10-year-old Maya Kowalski's high-dose ketamine treatment for pain syndrome, leading to her separation from mother Beata, who later suicided. The court ruled the hospital immune under Florida's good-faith reporter law for participating in dependency proceedings. This tragedy underscores how overzealous reports shatter families, imposing lifelong emotional and financial scars on innocents caught in bureaucracy. Immunity protects reporters but highlights need for evidence-based checks to prevent state overreach destroying parental bonds and prioritizing actual abuse over hunches.",
-      "url": "https://floridapolitics.com/archives/762994-court-overturns-213m-take-care-of-maya-verdict-citing-hospitals-child-abuse-immunity/",
-      "sourceLabel": "Florida Politics ↗"
+      "title": "Shutdown Puts SNAP Food Aid at Risk for 42 Million Americans",
+      "summary": "Federal shutdown enters day 29, threatening SNAP benefits expiration for 42 million low-income families this week. Partisan gridlock over spending bills halts funding, exposing welfare system’s fragility amid inflation and immigrant influx straining resources. Consequences hit hardest: child hunger spikes, family stress mounts, local economies suffer from reduced spending. America First demands accountability—slash foreign aid like Israel’s blank check to protect citizens; mass deportations cut welfare burdens. Elites prioritize bureaucracy over babies. Borders secure families first.",
+      "url": "https://www.reuters.com/sustainability/sustainable-finance-reporting/federal-shutdown-could-cost-us-economy-up-14-billion-2025-10-29/",
+      "sourceLabel": "Reuters ↗"
     },
     {
-      "title": "Singer Sia's Custody Battle Escalates with Child Porn, Drug Claims",
-      "summary": "Pop star Sia faces explosive divorce accusations from husband Daniel Bernad, who seeks sole custody of their 1-year-old son, alleging her drug addiction makes her unfit. Bernad claims Sia hid a sedative-positive hospitalization and demands monitored visits plus massive child support. Sia counters with LAPD probe into Bernad's hard drive for illicit child pornography, limiting him to supervised access. This high-stakes feud exposes how celebrity splits weaponize grave claims, endangering toddlers amid investigations and sobriety battles. Families suffer when courts drag out custody wars, draining resources on legal fights instead of child stability. True reform demands swift vetting and penalties for false claims that destabilize homes.",
-      "url": "https://www.eastbaytimes.com/2025/10/29/sia-divorce-custody-battle-allegations-drug-use-child-porn/",
-      "sourceLabel": "East Bay Times ↗"
+      "title": "States Sue Feds to Release Emergency SNAP Funds Amid Shutdown",
+      "summary": "Over two dozen states file lawsuit demanding USDA release emergency SNAP funds as benefits face halt. Shutdown politics block aid, directly harming vulnerable families nationwide. Ties to broader gov inefficiency, worsened by lax immigration adding millions to rolls. Effects: malnutrition rises, healthcare costs soar, poverty deepens generational cycles. Logical fix: enforce borders, deport welfare abusers; critique feminist policies destabilizing homes via false claims. Rare chance for efficiency if waste cut. Puts citizens over chaos.",
+      "url": "https://www.usatoday.com/story/news/politics/2025/10/29/government-shutdown-day-29-live-updates/86860007007/",
+      "sourceLabel": "USA Today ↗"
     },
     {
-      "title": "NC Foster Teen Suspected in Parents' Deaths Takes Own Life",
-      "summary": "A North Carolina teenager suspected of killing their foster parents committed suicide, police confirmed today amid ongoing investigation. The teen faced charges in the double homicide that shocked the community and raised alarms about foster system oversight. Placement failures allowed potential violence to erupt, leaving no justice for victims' relatives. Such breakdowns cost taxpayers millions in probes and care while orphans cycle through unstable homes. This demands rigorous vetting and swift removals, putting American kids first over endless placements that breed tragedy.",
-      "url": "https://thehill.com/sitemap/2025/October/29/",
+      "title": "Elderly SNAP Households Face Benefit Loss in Shutdown Crisis",
+      "summary": "5.8 million elderly living alone—27% of SNAP users—risk losing food aid as shutdown drags. Gridlock endangers nutrition for seniors, compounding isolation and health decline. Context: Welfare bloat from unchecked immigration diverts funds. Impacts: Hospitalizations up, family caregivers burdened, taxpayer dollars wasted. Takeaway: Sovereignty means prioritizing Americans; end foreign aid exploitation, enforce deportations to free resources. Hypocrisy exposed—gov fails its own.",
+      "url": "https://www.aei.org/opportunity-social-mobility/who-is-at-risk-of-losing-snap-benefits-due-to-the-shutdown/",
+      "sourceLabel": "AEI ↗"
+    },
+    {
+      "title": "Head Start Early Education for 65K Kids Halted by Shutdown",
+      "summary": "Government closure jeopardizes Head Start programs, stranding 65,000 children from vital early learning. Families in need lose support amid fiscal standoff. Reflects misplaced priorities: billions abroad while domestic kids suffer. Long-term: achievement gaps widen, welfare dependency grows, economy lags. America First: Cut interventionist spending, focus efficiency at home. Distraction from border security fueling overload.",
+      "url": "https://thehill.com/homenews/house/5579889-government-shutdown-americans-pain/",
       "sourceLabel": "The Hill ↗"
     },
     {
-      "title": "Texas Sues Tylenol Maker Over Autism Link in Children",
-      "summary": "Texas Attorney General sued acetaminophen manufacturers claiming links to autism in kids, echoing national concerns over everyday drugs harming development. The suit alleges misleading safety claims fueled epidemic rise in diagnoses, burdening families with lifelong care costs. Parents face skyrocketing therapies and lost wages from affected children unable to thrive. Big Pharma's profits trumped warnings, exemplifying corporate greed over family health. States leading accountability pushes back against elite capture, reclaiming resources for real safeguards.",
-      "url": "https://abcnews.go.com/Health/texas-sues-tylenol-maker-autism-link/story?id=1154321",
-      "sourceLabel": "ABC News ↗"
+      "title": "Housing Subsidies Stall, Evictions Loom for Needy Families",
+      "summary": "Shutdown freezes federal housing aid, pushing families toward eviction in high-cost crisis. Immigration surge inflates demand, pricing citizens out. Effects: Homelessness surges, kids disrupted, communities fray. Analysis: Mass deportations restore balance; critique elite overreach wasting on non-citizens. Efficiency trumps endless aid.",
+      "url": "https://thehill.com/homenews/house/5579889-government-shutdown-americans-pain/",
+      "sourceLabel": "The Hill ↗"
     },
-    {
-      "title": "Ex-Cop Charged in Death of Pregnant Woman's Unborn Child",
-      "summary": "Former police officer faces fetal homicide charges after killing a pregnant woman, compounding grief for her grieving family and unanswered justice. The incident highlights law enforcement accountability gaps when off-duty actions destroy innocents. Victims' kin endure compounded trauma and legal limbo, straining support networks. Lax standards invite such betrayals, demanding zero-tolerance purges to restore trust and protect vulnerable lives. Prioritizing families over badges delivers real security.",
-      "url": "https://masslawyersweekly.com/2025/10/29/ex-police-officer-accused-of-killing-pregnant-woman-faces-charges-in-death-of-unborn-child/",
-      "sourceLabel": "Mass Lawyers Weekly ↗"
-    },
-    {
-      "title": "Crypto Con Artist Accused in Houseboat Murder of Lawyer",
-      "summary": "Nora Nelson, a fraudulent crypto schemer, allegedly murdered lawyer Joseph Donahue and his dog on a Charlestown houseboat, preying on elite trust. Her cons unraveled into deadly violence, orphaning dependents and shattering communities. Elite deceptions erode family foundations, costing fortunes in fallout. Exposing grifters protects honest households from parasitic schemes run amok.",
-      "url": "https://www.bostonmagazine.com/news/2025/10/29/inventing-andi-nora-nelson-joseph-donahue-murder/",
-      "sourceLabel": "Boston Magazine ↗"
-    }
+    { "note": "Limited high-impact stories today—only 5 core items found" }
   ],
   "security": [
-    { "title": "ICE Arrests Pedophiles, Abusers Despite Democrat Shutdown", "summary": "ICE nabbed Jamaican pedophile Elroy Smith, Mexican abuser Joel Ocampo-Martinez, and others like fentanyl trafficker Osiris Rodriguez-Guzman amid shutdown chaos. Operations prioritized worst threats, shielding communities from imported predators. Conservative X users hailed efficiency as borders tighten under pressure. Victims spared further horror save billions in incarceration and trauma costs. This proves enforcement trumps bureaucracy, delivering sovereignty wins.", "url": "https://www.dhs.gov/news/2025/10/29/despite-democrats-government-shutdown-ice-arrests-worst-worst-criminal-illegal" },
-    { "title": "ICE Captures Violent Salvadoran Assaulter in Virginia", "summary": "ICE seized Luis Mario Martinez-Gonzalez, convicted of assaulting public servant, in Northern Virginia sweep defying shutdown hurdles. Routine enforcement removed immediate danger from streets. Safer neighborhoods cut crime waves fueled by lax entries. Firm priorities expose sanctuary failures, reclaiming control for citizens.", "url": "https://www.ice.gov/news/releases/ice-arrests-violent-criminal-salvadoran-alien-northern-virginia" },
-    { "title": "10 Charged in Federal Assaults on Officers During Raids", "summary": "Federal complaints hit 10 for violence against officers in immigration ops, underscoring resistance to lawful removals. Attacks heighten agent risks amid open-border fallout. Public safety demands prosecuting agitators fueling chaos. Accountability crushes elite excuses for anarchy.", "url": "https://www.justice.gov/usao-cdca/pr/10-arrested-federal-complaints-charging-them-committing-violence-against-officers-and" },
-    { "title": "Trump Demotes ICE Execs Failing Deportation Quotas", "summary": "Administration shuffled underperforming ICE leaders to ramp mass removals, signaling zero tolerance for foot-dragging. Aggressive tactics reclaim streets from criminal influx. Efficiency surges protect jobs, wages for Americans. Leadership overhaul cuts waste, enforces law.", "url": "https://english.elpais.com/usa/2025-10-29/trump-administration-demotes-ice-officials-for-failing-to-meet-deportation-targets.html" },
-    { "title": "Masked ICE Agents Detain Court-Attending Migrants", "summary": "Agents in disguise grabbed illegals at Manhattan hearings, streamlining removals despite activist outcry. Tactics bypass sanctuary shields harboring threats. Faster deportations slash crime, save resources. Bold moves prioritize citizens over foreign lawfare.", "url": "https://www.democracynow.org/2025/10/29/headlines/masked_ice_agents_continue_to_detain_immigrants_attending_court_hearings_in_manhattans_26_federal_plaza" },
-    { "title": "Madison ICE Raids Spark Local Outrage, Community Fears", "summary": "Enforcement in Wisconsin nabbed targets, prompting activist meltdowns over 'trauma' to communities. Reality: removals deter future waves, bolster safety. X conservatives mock hysteria shielding criminals. Results trump feelings every time.", "url": "https://badgerherald.com/news/madison/2025/10/29/following-ice-arrests-in-madison-community-organizations-share-reactions/" }
+    {
+      "title": "Israel Airstrikes Kill 100+ in Gaza, Testing Fragile Ceasefire",
+      "summary": "Israeli forces launch strikes killing over 100, including 46 children, after Hamas violations. U.S.-brokered truce strains amid hostage talks. Context: Endless aid enables endless conflict, silencing critics via victim narratives. Effects: Instability rises, U.S. entanglement costs billions, diverts from borders. Takeaway: Cut exploitative foreign aid; non-intervention prioritizes American security. Hypocrisy unchecked.",
+      "url": "https://www.washingtonpost.com/world/2025/10/29/israel-gaza-ceasefire-airstrikes/"
+    },
+    {
+      "title": "Sudan RSF Seizes Hospital, Slaughters 460 in Darfur Massacre",
+      "summary": "Paramilitary RSF captures el-Fasher hospital, killing 460+ per WHO. Civil war escalates atrocities. Minimal U.S. stake yet aid flows abroad. Consequences: Refugee waves threaten borders, terror exports. America First: Avoid entanglements; secure sovereignty over distant horrors. Waste exposed.",
+      "url": "https://apnews.com/article/sudan-hospital-rsf-darfur-fasher-who-3ac305299da5ee388429f3352ca5c6fa"
+    },
+    {
+      "title": "Brazil Police Raid Slays 100+ Gang Members in Rio Bloodbath",
+      "summary": "Massive op leaves 100+ dead in favela streets, deadliest ever. Targets cartels spilling violence north. Ties to U.S. border failures. Effects: Temporary win, but highlights lax enforcement costs. Enforce deportations; efficiency over foreign meddling.",
+      "url": "https://www.reuters.com/world/americas/more-than-40-bodies-seen-street-after-rios-deadliest-police-operation-2025-10-29/"
+    },
+    {
+      "title": "Trump Demands Probe of FBI, Jack Smith for Targeting Republicans",
+      "summary": "New docs reveal Biden FBI spied on GOP senators, subpoenaed records illegally. Trump calls for immediate indictments. Weaponized justice erodes trust. Impacts: Chills dissent, empowers deep state. Accountability now: prosecute lawfare; sovereignty demands it. Prison for traitors.",
+      "url": "https://twitter.com/EricLDaugh/status/1983643565281493453"
+    },
+    {
+      "title": "Memphis Surge Nets 1700 Arrests, 126 Gang Members in Month",
+      "summary": "Trump admin racks up arrests targeting criminals. Proves enforcement works. Context: Prior laxity invited chaos. Effects: Safer streets, deterred illegals. Praise discipline; mass deportations scale wins. Rare efficiency.",
+      "url": "https://twitter.com/AGPamBondi/status/1983613889410728127"
+    },
+    {
+      "title": "Alabama Plot to Massacre Synagogues, Politicians Foiled",
+      "summary": "Cops thwart attack; arsenal seized from radical. Threats to faith, leaders. Vigilance pays. Ties to imported hate. Secure borders block threats; critique open invites. Lives saved—priorities right.",
+      "url": "https://twitter.com/EricLDaugh/status/1983628027767804081"
+    },
+    {
+      "title": "7th Circuit Overturns Judge’s Daily Border Patrol Harassment",
+      "summary": "Ruling frees commander from leftist judge’s abuse after repelling rioters. Victory for enforcement. Exposes activist courts. Press on: borders over bench. Accountability wins.",
+      "url": "https://twitter.com/EricLDaugh/status/1983639770979868778"
+    }
   ],
   "economy": [
-    { "title": "Government Shutdown Risks $14 Billion GDP Hit", "summary": "CBO warns prolonged shutdown could slash GDP by 2%, costing $7-14 billion from furloughs and stalled aid. Families lose paychecks as partisan games drag on. Businesses stall expansions amid uncertainty. Wasteful gridlock proves limited government essential, slashing bloat for growth.", "url": "https://www.reuters.com/sustainability/sustainable-finance-reporting/federal-shutdown-could-cost-us-economy-up-14-billion-2025-10-29/" },
-    { "title": "Fed Slashes Rates 25 Points Amid Shutdown Data Void", "summary": "FOMC trimmed federal funds rate to 3.75-4% as jobs cool and inflation lingers, despite blackout from shutdown. Moderate expansion continues but risks mount. Borrowing eases for families, businesses. Cautious cuts avoid overkill, favoring markets over manipulation.", "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20251029a.htm" },
-    { "title": "Nvidia Hits Historic $5 Trillion Market Cap Milestone", "summary": "AI powerhouse Nvidia became first $5T company on chip boom, rewarding innovation over subsidies. Tech surge lifts pensions, creates jobs. Private genius outpaces government meddling. Deregulation unleashes more titans.", "url": "https://thehill.com/sitemap/2025/October/29/" },
-    { "title": "Microsoft Beats Earnings Despite Pre-Report Outage Chaos", "summary": "MSFT posted EPS $4.13 vs $3.66 expected, revenue $77.7B topping forecasts amid Azure glitch. Resilience shines through disruptions. Investors cheer execution, boosting confidence. Market discipline trumps excuses.", "url": "https://unusualwhales.com/earnings" },
-    { "title": "Google Alphabet Crushes Earnings with $102B Revenue", "summary": "GOOGL delivered EPS $2.87 vs $2.27, revenue $102.34B beating estimates handily. AI bets pay off big. Growth fuels retirements, innovation. Free enterprise delivers plenty.", "url": "https://unusualwhales.com/earnings" },
-    { "title": "Meta Earnings Miss on EPS but Revenue Tops Forecasts", "summary": "META revenue $51.2B beat but EPS $1.05 disappointed versus expectations. Ad resilience holds amid shifts. Volatility tests but private sector adapts fast. Hands-off policy wins.", "url": "https://unusualwhales.com/earnings" }
+    {
+      "title": "Fed Slashes Rates to 3.75-4% Amid Shutdown Data Blackout",
+      "summary": "FOMC cuts 25bps despite divisions; Powell hints pause as labor cools. Shutdown blinds data, risks missteps. Context: Tariffs loom, inflation ticks up. Effects: Boosts growth short-term, watches jobs. Smart move tempers excess; cut waste abroad for real relief. Efficiency delivers.",
+      "url": "https://www.reuters.com/business/fed-in-fog-it-heads-toward-another-rate-cut-2025-10-29/"
+    },
+    {
+      "title": "Shutdown Slams Economy with Up to $14 Billion Hit",
+      "summary": "CBO: 29-day closure shaves 2% GDP; permanent scars linger. Furloughs, delayed pay crush spending. Ties to spending fights. Consequences: Recession risks, families hurt. Critique overreach; deport to shrink rolls, fund priorities. Elites blank check ends now.",
+      "url": "https://www.reuters.com/sustainability/sustainable-finance-reporting/federal-shutdown-could-cost-us-economy-up-14-billion-2025-10-29/"
+    },
+    {
+      "title": "Nvidia Soars to First $5 Trillion Valuation on AI Frenzy",
+      "summary": "Chip king hits milestone; shares rally on deals, China access hopes. Powers U.S. tech edge. Effects: Jobs evolve, markets boom. Celebrate innovation; slash regs for more. Sovereignty through superiority.",
+      "url": "https://www.reuters.com/business/nvidia-poised-record-5-trillion-market-valuation-2025-10-29/"
+    },
+    {
+      "title": "Trump Finalizes Major Trade Deal with South Korea",
+      "summary": "Breakthrough caps Asia tour; lowers tariffs, boosts exports. Trump hailed with gold crown. Context: Puts America first in deals. Wins: Jobs home, deficits cut. Rare negotiation victory.",
+      "url": "https://nypost.com/2025/10/29/us-news/trump-live-updates-news-oct-29-30/"
+    },
+    {
+      "title": "Oil Prices Climb on Stockpile Draws, Trade Optimism",
+      "summary": "Crude rises as U.S. inventories plunge; Trump-Xi talks eyed. Energy independence key. Effects: Pumps profits, curbs imports. Prioritize domestic over aid drains.",
+      "url": "https://www.reuters.com/business/energy/oil-edges-up-us-crude-inventory-draw-2025-10-29/"
+    },
+    {
+      "title": "Amazon Launches $11B AI Data Center in Indiana",
+      "summary": "Behemoth invests rural; creates jobs via tech shift. AI reindustrializes. Critique cuts needed, but efficiency praised. Puts America back.",
+      "url": "https://twitter.com/unusual_whales/status/1983639477105951112"
+    },
+    {
+      "title": "Global Firms Slash Jobs for AI Efficiency Drive",
+      "summary": "Layoffs surge as tech optimizes; white-collar hit. Adaptation essential. Ties to policy: deregulate for growth. Distractions aside, progress.",
+      "url": "https://www.reuters.com/business/world-at-work/global-firms-slash-jobs-amid-weak-sentiment-ai-push-2025-10-29/"
+    }
   ],
   "health": [
-    { "title": "FDA Eases Rules to Speed Cheaper Biosimilar Drugs", "summary": "FDA streamlined approvals for generic biologics, promising billions saved on pricey meds. Faster market entry slashes family bills. Innovation thrives without price caps. Market competition crushes costs better than mandates.", "url": "https://www.hhs.gov/press-room/fda-accelerates-biosimilar-development-and-lowers-drug-costs.html" },
-    { "title": "Quarantines Curb Rising Measles Cases in South Carolina", "summary": "SC health officials credit quarantines for containing measles surge, preventing wider outbreaks. Imported diseases strain systems from border laxity. Quick action protects vulnerable kids. Borders seal threats at source.", "url": "https://scdailygazette.com/2025/10/29/quarantines-show-effectiveness-as-measles-cases-continue-to-rise-sc-health-officials-say/" },
-    { "title": "New Alzheimer's Pill Shows Promise for High-Risk Patients", "summary": "Experimental pill slows decline in APOE4 carriers, offering hope amid caregiving crisis. Private R&D delivers breakthroughs faster. Families gain years, easing burdens. Deregulate to accelerate cures.", "url": "https://www.npr.org/sections/shots-health-news/2025/10/29/nx-s1-5575561/alzheimers-pill-apoe4-high-risk-lecanemab-donanemab" },
-    { "title": "Genetic Marker Predicts Severe Gout Drug Reactions", "summary": "VUMC identifies gene variant warning of deadly allopurinol responses in US patients. Precision medicine avoids tragedies. Kidneys spared, lives saved. Targeted care cuts waste.", "url": "https://news.vumc.org/2025/10/29/new-genetic-marker-found-to-predict-severe-gout-drug-reactions-in-us-patients/" },
-    { "title": "Experts Urge Flu Shots Ahead of Active Season", "summary": "Health pros warn robust flu wave coming, pushing vaccines to shield vulnerable. Prevention averts hospital overloads. Self-reliance beats dependency. Stock up, stay strong.", "url": "https://libn.com/2025/10/29/experts-warn-of-active-flu-season-urge-vaccination/" },
-    { "title": "RFK Jr's Vaccine Adviser Vows Impartial Science Focus", "summary": "Martin Kulldorff chairs panel, promising data-driven reviews free of bias. Accountability restores trust post-mandates. Families empowered with facts. Reform exposes overreach.", "url": "https://www.politico.com/news/2025/10/29/an-interview-with-the-chair-of-kennedys-controversial-vaccine-panel-00626463" }
+    {
+      "title": "Tylenol-Autism Link Deemed Unproven by U.S. Health Chief",
+      "summary": "Official: Insufficient data ties acetaminophen to autism; caution urged. Pharma scrutiny rises. Context: Mental health crises like trans fads ignored. Effects: Lawsuits loom, trust erodes. Focus real causes; cut waste on fads. Logic over hype.",
+      "url": "https://www.reuters.com/business/healthcare-pharmaceuticals/us-health-chief-says-not-enough-data-show-tylenol-causes-autism-still-advises-2025-10-29/"
+    },
+    {
+      "title": "Severe Colon Disease Surges in Adults Under 50",
+      "summary": "Researchers note rise in young patients; lifestyle culprits probed. Strains systems. Ties to decay: process foods, stress. Prevention key; critique cultural distractions. Efficiency in care.",
+      "url": "https://www.reuters.com/business/healthcare-pharmaceuticals/health-rounds-severe-colon-disorder-rise-younger-patients-2025-10-29/"
+    },
+    {
+      "title": "Men Need Twice Women’s Exercise for Heart Benefits",
+      "summary": "Study: Gender gap in fitness gains. Policies overlook biology. Effects: Tailored advice saves lives. Critique feminist one-size-fits; incentives matter. Rare truth.",
+      "url": "https://nypost.com/2025/10/29/health/men-need-twice-the-exercise-as-women-for-this-health-benefit/"
+    },
+    {
+      "title": "GSK Lifts Outlook on Cancer, HIV Drug Sales Boom",
+      "summary": "Forecast up from specialty meds. Innovation pays. Cut regs for more. Delivers results.",
+      "url": "https://www.reuters.com/business/healthcare-pharmaceuticals/gsk-raises-2025-sales-forecast-after-strong-growth-specialty-medicines-2025-10-29/"
+    },
+    {
+      "title": "WSJ Calls for Ending Obamacare Subsidies in Shutdown",
+      "summary": "Editorial: GOP kill boosts to force reform. Overhaul excess. Puts markets first.",
+      "url": "https://thehill.com/homenews/media/5578528-wall-street-journal-gop-obamacare-subsidies-shutdown/"
+    },
+    { "note": "Limited high-impact stories today—only 5 items found" }
   ],
   "tech": [
-    { "title": "Microsoft Azure, 365 Global Outage Disrupts Airlines, Airports", "summary": "Config change sparked Azure crash hitting 365, Xbox, Minecraft worldwide, delaying flights at Heathrow, Alaska Airlines. Millions affected pre-earnings. Single failures expose cloud risks. Domestic redundancy fortifies against elite overreliance.", "url": "https://www.reuters.com/technology/microsoft-azure-down-thousands-users-downdetector-shows-2025-10-29/" },
-    { "title": "Nvidia Soars to First-Ever $5 Trillion Valuation", "summary": "Chip leader Nvidia claims top spot on AI demand explosion, three months after $4T. Validates bold bets, lifts markets. US dominance crushes rivals. Innovate free, dominate globally.", "url": "https://thehill.com/sitemap/2025/October/29/" },
-    { "title": "AI Not Dot-Com Repeat, Powell Assures Markets", "summary": "Fed Chair distinguishes AI productivity from bubble hype, calming investors. Real gains build economy unlike speculation. Policy neutrality unleashes tech wave. Hands off for prosperity.", "url": "https://unusualwhales.com/earnings" }
+    {
+      "title": "Nvidia Claims World’s First $5 Trillion Market Cap",
+      "summary": "AI dominance propels surge; $500B chip orders fuel. U.S. leads rivalry. Jobs transform, wealth created. Deregulate to dominate; sovereignty via silicon.",
+      "url": "https://www.reuters.com/business/nvidia-poised-record-5-trillion-market-valuation-2025-10-29/"
+    },
+    {
+      "title": "OpenAI Restructures with $500B Microsoft Deal Freedoms",
+      "summary": "For-profit shift unlocks ambitions; MS stake balloons. Reindustrializes via AI. Innovation over regs; cut distractions.",
+      "url": "https://www.reuters.com/technology/artificial-intelligence/artificial-intelligencer-inside-500-billion-deal-that-freed-openais-ambition-2025-10-29/"
+    },
+    {
+      "title": "Microsoft Azure Global Outage Hits Businesses Hard",
+      "summary": "Cloud crash disrupts 365 users; DNS fix applied. Reliance risks exposed. Resilient infra key; critique monopoly.",
+      "url": "https://www.reuters.com/technology/microsoft-azure-down-thousands-users-downdetector-shows-2025-10-29/"
+    },
+    {
+      "title": "Amazon Builds $11B AI Data Center in Rural Indiana",
+      "summary": "Investment sparks jobs; AI pivot accelerates. Rural revival. Efficiency praised.",
+      "url": "https://twitter.com/unusual_whales/status/1983639477105951112"
+    },
+    {
+      "title": "Powell: AI Boom No Bubble, Jobs to Shift",
+      "summary": "Fed chair bullish; investments real. Productivity surge ahead. Embrace change.",
+      "url": "https://thehill.com/business/5579627-ai-investment-not-bubble-powell/"
+    },
+    {
+      "title": "Tech Titans Fund Trump’s White House Ballroom Revamp",
+      "summary": "Nvidia CEO joins donors. Private cash over tax waste. Smart play.",
+      "url": "https://www.reuters.com/business/nvidias-huang-joins-tech-titans-funding-trumps-ballroom-2025-10-29/"
+    }
   ],
   "world": [
-    { "title": "Israel Airstrikes Kill 104 Including 46 Kids After Soldier Slain", "summary": "IDF bombed 24 Gaza sites post-soldier death, leveling militant hubs but claiming 104 lives mostly civilians. Trump backs right to hit back, ceasefire intact. Endless aid props cycles draining US billions. Non-intervention redirects funds home, ends victimhood grift.", "url": "https://www.reuters.com/world/middle-east/trump-says-gaza-ceasefire-holds-israel-has-right-hit-back-if-attacked-2025-10-29/" },
-    { "title": "Putin Envoy Predicts Ukraine Peace Within One Year", "summary": "Kremlin aide Dmitriev foresees end to war soon, easing Europe fears. No US entanglement needed. Savings massive for taxpayers. Isolationism delivers peace dividends.", "url": "https://www.reuters.com/business/finance/putins-envoy-dmitriev-says-there-will-be-peace-ukraine-within-one-year-2025-10-29/" },
-    { "title": "Trump, Xi Set for High-Stakes Summit in South Korea", "summary": "Leaders meet Thursday on trade, fentanyl amid alliance revival. Leverage secures deals without wars. Smart diplomacy puts America first, cuts waste.", "url": "https://www.reuters.com/world/china/trump-meet-chinas-xi-11-am-thursday-2025-10-29/" }
+    {
+      "title": "Hurricane Melissa Batters Cuba After Jamaica Devastation",
+      "summary": "Cat 3 churns on; dozens dead, floods ravage. Aid questions rise. Critique: U.S. resources for foreigners? Focus home resilience first.",
+      "url": "https://www.reuters.com/sustainability/climate-energy/hurricane-melissa-hits-cuba-hours-after-devastating-jamaica-2025-10-29/"
+    },
+    {
+      "title": "Trump Hailed with Gold Crown in South Korea Trade Win",
+      "summary": "Deal sealed; historic honor. Puts America earning. Model for Xi meet.",
+      "url": "https://nypost.com/2025/10/29/us-news/trump-live-updates-news-oct-29-30/"
+    },
+    {
+      "title": "Dutch Election Tests Far-Right Populist Surge",
+      "summary": "Wilders eyes win amid migration backlash. Europe wakes. U.S. leads isolation.",
+      "url": "https://www.reuters.com/world/europe/dutch-vote-elections-test-european-populisms-reach-2025-10-29/"
+    },
+    {
+      "title": "Rio’s Deadliest Raid Leaves 100+ Bodies in Streets",
+      "summary": "Police crush gangs; human cost high. Echoes needed U.S. resolve.",
+      "url": "https://www.reuters.com/world/americas/more-than-40-bodies-seen-street-after-rios-deadliest-police-operation-2025-10-29/"
+    },
+    {
+      "title": "Sudan RSF Captures Darfur City in Bloody Advance",
+      "summary": "Hospital massacre; war grinds. Stay out; no aid traps.",
+      "url": "https://apnews.com/article/sudan-hospital-rsf-darfur-fasher-who-3ac305299da5ee388429f3352ca5c6fa"
+    },
+    {
+      "title": "Trump-Xi Summit Looms with Trade, Fentanyl Stakes",
+      "summary": "High noon talks; deals or tariffs. America dictates terms.",
+      "url": "https://www.reuters.com/world/china/trump-meet-chinas-xi-11-am-thursday-2025-10-29/"
+    },
+    {
+      "title": "Reform UK Polls Strong in Local Immigration Fight",
+      "summary": "Anti-migrant party rises; blueprint for wins. Deportations work.",
+      "url": "https://www.reuters.com/world/uk/britains-populist-reform-party-faces-local-authority-tests-2025-10-29/"
+    }
   ]
 }
