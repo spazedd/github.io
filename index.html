@@ -10,9 +10,33 @@
   <meta property="og:description" content="Your daily 3-sentence news. Click to read.">
   <meta property="og:image" content="https://somethingtoreport.com/og-image.jpg">
 
-  <!-- Fonts & Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <!-- ========== Fonts: performance-optimized ========== -->
+  <!-- Preconnect to font hosts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+
+  <!-- Preload Google Fonts CSS, apply async; noscript fallback -->
+  <link rel="preload"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap"
+        as="style"
+        onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  </noscript>
+
+  <!-- Preload Font Awesome CSS, apply async; noscript fallback -->
+  <link rel="preload"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        as="style"
+        onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  </noscript>
+  <!-- ========== /Fonts ========== -->
 
   <!-- === A2HS additions (start) === -->
   <link rel="manifest" href="/manifest.webmanifest">
@@ -28,13 +52,18 @@
     /* ==== Reset & Base ==== */
     *, *::before, *::after { box-sizing: border-box; margin:0; padding:0; }
     body {
-      font-family: 'Inter', sans-serif;
+      /* System fallback stack first to reduce CLS, Inter swaps in fast */
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      /* Helps keep text size visually stable on swap */
+      font-size-adjust: 0.5;
       line-height: 1.6;
       transition: background 0.3s, color 0.3s;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
     }
     a { text-decoration: none; color: inherit; }
 
-    /* ==== Light Mode ==== */
+    /* ==== Light/Dark (unchanged colors) ==== */
     .light { background: #fafafa; color: #111; }
     .light .category { border-left-color: #000; }
     .light .news-toggle { color: #000; }
@@ -46,7 +75,6 @@
     .light .pill.active { outline:2px solid #000; }
     .light .breaking { background:#fff; border-color:#ddd; }
 
-    /* ==== Dark Mode ==== */
     .dark { background: #0f0f0f; color: #eee; }
     .dark .category { border-left-color: #fff; }
     .dark .news-toggle { color: #fff; }
@@ -103,7 +131,6 @@
       /* CLS fix: reserve space even before data arrives */
       min-height: 64px;
     }
-
     .breaking .bar { font-weight:700; margin-bottom:.25rem; }
     .breaking .body a { text-decoration: underline; }
 
@@ -132,10 +159,10 @@
       font-weight: 400; font-size: 1.05rem; padding: 0.4rem 0;
       transition: color 0.2s;
     }
-    /* CLS fix: fix icon width so font swap doesn’t shift text */
+    /* CLS fix: fix icon width so icon font swap doesn’t shift text */
     .news-toggle i { width: 0.9rem; flex: 0 0 0.9rem; text-align:center; transition: transform 0.3s; font-size: 0.9rem; }
 
-    /* Smooth, GPU-friendly open/close (no color changes) */
+    /* Smooth, GPU-friendly open/close */
     .news-panel {
       max-height: 0; overflow: hidden; opacity: 0;
       transition: max-height 0.4s ease, opacity 0.3s ease, padding 0.3s, transform 0.35s ease;
@@ -157,14 +184,13 @@
       margin-bottom: 0.5rem;
     }
 
-    /* CLS fix: reserve image area before load */
+    /* CLS-safe image box */
     .thumb {
       position: relative;
       width: 100%;
       aspect-ratio: 16/9;
       border-radius: 6px;
       overflow: hidden;
-      /* subtle placeholder so layout height is fixed */
       background: currentColor;
       opacity: 0.06;
     }
@@ -187,7 +213,7 @@
     }
     footer a { font-weight: 600; }
 
-    /* Motion safety for users who prefer less motion */
+    /* Motion safety */
     @media (prefers-reduced-motion: reduce) {
       * { animation: none !important; transition: none !important; }
     }
