@@ -1,543 +1,343 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Something to Report – Daily Briefings</title>
+  <meta charset="utf-8" />
+  <title>Something to Report — Stream</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="theme-color" content="#0f1011" />
+  <link rel="manifest" href="/manifest.webmanifest" />
 
-  <!-- SEO / Social -->
-  <meta property="og:title" content="Something to Report – Daily Briefings">
-  <meta property="og:description" content="Your daily 3-sentence news. Click to read.">
-  <meta property="og:image" content="https://somethingtoreport.com/og-image.jpg">
-
-  <!-- ========== Fonts: performance-optimized ========== -->
-  <!-- Preconnect to font hosts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
-  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
-
-  <!-- Preload Google Fonts CSS, apply async; noscript fallback -->
-  <link rel="preload"
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap"
-        as="style"
-        onload="this.onload=null;this.rel='stylesheet'">
-  <noscript>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-  </noscript>
-
-  <!-- Preload Font Awesome CSS, apply async; noscript fallback -->
-  <link rel="preload"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-        as="style"
-        onload="this.onload=null;this.rel='stylesheet'">
-  <noscript>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  </noscript>
-  <!-- ========== /Fonts ========== -->
-
-  <!-- === A2HS additions (start) === -->
-  <link rel="manifest" href="/manifest.webmanifest">
-  <meta name="theme-color" content="#0f0f0f">
-  <!-- iOS full-screen (optional icon provided; iOS can auto-generate if you remove this line) -->
-  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-title" content="Something to Report">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <!-- === A2HS additions (end) === -->
+  <script>
+    // Prevent flash on load
+    (function () {
+      const saved = localStorage.getItem("mode");
+      const prefers = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      const dark = saved ? saved === "dark" : prefers;
+      document.documentElement.classList.add(dark ? "dark" : "light");
+    })();
+  </script>
 
   <style>
-    /* ==== Reset & Base ==== */
-    *, *::before, *::after { box-sizing: border-box; margin:0; padding:0; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
     body {
-      /* System fallback stack first to reduce CLS, Inter swaps in fast */
-      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-      /* Helps keep text size visually stable on swap */
-      font-size-adjust: 0.5;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
       line-height: 1.6;
-      transition: background 0.3s, color 0.3s;
       -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
+      transition: background-color 0.4s ease, color 0.4s ease;
+      background: var(--bg);
+      color: var(--fg);
+      position: relative;
     }
-    a { text-decoration: none; color: inherit; }
 
-    /* ==== Light/Dark (unchanged colors) ==== */
-    .light { background: #fafafa; color: #111; }
-    .light .category { border-left-color: #000; }
-    .light .news-toggle { color: #000; }
-    .light .read-more { background: #000; color: #fff; }
-    .light .read-more:hover { background: #333; }
-    .light .controls button { background: #eee; }
-    .light .controls button:hover { background: #ddd; }
-    .light .pill { background:#fff; border-color:#ddd; color:#333; }
-    .light .pill.active { outline:2px solid #000; }
-    .light .breaking { background:#fff; border-color:#ddd; }
+    :root {
+      --bg: #0f1011;
+      --fg: #ececed;
+      --rule: #2a2c30;
+      --card: #15161a;
+      --chip: #191b1f;
+      --link-underline: rgba(255, 255, 255, 0.3);
+      --toggle-fg: #fff;
+    }
+    .light {
+      --bg: #f4f5f6;
+      --fg: #111;
+      --rule: #ddd;
+      --card: #fff;
+      --chip: #fff;
+      --link-underline: rgba(0, 0, 0, 0.3);
+      --toggle-fg: #000;
+    }
 
-    .dark { background: #0f0f0f; color: #eee; }
-    .dark .category { border-left-color: #fff; }
-    .dark .news-toggle { color: #fff; }
-    .dark .read-more { background: #fff; color: #000; }
-    .dark .read-more:hover { background: #ccc; }
-    .dark .controls button { background: #222; color: #fff; }
-    .dark .controls button:hover { background: #333; }
-    .dark .pill { background:#1b1b1b; border-color:#333; color:#eee; }
-    .dark .pill.active { outline:2px solid #fff; }
-    .dark .breaking { background:#161616; border-color:#2a2a2a; }
+    a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--link-underline); }
+    a:hover { opacity: 0.9; }
 
-    /* ==== Header ==== */
     header {
       text-align: center;
-      padding: 2.5rem 1rem 1.5rem;
-      border-bottom: 1px solid;
+      padding: 56px 16px 12px;
+      border-bottom: 1px solid var(--rule);
     }
-    header h1 { font-weight: 300; font-size: 2.2rem; letter-spacing: -0.03em; }
-    header .timestamp { font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.7; }
+    header h1 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 800;
+      font-size: clamp(2rem, 5vw, 3rem);
+    }
+    header p { max-width: 860px; margin: 0.6rem auto; opacity: 0.85; }
+    .time { margin-top: 0.35rem; opacity: 0.7; font-size: 0.95rem; }
 
-    /* ==== Controls (Dark Mode + Expand All) ==== */
     .controls {
-      text-align: center;
-      padding: 1rem;
-      display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;
+      display: flex;
+      gap: 0.6rem;
+      justify-content: center;
+      padding: 14px 0;
     }
-    .controls button {
-      padding: 0.6rem 1.2rem;
-      border: none; border-radius: 6px;
-      font-size: 0.9rem; font-weight: 600;
-      cursor: pointer; transition: all 0.2s;
-      /* no color changes here by request */
+    .btn {
+      padding: 0.55rem 1rem;
+      border-radius: 999px;
+      border: 1px solid var(--rule);
+      background: var(--card);
+      cursor: pointer;
+      font-weight: 800;
+      color: inherit;
+      transition: transform 0.1s ease, background 0.4s ease;
     }
+    .btn:hover { transform: translateY(-1px); }
 
-    /* ==== Date Pills & Stamp ==== */
-    .dates {
-      max-width: 1400px; margin: 0 auto; padding: 0 1rem 1rem;
-      display:flex; gap:.5rem; align-items:center; flex-wrap:wrap; justify-content:center;
-      /* CLS fix: keep row height stable while pills are injected */
-      min-height: 44px;
-    }
-    .pill {
-      display:inline-flex; align-items:center; gap:.5rem;
-      padding:.5rem .9rem; border:1px solid; border-radius:999px; cursor:pointer;
-      font-size:.85rem; font-weight:600; transition: box-shadow .2s ease, transform .2s ease;
-    }
-    .pill:hover { box-shadow: 0 6px 18px rgba(0,0,0,.12); transform: translateY(-1px); }
-    .stamp { font-size:.85rem; opacity:.7; margin-left:.5rem; white-space:nowrap; }
-
-    /* ==== Breaking Banner ==== */
-    .breaking {
-      max-width: 1400px; margin: 0 auto 0; padding: .9rem 1rem;
-      border:1px solid; border-radius: 10px;
-      /* CLS fix: reserve space even before data arrives */
-      min-height: 64px;
-    }
-    .breaking .bar { font-weight:700; margin-bottom:.25rem; }
-    .breaking .body a { text-decoration: underline; }
-
-    /* ==== Category Grid (3 per row on desktop) ==== */
-    .categories {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      padding: 2rem 1rem;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-    .category {
-      border-left: 4px solid;
-      padding-left: 1rem;
-    }
-    .category h2 {
-      font-weight: 400; font-size: 1.3rem; margin-bottom: 1rem;
-      text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.8;
-    }
-
-    /* ==== News Item ==== */
-    .news-item { margin-bottom: 1.2rem; }
-    .news-toggle {
-      cursor: pointer; display: flex; align-items: center; gap: 0.5rem;
-      font-weight: 400; font-size: 1.05rem; padding: 0.4rem 0;
-      transition: color 0.2s;
-    }
-    /* CLS fix: fix icon width so icon font swap doesn’t shift text */
-    .news-toggle i { width: 0.9rem; flex: 0 0 0.9rem; text-align:center; transition: transform 0.3s; font-size: 0.9rem; }
-
-    /* Smooth, GPU-friendly open/close */
-    .news-panel {
-      max-height: 0; overflow: hidden; opacity: 0;
-      transition: max-height 0.4s ease, opacity 0.3s ease, padding 0.3s, transform 0.35s ease;
-      padding: 0 1rem;
-      transform: translateY(10px);
-      will-change: transform, opacity;
-    }
-    .news-panel.open {
-      max-height: 40rem; opacity: 1; padding: 1rem 1rem 0.5rem;
-      transform: translateY(0);
-    }
-
-    .summary { font-size: 0.95rem; margin-bottom: 0.8rem; }
-    .read-more {
-      display: inline-block;
-      padding: 0.5rem 1rem;
-      border-radius: 4px;
-      font-size: 0.85rem; font-weight: 600;
-      margin-bottom: 0.5rem;
-    }
-
-    /* CLS-safe image box */
-    .thumb {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 16/9;
-      border-radius: 6px;
+    .hero {
+      border: 1px solid var(--rule);
+      border-radius: 12px;
+      margin: 12px 0 18px;
+      background: var(--card);
       overflow: hidden;
-      background: currentColor;
-      opacity: 0.06;
     }
-    .thumb img {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      display: block;
-      opacity: 0; transition: opacity 0.4s;
+    .hero-body { padding: 16px 18px; }
+    .hero-body .hed {
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 800;
+      font-size: clamp(1.2rem, 2.3vw, 1.6rem);
     }
-    .thumb img.loaded { opacity: 0.9; }
 
-    /* ==== Empty state ==== */
-    .no-results { opacity:.6; font-size:.9rem; padding:.3rem 0; display:none; }
+    .stream { display: grid; gap: 0.9rem; margin: 20px 0 40px; }
+    .card {
+      border: 1px solid var(--rule);
+      border-radius: 10px;
+      background: var(--card);
+      overflow: hidden;
+      transition: background 0.4s ease;
+    }
+    .card-inner {
+      display: grid;
+      grid-template-columns: 1fr 110px;
+      gap: 0.6rem;
+      padding: 12px;
+    }
+    @media (max-width: 640px) {
+      .card-inner { grid-template-columns: 1fr; }
+    }
+    .card-body { padding: 0.5rem 0.75rem; }
+    .card-title {
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 0.3rem;
+    }
+    .thumb {
+      height: 90px;
+      background: #0a0a0b;
+      border-radius: 8px;
+      position: relative;
+      overflow: hidden;
+    }
 
-    /* ==== Footer ==== */
+    .toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: var(--chip);
+      color: var(--toggle-fg);
+      border: 1px solid var(--rule);
+      border-radius: 10px;
+      padding: 0.35rem 0.65rem;
+      cursor: pointer;
+      font-weight: 800;
+      margin-top: 0.1rem;
+      transition: all 0.3s ease;
+    }
+    .chev {
+      width: 0.95rem;
+      height: 0.95rem;
+      stroke: currentColor;
+      fill: none;
+      transition: transform 0.25s ease;
+    }
+    .panel {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: max-height 0.4s ease, opacity 0.3s ease, transform 0.3s ease;
+      padding: 0 18px;
+    }
+    .panel.open {
+      max-height: 500px;
+      opacity: 1;
+      transform: translateY(0);
+      padding: 10px 18px 12px;
+    }
+    .summary { margin: 0.35rem 0 0.25rem; }
+    .cta {
+      display: inline-block;
+      margin-top: 0.3rem;
+      padding: 0.38rem 0.65rem;
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: 0.9rem;
+    }
+
     footer {
-      text-align: center; padding: 2rem 1rem; font-size: 0.85rem;
-      border-top: 1px solid; opacity: 0.7;
+      border-top: 1px solid var(--rule);
+      opacity: 0.85;
+      text-align: center;
+      padding: 18px 0 26px;
+      font-size: 0.9rem;
     }
-    footer a { font-weight: 600; }
-
-    /* Motion safety */
-    @media (prefers-reduced-motion: reduce) {
-      * { animation: none !important; transition: none !important; }
+    .backtop {
+      display: inline-block;
+      margin-top: 0.6rem;
+      border-bottom: 1px solid var(--link-underline);
+      font-weight: 800;
+      cursor: pointer;
     }
   </style>
 </head>
-
-<body class="light">
-
-  <!-- Header -->
-  <header>
+<body id="top">
+  <header class="wrap">
     <h1>Something to Report</h1>
-    <div class="timestamp" id="current-time"></div>
+    <p>Pivotal themes shaping the future: <strong>Family</strong>, <strong>Education</strong>, <strong>Security</strong>, <strong>American Values</strong>, <strong>Global Influence</strong>, <strong>Lifestyle</strong>, <strong>Politics</strong>.</p>
+    <div class="time" id="now"></div>
   </header>
 
-  <!-- Controls -->
-  <div class="controls">
-    <button id="expand-all">Expand All</button>
-    <button id="dark-mode-toggle">Dark Mode</button>
-  </div>
-
-  <!-- Date pills + stamp -->
-  <div class="dates" id="dates">
-    <span class="stamp" id="stamp">Last updated --:--</span>
-  </div>
-
-  <!-- Breaking -->
-  <div class="breaking" id="breaking" style="visibility:hidden;">
-    <div class="bar" id="breakingBar"></div>
-    <div class="body" id="breakingBody"></div>
-  </div>
-
-  <!-- Categories Grid -->
-  <div class="categories">
-
-    <!-- CATEGORY: Family -->
-    <div class="category" data-section="family">
-      <h2>Family</h2>
-      <div class="list"></div>
-      <div class="no-results">No family-focused briefings for this date.</div>
+  <section class="wrap">
+    <div class="controls">
+      <button id="expandAll" class="btn">Expand All</button>
+      <button id="mode" class="btn">Dark Mode</button>
     </div>
 
-    <!-- CATEGORY: Security -->
-    <div class="category" data-section="security">
-      <h2>Security</h2>
-      <div class="list"></div>
-      <div class="no-results">No security updates for this date.</div>
-    </div>
+    <article class="hero">
+      <div class="hero-body">
+        <div class="hed" id="heroTitle"></div>
+        <p id="heroDek" class="dek" style="margin-top: .35rem"></p>
+      </div>
+    </article>
 
-    <!-- CATEGORY: Economy -->
-    <div class="category" data-section="economy">
-      <h2>Economy</h2>
-      <div class="list"></div>
-      <div class="no-results">No economy items for this date.</div>
-    </div>
+    <main id="stream" class="stream"></main>
+  </section>
 
-    <!-- CATEGORY: Health -->
-    <div class="category" data-section="health">
-      <h2>Health</h2>
-      <div class="list"></div>
-      <div class="no-results">No health items for this date.</div>
-    </div>
-
-    <!-- CATEGORY: Tech -->
-    <div class="category" data-section="tech">
-      <h2>Tech</h2>
-      <div class="list"></div>
-      <div class="no-results">No tech items for this date.</div>
-    </div>
-
-    <!-- CATEGORY: World -->
-    <div class="category" data-section="world">
-      <h2>World</h2>
-      <div class="list"></div>
-      <div class="no-results">No world items for this date.</div>
-    </div>
-
-  </div>
-
-  <!-- Footer -->
-  <footer>
-    <p>Send tips: <a href="mailto:tips@somethingtoreport.com">tips@somethingtoreport.com</a></p>
-    <p>© <span id="year"></span> Something to Report | <a href="#top">Back to Top</a></p>
+  <footer class="wrap">
+    <p>Send tips: <a href="mailto:tips@somethingtoreport.com">tips@somethingtoreport.com</a> · © <span id="yr"></span> Something to Report</p>
+    <a class="backtop" href="#top">Back to the top ↑</a>
   </footer>
 
-  <!-- Scripts -->
   <script>
-    // ===== Helpers =====
-    const $=(s,el=document)=>el.querySelector(s);
-    const $$=(s,el=document)=>[...el.querySelectorAll(s)];
-    const pad=n=>String(n).padStart(2,'0');
-    const toISO=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
-    const toLabel=d=>`${pad(d.getMonth()+1)}-${pad(d.getDate())}-${d.getFullYear()}`;
-    const fmtTime=d=>d.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+    const $ = (s, el=document) => el.querySelector(s);
+    const $$ = (s, el=document) => [...el.querySelectorAll(s)];
+    const pad = n => String(n).padStart(2,"0");
+    const toISO = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+    const fmtTime = d => d.toLocaleTimeString([], {hour:"2-digit", minute:"2-digit"});
 
-    // Current time in header
-    const setHeaderTime=()=>{
-      const now=new Date();
-      $('#current-time').textContent = now.toLocaleDateString('en-US',{
-        weekday:'long', month:'long', day:'numeric', year:'numeric'
-      }) + ' — ' + fmtTime(now);
-    };
-    setHeaderTime(); setInterval(setHeaderTime, 30_000);
+    const tick = () => $("#now").textContent =
+      new Date().toLocaleDateString("en-US",{weekday:"long", month:"long", day:"numeric", year:"numeric"}) +
+      " — " + fmtTime(new Date());
+    tick(); setInterval(tick, 30000);
+    $("#yr").textContent = new Date().getFullYear();
 
-    // Footer year
-    $('#year').textContent = new Date().getFullYear();
+    // theme toggle
+    const modeBtn = $("#mode");
+    function setTheme(isDark){
+      document.documentElement.classList.toggle("dark", isDark);
+      document.documentElement.classList.toggle("light", !isDark);
+      modeBtn.textContent = isDark ? "Light Mode" : "Dark Mode";
+      localStorage.setItem("mode", isDark ? "dark" : "light");
+    }
+    setTheme(document.documentElement.classList.contains("dark"));
+    modeBtn.addEventListener("click", ()=>setTheme(!document.documentElement.classList.contains("dark")));
 
-    // ===== Dark Mode =====
-    const themeMeta = document.querySelector('meta[name="theme-color"]');
-    const darkToggle = document.getElementById('dark-mode-toggle');
-
-    function applyTheme(isDark){
-      document.body.classList.toggle('dark', isDark);
-      document.body.classList.toggle('light', !isDark);
-      darkToggle.textContent = isDark ? 'Light Mode' : 'Dark Mode';
-      localStorage.setItem('mode', isDark ? 'dark' : 'light');
-      if (themeMeta) themeMeta.setAttribute('content', isDark ? '#0f0f0f' : '#fafafa');
+    // JSON path pattern
+    async function fetchNews(){
+      const today = toISO(new Date());
+      const url = `/data/news-${today}.json`;
+      try {
+        const res = await fetch(url,{cache:"no-store"});
+        if(!res.ok) throw new Error();
+        return res.json();
+      } catch {
+        return {lead:null, items:[]};
+      }
     }
 
-    // Respect saved mode
-    (()=>{ applyTheme(localStorage.getItem('mode') === 'dark'); })();
-    darkToggle.addEventListener('click', () => applyTheme(!document.body.classList.contains('dark')));
-
-    // iOS PWA resume: re-apply theme in case Safari paused rendering
-    document.addEventListener('visibilitychange', () => {
-      if (!document.hidden) applyTheme(localStorage.getItem('mode') === 'dark');
-    });
-
-    // ===== Date pills (today / yesterday / day before) =====
-    const datesEl = document.getElementById('dates');
-    const stampEl = document.getElementById('stamp');
-    const params=new URLSearchParams(location.search);
-    const preset=params.get('date'); // MM-DD-YYYY
-    const today=new Date();
-    const d0=new Date(today), d1=new Date(today), d2=new Date(today);
-    d1.setDate(today.getDate()-1); d2.setDate(today.getDate()-2);
-    const days=[d0,d1,d2];
-    const pills=[];
-    days.forEach((d,i)=>{
-      const pill=document.createElement('button');
-      pill.type='button'; pill.className='pill';
-      const label=toLabel(d);
-      pill.dataset.date=label;
-      pill.textContent = i===0 ? `Latest: ${label}` : label;
-      datesEl.insertBefore(pill, stampEl);
-      pills.push(pill);
-    });
-
-    // ===== Fetch daily JSON =====
-    async function fetchNewsByLabel(dateLabel){
-      const [mm,dd,yyyy]=dateLabel.split('-');
-      const iso=`${yyyy}-${mm}-${dd}`;
-      const url=`/data/news-${iso}.json`;
-      const res=await fetch(url,{cache:'no-store'});
-      if(!res.ok) throw new Error(`Missing JSON: ${url}`);
-      return res.json();
+    function chevron(){
+      const s=document.createElementNS("http://www.w3.org/2000/svg","svg");
+      s.setAttribute("viewBox","0 0 24 24");
+      s.classList.add("chev");
+      const p=document.createElementNS("http://www.w3.org/2000/svg","path");
+      p.setAttribute("d","M7 10l5 5 5-5");
+      p.setAttribute("stroke","currentColor");
+      p.setAttribute("stroke-width","2");
+      p.setAttribute("stroke-linecap","round");
+      p.setAttribute("stroke-linejoin","round");
+      p.setAttribute("fill","none");
+      s.appendChild(p);
+      return s;
     }
 
-    // ===== Renderers =====
-    function clearLists(){
-      $$('.category').forEach(cat=>{
-        const list=$('.list',cat); if(list) list.innerHTML='';
-        const empty=$('.no-results',cat); if(empty) empty.style.display='none';
-      });
-    }
+    function render(data){
+      const hero = data.lead;
+      if(hero){ $("#heroTitle").textContent = hero.title; $("#heroDek").textContent = hero.summary; }
 
-    function renderSection(sectionKey, items){
-      const cat = $(`.category[data-section="${sectionKey}"]`);
-      if(!cat) return;
-      const list = $('.list',cat);
-      list.innerHTML = '';
-      let shown = 0;
+      const stream = $("#stream"); stream.innerHTML = "";
+      data.items.forEach(item=>{
+        const card = document.createElement("article");
+        card.className="card";
+        const inner=document.createElement("div");
+        inner.className="card-inner";
+        const body=document.createElement("div");
+        body.className="card-body";
+        const right=document.createElement("div");
+        right.className="thumb";
+        const title=document.createElement("div");
+        title.className="card-title";
+        title.textContent=item.title;
 
-      (items||[]).forEach(it=>{
-        const item = document.createElement('div');
-        item.className='news-item';
+        const btn=document.createElement("button");
+        btn.className="toggle";
+        btn.type="button";
+        btn.setAttribute("aria-expanded","false");
+        btn.appendChild(chevron());
+        const span=document.createElement("span");
+        span.textContent="Brief";
+        btn.appendChild(span);
 
-        const h = document.createElement('h3');
-        h.className='news-toggle';
-        h.innerHTML = `<i class="fas fa-chevron-down"></i> ${it.title || '(untitled)'}`;
+        const panel=document.createElement("div");
+        panel.className="panel";
+        const summary=document.createElement("p");
+        summary.className="summary";
+        summary.textContent=item.summary;
+        const cta=document.createElement("a");
+        cta.href=item.url; cta.target="_blank"; cta.rel="noopener noreferrer";
+        cta.className="cta"; cta.textContent="Source";
+        panel.append(summary, cta);
 
-        const panel = document.createElement('div');
-        panel.className='news-panel';
-
-        const summary = document.createElement('p');
-        summary.className='summary';
-        summary.textContent = it.summary || '';
-
-        const link = document.createElement('a');
-        link.href = it.url || '#';
-        link.target = '_blank';
-        link.rel = 'noopener';
-        link.className='read-more';
-        link.textContent = it.sourceLabel || 'Source';
-
-        panel.appendChild(summary);
-        panel.appendChild(link);
-
-        // Optional image (lazy + async decode) with reserved space
-        if(it.image){
-          const thumb=document.createElement('div'); thumb.className='thumb';
-          const img=document.createElement('img');
-          img.setAttribute('data-src', it.image);
-          img.loading = 'lazy';
-          img.decoding = 'async';
-          thumb.appendChild(img); panel.appendChild(thumb);
-        }
-
-        item.appendChild(h);
-        item.appendChild(panel);
-        list.appendChild(item);
-
-        // toggle
-        h.addEventListener('click', ()=>{
-          const icon = h.querySelector('i');
-          panel.classList.toggle('open');
-          icon.style.transform = panel.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)';
+        btn.addEventListener("click",()=>{
+          const open=panel.classList.contains("open");
+          panel.classList.toggle("open",!open);
+          btn.querySelector(".chev").style.transform=!open?"rotate(180deg)":"rotate(0deg)";
+          btn.setAttribute("aria-expanded",String(!open));
         });
 
-        shown++;
-      });
-
-      const empty=$('.no-results',cat);
-      if(empty) empty.style.display = shown ? 'none' : 'block';
-    }
-
-    function renderAll(data){
-      // Breaking (CLS-safe)
-      const wrap = document.getElementById('breaking');
-      const bar = document.getElementById('breakingBar');
-      const body = document.getElementById('breakingBody');
-      if(data.breaking && (data.breaking.title || data.breaking.kicker)){
-        bar.textContent = data.breaking.title || 'BREAKING';
-        body.innerHTML = data.breaking.url
-          ? `<a href="${data.breaking.url}" target="_blank" rel="noopener">${data.breaking.kicker || 'Open source ↗'}</a>`
-          : (data.breaking.kicker || '');
-        wrap.style.visibility='visible';
-      } else {
-        // keep space but hide visually to avoid layout jump
-        bar.textContent = '';
-        body.textContent = '';
-        wrap.style.visibility='hidden';
-      }
-
-      // Sections map (match your original layout)
-      const sections = {
-        family:  data.family  || [],
-        security:data.security|| [],
-        economy: data.economy || [],
-        health:  data.health  || [],
-        tech:    data.tech    || [],
-        world:   data.world   || []
-      };
-
-      Object.entries(sections).forEach(([k,arr])=>renderSection(k, arr));
-
-      // Lazy load images (fade-in only; layout already reserved)
-      $$('img[data-src]').forEach(img=>{
-        img.src = img.dataset.src;
-        img.onload = () => img.classList.add('loaded');
+        body.append(title, btn);
+        inner.append(body,right);
+        card.append(inner,panel);
+        stream.append(card);
       });
     }
 
-    // ===== Controller: apply a date =====
-    async function applyDate(label){
-      // highlight
-      pills.forEach(p=>p.classList.toggle('active', p.dataset.date===label));
-      // URL + stamp
-      const url=new URL(location.href); url.searchParams.set('date', label); history.replaceState(null,'',url.toString());
-      stampEl.textContent = `Last updated ${fmtTime(new Date())}`;
-
-      // fetch + render
-      clearLists();
-      try{
-        const json=await fetchNewsByLabel(label);
-        renderAll(json);
-      }catch(e){
-        console.warn(e.message);
-        renderAll({}); // empty
-      }
-
-      // Reset expand-all button label
-      const expandBtn = document.getElementById('expand-all');
-      if(expandBtn) expandBtn.textContent = 'Expand All';
-    }
-
-    // Hook pills
-    pills.forEach(p=>p.addEventListener('click', ()=>applyDate(p.dataset.date)));
-
-    // Initial selection
-    const initial = preset && pills.some(p=>p.dataset.date===preset) ? preset : pills[0]?.dataset.date;
-    if(initial) applyDate(initial);
-
-    // ===== Expand/Collapse All (batched) =====
-    const expandBtn = document.getElementById('expand-all');
-    expandBtn.addEventListener('click', () => {
-      const allPanels = document.querySelectorAll('.news-panel');
-      const allIcons = document.querySelectorAll('.news-toggle i');
-      const isOpen = expandBtn.textContent.includes('Expand');
-
-      // Batch DOM writes to avoid layout thrash
-      requestAnimationFrame(() => {
-        allPanels.forEach((panel, i) => {
-          panel.classList.toggle('open', isOpen);
-          if(allIcons[i]) allIcons[i].style.transform = isOpen ? 'rotate(180deg)' : 'rotate(0deg)';
-        });
-        expandBtn.textContent = isOpen ? 'Collapse All' : 'Expand All';
-      });
+    $("#expandAll").addEventListener("click",()=>{
+      const open=$("#expandAll").textContent.includes("Expand");
+      $$(".panel").forEach(p=>p.classList.toggle("open",open));
+      $$(".chev").forEach(c=>c.style.transform=open?"rotate(180deg)":"rotate(0deg)");
+      $("#expandAll").textContent=open?"Collapse All":"Expand All";
     });
 
-    // Smooth back to top
-    document.querySelector('a[href="#top"]')?.addEventListener('click', e => {
-      e.preventDefault();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-  </script>
+    (async function init(){
+      const json=await fetchNews();
+      render(json);
+    })();
 
-  <!-- === A2HS additions: service worker registration (start) === -->
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js').catch(console.error);
-      });
+    // register SW
+    if("serviceWorker" in navigator){
+      window.addEventListener("load",()=>navigator.serviceWorker.register("/sw.js"));
     }
   </script>
-  <!-- === A2HS additions: service worker registration (end) === -->
 </body>
 </html>
