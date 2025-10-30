@@ -8,7 +8,7 @@
   <meta name="theme-color" content="#0f1011" />
   <link rel="icon" type="image/png" href="icons/icon-1.png">
   <link rel="apple-touch-icon" href="icons/icon-1.png">
-  <link rel="manifest" href="manifest.webmanifest?v=3">
+  <link rel="manifest" href="manifest.webmanifest">
 
   <script>
     // Prevent flash on load
@@ -339,7 +339,9 @@
     // register SW
     if('serviceWorker' in navigator){
       window.addEventListener('load',()=> {
-        navigator.serviceWorker.register('sw.js?v=4', { scope: './' });
+        navigator.serviceWorker.register('/sw.js', { scope: '/' })
+          .then(reg=> console.log('SW registered successfully!'))
+          .catch(err=> colsole.error('SW error:', err));
       });
     }
   </script>
