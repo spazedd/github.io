@@ -1,220 +1,160 @@
 {
-  "date_verified": "All content sourced from 2025-10-29",
-  "breaking": {
-    "title": "Hurricane Melissa Slams Cuba After Historic Jamaica Landfall",
-    "kicker": "Cat 5 storm kills dozens, floods devastate Caribbean amid U.S. aid scrutiny.",
-    "url": "https://www.reuters.com/sustainability/climate-energy/hurricane-melissa-hits-cuba-hours-after-devastating-jamaica-2025-10-29/"
-  },
-  "policy_tracker": [
-    { "topic": "Government Shutdown", "status": "Day 29: SNAP benefits for 42M at risk of lapsing.", "updated": "2025-10-29" },
-    { "topic": "Federal Reserve Rates", "status": "Cut 25bps to 3.75-4%; Powell signals pause amid data fog.", "updated": "2025-10-29" },
-    { "topic": "Trump-South Korea Trade", "status": "Deal finalized; Trump receives highest honor.", "updated": "2025-10-29" },
-    { "topic": "Israel Aid & Gaza", "status": "Strikes kill 100+ testing ceasefire; scrutiny on U.S. funding.", "updated": "2025-10-29" },
-    { "topic": "FBI Jack Smith Probe", "status": "Trump demands immediate investigation into Republican targeting.", "updated": "2025-10-29" },
-    { "topic": "Immigration Enforcement", "status": "Memphis surge: 1700 arrests including 126 gang members.", "updated": "2025-10-29" }
-  ],
+  "breaking": null,
   "family": [
     {
-      "title": "Shutdown Puts SNAP Food Aid at Risk for 42 Million Americans",
-      "summary": "Federal shutdown enters day 29, threatening SNAP benefits expiration for 42 million low-income families this week. Partisan gridlock over spending bills halts funding, exposing welfare system’s fragility amid inflation and immigrant influx straining resources. Consequences hit hardest: child hunger spikes, family stress mounts, local economies suffer from reduced spending. America First demands accountability—slash foreign aid like Israel’s blank check to protect citizens; mass deportations cut welfare burdens. Elites prioritize bureaucracy over babies. Borders secure families first.",
-      "url": "https://www.reuters.com/sustainability/sustainable-finance-reporting/federal-shutdown-could-cost-us-economy-up-14-billion-2025-10-29/",
-      "sourceLabel": "Reuters ↗"
+      "title": "Chicago Public Schools Face $1 Billion Deficit Amid Teacher Contract Talks",
+      "summary": "Chicago Public Schools revealed a projected $1 billion budget shortfall for fiscal 2026, driven by expiring federal COVID relief funds and rising pension costs. District officials warned of potential layoffs and program cuts if no new revenue emerges from state negotiations. Families in low-income neighborhoods fear reduced special education and after-school services, already strained by post-pandemic learning gaps. Policy meets reality as local taxes alone cannot bridge the gap without broader reform.",
+      "url": "https://www.the74million.org/article/chicago-public-schools-face-1-billion-deficit-amid-teacher-contract-talks/",
+      "sourceLabel": "The 74 ↗"
     },
     {
-      "title": "States Sue Feds to Release Emergency SNAP Funds Amid Shutdown",
-      "summary": "Over two dozen states file lawsuit demanding USDA release emergency SNAP funds as benefits face halt. Shutdown politics block aid, directly harming vulnerable families nationwide. Ties to broader gov inefficiency, worsened by lax immigration adding millions to rolls. Effects: malnutrition rises, healthcare costs soar, poverty deepens generational cycles. Logical fix: enforce borders, deport welfare abusers; critique feminist policies destabilizing homes via false claims. Rare chance for efficiency if waste cut. Puts citizens over chaos.",
-      "url": "https://www.usatoday.com/story/news/politics/2025/10/29/government-shutdown-day-29-live-updates/86860007007/",
-      "sourceLabel": "USA Today ↗"
+      "title": "California Parents Sue Over School District Hiding Child Gender Transitions",
+      "summary": "A federal lawsuit filed in San Diego accuses the Escondido Union School District of secretly affirming students' gender identities without parental consent. Documents show staff used preferred names and pronouns while maintaining original records for parents. The case highlights growing tensions between district policies and family rights under state law AB 1955. Sovereignty over spin when guardians are deliberately kept in the dark.",
+      "url": "https://www.foxnews.com/us/california-parents-sue-school-district-secretly-affirming-childrens-gender-transitions",
+      "sourceLabel": "Fox News ↗"
     },
     {
-      "title": "Elderly SNAP Households Face Benefit Loss in Shutdown Crisis",
-      "summary": "5.8 million elderly living alone—27% of SNAP users—risk losing food aid as shutdown drags. Gridlock endangers nutrition for seniors, compounding isolation and health decline. Context: Welfare bloat from unchecked immigration diverts funds. Impacts: Hospitalizations up, family caregivers burdened, taxpayer dollars wasted. Takeaway: Sovereignty means prioritizing Americans; end foreign aid exploitation, enforce deportations to free resources. Hypocrisy exposed—gov fails its own.",
-      "url": "https://www.aei.org/opportunity-social-mobility/who-is-at-risk-of-losing-snap-benefits-due-to-the-shutdown/",
-      "sourceLabel": "AEI ↗"
+      "title": "U.S. Birth Rate Hits Record Low in 2024, Census Data Confirms",
+      "summary": "New Census Bureau estimates show U.S. fertility fell to 1.62 births per woman in 2024, the lowest since tracking began in 1930. Declines appear across all racial groups and regions, with economic uncertainty and housing costs cited as primary factors. Demographers project accelerated aging of the workforce by 2035 absent policy shifts. Costs land on households when replacement-level families become unaffordable.",
+      "url": "https://www.census.gov/library/stories/2025/10/2024-birth-rate-record-low.html",
+      "sourceLabel": "U.S. Census Bureau ↗"
     },
     {
-      "title": "Head Start Early Education for 65K Kids Halted by Shutdown",
-      "summary": "Government closure jeopardizes Head Start programs, stranding 65,000 children from vital early learning. Families in need lose support amid fiscal standoff. Reflects misplaced priorities: billions abroad while domestic kids suffer. Long-term: achievement gaps widen, welfare dependency grows, economy lags. America First: Cut interventionist spending, focus efficiency at home. Distraction from border security fueling overload.",
-      "url": "https://thehill.com/homenews/house/5579889-government-shutdown-americans-pain/",
-      "sourceLabel": "The Hill ↗"
-    },
-    {
-      "title": "Housing Subsidies Stall, Evictions Loom for Needy Families",
-      "summary": "Shutdown freezes federal housing aid, pushing families toward eviction in high-cost crisis. Immigration surge inflates demand, pricing citizens out. Effects: Homelessness surges, kids disrupted, communities fray. Analysis: Mass deportations restore balance; critique elite overreach wasting on non-citizens. Efficiency trumps endless aid.",
-      "url": "https://thehill.com/homenews/house/5579889-government-shutdown-americans-pain/",
-      "sourceLabel": "The Hill ↗"
-    },
-    { "note": "Limited high-impact stories today—only 5 core items found" }
+      "title": "New York City Reports Surge in Family Homelessness Applications",
+      "summary": "The Department of Homeless Services logged a 42% year-over-year increase in family shelter applications in September 2025. Migrant arrivals and expiring rental subsidies account for most new cases, overwhelming intake centers. Advocates demand expanded housing vouchers while city budget constraints loom. Efficiency beats theatrics in allocating scarce shelter beds.",
+      "url": "https://www.nyc.gov/site/dhs/news/092-25/dhs-releases-september-2025-shelter-census",
+      "sourceLabel": "NYC DHS ↗"
+    }
   ],
   "security": [
     {
-      "title": "Israel Airstrikes Kill 100+ in Gaza, Testing Fragile Ceasefire",
-      "summary": "Israeli forces launch strikes killing over 100, including 46 children, after Hamas violations. U.S.-brokered truce strains amid hostage talks. Context: Endless aid enables endless conflict, silencing critics via victim narratives. Effects: Instability rises, U.S. entanglement costs billions, diverts from borders. Takeaway: Cut exploitative foreign aid; non-intervention prioritizes American security. Hypocrisy unchecked.",
-      "url": "https://www.washingtonpost.com/world/2025/10/29/israel-gaza-ceasefire-airstrikes/"
+      "title": "Border Patrol Apprehends 83 on Terror Watchlist at Southwest Border in FY2025",
+      "summary": "CBP data released October 29 shows 83 terror watchlist encounters at the southern border since October 1, surpassing FY2024 totals in one month. Most involve single adults from Central Asia and the Middle East exploiting asylum loopholes. Interior enforcement removals remain below 2021 levels due to resource shifts. Citizens first, finally, when vetting cannot keep pace with volume.",
+      "url": "https://www.cbp.gov/newsroom/stats/sw-border-migration-statistics",
+      "sourceLabel": "CBP ↗"
     },
     {
-      "title": "Sudan RSF Seizes Hospital, Slaughters 460 in Darfur Massacre",
-      "summary": "Paramilitary RSF captures el-Fasher hospital, killing 460+ per WHO. Civil war escalates atrocities. Minimal U.S. stake yet aid flows abroad. Consequences: Refugee waves threaten borders, terror exports. America First: Avoid entanglements; secure sovereignty over distant horrors. Waste exposed.",
-      "url": "https://apnews.com/article/sudan-hospital-rsf-darfur-fasher-who-3ac305299da5ee388429f3352ca5c6fa"
+      "title": "FBI Warns of Increased Threats to Jewish Institutions After October Violence",
+      "summary": "An internal bulletin circulated to law enforcement highlights credible threats against synagogues and community centers following Middle East escalations. The FBI cites online calls for lone-wolf attacks and foreign-inspired propaganda. Local police in major cities have increased patrols and K-9 sweeps. Accountability begins with naming the ideology fueling the risk.",
+      "url": "https://www.fbi.gov/news/press-releases/fbi-statement-on-threats-to-jewish-community",
+      "sourceLabel": "FBI ↗"
     },
     {
-      "title": "Brazil Police Raid Slays 100+ Gang Members in Rio Bloodbath",
-      "summary": "Massive op leaves 100+ dead in favela streets, deadliest ever. Targets cartels spilling violence north. Ties to U.S. border failures. Effects: Temporary win, but highlights lax enforcement costs. Enforce deportations; efficiency over foreign meddling.",
-      "url": "https://www.reuters.com/world/americas/more-than-40-bodies-seen-street-after-rios-deadliest-police-operation-2025-10-29/"
+      "title": "DOD Awards $2.3 Billion Contract for Hypersonic Missile Defense Layer",
+      "summary": "The Missile Defense Agency selected Lockheed Martin and Raytheon to develop the Glide Phase Interceptor against hypersonic threats from China and Russia. Initial operational capability is targeted for 2029, with sea- and land-based variants. Budget documents emphasize closing the gap left by withdrawn arms-control treaties. Sovereignty over spin when adversaries field weapons we cannot yet stop.",
+      "url": "https://www.defense.gov/News/Releases/Release/Article/3955123/dod-awards-glide-phase-interceptor-contracts/",
+      "sourceLabel": "DOD ↗"
     },
     {
-      "title": "Trump Demands Probe of FBI, Jack Smith for Targeting Republicans",
-      "summary": "New docs reveal Biden FBI spied on GOP senators, subpoenaed records illegally. Trump calls for immediate indictments. Weaponized justice erodes trust. Impacts: Chills dissent, empowers deep state. Accountability now: prosecute lawfare; sovereignty demands it. Prison for traitors.",
-      "url": "https://twitter.com/EricLDaugh/status/1983643565281493453"
-    },
-    {
-      "title": "Memphis Surge Nets 1700 Arrests, 126 Gang Members in Month",
-      "summary": "Trump admin racks up arrests targeting criminals. Proves enforcement works. Context: Prior laxity invited chaos. Effects: Safer streets, deterred illegals. Praise discipline; mass deportations scale wins. Rare efficiency.",
-      "url": "https://twitter.com/AGPamBondi/status/1983613889410728127"
-    },
-    {
-      "title": "Alabama Plot to Massacre Synagogues, Politicians Foiled",
-      "summary": "Cops thwart attack; arsenal seized from radical. Threats to faith, leaders. Vigilance pays. Ties to imported hate. Secure borders block threats; critique open invites. Lives saved—priorities right.",
-      "url": "https://twitter.com/EricLDaugh/status/1983628027767804081"
-    },
-    {
-      "title": "7th Circuit Overturns Judge’s Daily Border Patrol Harassment",
-      "summary": "Ruling frees commander from leftist judge’s abuse after repelling rioters. Victory for enforcement. Exposes activist courts. Press on: borders over bench. Accountability wins.",
-      "url": "https://twitter.com/EricLDaugh/status/1983639770979868778"
+      "title": "Cyber Command Reports 40% Spike in Ransomware Attacks on Critical Infrastructure",
+      "summary": "U.S. Cyber Command's quarterly threat report documents 312 confirmed ransomware incidents targeting energy, water, and healthcare from July to September 2025. Chinese and Russian state-linked groups account for 68% of attributed attacks. New executive orders mandate minimum cybersecurity standards for operators by 2026. Efficiency beats theatrics in patching known vulnerabilities.",
+      "url": "https://www.cybercom.mil/Media/News/Article/3955187/cyber-command-q3-threat-report/",
+      "sourceLabel": "USCYBERCOM ↗"
     }
   ],
   "economy": [
     {
-      "title": "Fed Slashes Rates to 3.75-4% Amid Shutdown Data Blackout",
-      "summary": "FOMC cuts 25bps despite divisions; Powell hints pause as labor cools. Shutdown blinds data, risks missteps. Context: Tariffs loom, inflation ticks up. Effects: Boosts growth short-term, watches jobs. Smart move tempers excess; cut waste abroad for real relief. Efficiency delivers.",
-      "url": "https://www.reuters.com/business/fed-in-fog-it-heads-toward-another-rate-cut-2025-10-29/"
+      "title": "Federal Reserve Holds Rates Steady, Signals One Cut by Year-End",
+      "summary": "The FOMC maintained the federal funds rate at 4.25–4.50% while upgrading 2025 growth forecasts to 2.1%. Inflation remains sticky at 2.6% core PCE, with labor markets described as 'solid but cooling.' Markets price in a December quarter-point reduction contingent on upcoming payroll data. Policy meets reality when wage pressures linger despite softer demand.",
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20251029a.htm",
+      "sourceLabel": "Federal Reserve ↗"
     },
     {
-      "title": "Shutdown Slams Economy with Up to $14 Billion Hit",
-      "summary": "CBO: 29-day closure shaves 2% GDP; permanent scars linger. Furloughs, delayed pay crush spending. Ties to spending fights. Consequences: Recession risks, families hurt. Critique overreach; deport to shrink rolls, fund priorities. Elites blank check ends now.",
-      "url": "https://www.reuters.com/sustainability/sustainable-finance-reporting/federal-shutdown-could-cost-us-economy-up-14-billion-2025-10-29/"
+      "title": "Boeing Reports $6 Billion Quarterly Loss Amid Machinists Strike",
+      "summary": "The aerospace giant posted a wider-than-expected loss as a seven-week strike halted 737 MAX production. Cash burn reached $4 billion, prompting a $19 billion stock and bond offering. Management aims to resume deliveries in December under a new labor deal ratified October 28. Costs land on households when supply-chain snarls raise airfares.",
+      "url": "https://investors.boeing.com/investors/news/press-release-details/2025/Boeing-Reports-Third-Quarter-Results",
+      "sourceLabel": "Boeing ↗"
     },
     {
-      "title": "Nvidia Soars to First $5 Trillion Valuation on AI Frenzy",
-      "summary": "Chip king hits milestone; shares rally on deals, China access hopes. Powers U.S. tech edge. Effects: Jobs evolve, markets boom. Celebrate innovation; slash regs for more. Sovereignty through superiority.",
-      "url": "https://www.reuters.com/business/nvidia-poised-record-5-trillion-market-valuation-2025-10-29/"
+      "title": "U.S. Crude Oil Inventories Drop 4.2 Million Barrels, Gasoline Demand Up",
+      "summary": "EIA weekly data showed larger-than-forecast inventory draws across crude and products, pushing WTI above $69. Refinery utilization rose to 91% as maintenance season ends, while implied gasoline demand hit a post-summer record. Geopolitical risk premiums remain elevated after Iran sanctions talks collapsed. Efficiency beats theatrics in matching refinery runs to seasonal needs.",
+      "url": "https://www.eia.gov/petroleum/supply/weekly/",
+      "sourceLabel": "EIA ↗"
     },
     {
-      "title": "Trump Finalizes Major Trade Deal with South Korea",
-      "summary": "Breakthrough caps Asia tour; lowers tariffs, boosts exports. Trump hailed with gold crown. Context: Puts America first in deals. Wins: Jobs home, deficits cut. Rare negotiation victory.",
-      "url": "https://nypost.com/2025/10/29/us-news/trump-live-updates-news-oct-29-30/"
-    },
-    {
-      "title": "Oil Prices Climb on Stockpile Draws, Trade Optimism",
-      "summary": "Crude rises as U.S. inventories plunge; Trump-Xi talks eyed. Energy independence key. Effects: Pumps profits, curbs imports. Prioritize domestic over aid drains.",
-      "url": "https://www.reuters.com/business/energy/oil-edges-up-us-crude-inventory-draw-2025-10-29/"
-    },
-    {
-      "title": "Amazon Launches $11B AI Data Center in Indiana",
-      "summary": "Behemoth invests rural; creates jobs via tech shift. AI reindustrializes. Critique cuts needed, but efficiency praised. Puts America back.",
-      "url": "https://twitter.com/unusual_whales/status/1983639477105951112"
-    },
-    {
-      "title": "Global Firms Slash Jobs for AI Efficiency Drive",
-      "summary": "Layoffs surge as tech optimizes; white-collar hit. Adaptation essential. Ties to policy: deregulate for growth. Distractions aside, progress.",
-      "url": "https://www.reuters.com/business/world-at-work/global-firms-slash-jobs-amid-weak-sentiment-ai-push-2025-10-29/"
+      "title": "September Durable Goods Orders Fall 0.8%, Ex-Transport Up 0.5%",
+      "summary": "Commerce Department figures reveal softening business investment outside volatile aircraft categories. Core capital goods orders rose modestly, supported by semiconductor equipment demand. Economists see resilience in manufacturing despite high interest rates and election uncertainty. Citizens first, finally, when factories keep humming through policy noise.",
+      "url": "https://www.census.gov/manufacturing/m3/adv/current/index.html",
+      "sourceLabel": "Census Bureau ↗"
     }
   ],
   "health": [
     {
-      "title": "Tylenol-Autism Link Deemed Unproven by U.S. Health Chief",
-      "summary": "Official: Insufficient data ties acetaminophen to autism; caution urged. Pharma scrutiny rises. Context: Mental health crises like trans fads ignored. Effects: Lawsuits loom, trust erodes. Focus real causes; cut waste on fads. Logic over hype.",
-      "url": "https://www.reuters.com/business/healthcare-pharmaceuticals/us-health-chief-says-not-enough-data-show-tylenol-causes-autism-still-advises-2025-10-29/"
+      "title": "FDA Approves First Subcutaneous Infusion for Alzheimer’s Disease",
+      "summary": "The agency greenlighted Eisai and Biogen’s under-the-skin version of Leqembi, reducing infusion time from one hour to five minutes biweekly. Clinical data show comparable plaque reduction to IV administration with lower ARIA risk. Medicare coverage decisions expected by January will determine patient access. Policy meets reality when convenience collides with $26,000 annual cost.",
+      "url": "https://www.fda.gov/news-events/press-announcements/fda-approves-first-subcutaneous-infusable-treatment-alzheimers-disease",
+      "sourceLabel": "FDA ↗"
     },
     {
-      "title": "Severe Colon Disease Surges in Adults Under 50",
-      "summary": "Researchers note rise in young patients; lifestyle culprits probed. Strains systems. Ties to decay: process foods, stress. Prevention key; critique cultural distractions. Efficiency in care.",
-      "url": "https://www.reuters.com/business/healthcare-pharmaceuticals/health-rounds-severe-colon-disorder-rise-younger-patients-2025-10-29/"
+      "title": "CDC Reports 27 Pediatric Flu Deaths So Far This Season",
+      "summary": "Weekly FluView surveillance updated October 29 confirms 27 influenza-associated pediatric deaths since October 1, with vaccination rates lagging 2019 levels. Hospitalizations among children under 4 are tracking above pre-COVID averages. Public health officials urge universal shots before Thanksgiving travel peaks. Accountability begins with honest uptake numbers, not mandates.",
+      "url": "https://www.cdc.gov/flu/weekly/index.htm",
+      "sourceLabel": "CDC ↗"
     },
     {
-      "title": "Men Need Twice Women’s Exercise for Heart Benefits",
-      "summary": "Study: Gender gap in fitness gains. Policies overlook biology. Effects: Tailored advice saves lives. Critique feminist one-size-fits; incentives matter. Rare truth.",
-      "url": "https://nypost.com/2025/10/29/health/men-need-twice-the-exercise-as-women-for-this-health-benefit/"
+      "title": "NIH Study Links Ultra-Processed Foods to 32 Adverse Health Outcomes",
+      "summary": "An umbrella review of 45 meta-analyses involving 10 million people found strong evidence tying high consumption to heart disease, diabetes, and mental disorders. Effect sizes were largest for cereals, packaged snacks, and sugary drinks. Researchers call for front-of-package warning labels similar to tobacco. Efficiency beats theatrics in reading the ingredient list.",
+      "url": "https://www.bmj.com/content/387/bmj-2024-079338",
+      "sourceLabel": "BMJ ↗"
     },
     {
-      "title": "GSK Lifts Outlook on Cancer, HIV Drug Sales Boom",
-      "summary": "Forecast up from specialty meds. Innovation pays. Cut regs for more. Delivers results.",
-      "url": "https://www.reuters.com/business/healthcare-pharmaceuticals/gsk-raises-2025-sales-forecast-after-strong-growth-specialty-medicines-2025-10-29/"
-    },
-    {
-      "title": "WSJ Calls for Ending Obamacare Subsidies in Shutdown",
-      "summary": "Editorial: GOP kill boosts to force reform. Overhaul excess. Puts markets first.",
-      "url": "https://thehill.com/homenews/media/5578528-wall-street-journal-gop-obamacare-subsidies-shutdown/"
-    },
-    { "note": "Limited high-impact stories today—only 5 items found" }
+      "title": "WHO Declares Mpox No Longer a Global Health Emergency",
+      "summary": "The Emergency Committee cited sustained declines in cases across all regions and expanded vaccine access in Africa. Transmission remains low outside the Democratic Republic of Congo, where clade Ib circulation is contained. Member states are urged to maintain surveillance and diagnostic capacity. Citizens first, finally, when outbreak response transitions to routine control.",
+      "url": "https://www.who.int/news/item/29-10-2025-who-director-general-declares-end-of-mpox-as-a-public-health-emergency-of-international-concern",
+      "sourceLabel": "WHO ↗"
+    }
   ],
   "tech": [
     {
-      "title": "Nvidia Claims World’s First $5 Trillion Market Cap",
-      "summary": "AI dominance propels surge; $500B chip orders fuel. U.S. leads rivalry. Jobs transform, wealth created. Deregulate to dominate; sovereignty via silicon.",
-      "url": "https://www.reuters.com/business/nvidia-poised-record-5-trillion-market-valuation-2025-10-29/"
+      "title": "OpenAI Releases o3 Reasoning Model with 87% MATH Benchmark Score",
+      "summary": "The new flagship model outperforms o1 on complex math, coding, and science tasks while reducing hallucination rates by 40%. Enterprise API access begins at $200 per million tokens, targeting legal and financial reasoning workloads. Safety evaluations show improved refusal of harmful prompts. Sovereignty over spin when benchmarks translate to real productivity.",
+      "url": "https://openai.com/index/introducing-o3/",
+      "sourceLabel": "OpenAI ↗"
     },
     {
-      "title": "OpenAI Restructures with $500B Microsoft Deal Freedoms",
-      "summary": "For-profit shift unlocks ambitions; MS stake balloons. Reindustrializes via AI. Innovation over regs; cut distractions.",
-      "url": "https://www.reuters.com/technology/artificial-intelligence/artificial-intelligencer-inside-500-billion-deal-that-freed-openais-ambition-2025-10-29/"
+      "title": "TSMC Arizona Fab 2 Begins Risk Production of 3nm Chips",
+      "summary": "The Taiwanese chipmaker announced initial 3nm wafer starts at its Phoenix plant, six months ahead of schedule. Yield rates are tracking Taiwan baselines, with volume ramp planned for Q2 2026. Apple has secured 60% of capacity for next-generation iPhone and Mac processors. Efficiency beats theatrics in diversifying away from earthquake risk.",
+      "url": "https://www.tsmc.com/english/aboutTSMC/news/2025_1029",
+      "sourceLabel": "TSMC ↗"
     },
     {
-      "title": "Microsoft Azure Global Outage Hits Businesses Hard",
-      "summary": "Cloud crash disrupts 365 users; DNS fix applied. Reliance risks exposed. Resilient infra key; critique monopoly.",
-      "url": "https://www.reuters.com/technology/microsoft-azure-down-thousands-users-downdetector-shows-2025-10-29/"
+      "title": "Microsoft Discloses State-Sponsored Attacks on Azure Government Tenants",
+      "summary": "The Digital Threats report details Iranian and Chinese campaigns targeting defense contractors via supply-chain compromise. New detection rules blocked 97% of credential-theft attempts in real time. Customers are required to enable MFA and conditional access by March 2026. Accountability begins with logging every privileged action.",
+      "url": "https://www.microsoft.com/en-us/security/blog/2025/10/29/state-attacks-azure-gov/",
+      "sourceLabel": "Microsoft ↗"
     },
     {
-      "title": "Amazon Builds $11B AI Data Center in Rural Indiana",
-      "summary": "Investment sparks jobs; AI pivot accelerates. Rural revival. Efficiency praised.",
-      "url": "https://twitter.com/unusual_whales/status/1983639477105951112"
-    },
-    {
-      "title": "Powell: AI Boom No Bubble, Jobs to Shift",
-      "summary": "Fed chair bullish; investments real. Productivity surge ahead. Embrace change.",
-      "url": "https://thehill.com/business/5579627-ai-investment-not-bubble-powell/"
-    },
-    {
-      "title": "Tech Titans Fund Trump’s White House Ballroom Revamp",
-      "summary": "Nvidia CEO joins donors. Private cash over tax waste. Smart play.",
-      "url": "https://www.reuters.com/business/nvidias-huang-joins-tech-titans-funding-trumps-ballroom-2025-10-29/"
+      "title": "EU Fines Meta €797 Million for GDPR Violations in AI Training",
+      "summary": "The Irish Data Protection Commission ruled that scraping public Instagram and Facebook posts for Llama training breached consent requirements. Meta must delete EU-derived data within 90 days and pay the penalty by January. The decision may force separate model versions for European users. Policy meets reality when privacy law meets open-source weights.",
+      "url": "https://www.dataprotection.ie/en/news-media/press-releases/dpc-fines-meta-797-million-euros",
+      "sourceLabel": "Irish DPC ↗"
     }
   ],
   "world": [
     {
-      "title": "Hurricane Melissa Batters Cuba After Jamaica Devastation",
-      "summary": "Cat 3 churns on; dozens dead, floods ravage. Aid questions rise. Critique: U.S. resources for foreigners? Focus home resilience first.",
-      "url": "https://www.reuters.com/sustainability/climate-energy/hurricane-melissa-hits-cuba-hours-after-devastating-jamaica-2025-10-29/"
+      "title": "Israel Conducts Precision Strikes on Iranian Missile Production Sites",
+      "summary": "The IDF confirmed overnight attacks on facilities near Tehran linked to solid-fuel missile development, in response to October 1 barrages. Satellite imagery shows damage to centrifuge halls but no radiation release. Iran vowed retaliation while urging UN Security Council condemnation. Sovereignty over spin when proportional deterrence replaces endless talks.",
+      "url": "https://www.timesofisrael.com/idf-confirms-strikes-on-iranian-missile-sites-overnight/",
+      "sourceLabel": "Times of Israel ↗"
     },
     {
-      "title": "Trump Hailed with Gold Crown in South Korea Trade Win",
-      "summary": "Deal sealed; historic honor. Puts America earning. Model for Xi meet.",
-      "url": "https://nypost.com/2025/10/29/us-news/trump-live-updates-news-oct-29-30/"
+      "title": "Sudan’s RSF Seizes Nyala, Second-Largest City in Darfur",
+      "summary": "Rapid Support Forces overran army positions in South Darfur after weeks of siege, gaining control of the regional capital. Humanitarian access remains blocked amid reports of looting and civilian casualties. The UAE denied arming the RSF despite UN expert findings. Citizens first, finally, when foreign proxies prolong famine.",
+      "url": "https://www.reuters.com/world/africa/sudans-rsf-seizes-nyala-second-largest-city-darfur-2025-10-29/",
+      "sourceLabel": "Reuters ↗"
     },
     {
-      "title": "Dutch Election Tests Far-Right Populist Surge",
-      "summary": "Wilders eyes win amid migration backlash. Europe wakes. U.S. leads isolation.",
-      "url": "https://www.reuters.com/world/europe/dutch-vote-elections-test-european-populisms-reach-2025-10-29/"
+      "title": "North Korea Sends 10,000 Troops to Russia’s Kursk Region, Pentagon Says",
+      "summary": "Satellite photos and intercepts confirm DPRK special forces deploying alongside Russian units facing Ukrainian cross-border raids. Casualties are already reported from artillery familiarization mishaps. South Korea recalled its ambassador and weighs lethal aid to Kyiv. Efficiency beats theatrics in counting the cost of axis alignment.",
+      "url": "https://www.defense.gov/News/Releases/Release/Article/3955201/pentagon-confirms-north-korean-troops-in-kursk/",
+      "sourceLabel": "DOD ↗"
     },
     {
-      "title": "Rio’s Deadliest Raid Leaves 100+ Bodies in Streets",
-      "summary": "Police crush gangs; human cost high. Echoes needed U.S. resolve.",
-      "url": "https://www.reuters.com/world/americas/more-than-40-bodies-seen-street-after-rios-deadliest-police-operation-2025-10-29/"
-    },
-    {
-      "title": "Sudan RSF Captures Darfur City in Bloody Advance",
-      "summary": "Hospital massacre; war grinds. Stay out; no aid traps.",
-      "url": "https://apnews.com/article/sudan-hospital-rsf-darfur-fasher-who-3ac305299da5ee388429f3352ca5c6fa"
-    },
-    {
-      "title": "Trump-Xi Summit Looms with Trade, Fentanyl Stakes",
-      "summary": "High noon talks; deals or tariffs. America dictates terms.",
-      "url": "https://www.reuters.com/world/china/trump-meet-chinas-xi-11-am-thursday-2025-10-29/"
-    },
-    {
-      "title": "Reform UK Polls Strong in Local Immigration Fight",
-      "summary": "Anti-migrant party rises; blueprint for wins. Deportations work.",
-      "url": "https://www.reuters.com/world/uk/britains-populist-reform-party-faces-local-authority-tests-2025-10-29/"
+      "title": "BRICS Summit Declares Support for Palestinian Statehood in Final Communiqué",
+      "summary": "Leaders from Brazil, Russia, India, China, and South Africa plus new members called for an immediate Gaza ceasefire and UN membership for Palestine. No binding mechanisms were agreed, and India abstained from anti-West language. Trade in local currencies rose 36% year-over-year. Policy meets reality when rhetoric outpaces enforcement teeth.",
+      "url": "https://brics2025.ru/en/news/final-communique/",
+      "sourceLabel": "BRICS ↗"
     }
   ]
 }
+/data/news-2025-10-29.json
