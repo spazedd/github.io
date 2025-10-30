@@ -1,0 +1,21 @@
+{
+  "lead": {
+    "title": "Commission Sets Two-Debate Format",
+    "summary": "Live fact checks and shorter responses trialed for clarity.",
+    "url": "https://example.com/pol1"
+  },
+  "items": [
+    {
+      "id": "t1",
+      "title": "AI Photo Tools Land In Everyday Apps",
+      "summary": "Consumer apps add smart clean-ups and captioning.",
+      "url": "https://example.com/tech1"
+    },
+    {
+      "id": "f1",
+      "title": "Teen Screen-Time Guidelines Updated",
+      "summary": "Schools test lock modes; parents weigh autonomy vs guardrails.",
+      "url": "https://example.com/fam1"
+    }
+  ]
+}
