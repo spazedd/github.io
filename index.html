@@ -2,16 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Something to Report </title>
+  <title>somethingtoreport</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="color-scheme" content="light dark" />
   <meta name="theme-color" content="#0f1011" />
+  <meta name="description" content="Daily news and analysis">
+  
   <link rel="icon" type="image/png" href="icons/icon-2.png">
   <link rel="apple-touch-icon" href="icons/icon-2.png">
   <link rel="manifest" href="manifest.webmanifest">
 
   <script>
-    // Prevent flash on load
     (function () {
       const saved = localStorage.getItem("mode");
       const prefers = window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -21,328 +22,748 @@
   </script>
 
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    *, *::before, *::after { 
+      box-sizing: border-box; 
+      margin: 0; 
+      padding: 0; 
+    }
+    
+    html { 
+      scroll-behavior: smooth; 
+    }
+    
     body {
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      font-family: system-ui, -apple-system, sans-serif;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
-      transition: background-color 0.4s ease, color 0.4s ease;
       background: var(--bg);
       color: var(--fg);
-      position: relative;
+      min-height: 100vh;
+    }
+
+    .reading-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: var(--accent);
+      z-index: 1000;
     }
 
     :root {
-      --bg: #0f1011;
-      --fg: #ececed;
-      --rule: #2a2c30;
-      --card: #15161a;
-      --chip: #191b1f;
-      --link-underline: rgba(255, 255, 255, 0.3);
-      --toggle-fg: #fff;
+      --bg: #0a0a0a;
+      --fg: #ffffff;
+      --rule: #2a2a2a;
+      --card: #111111;
+      --accent: #2563eb;
+      --accent-alt: #dc2626;
+      --meta: #888;
     }
+    
     .light {
-      --bg: #f4f5f6;
-      --fg: #111;
-      --rule: #ddd;
-      --card: #fff;
-      --chip: #fff;
-      --link-underline: rgba(0, 0, 0, 0.3);
-      --toggle-fg: #000;
+      --bg: #ffffff;
+      --fg: #171717;
+      --rule: #e5e5e5;
+      --card: #fafafa;
+      --accent: #2563eb;
+      --accent-alt: #dc2626;
+      --meta: #666;
     }
 
-    a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--link-underline); }
-    a:hover { opacity: 0.9; }
+    a { 
+      color: inherit; 
+      text-decoration: none; 
+    }
+    
+    a:hover { 
+      opacity: 0.8; 
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
 
     header {
-      text-align: center;
-      padding: 56px 16px 12px;
+      padding: 40px 0 20px;
       border-bottom: 1px solid var(--rule);
     }
+    
     header h1 {
-      font-family: Georgia, "Times New Roman", serif;
-      font-weight: 800;
-      font-size: clamp(2rem, 5vw, 3rem);
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
     }
-    header p { max-width: 860px; margin: 0.6rem auto; opacity: 0.85; }
-    .time { margin-top: 0.35rem; opacity: 0.7; font-size: 0.95rem; }
+    
+    header p { 
+      opacity: 0.7;
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+    
+    .date { 
+      opacity: 0.6; 
+      font-size: 0.9rem;
+      font-family: 'Georgia', serif;
+    }
 
     .controls {
       display: flex;
-      gap: 0.6rem;
-      justify-content: center;
-      padding: 14px 0;
-    }
-    .btn {
-      padding: 0.55rem 1rem;
-      border-radius: 999px;
-      border: 1px solid var(--rule);
-      background: var(--card);
-      cursor: pointer;
-      font-weight: 800;
-      color: inherit;
-      transition: transform 0.1s ease, background 0.4s ease;
-    }
-    .btn:hover { transform: translateY(-1px); }
-
-    .hero {
-      border: 1px solid var(--rule);
-      border-radius: 12px;
-      margin: 12px 0 18px;
-      background: var(--card);
-      overflow: hidden;
-    }
-    .hero-body { padding: 16px 18px; }
-    .hero-body .hed {
-      font-family: Georgia, "Times New Roman", serif;
-      font-weight: 800;
-      font-size: clamp(1.2rem, 2.3vw, 1.6rem);
-    }
-
-    .stream { display: grid; gap: 0.9rem; margin: 20px 0 40px; }
-    .card {
-      border: 1px solid var(--rule);
-      border-radius: 10px;
-      background: var(--card);
-      overflow: hidden;
-      transition: background 0.4s ease;
-    }
-    .card-inner {
-      display: grid;
-      grid-template-columns: 1fr 110px;
-      gap: 0.6rem;
-      padding: 12px;
-    }
-    @media (max-width: 640px) {
-      .card-inner { grid-template-columns: 1fr; }
-    }
-    .card-body { padding: 0.5rem 0.75rem; }
-    .card-title {
-      font-weight: 800;
-      line-height: 1.25;
-      margin-bottom: 0.3rem;
-    }
-    .thumb {
-      height: 90px;
-      background: #0a0a0b;
-      border-radius: 8px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .toggle {
-      display: inline-flex;
+      gap: 0.75rem;
+      padding: 20px 0;
+      justify-content: flex-start;
       align-items: center;
-      gap: 0.45rem;
-      background: var(--chip);
-      color: var(--toggle-fg);
-      border: 1px solid var(--rule);
-      border-radius: 10px;
-      padding: 0.35rem 0.65rem;
-      cursor: pointer;
-      font-weight: 800;
-      margin-top: 0.1rem;
-      transition: all 0.3s ease;
+      flex-wrap: wrap;
     }
-    .chev {
-      width: 0.95rem;
-      height: 0.95rem;
+    
+    .btn {
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      border: 1px solid var(--rule);
+      background: var(--card);
+      cursor: pointer;
+      font-weight: 500;
+      color: var(--fg);
+      transition: all 0.2s ease;
+      font-size: 0.9rem;
+    }
+    
+    .btn:hover { 
+      border-color: var(--accent);
+    }
+
+    .btn.active {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+    }
+
+    .filter-select {
+      padding: 0.5rem 2rem 0.5rem 1rem;
+      border-radius: 6px;
+      border: 1px solid var(--rule);
+      background: var(--card);
+      color: var(--fg);
+      font-size: 0.9rem;
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.5rem center;
+      background-size: 1rem;
+    }
+
+    .filter-select:hover {
+      border-color: var(--accent);
+    }
+
+    .search-container {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .search-btn {
+      padding: 0.5rem;
+      border-radius: 6px;
+      border: 1px solid var(--rule);
+      background: var(--card);
+      cursor: pointer;
+      color: var(--fg);
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .search-btn:hover {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: white;
+    }
+
+    .search-icon {
+      width: 1.2rem;
+      height: 1.2rem;
       stroke: currentColor;
       fill: none;
-      transition: transform 0.25s ease;
     }
-    .panel {
+
+    .search-input {
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      border: 1px solid var(--rule);
+      background: var(--card);
+      color: var(--fg);
+      font-size: 0.9rem;
+      width: 0;
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+
+    .search-input.expanded {
+      width: 200px;
+      opacity: 1;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .section-header {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin: 1.5rem 0 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--accent);
+      display: inline-block;
+    }
+
+    .section-header.analysis {
+      border-bottom-color: var(--accent-alt);
+    }
+
+    .articles {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem; 
+      margin: 0 0 3rem;
+    }
+    
+    .article {
+      background: var(--card);
+      border-radius: 8px;
+      padding: 0;
+      transition: all 0.2s ease;
+      border: 1px solid var(--rule);
+    }
+
+    .article:hover {
+      transform: translateY(-1px);
+      border-color: var(--accent);
+    }
+
+    .article.analysis {
+      border-left: 3px solid var(--accent-alt);
+    }
+
+    .article-header {
+      padding: 20px 20px 0;
+    }
+    
+    .article-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      line-height: 1.3;
+      margin-bottom: 0.5rem;
+    }
+
+    .article-meta {
+      font-size: 0.85rem;
+      opacity: 0.6;
+      margin-bottom: 1rem;
+      font-family: 'Georgia', serif;
+    }
+
+    .article-body {
+      padding: 0 20px;
+    }
+    
+    .article-summary {
+      line-height: 1.6;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+
+    .expand-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.5rem 1rem;
+      background: var(--bg);
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 0.85rem;
+      color: var(--fg);
+      transition: all 0.2s ease;
+      margin-bottom: 1rem;
+    }
+
+    .expand-btn:hover {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+    }
+
+    .chev {
+      width: 1rem;
+      height: 1rem;
+      stroke: currentColor;
+      fill: none;
+      transition: transform 0.3s ease;
+    }
+
+    .article-details {
       max-height: 0;
       overflow: hidden;
       opacity: 0;
-      transform: translateY(6px);
-      transition: max-height 0.4s ease, opacity 0.3s ease, transform 0.3s ease;
-      padding: 0 18px;
+      transform: translateY(-8px);
+      transition: all 0.4s ease;
     }
-    .panel.open {
+
+    .article-details.open {
       max-height: 500px;
       opacity: 1;
       transform: translateY(0);
-      padding: 10px 18px 12px;
+      margin-bottom: 1rem;
     }
-    .summary { margin: 0.35rem 0 0.25rem; }
-    .cta {
-      display: inline-block;
-      margin-top: 0.3rem;
-      padding: 0.38rem 0.65rem;
+
+    .analysis-content {
+      background: var(--bg);
+      border-radius: 6px;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-left: 3px solid var(--accent-alt);
+    }
+
+    .article-actions {
+      padding: 0 20px 20px;
+      display: flex;
+      gap: 0.8rem;
+      align-items: center;
+    }
+
+    .action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.5rem 1rem;
+      background: var(--bg);
       border: 1px solid var(--rule);
-      border-radius: 8px;
-      font-weight: 800;
-      font-size: 0.9rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 0.85rem;
+      color: var(--fg);
+      transition: all 0.2s ease;
+    }
+
+    .action-btn:hover {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+    }
+
+    .source-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.5rem 1rem;
+      background: var(--accent);
+      color: white;
+      border-radius: 6px;
+      font-weight: 500;
+      font-size: 0.85rem;
+      transition: all 0.2s ease;
+    }
+
+    .source-link:hover {
+      opacity: 0.9;
+      transform: translateX(2px);
     }
 
     footer {
       border-top: 1px solid var(--rule);
-      opacity: 0.85;
+      opacity: 0.7;
       text-align: center;
-      padding: 18px 0 26px;
+      padding: 40px 0;
       font-size: 0.9rem;
     }
+    
     .backtop {
-      display: inline-block;
-      margin-top: 0.6rem;
-      border-bottom: 1px solid var(--link-underline);
-      font-weight: 800;
-      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      opacity: 0.8;
+      font-weight: 500;
+      padding: 0.5rem;
     }
-  </style>
-</head>
-<body id="top">
-  <header class="wrap">
-    <h1>Something to Report</h1>
-    <p>Pivotal themes shaping the future: <strong>Family</strong>, <strong>Education</strong>, <strong>Security</strong>, <strong>American Values</strong>, <strong>Global Influence</strong>, <strong>Lifestyle</strong>, <strong>Politics</strong>.</p>
-    <div class="time" id="now"></div>
-  </header>
 
-  <section class="wrap">
-    <div class="controls">
-      <button id="expandAll" class="btn">Expand All</button>
-      <button id="mode" class="btn">Dark Mode</button>
-    </div>
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 16px;
+      }
+      
+      header {
+        padding: 30px 0 15px;
+      }
+      
+      header h1 {
+        font-size: 2rem;
+      }
+      
+      .articles {
+        gap: 1.5rem;
+      }
 
-    <article class="hero">
-      <div class="hero-body">
-        <div class="hed" id="heroTitle"></div>
-        <p id="heroDek" class="dek" style="margin-top: .35rem"></p>
-      </div>
-    </article>
+      .controls {
+        gap: 0.5rem;
+      }
 
-    <main id="stream" class="stream"></main>
-  </section>
+      .filter-select {
+        width: auto;
+        min-width: 140px;
+      }
 
-  <footer class="wrap">
-    <p>Send tips: <a href="mailto:tips@somethingtoreport.com">tips@somethingtoreport.com</a> · © <span id="yr"></span> Something to Report</p>
-    <a class="backtop" href="#top">Back to top ↑</a>
-  </footer>
-
-  <script>
-    const $ = (s, el=document) => el.querySelector(s);
-    const $$ = (s, el=document) => [...el.querySelectorAll(s)];
-    const pad = n => String(n).padStart(2,"0");
-    const toISO = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
-    const fmtTime = d => d.toLocaleTimeString([], {hour:"2-digit", minute:"2-digit"});
-
-    const tick = () => $("#now").textContent =
-      new Date().toLocaleDateString("en-US",{weekday:"long", month:"long", day:"numeric", year:"numeric"}) +
-      " — " + fmtTime(new Date());
-    tick(); setInterval(tick, 30000);
-    $("#yr").textContent = new Date().getFullYear();
-
-    // theme toggle
-    const modeBtn = $("#mode");
-    function setTheme(isDark){
-      document.documentElement.classList.toggle("dark", isDark);
-      document.documentElement.classList.toggle("light", !isDark);
-      modeBtn.textContent = isDark ? "Light Mode" : "Dark Mode";
-      localStorage.setItem("mode", isDark ? "dark" : "light");
-    }
-    setTheme(document.documentElement.classList.contains("dark"));
-    modeBtn.addEventListener("click", ()=>setTheme(!document.documentElement.classList.contains("dark")));
-
-    // JSON path pattern
-    async function fetchNews(){
-      const today = toISO(new Date());
-      const url = `/data/news-${today}.json`;
-      try {
-        const res = await fetch(url,{cache:"no-store"});
-        if(!res.ok) throw new Error();
-        return res.json();
-      } catch {
-        return {lead:null, items:[]};
+      .search-input.expanded {
+        width: 150px;
       }
     }
 
-    function chevron(){
-      const s=document.createElementNS("http://www.w3.org/2000/svg","svg");
-      s.setAttribute("viewBox","0 0 24 24");
+    @media (max-width: 480px) {
+      .controls {
+        flex-wrap: wrap;
+      }
+      
+      .btn, .filter-select {
+        flex: 1;
+        min-width: 120px;
+      }
+
+      .search-container {
+        width: 100%;
+        justify-content: flex-end;
+        margin-top: 0.5rem;
+      }
+
+      .search-input.expanded {
+        width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="reading-progress" id="readingProgress"></div>
+
+  <div class="container">
+    <header>
+      <h1>somethingtoreport</h1>
+      <p>News reports and data analysis</p>
+      <div class="date" id="currentDate"></div>
+    </header>
+
+    <div class="controls">
+      <button id="themeToggle" class="btn">Dark Mode</button>
+      <button id="expandAll" class="btn">Expand All</button>
+      <select id="contentFilter" class="filter-select">
+        <option value="all">All Content</option>
+        <option value="news">News Only</option>
+        <option value="analysis">Analysis Only</option>
+      </select>
+      <div class="search-container">
+        <input type="text" id="searchInput" class="search-input" placeholder="Search articles...">
+        <button id="searchBtn" class="search-btn">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.3-4.3"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <main>
+      <!-- News Section - WILL BE POPULATED BY JSON -->
+      <h2 class="section-header" id="newsHeader">Today's Reports</h2>
+      <div id="newsArticles" class="articles">
+        <div style="text-align: center; padding: 2rem; opacity: 0.7;">Loading news reports...</div>
+      </div>
+
+      <!-- Analysis Section - WILL BE POPULATED BY JSON -->
+      <h2 class="section-header analysis" id="analysisHeader">Data & Analysis</h2>
+      <div id="analysisArticles" class="articles">
+        <div style="text-align: center; padding: 2rem; opacity: 0.7;">Loading analysis...</div>
+      </div>
+    </main>
+
+    <footer>
+      <p>© <span id="year"></span> somethingtoreport</p>
+      <a class="backtop" href="#">
+        <span>Back to top</span>
+        <span>↑</span>
+      </a>
+    </footer>
+  </div>
+
+  <script>
+    const $ = (s) => document.querySelector(s);
+    const $$ = (s) => [...document.querySelectorAll(s)];
+
+    let currentArticles = { news: [], analysis: [] };
+    let currentSearch = '';
+    let isSearchExpanded = false;
+
+    $("#currentDate").textContent = new Date().toLocaleDateString('en-US', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+    $("#year").textContent = new Date().getFullYear();
+
+    const themeBtn = $("#themeToggle");
+    function setTheme(isDark) {
+      document.documentElement.classList.toggle("dark", isDark);
+      document.documentElement.classList.toggle("light", !isDark);
+      themeBtn.textContent = isDark ? "Light Mode" : "Dark Mode";
+      localStorage.setItem("mode", isDark ? "dark" : "light");
+    }
+    setTheme(document.documentElement.classList.contains("dark"));
+    themeBtn.addEventListener("click", () => setTheme(!document.documentElement.classList.contains("dark")));
+
+    $("#contentFilter").addEventListener("change", (e) => {
+      const filter = e.target.value;
+      
+      if (filter === 'all') {
+        $("#newsHeader").style.display = 'block';
+        $("#analysisHeader").style.display = 'block';
+        $$('#newsArticles, #analysisArticles').forEach(el => el.style.display = 'block');
+      } else if (filter === 'news') {
+        $("#newsHeader").style.display = 'block';
+        $("#analysisHeader").style.display = 'none';
+        $("#newsArticles").style.display = 'block';
+        $("#analysisArticles").style.display = 'none';
+      } else {
+        $("#newsHeader").style.display = 'none';
+        $("#analysisHeader").style.display = 'block';
+        $("#newsArticles").style.display = 'none';
+        $("#analysisArticles").style.display = 'block';
+      }
+    });
+
+    $("#searchBtn").addEventListener('click', function() {
+      const searchInput = $("#searchInput");
+      isSearchExpanded = !isSearchExpanded;
+      
+      if (isSearchExpanded) {
+        searchInput.classList.add('expanded');
+        searchInput.focus();
+      } else {
+        searchInput.classList.remove('expanded');
+        if (!searchInput.value) {
+          currentSearch = '';
+          renderContent(currentArticles);
+        }
+      }
+    });
+
+    $("#searchInput").addEventListener('input', (e) => {
+      currentSearch = e.target.value.toLowerCase();
+      renderContent(currentArticles);
+    });
+
+    document.addEventListener('click', (e) => {
+      const searchContainer = $('.search-container');
+      if (isSearchExpanded && !searchContainer.contains(e.target)) {
+        const searchInput = $("#searchInput");
+        if (!searchInput.value) {
+          searchInput.classList.remove('expanded');
+          isSearchExpanded = false;
+        }
+      }
+    });
+
+    window.addEventListener('scroll', () => {
+      const winHeight = window.innerHeight;
+      const docHeight = document.documentElement.scrollHeight;
+      const scrollTop = window.pageYOffset;
+      const trackLength = docHeight - winHeight;
+      const pctScrolled = Math.floor(scrollTop / trackLength * 100);
+      $("#readingProgress").style.width = pctScrolled + '%';
+    });
+
+    function chevron() {
+      const s = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      s.setAttribute("viewBox", "0 0 24 24");
       s.classList.add("chev");
-      const p=document.createElementNS("http://www.w3.org/2000/svg","path");
-      p.setAttribute("d","M7 10l5 5 5-5");
-      p.setAttribute("stroke","currentColor");
-      p.setAttribute("stroke-width","2");
-      p.setAttribute("stroke-linecap","round");
-      p.setAttribute("stroke-linejoin","round");
-      p.setAttribute("fill","none");
+      const p = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      p.setAttribute("d", "M7 10l5 5 5-5");
+      p.setAttribute("stroke", "currentColor");
+      p.setAttribute("stroke-width", "2");
+      p.setAttribute("stroke-linecap", "round");
+      p.setAttribute("stroke-linejoin", "round");
+      p.setAttribute("fill", "none");
       s.appendChild(p);
       return s;
     }
 
-    function render(data){
-      const hero = data.lead;
-      if(hero){ $("#heroTitle").textContent = hero.title; $("#heroDek").textContent = hero.summary; }
+    async function loadContent() {
+      try {
+        const response = await fetch('./data/content.json');
+        const data = await response.json();
+        return data;
+      } catch (error) {
+        console.error('Failed to load content:', error);
+        // Fallback to empty data structure
+        return {
+          news: [],
+          analysis: []
+        };
+      }
+    }
 
-      const stream = $("#stream"); stream.innerHTML = "";
-      data.items.forEach(item=>{
-        const card = document.createElement("article");
-        card.className="card";
-        const inner=document.createElement("div");
-        inner.className="card-inner";
-        const body=document.createElement("div");
-        body.className="card-body";
-        const right=document.createElement("div");
-        right.className="thumb";
-        const title=document.createElement("div");
-        title.className="card-title";
-        title.textContent=item.title;
+    function filterArticles(articles) {
+      if (!currentSearch) return articles;
+      
+      return articles.filter(article => 
+        article.title.toLowerCase().includes(currentSearch) ||
+        article.summary.toLowerCase().includes(currentSearch) ||
+        article.details.toLowerCase().includes(currentSearch)
+      );
+    }
 
-        const btn=document.createElement("button");
-        btn.className="toggle";
-        btn.type="button";
-        btn.setAttribute("aria-expanded","false");
-        btn.appendChild(chevron());
-        const span=document.createElement("span");
-        span.textContent="Brief";
-        btn.appendChild(span);
+    function createArticleElement(article, type) {
+      const element = document.createElement('article');
+      element.className = `article ${type === 'analysis' ? 'analysis' : ''}`;
+      
+      element.innerHTML = `
+        <div class="article-header">
+          <h2 class="article-title">${article.title}</h2>
+          <div class="article-meta">${article.timestamp}</div>
+        </div>
+        <div class="article-body">
+          <p class="article-summary">${article.summary}</p>
+          <button class="expand-btn" data-id="${article.id}">
+            ${chevron().outerHTML}
+            <span>${type === 'analysis' ? 'View analysis' : 'Read more'}</span>
+          </button>
+          <div class="article-details" id="details-${article.id}">
+            <p>${article.details}</p>
+            ${type === 'analysis' && article.insights ? `
+              <div class="analysis-content">
+                <strong>Key Insights:</strong>
+                <p>${article.insights.map(insight => `• ${insight}`).join('<br>')}</p>
+              </div>
+            ` : ''}
+            ${type === 'analysis' && article.conclusion ? `
+              <p>${article.conclusion}</p>
+            ` : ''}
+          </div>
+        </div>
+        <div class="article-actions">
+          <a href="${article.source}" target="_blank" class="source-link">
+            <span>${type === 'analysis' ? 'Full analysis' : 'Full story'}</span>
+            <span>→</span>
+          </a>
+          <button class="action-btn copy-link" data-url="${article.source}">
+            <span>Copy link</span>
+          </button>
+        </div>
+      `;
+      
+      return element;
+    }
 
-        const panel=document.createElement("div");
-        panel.className="panel";
-        const summary=document.createElement("p");
-        summary.className="summary";
-        summary.textContent=item.summary;
-        const cta=document.createElement("a");
-        cta.href=item.url; cta.target="_blank"; cta.rel="noopener noreferrer";
-        cta.className="cta"; cta.textContent="Source";
-        panel.append(summary, cta);
-
-        btn.addEventListener("click",()=>{
-          const open=panel.classList.contains("open");
-          panel.classList.toggle("open",!open);
-          btn.querySelector(".chev").style.transform=!open?"rotate(180deg)":"rotate(0deg)";
-          btn.setAttribute("aria-expanded",String(!open));
+    function renderContent(data) {
+      currentArticles = data;
+      
+      $("#newsArticles").innerHTML = '';
+      $("#analysisArticles").innerHTML = '';
+      
+      const filteredNews = filterArticles(data.news || []);
+      if (filteredNews.length > 0) {
+        filteredNews.forEach(article => {
+          const articleEl = createArticleElement(article, 'news');
+          $("#newsArticles").appendChild(articleEl);
         });
+      } else {
+        $("#newsArticles").innerHTML = '<div style="text-align: center; padding: 2rem; opacity: 0.7;">' + 
+          (currentSearch ? 'No news articles match your search.' : 'No news reports today.') + '</div>';
+      }
+      
+      const filteredAnalysis = filterArticles(data.analysis || []);
+      if (filteredAnalysis.length > 0) {
+        filteredAnalysis.forEach(article => {
+          const articleEl = createArticleElement(article, 'analysis');
+          $("#analysisArticles").appendChild(articleEl);
+        });
+      } else {
+        $("#analysisArticles").innerHTML = '<div style="text-align: center; padding: 2rem; opacity: 0.7;">' + 
+          (currentSearch ? 'No analysis articles match your search.' : 'No analysis available.') + '</div>';
+      }
+      
+      setupInteractions();
+    }
 
-        body.append(title, btn);
-        inner.append(body,right);
-        card.append(inner,panel);
-        stream.append(card);
+    function setupInteractions() {
+      
+      $$('.expand-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const id = this.getAttribute('data-id');
+          const details = document.getElementById('details-' + id);
+          const isOpen = details.classList.contains('open');
+          
+          details.classList.toggle('open', !isOpen);
+          this.querySelector('.chev').style.transform = !isOpen ? 'rotate(180deg)' : 'rotate(0deg)';
+          
+          const isAnalysis = this.closest('.analysis') !== null;
+          this.querySelector('span').textContent = !isOpen ? 'Show less' : 
+            (isAnalysis ? 'View analysis' : 'Read more');
+        });
+      });
+
+      $$('.copy-link').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const url = this.getAttribute('data-url');
+          navigator.clipboard.writeText(url);
+          const original = this.innerHTML;
+          this.innerHTML = '<span>Copied!</span>';
+          setTimeout(() => {
+            this.innerHTML = original;
+          }, 2000);
+        });
       });
     }
 
-    $("#expandAll").addEventListener("click",()=>{
-      const open=$("#expandAll").textContent.includes("Expand");
-      $$(".panel").forEach(p=>p.classList.toggle("open",open));
-      $$(".chev").forEach(c=>c.style.transform=open?"rotate(180deg)":"rotate(0deg)");
-      $("#expandAll").textContent=open?"Collapse All":"Expand All";
+    $("#expandAll").addEventListener("click", function() {
+      const allClosed = $$('.article-details').every(d => !d.classList.contains('open'));
+      
+      $$('.article-details').forEach(details => {
+        details.classList.toggle('open', allClosed);
+      });
+      
+      $$('.expand-btn').forEach(btn => {
+        const chev = btn.querySelector('.chev');
+        chev.style.transform = allClosed ? 'rotate(180deg)' : 'rotate(0deg)';
+        
+        const isAnalysis = btn.closest('.analysis') !== null;
+        btn.querySelector('span').textContent = allClosed ? 'Show less' : 
+          (isAnalysis ? 'View analysis' : 'Read more');
+      });
+      
+      this.textContent = allClosed ? 'Collapse All' : 'Expand All';
     });
 
-    (async function init(){
-      const json=await fetchNews();
-      render(json);
-    })();
+    async function init() {
+      const content = await loadContent();
+      renderContent(content);
+    }
 
-    // register SW
-    if('serviceWorker' in navigator){
-      window.addEventListener('load',()=> {
-        navigator.serviceWorker.register('/sw.js', { scope: '/' })
-          .then(reg=> console.log('SW registered successfully!'))
-          .catch(err=> colsole.error('SW error:', err));
-      });
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
     }
   </script>
 </body>
