@@ -13,6 +13,7 @@
   <link rel="manifest" href="manifest.webmanifest">
 
   <script>
+    // Prevent flash on load
     (function () {
       const saved = localStorage.getItem("mode");
       const prefers = window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -22,6 +23,7 @@
   </script>
 
   <style>
+    /* [ALL YOUR EXISTING CSS STAYS EXACTLY THE SAME] */
     *, *::before, *::after { 
       box-sizing: border-box; 
       margin: 0; 
@@ -510,18 +512,23 @@
     const $ = (s) => document.querySelector(s);
     const $$ = (s) => [...document.querySelectorAll(s)];
 
+    // Current state
     let currentArticles = { news: [], analysis: [] };
     let currentSearch = '';
     let isSearchExpanded = false;
 
-    $("#currentDate").textContent = new Date().toLocaleDateString('en-US', {
+    // Current date
+    const today = new Date();
+    const todayString = today.toISOString().split('T')[0]; // "2024-01-15"
+    $("#currentDate").textContent = today.toLocaleDateString('en-US', {
       weekday: 'long',
       year: 'numeric',
       month: 'long',
       day: 'numeric'
     });
-    $("#year").textContent = new Date().getFullYear();
+    $("#year").textContent = today.getFullYear();
 
+    // Theme toggle
     const themeBtn = $("#themeToggle");
     function setTheme(isDark) {
       document.documentElement.classList.toggle("dark", isDark);
@@ -532,6 +539,7 @@
     setTheme(document.documentElement.classList.contains("dark"));
     themeBtn.addEventListener("click", () => setTheme(!document.documentElement.classList.contains("dark")));
 
+    // Content filter
     $("#contentFilter").addEventListener("change", (e) => {
       const filter = e.target.value;
       
@@ -552,6 +560,7 @@
       }
     });
 
+    // Search functionality
     $("#searchBtn").addEventListener('click', function() {
       const searchInput = $("#searchInput");
       isSearchExpanded = !isSearchExpanded;
@@ -573,6 +582,7 @@
       renderContent(currentArticles);
     });
 
+    // Close search when clicking outside
     document.addEventListener('click', (e) => {
       const searchContainer = $('.search-container');
       if (isSearchExpanded && !searchContainer.contains(e.target)) {
@@ -584,6 +594,7 @@
       }
     });
 
+    // Reading progress
     window.addEventListener('scroll', () => {
       const winHeight = window.innerHeight;
       const docHeight = document.documentElement.scrollHeight;
@@ -608,14 +619,33 @@
       return s;
     }
 
+    // SIMPLE JSON LOADING - JUST DROP FILES IN /data/ FOLDER
     async function loadContent() {
       try {
-        const response = await fetch('./data/content.json');
-        const data = await response.json();
-        return data;
+        // Try to load today's news file
+        let newsData = [];
+        try {
+          const newsResponse = await fetch(`./data/news-${todayString}.json`);
+          newsData = await newsResponse.json();
+        } catch (e) {
+          console.log('No news file for today');
+        }
+
+        // Try to load today's analysis file  
+        let analysisData = [];
+        try {
+          const analysisResponse = await fetch(`./data/analysis-${todayString}.json`);
+          analysisData = await analysisResponse.json();
+        } catch (e) {
+          console.log('No analysis file for today');
+        }
+
+        return {
+          news: Array.isArray(newsData) ? newsData : [],
+          analysis: Array.isArray(analysisData) ? analysisData : []
+        };
       } catch (error) {
         console.error('Failed to load content:', error);
-        // Fallback to empty data structure
         return {
           news: [],
           analysis: []
@@ -678,9 +708,11 @@
     function renderContent(data) {
       currentArticles = data;
       
+      // Clear loading messages
       $("#newsArticles").innerHTML = '';
       $("#analysisArticles").innerHTML = '';
       
+      // Filter news articles
       const filteredNews = filterArticles(data.news || []);
       if (filteredNews.length > 0) {
         filteredNews.forEach(article => {
@@ -692,6 +724,7 @@
           (currentSearch ? 'No news articles match your search.' : 'No news reports today.') + '</div>';
       }
       
+      // Filter analysis articles
       const filteredAnalysis = filterArticles(data.analysis || []);
       if (filteredAnalysis.length > 0) {
         filteredAnalysis.forEach(article => {
@@ -707,7 +740,7 @@
     }
 
     function setupInteractions() {
-      
+      // Expand buttons
       $$('.expand-btn').forEach(btn => {
         btn.addEventListener('click', function() {
           const id = this.getAttribute('data-id');
@@ -723,6 +756,7 @@
         });
       });
 
+      // Copy links
       $$('.copy-link').forEach(btn => {
         btn.addEventListener('click', function() {
           const url = this.getAttribute('data-url');
@@ -736,6 +770,7 @@
       });
     }
 
+    // Expand all functionality
     $("#expandAll").addEventListener("click", function() {
       const allClosed = $$('.article-details').every(d => !d.classList.contains('open'));
       
@@ -755,11 +790,13 @@
       this.textContent = allClosed ? 'Collapse All' : 'Expand All';
     });
 
+    // Initialize
     async function init() {
       const content = await loadContent();
       renderContent(content);
     }
 
+    // Start when ready
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', init);
     } else {
