@@ -7,6 +7,7 @@
   <meta name="color-scheme" content="light dark" />
   <meta name="theme-color" content="#0f1011" />
   <meta name="description" content="Daily news and analysis" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; img-src 'self' data:;">
 
   <style>
     :root {
@@ -15,7 +16,7 @@
       --btn-fg:#fff;
     }
     .light {
-      --bg:#ffffff; --fg:#171717; --rule:#cbd5e1; /* stronger border */
+      --bg:#ffffff; --fg:#171717; --rule:#cbd5e1;
       --card:#fafafa; --accent:#2563eb; --accent-alt:#dc2626; --meta:#586274;
       --btn-fg:#fff;
     }
@@ -31,7 +32,6 @@
     header p{opacity:.8}
     .date{opacity:.75;font-size:.95rem;margin-top:.25rem}
 
-    /* Controls */
     .controls{display:flex;gap:.6rem;padding:16px 0;align-items:center;flex-wrap:nowrap}
     .filter-select{
       padding:0 2rem 0 1rem;height:40px;border-radius:10px;border:1px solid var(--rule);
@@ -40,7 +40,6 @@
       background-repeat:no-repeat;background-position:right .6rem center;background-size:1rem
     }
 
-    /* Icon-only buttons (theme/search) */
     .icon-btn{
       width:40px;height:40px;border-radius:10px;border:1px solid var(--rule);
       background:var(--card);display:inline-flex;align-items:center;justify-content:center;
@@ -65,7 +64,7 @@
       transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease
     }
     .article:hover{transform:translateY(-2px);border-color:var(--accent);box-shadow:0 6px 22px rgba(37,99,235,.16)}
-    .light .article{box-shadow:0 1px 0 rgba(0,0,0,.02), 0 4px 14px rgba(0,0,0,.06)} /* clearer in light */
+    .light .article{box-shadow:0 1px 0 rgba(0,0,0,.02), 0 4px 14px rgba(0,0,0,.06)}
     .article.analysis{border-left:3px solid var(--accent-alt)}
     .article-header{padding:18px 18px 0}
     .article-title{font-size:1.2rem;font-weight:800;letter-spacing:-.01em;line-height:1.3;margin-bottom:.4rem}
@@ -73,7 +72,6 @@
     .article-summary{margin-bottom:.5rem}
     .article-meta{font-size:.92rem;opacity:.85;margin:.2rem 0 .8rem}
 
-    /* PRIMARY buttons — blue by default */
     .open-full-btn,
     .toggle-more{
       display:inline-flex;align-items:center;gap:.5rem;padding:.55rem 1rem;border-radius:10px;cursor:pointer;
@@ -86,7 +84,6 @@
     .toggle-more:active{transform:translateY(1px)}
     .article-actions{padding:0 18px 16px;display:flex;gap:.6rem;align-items:center;flex-wrap:wrap}
 
-    /* News dropdown */
     .chev{transition:transform .24s ease}
     .chev svg{width:1rem;height:1rem;display:block}
     .collapsible{overflow:hidden;max-height:0;opacity:0;transition:max-height .5s ease, opacity .5s ease}
@@ -94,11 +91,10 @@
 
     footer{border-top:1px solid var(--rule);opacity:.85;text-align:center;padding:36px 0;font-size:.95rem}
 
-    /* Overlay */
     .overlay{position:fixed;inset:0;background:color-mix(in oklab, var(--bg) 96%, black 4%);display:none;z-index:9999}
     .overlay.open{display:block}
-    .overlay-wrap{max-width:860px;margin:0 auto;height:100%;overflow:auto;padding:60px 18px 56px} /* top padding so fixed back button doesn't overlap */
-    .overlay-card{background:var(--card);border:1.5px solid var(--rule);border-radius:18px;padding:22px;margin-top:12px}
+    .overlay-wrap{max-width:860px;margin:0 auto;height:100%;overflow:auto;padding:20px 18px}
+    .overlay-card{background:var(--card);border:1.5px solid var(--rule);border-radius:18px;padding:22px}
     .overlay h2{font-size:2rem;letter-spacing:-.02em;margin-bottom:.3rem}
     .overlay .lead{opacity:.9;margin:.6rem 0 1rem}
     .overlay .meta{opacity:.8;margin-bottom:1rem}
@@ -109,21 +105,18 @@
     .overlay .content li{margin:.3rem 0}
     .callout{border-left:3px solid var(--accent);background:color-mix(in oklab, var(--card) 85%, var(--accent) 15%);padding:.75rem .9rem;border-radius:.6rem;margin:1rem 0}
 
-    /* Fixed back button (top-right) — always visible while scrolling */
     .overlay-close{
-      position:fixed;top:16px;right:16px;z-index:10000;
       display:inline-flex;align-items:center;gap:.4rem;background:var(--accent);color:var(--btn-fg);
-      border:1px solid var(--accent);border-radius:10px;padding:.5rem .85rem;cursor:pointer;font-weight:800
+      border:1px solid var(--accent);border-radius:10px;padding:.5rem .85rem;cursor:pointer;font-weight:800;
+      margin-bottom: 1rem;
     }
     .overlay-close:hover{filter:brightness(1.05)}
 
-    /* Focus rings */
     .icon-btn:focus-visible,
     .toggle-more:focus-visible,
     .open-full-btn:focus-visible,
     .overlay-close:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 
-    /* Mobile */
     @media (max-width:768px){
       .container{padding:0 16px}
       header{padding:28px 0 16px}
@@ -139,7 +132,6 @@
     @media (prefers-reduced-motion: reduce){ *{transition-duration:.01ms !important} }
   </style>
 
-  <!-- No-flash theme -->
   <script>
     (function () {
       const saved = localStorage.getItem("mode");
@@ -157,7 +149,6 @@
       <div class="date" id="currentDate"></div>
 
       <div class="controls">
-        <!-- Theme toggle -->
         <button id="themeToggle" class="icon-btn" aria-label="Toggle theme" title="Toggle theme">
           <svg id="iconSun" class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
           <svg id="iconMoon" class="icon" viewBox="0 0 24 24" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -197,11 +188,10 @@
     </footer>
   </div>
 
-  <!-- Overlay -->
   <div id="overlay" class="overlay" aria-hidden="true" role="dialog" aria-modal="true">
     <div class="overlay-wrap">
-      <button class="overlay-close" id="overlayClose">← Back</button>
       <div class="overlay-card">
+        <button class="overlay-close" id="overlayClose">← Back</button>
         <div class="meta" id="ovKind"></div>
         <h2 id="ovTitle"></h2>
         <p class="lead" id="ovLead"></p>
@@ -212,19 +202,16 @@
   </div>
 
   <script>
-    /* Utils */
     const $ = (s) => document.querySelector(s);
     const $$ = (s) => [...document.querySelectorAll(s)];
     const pad = (n) => String(n).padStart(2,'0');
     const toYMD = (d) => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
     const prettyDate = (ds) => { const [y,m,d]=ds.split('-').map(Number); return new Date(y,m-1,d).toLocaleDateString(undefined,{year:'numeric',month:'long',day:'numeric'}); };
 
-    // Header: show the user's CURRENT date (not latest post date)
     const now = new Date();
     $("#currentDate").textContent = now.toLocaleDateString(undefined, {weekday:'long',year:'numeric',month:'long',day:'numeric'});
     $("#year").textContent = now.getFullYear();
 
-    /* Theme toggle */
     const themeBtn = $("#themeToggle");
     const iconSun  = $("#iconSun");
     const iconMoon = $("#iconMoon");
@@ -245,7 +232,6 @@
       });
     })();
 
-    /* Search */
     let currentSearch = ""; let searchOpen=false; let daysCache=[];
     const searchContainer=$(".search-container"), searchInput=$("#searchInput"), searchBtn=$("#searchBtn");
     function reRenderIfReady(){ if (typeof renderRange==='function' && Array.isArray(daysCache)) renderRange(daysCache); }
@@ -253,7 +239,10 @@
       if(searchOpen){ searchInput.classList.add('expanded'); setTimeout(()=>searchInput.focus(),10); }
       else { searchInput.classList.remove('expanded'); if(!searchInput.value){ currentSearch=""; reRenderIfReady(); } }
     });
-    searchInput.addEventListener('input',(e)=>{ currentSearch=(e.target.value||"").toLowerCase(); reRenderIfReady(); });
+    searchInput.addEventListener('input',(e)=>{ 
+      currentSearch=(e.target.value||"").toLowerCase().replace(/[<>]/g, '');
+      reRenderIfReady(); 
+    });
     document.addEventListener('click',(e)=>{ if(!searchOpen) return; if(!searchContainer.contains(e.target)){ if(!searchInput.value){ searchInput.classList.remove('expanded'); searchOpen=false; currentSearch=""; reRenderIfReady(); } } });
     function filterList(list){
       if(!currentSearch) return list||[];
@@ -265,7 +254,6 @@
       );
     }
 
-    /* Data (JSON-only; will skip missing files gracefully) */
     const DAYS_BACK=30, MAX_CONSEC_MISSES=7;
     async function fetchJSONOrNull(url){ try{ const r=await fetch(url,{cache:'no-store'}); if(!r.ok) return null; return await r.json(); }catch{ return null; } }
     async function loadRange(daysBack=DAYS_BACK){
@@ -285,7 +273,6 @@
       return out;
     }
 
-    /* UI helpers */
     function openCollapsible(el){ el.classList.add('open'); const h=el.scrollHeight; el.style.maxHeight=h+'px'; el.style.opacity='1'; }
     function closeCollapsible(el){
       el.style.maxHeight = el.scrollHeight+'px';
@@ -309,7 +296,7 @@
           ${kind==='news' ? `
             <button class="toggle-more" type="button" aria-expanded="false">
               <span class="chev" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap='round' stroke-linejoin='round'><path d="M6 9l6 6 6-6"></path></svg>
               </span>
               <span class="label">Read more</span>
             </button>
@@ -328,7 +315,6 @@
         ` : ``}
       `;
 
-      // News dropdown
       if(kind==='news'){
         const toggle=el.querySelector('.toggle-more');
         const coll=el.querySelector('.collapsible');
@@ -348,7 +334,6 @@
         });
       }
 
-      // Analysis overlay
       if(kind==='analysis'){
         el.querySelector('.open-full-btn').addEventListener('click',()=>{
           openOverlay(article,'analysis',dateStr);
@@ -366,14 +351,17 @@
       items.forEach(a=>container.appendChild(createCard(a,kind,a.dateStr)));
     }
 
-    /* Overlay */
     const overlay=$("#overlay"), ovTitle=$("#ovTitle"), ovLead=$("#ovLead"), ovDate=$("#ovDate"), ovContent=$("#ovContent"), ovKind=$("#ovKind");
     function openOverlay(article, kind, dateStr){
       ovKind.textContent='Analysis';
       ovTitle.textContent=article.title||'';
       ovLead.textContent=article.summary||'';
       ovDate.textContent=prettyDate(dateStr);
-      ovContent.innerHTML=article.full || `<p>${article.details||''}</p>`;
+      
+      ovContent.textContent = '';
+      const content = article.full || `<p>${article.details||''}</p>`;
+      ovContent.innerHTML = content.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
+      
       overlay.classList.add('open'); overlay.setAttribute('aria-hidden','false');
       $("#overlayClose").focus(); document.body.style.overflow='hidden';
     }
@@ -382,7 +370,6 @@
     overlay.addEventListener('click',(e)=>{ if(e.target===overlay) closeOverlay(); });
     document.addEventListener('keydown',(e)=>{ if(e.key==='Escape' && overlay.classList.contains('open')) closeOverlay(); });
 
-    /* Filter dropdown */
     $("#contentFilter").addEventListener('change',(e)=>{
       const v=e.target.value, show=(sel,on)=>{ const el=$(sel); if(el) el.style.display=on?'block':'none'; };
       if(v==='all'){
@@ -403,10 +390,9 @@
       }
     });
 
-    /* Render newest on top + earlier below */
     function attachDate(list, dateStr){ return (list||[]).map(a=>({...a, dateStr})); }
     function renderRange(days){
-      daysCache=days; // for search
+      daysCache=days;
       const latest=days[0];
 
       const latestNews = attachDate(latest?.news||[], latest?.dateStr||'');
