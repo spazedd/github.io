@@ -1,0 +1,16 @@
+[
+  {
+    "id": "1",
+    "title": "City Council Approves Downtown Plan",
+    "summary": "After months of debate, the city council approved the revitalization project.",
+    "details": "The comprehensive plan includes mixed-use developments, green spaces, and improved public transportation infrastructure. Construction begins next quarter.",
+    "source": "https://example.com/source"
+  },
+  {
+    "id": "2", 
+    "title": "Tech Company Expands Operations",
+    "summary": "Local tech firm announces major hiring spree and office expansion.",
+    "details": "The company plans to add 200 new positions over the next six months, focusing on engineering and data science roles.",
+    "source": "https://example.com/tech-news"
+  }
+]
