@@ -7,13 +7,12 @@
   <meta name="color-scheme" content="light dark" />
   <meta name="theme-color" content="#0f1011" />
   <meta name="description" content="Daily news and analysis">
-  
+
   <link rel="icon" type="image/png" href="icons/icon-2.png">
   <link rel="apple-touch-icon" href="icons/icon-2.png">
   <link rel="manifest" href="manifest.webmanifest">
 
   <script>
-    // Prevent flash on load
     (function () {
       const saved = localStorage.getItem("mode");
       const prefers = window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -23,437 +22,58 @@
   </script>
 
   <style>
-    /* [ALL YOUR EXISTING CSS STAYS EXACTLY THE SAME] */
-    *, *::before, *::after { 
-      box-sizing: border-box; 
-      margin: 0; 
-      padding: 0; 
-    }
-    
-    html { 
-      scroll-behavior: smooth; 
-    }
-    
-    body {
-      font-family: system-ui, -apple-system, sans-serif;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-      background: var(--bg);
-      color: var(--fg);
-      min-height: 100vh;
-    }
-
-    .reading-progress {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 0%;
-      height: 2px;
-      background: var(--accent);
-      z-index: 1000;
-    }
-
-    :root {
-      --bg: #0a0a0a;
-      --fg: #ffffff;
-      --rule: #2a2a2a;
-      --card: #111111;
-      --accent: #2563eb;
-      --accent-alt: #dc2626;
-      --meta: #888;
-    }
-    
-    .light {
-      --bg: #ffffff;
-      --fg: #171717;
-      --rule: #e5e5e5;
-      --card: #fafafa;
-      --accent: #2563eb;
-      --accent-alt: #dc2626;
-      --meta: #666;
-    }
-
-    a { 
-      color: inherit; 
-      text-decoration: none; 
-    }
-    
-    a:hover { 
-      opacity: 0.8; 
-    }
-
-    .container {
-      max-width: 680px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    header {
-      padding: 40px 0 20px;
-      border-bottom: 1px solid var(--rule);
-    }
-    
-    header h1 {
-      font-size: 2.5rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-      letter-spacing: -0.02em;
-    }
-    
-    header p { 
-      opacity: 0.7;
-      font-size: 1.1rem;
-      margin-bottom: 1rem;
-    }
-    
-    .date { 
-      opacity: 0.6; 
-      font-size: 0.9rem;
-      font-family: 'Georgia', serif;
-    }
-
-    .controls {
-      display: flex;
-      gap: 0.75rem;
-      padding: 20px 0;
-      justify-content: flex-start;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-    
-    .btn {
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
-      border: 1px solid var(--rule);
-      background: var(--card);
-      cursor: pointer;
-      font-weight: 500;
-      color: var(--fg);
-      transition: all 0.2s ease;
-      font-size: 0.9rem;
-    }
-    
-    .btn:hover { 
-      border-color: var(--accent);
-    }
-
-    .btn.active {
-      background: var(--accent);
-      color: white;
-      border-color: var(--accent);
-    }
-
-    .filter-select {
-      padding: 0.5rem 2rem 0.5rem 1rem;
-      border-radius: 6px;
-      border: 1px solid var(--rule);
-      background: var(--card);
-      color: var(--fg);
-      font-size: 0.9rem;
-      cursor: pointer;
-      appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 0.5rem center;
-      background-size: 1rem;
-    }
-
-    .filter-select:hover {
-      border-color: var(--accent);
-    }
-
-    .search-container {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .search-btn {
-      padding: 0.5rem;
-      border-radius: 6px;
-      border: 1px solid var(--rule);
-      background: var(--card);
-      cursor: pointer;
-      color: var(--fg);
-      transition: all 0.2s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .search-btn:hover {
-      border-color: var(--accent);
-      background: var(--accent);
-      color: white;
-    }
-
-    .search-icon {
-      width: 1.2rem;
-      height: 1.2rem;
-      stroke: currentColor;
-      fill: none;
-    }
-
-    .search-input {
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
-      border: 1px solid var(--rule);
-      background: var(--card);
-      color: var(--fg);
-      font-size: 0.9rem;
-      width: 0;
-      opacity: 0;
-      transition: all 0.3s ease;
-    }
-
-    .search-input.expanded {
-      width: 200px;
-      opacity: 1;
-    }
-
-    .search-input:focus {
-      outline: none;
-      border-color: var(--accent);
-    }
-
-    .section-header {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin: 1.5rem 0 1rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 2px solid var(--accent);
-      display: inline-block;
-    }
-
-    .section-header.analysis {
-      border-bottom-color: var(--accent-alt);
-    }
-
-    .articles {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem; 
-      margin: 0 0 3rem;
-    }
-    
-    .article {
-      background: var(--card);
-      border-radius: 8px;
-      padding: 0;
-      transition: all 0.2s ease;
-      border: 1px solid var(--rule);
-    }
-
-    .article:hover {
-      transform: translateY(-1px);
-      border-color: var(--accent);
-    }
-
-    .article.analysis {
-      border-left: 3px solid var(--accent-alt);
-    }
-
-    .article-header {
-      padding: 20px 20px 0;
-    }
-    
-    .article-title {
-      font-size: 1.2rem;
-      font-weight: 600;
-      line-height: 1.3;
-      margin-bottom: 0.5rem;
-    }
-
-    .article-meta {
-      font-size: 0.85rem;
-      opacity: 0.6;
-      margin-bottom: 1rem;
-      font-family: 'Georgia', serif;
-    }
-
-    .article-body {
-      padding: 0 20px;
-    }
-    
-    .article-summary {
-      line-height: 1.6;
-      margin-bottom: 1rem;
-      font-size: 1rem;
-    }
-
-    .expand-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 0.5rem 1rem;
-      background: var(--bg);
-      border: 1px solid var(--rule);
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: 500;
-      font-size: 0.85rem;
-      color: var(--fg);
-      transition: all 0.2s ease;
-      margin-bottom: 1rem;
-    }
-
-    .expand-btn:hover {
-      background: var(--accent);
-      color: white;
-      border-color: var(--accent);
-    }
-
-    .chev {
-      width: 1rem;
-      height: 1rem;
-      stroke: currentColor;
-      fill: none;
-      transition: transform 0.3s ease;
-    }
-
-    .article-details {
-      max-height: 0;
-      overflow: hidden;
-      opacity: 0;
-      transform: translateY(-8px);
-      transition: all 0.4s ease;
-    }
-
-    .article-details.open {
-      max-height: 500px;
-      opacity: 1;
-      transform: translateY(0);
-      margin-bottom: 1rem;
-    }
-
-    .analysis-content {
-      background: var(--bg);
-      border-radius: 6px;
-      padding: 1rem;
-      margin: 1rem 0;
-      border-left: 3px solid var(--accent-alt);
-    }
-
-    .article-actions {
-      padding: 0 20px 20px;
-      display: flex;
-      gap: 0.8rem;
-      align-items: center;
-    }
-
-    .action-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 0.5rem 1rem;
-      background: var(--bg);
-      border: 1px solid var(--rule);
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: 500;
-      font-size: 0.85rem;
-      color: var(--fg);
-      transition: all 0.2s ease;
-    }
-
-    .action-btn:hover {
-      background: var(--accent);
-      color: white;
-      border-color: var(--accent);
-    }
-
-    .source-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 0.5rem 1rem;
-      background: var(--accent);
-      color: white;
-      border-radius: 6px;
-      font-weight: 500;
-      font-size: 0.85rem;
-      transition: all 0.2s ease;
-    }
-
-    .source-link:hover {
-      opacity: 0.9;
-      transform: translateX(2px);
-    }
-
-    footer {
-      border-top: 1px solid var(--rule);
-      opacity: 0.7;
-      text-align: center;
-      padding: 40px 0;
-      font-size: 0.9rem;
-    }
-    
-    .backtop {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin-top: 1rem;
-      opacity: 0.8;
-      font-weight: 500;
-      padding: 0.5rem;
-    }
-
-    @media (max-width: 768px) {
-      .container {
-        padding: 0 16px;
-      }
-      
-      header {
-        padding: 30px 0 15px;
-      }
-      
-      header h1 {
-        font-size: 2rem;
-      }
-      
-      .articles {
-        gap: 1.5rem;
-      }
-
-      .controls {
-        gap: 0.5rem;
-      }
-
-      .filter-select {
-        width: auto;
-        min-width: 140px;
-      }
-
-      .search-input.expanded {
-        width: 150px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .controls {
-        flex-wrap: wrap;
-      }
-      
-      .btn, .filter-select {
-        flex: 1;
-        min-width: 120px;
-      }
-
-      .search-container {
-        width: 100%;
-        justify-content: flex-end;
-        margin-top: 0.5rem;
-      }
-
-      .search-input.expanded {
-        width: 100%;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      * { transition-duration: 0.01ms !important; }
-    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: system-ui,-apple-system,sans-serif; line-height:1.6; -webkit-font-smoothing:antialiased; background:var(--bg); color:var(--fg); min-height:100vh; }
+    .reading-progress{position:fixed;top:0;left:0;width:0%;height:2px;background:var(--accent);z-index:1000;}
+    :root{--bg:#0a0a0a;--fg:#fff;--rule:#2a2a2a;--card:#111;--accent:#2563eb;--accent-alt:#dc2626;--meta:#888;}
+    .light{--bg:#fff;--fg:#171717;--rule:#e5e5e5;--card:#fafafa;--accent:#2563eb;--accent-alt:#dc2626;--meta:#666;}
+    a{color:inherit;text-decoration:none} a:hover{opacity:.8}
+    .container{max-width:680px;margin:0 auto;padding:0 20px}
+    header{padding:40px 0 20px;border-bottom:1px solid var(--rule)}
+    header h1{font-size:2.5rem;font-weight:700;margin-bottom:.5rem;letter-spacing:-.02em}
+    header p{opacity:.7;font-size:1.1rem;margin-bottom:1rem}
+    .date{opacity:.6;font-size:.9rem;font-family:'Georgia',serif}
+    .controls{display:flex;gap:.75rem;padding:20px 0;align-items:center;flex-wrap:wrap}
+    .btn{padding:.5rem 1rem;border-radius:6px;border:1px solid var(--rule);background:var(--card);cursor:pointer;font-weight:500;color:var(--fg);transition:.2s;font-size:.9rem}
+    .btn:hover{border-color:var(--accent)}
+    .btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+    .filter-select{padding:.5rem 2rem .5rem 1rem;border-radius:6px;border:1px solid var(--rule);background:var(--card);color:var(--fg);font-size:.9rem;cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .5rem center;background-size:1rem}
+    .filter-select:hover{border-color:var(--accent)}
+    .search-container{display:flex;align-items:center;gap:.5rem}
+    .search-btn{padding:.5rem;border-radius:6px;border:1px solid var(--rule);background:var(--card);cursor:pointer;color:var(--fg);transition:.2s;display:flex;align-items:center;justify-content:center}
+    .search-btn:hover{border-color:var(--accent);background:var(--accent);color:#fff}
+    .search-icon{width:1.2rem;height:1.2rem;stroke:currentColor;fill:none}
+    .search-input{padding:.5rem 1rem;border-radius:6px;border:1px solid var(--rule);background:var(--card);color:var(--fg);font-size:.9rem;width:0;opacity:0;transition:.3s}
+    .search-input.expanded{width:200px;opacity:1}
+    .search-input:focus{outline:none;border-color:var(--accent)}
+    .section-header{font-size:1.1rem;font-weight:600;margin:1.5rem 0 1rem;padding-bottom:.5rem;border-bottom:2px solid var(--accent);display:inline-block}
+    .section-header.analysis{border-bottom-color:var(--accent-alt)}
+    .articles{display:flex;flex-direction:column;gap:1.5rem;margin:0 0 3rem}
+    .article{background:var(--card);border-radius:8px;padding:0;transition:.2s;border:1px solid var(--rule)}
+    .article:hover{transform:translateY(-1px);border-color:var(--accent)}
+    .article.analysis{border-left:3px solid var(--accent-alt)}
+    .article-header{padding:20px 20px 0}
+    .article-title{font-size:1.2rem;font-weight:600;line-height:1.3;margin-bottom:.5rem}
+    .article-meta{font-size:.85rem;opacity:.6;margin-bottom:1rem;font-family:'Georgia',serif}
+    .article-body{padding:0 20px}
+    .article-summary{line-height:1.6;margin-bottom:1rem;font-size:1rem}
+    .expand-btn{display:inline-flex;align-items:center;gap:.4rem;padding:.5rem 1rem;background:var(--bg);border:1px solid var(--rule);border-radius:6px;cursor:pointer;font-weight:500;font-size:.85rem;color:var(--fg);transition:.2s;margin-bottom:1rem}
+    .expand-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+    .chev{width:1rem;height:1rem;stroke:currentColor;fill:none;transition:transform .3s}
+    .article-details{max-height:0;overflow:hidden;opacity:0;transform:translateY(-8px);transition:all .4s}
+    .article-details.open{max-height:500px;opacity:1;transform:translateY(0);margin-bottom:1rem}
+    .analysis-content{background:var(--bg);border-radius:6px;padding:1rem;margin:1rem 0;border-left:3px solid var(--accent-alt)}
+    .article-actions{padding:0 20px 20px;display:flex;gap:.8rem;align-items:center}
+    .action-btn{display:inline-flex;align-items:center;gap:.4rem;padding:.5rem 1rem;background:var(--bg);border:1px solid var(--rule);border-radius:6px;cursor:pointer;font-weight:500;font-size:.85rem;color:var(--fg);transition:.2s}
+    .action-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+    .source-link{display:inline-flex;align-items:center;gap:.4rem;padding:.5rem 1rem;background:var(--accent);color:#fff;border-radius:6px;font-weight:500;font-size:.85rem;transition:.2s}
+    .source-link:hover{opacity:.9;transform:translateX(2px)}
+    footer{border-top:1px solid var(--rule);opacity:.7;text-align:center;padding:40px 0;font-size:.9rem}
+    .backtop{display:inline-flex;align-items:center;gap:.5rem;margin-top:1rem;opacity:.8;font-weight:500;padding:.5rem}
+    @media (max-width:768px){.container{padding:0 16px}header{padding:30px 0 15px}header h1{font-size:2rem}.articles{gap:1.5rem}.controls{gap:.5rem}.filter-select{min-width:140px}.search-input.expanded{width:150px}}
+    @media (max-width:480px){.controls{flex-wrap:wrap}.btn,.filter-select{flex:1;min-width:120px}.search-container{width:100%;justify-content:flex-end;margin-top:.5rem}.search-input.expanded{width:100%}}
+    @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition-duration:.01ms!important}}
   </style>
 </head>
 <body>
@@ -464,47 +84,48 @@
       <h1>somethingtoreport</h1>
       <p>News reports and data analysis</p>
       <div class="date" id="currentDate"></div>
+
+      <div class="controls">
+        <button id="themeToggle" class="btn">Dark Mode</button>
+        <button id="expandAll" class="btn">Expand All</button>
+        <select id="contentFilter" class="filter-select">
+          <option value="all">All Content</option>
+          <option value="news">News Only</option>
+          <option value="analysis">Analysis Only</option>
+        </select>
+        <div class="search-container">
+          <input type="text" id="searchInput" class="search-input" placeholder="Search articles...">
+          <button id="searchBtn" class="search-btn">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.3-4.3"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
     </header>
 
-    <div class="controls">
-      <button id="themeToggle" class="btn">Dark Mode</button>
-      <button id="expandAll" class="btn">Expand All</button>
-      <select id="contentFilter" class="filter-select">
-        <option value="all">All Content</option>
-        <option value="news">News Only</option>
-        <option value="analysis">Analysis Only</option>
-      </select>
-      <div class="search-container">
-        <input type="text" id="searchInput" class="search-input" placeholder="Search articles...">
-        <button id="searchBtn" class="search-btn">
-          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="11" cy="11" r="8"></circle>
-            <path d="m21 21-4.3-4.3"></path>
-          </svg>
-        </button>
-      </div>
-    </div>
-
     <main>
-      <!-- News Section - WILL BE POPULATED BY JSON -->
       <h2 class="section-header" id="newsHeader">Today's Reports</h2>
       <div id="newsArticles" class="articles">
-        <div style="text-align: center; padding: 2rem; opacity: 0.7;">Loading news reports...</div>
+        <div style="text-align:center;padding:2rem;opacity:.7;">Loading news reports...</div>
       </div>
 
-      <!-- Analysis Section - WILL BE POPULATED BY JSON -->
       <h2 class="section-header analysis" id="analysisHeader">Data & Analysis</h2>
       <div id="analysisArticles" class="articles">
-        <div style="text-align: center; padding: 2rem; opacity: 0.7;">Loading analysis...</div>
+        <div style="text-align:center;padding:2rem;opacity:.7;">Loading analysis...</div>
       </div>
+
+      <h3 class="section-header" id="newsEarlierHeader">Earlier Reports</h3>
+      <div id="newsEarlier" class="articles"></div>
+
+      <h3 class="section-header analysis" id="analysisEarlierHeader">Earlier Analysis</h3>
+      <div id="analysisEarlier" class="articles"></div>
     </main>
 
     <footer>
       <p>© <span id="year"></span> somethingtoreport</p>
-      <a class="backtop" href="#">
-        <span>Back to top</span>
-        <span>↑</span>
-      </a>
+      <a class="backtop" href="#"><span>Back to top</span><span>↑</span></a>
     </footer>
   </div>
 
@@ -512,23 +133,21 @@
     const $ = (s) => document.querySelector(s);
     const $$ = (s) => [...document.querySelectorAll(s)];
 
-    // Current state
-    let currentArticles = { news: [], analysis: [] };
+    // --- State ---
+    let currentArticles = { newsToday: [], newsEarlier: [], analysisToday: [], analysisEarlier: [] };
     let currentSearch = '';
     let isSearchExpanded = false;
 
-    // Current date
+    // --- Dates ---
     const today = new Date();
-    const todayString = today.toISOString().split('T')[0]; // "2024-01-15"
-    $("#currentDate").textContent = today.toLocaleDateString('en-US', {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    });
+    const pad = (n) => String(n).padStart(2,'0');
+    const toYMD = (d) => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+    const todayString = toYMD(today);
+
+    $("#currentDate").textContent = today.toLocaleDateString('en-US', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
     $("#year").textContent = today.getFullYear();
 
-    // Theme toggle
+    // --- Theme ---
     const themeBtn = $("#themeToggle");
     function setTheme(isDark) {
       document.documentElement.classList.toggle("dark", isDark);
@@ -539,138 +158,149 @@
     setTheme(document.documentElement.classList.contains("dark"));
     themeBtn.addEventListener("click", () => setTheme(!document.documentElement.classList.contains("dark")));
 
-    // Content filter
+    // --- Filter ---
     $("#contentFilter").addEventListener("change", (e) => {
-      const filter = e.target.value;
-      
-      if (filter === 'all') {
-        $("#newsHeader").style.display = 'block';
-        $("#analysisHeader").style.display = 'block';
-        $$('#newsArticles, #analysisArticles').forEach(el => el.style.display = 'block');
-      } else if (filter === 'news') {
-        $("#newsHeader").style.display = 'block';
-        $("#analysisHeader").style.display = 'none';
-        $("#newsArticles").style.display = 'block';
-        $("#analysisArticles").style.display = 'none';
+      const v = e.target.value;
+      const show = (el, on) => el && (el.style.display = on ? 'block' : 'none');
+      if (v === 'all') {
+        show($("#newsHeader"), true); show($("#newsArticles"), true);
+        show($("#analysisHeader"), true); show($("#analysisArticles"), true);
+        show($("#newsEarlierHeader"), true); show($("#newsEarlier"), true);
+        show($("#analysisEarlierHeader"), true); show($("#analysisEarlier"), true);
+      } else if (v === 'news') {
+        show($("#newsHeader"), true); show($("#newsArticles"), true);
+        show($("#newsEarlierHeader"), true); show($("#newsEarlier"), true);
+        show($("#analysisHeader"), false); show($("#analysisArticles"), false);
+        show($("#analysisEarlierHeader"), false); show($("#analysisEarlier"), false);
       } else {
-        $("#newsHeader").style.display = 'none';
-        $("#analysisHeader").style.display = 'block';
-        $("#newsArticles").style.display = 'none';
-        $("#analysisArticles").style.display = 'block';
+        show($("#newsHeader"), false); show($("#newsArticles"), false);
+        show($("#newsEarlierHeader"), false); show($("#newsEarlier"), false);
+        show($("#analysisHeader"), true); show($("#analysisArticles"), true);
+        show($("#analysisEarlierHeader"), true); show($("#analysisEarlier"), true);
       }
     });
 
-    // Search functionality
-    $("#searchBtn").addEventListener('click', function() {
-      const searchInput = $("#searchInput");
+    // --- Search UI ---
+    $("#searchBtn").addEventListener('click', () => {
+      const input = $("#searchInput");
       isSearchExpanded = !isSearchExpanded;
-      
-      if (isSearchExpanded) {
-        searchInput.classList.add('expanded');
-        searchInput.focus();
-      } else {
-        searchInput.classList.remove('expanded');
-        if (!searchInput.value) {
-          currentSearch = '';
-          renderContent(currentArticles);
-        }
+      if (isSearchExpanded) { input.classList.add('expanded'); input.focus(); }
+      else {
+        input.classList.remove('expanded');
+        if (!input.value) { currentSearch = ''; renderContent(currentArticles); }
       }
     });
-
-    $("#searchInput").addEventListener('input', (e) => {
-      currentSearch = e.target.value.toLowerCase();
-      renderContent(currentArticles);
-    });
-
-    // Close search when clicking outside
+    $("#searchInput").addEventListener('input', (e) => { currentSearch = e.target.value.toLowerCase(); renderContent(currentArticles); });
     document.addEventListener('click', (e) => {
-      const searchContainer = $('.search-container');
-      if (isSearchExpanded && !searchContainer.contains(e.target)) {
-        const searchInput = $("#searchInput");
-        if (!searchInput.value) {
-          searchInput.classList.remove('expanded');
-          isSearchExpanded = false;
-        }
+      const box = $('.search-container');
+      if (isSearchExpanded && !box.contains(e.target)) {
+        const input = $("#searchInput");
+        if (!input.value) { input.classList.remove('expanded'); isSearchExpanded = false; }
       }
     });
 
-    // Reading progress
+    // --- Reading progress ---
     window.addEventListener('scroll', () => {
-      const winHeight = window.innerHeight;
-      const docHeight = document.documentElement.scrollHeight;
-      const scrollTop = window.pageYOffset;
-      const trackLength = docHeight - winHeight;
-      const pctScrolled = Math.floor(scrollTop / trackLength * 100);
-      $("#readingProgress").style.width = pctScrolled + '%';
+      const winH = window.innerHeight, docH = document.documentElement.scrollHeight, y = window.pageYOffset;
+      const pct = Math.floor((y / (docH - winH)) * 100);
+      $("#readingProgress").style.width = pct + '%';
     });
 
     function chevron() {
       const s = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-      s.setAttribute("viewBox", "0 0 24 24");
-      s.classList.add("chev");
-      const p = document.createElementNS("http://www.w3.org/2000/svg", "path");
-      p.setAttribute("d", "M7 10l5 5 5-5");
-      p.setAttribute("stroke", "currentColor");
-      p.setAttribute("stroke-width", "2");
-      p.setAttribute("stroke-linecap", "round");
-      p.setAttribute("stroke-linejoin", "round");
-      p.setAttribute("fill", "none");
-      s.appendChild(p);
-      return s;
+      s.setAttribute("viewBox","0 0 24 24"); s.classList.add("chev");
+      const p = document.createElementNS("http://www.w3.org/2000/svg","path");
+      p.setAttribute("d","M7 10l5 5 5-5"); p.setAttribute("stroke","currentColor");
+      p.setAttribute("stroke-width","2"); p.setAttribute("stroke-linecap","round");
+      p.setAttribute("stroke-linejoin","round"); p.setAttribute("fill","none");
+      s.appendChild(p); return s;
     }
 
-    // SIMPLE JSON LOADING - JUST DROP FILES IN /data/ FOLDER
-    async function loadContent() {
+    // --- Fetch helpers ---
+    async function fetchJSONOrNull(url) {
       try {
-        // Try to load today's news file
-        let newsData = [];
-        try {
-          const newsResponse = await fetch(`./data/news-${todayString}.json`);
-          newsData = await newsResponse.json();
-        } catch (e) {
-          console.log('No news file for today');
-        }
-
-        // Try to load today's analysis file  
-        let analysisData = [];
-        try {
-          const analysisResponse = await fetch(`./data/analysis-${todayString}.json`);
-          analysisData = await analysisResponse.json();
-        } catch (e) {
-          console.log('No analysis file for today');
-        }
-
-        return {
-          news: Array.isArray(newsData) ? newsData : [],
-          analysis: Array.isArray(analysisData) ? analysisData : []
-        };
-      } catch (error) {
-        console.error('Failed to load content:', error);
-        return {
-          news: [],
-          analysis: []
-        };
-      }
+        const res = await fetch(url, { cache: 'no-store' });
+        if (!res.ok) return null;
+        return await res.json();
+      } catch { return null; }
     }
 
-    function filterArticles(articles) {
-      if (!currentSearch) return articles;
-      
-      return articles.filter(article => 
-        article.title.toLowerCase().includes(currentSearch) ||
-        article.summary.toLowerCase().includes(currentSearch) ||
-        article.details.toLowerCase().includes(currentSearch)
+    // --- Load today and earlier ---
+    const MAX_DAYS_BACK = 30;
+    const MAX_CONSECUTIVE_MISSES = 7;
+
+    function normalizeArticle(raw, {type, dateStr, index}) {
+      const id = raw.id || `${type}-${dateStr}-${index}-${Math.random().toString(36).slice(2,7)}`;
+      const safe = {
+        id,
+        title: raw.title || '(Untitled)',
+        summary: raw.summary || '',
+        details: raw.details || '',
+        source: raw.source || '#',
+        dateStr
+      };
+      if (type === 'analysis') {
+        safe.insights = Array.isArray(raw.insights) ? raw.insights : (raw.insights ? [String(raw.insights)] : []);
+        if (raw.conclusion) safe.conclusion = raw.conclusion;
+      }
+      return safe;
+    }
+
+    async function loadContent() {
+      const out = { newsToday: [], newsEarlier: [], analysisToday: [], analysisEarlier: [] };
+      let misses = 0;
+
+      for (let i = 0; i <= MAX_DAYS_BACK; i++) {
+        const d = new Date(); d.setDate(today.getDate() - i);
+        const dateStr = toYMD(d);
+
+        const [news, analysis] = await Promise.all([
+          fetchJSONOrNull(`./data/news-${dateStr}.json`),
+          fetchJSONOrNull(`./data/analysis-${dateStr}.json`)
+        ]);
+
+        const got = (Array.isArray(news) && news.length) || (Array.isArray(analysis) && analysis.length);
+        misses = got ? 0 : misses + 1;
+        if (misses >= MAX_CONSECUTIVE_MISSES) break;
+
+        if (Array.isArray(news)) news.forEach((r, idx) => {
+          const a = normalizeArticle(r, {type:'news', dateStr, index: idx});
+          if (i === 0) out.newsToday.push(a); else out.newsEarlier.push(a);
+        });
+        if (Array.isArray(analysis)) analysis.forEach((r, idx) => {
+          const a = normalizeArticle(r, {type:'analysis', dateStr, index: idx});
+          if (i === 0) out.analysisToday.push(a); else out.analysisEarlier.push(a);
+        });
+      }
+
+      // earlier: newest first
+      const byDateDesc = (a,b) => a.dateStr > b.dateStr ? -1 : a.dateStr < b.dateStr ? 1 : 0;
+      out.newsEarlier.sort(byDateDesc);
+      out.analysisEarlier.sort(byDateDesc);
+      return out;
+    }
+
+    // --- Search ---
+    function filterList(list) {
+      if (!currentSearch) return list;
+      const q = currentSearch;
+      return list.filter(a =>
+        (a.title||'').toLowerCase().includes(q) ||
+        (a.summary||'').toLowerCase().includes(q) ||
+        (a.details||'').toLowerCase().includes(q)
       );
     }
 
-    function createArticleElement(article, type) {
-      const element = document.createElement('article');
-      element.className = `article ${type === 'analysis' ? 'analysis' : ''}`;
-      
-      element.innerHTML = `
+    // --- Render ---
+    function createArticleElement(article, type, isToday) {
+      const el = document.createElement('article');
+      el.className = `article ${type==='analysis' ? 'analysis' : ''}`;
+      const metaText = isToday ? 'Today' : article.dateStr;
+
+      el.innerHTML = `
         <div class="article-header">
           <h2 class="article-title">${article.title}</h2>
-          <div class="article-meta">${article.timestamp}</div>
+          <div class="article-meta">${metaText}</div>
         </div>
         <div class="article-body">
           <p class="article-summary">${article.summary}</p>
@@ -680,128 +310,82 @@
           </button>
           <div class="article-details" id="details-${article.id}">
             <p>${article.details}</p>
-            ${type === 'analysis' && article.insights ? `
+            ${type==='analysis' && article.insights && article.insights.length ? `
               <div class="analysis-content">
                 <strong>Key Insights:</strong>
-                <p>${article.insights.map(insight => `• ${insight}`).join('<br>')}</p>
-              </div>
-            ` : ''}
-            ${type === 'analysis' && article.conclusion ? `
-              <p>${article.conclusion}</p>
-            ` : ''}
+                <p>${article.insights.map(i => `• ${i}`).join('<br>')}</p>
+              </div>` : ''}
+            ${type==='analysis' && article.conclusion ? `<p>${article.conclusion}</p>` : ''}
           </div>
         </div>
         <div class="article-actions">
           <a href="${article.source}" target="_blank" class="source-link">
-            <span>${type === 'analysis' ? 'Full analysis' : 'Full story'}</span>
-            <span>→</span>
+            <span>${type==='analysis' ? 'Full analysis' : 'Full story'}</span><span>→</span>
           </a>
-          <button class="action-btn copy-link" data-url="${article.source}">
-            <span>Copy link</span>
-          </button>
+          <button class="action-btn copy-link" data-url="${article.source}"><span>Copy link</span></button>
         </div>
       `;
-      
-      return element;
+      return el;
+    }
+
+    function renderBucket(list, container, type, emptyMsg, isToday) {
+      container.innerHTML = '';
+      const items = filterList(list);
+      if (items.length === 0) {
+        container.innerHTML = `<div style="text-align:center;padding:2rem;opacity:.7;">${currentSearch ? 'No results match your search.' : emptyMsg}</div>`;
+        return;
+      }
+      items.forEach(a => container.appendChild(createArticleElement(a, type, isToday)));
     }
 
     function renderContent(data) {
       currentArticles = data;
-      
-      // Clear loading messages
-      $("#newsArticles").innerHTML = '';
-      $("#analysisArticles").innerHTML = '';
-      
-      // Filter news articles
-      const filteredNews = filterArticles(data.news || []);
-      if (filteredNews.length > 0) {
-        filteredNews.forEach(article => {
-          const articleEl = createArticleElement(article, 'news');
-          $("#newsArticles").appendChild(articleEl);
-        });
-      } else {
-        $("#newsArticles").innerHTML = '<div style="text-align: center; padding: 2rem; opacity: 0.7;">' + 
-          (currentSearch ? 'No news articles match your search.' : 'No news reports today.') + '</div>';
-      }
-      
-      // Filter analysis articles
-      const filteredAnalysis = filterArticles(data.analysis || []);
-      if (filteredAnalysis.length > 0) {
-        filteredAnalysis.forEach(article => {
-          const articleEl = createArticleElement(article, 'analysis');
-          $("#analysisArticles").appendChild(articleEl);
-        });
-      } else {
-        $("#analysisArticles").innerHTML = '<div style="text-align: center; padding: 2rem; opacity: 0.7;">' + 
-          (currentSearch ? 'No analysis articles match your search.' : 'No analysis available.') + '</div>';
-      }
-      
+      renderBucket(data.newsToday, $("#newsArticles"), 'news', 'No news reports today.', true);
+      renderBucket(data.analysisToday, $("#analysisArticles"), 'analysis', 'No analysis available.', true);
+      renderBucket(data.newsEarlier, $("#newsEarlier"), 'news', 'No earlier news.', false);
+      renderBucket(data.analysisEarlier, $("#analysisEarlier"), 'analysis', 'No earlier analysis.', false);
       setupInteractions();
     }
 
     function setupInteractions() {
-      // Expand buttons
       $$('.expand-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
+        btn.addEventListener('click', function(){
           const id = this.getAttribute('data-id');
-          const details = document.getElementById('details-' + id);
-          const isOpen = details.classList.contains('open');
-          
-          details.classList.toggle('open', !isOpen);
-          this.querySelector('.chev').style.transform = !isOpen ? 'rotate(180deg)' : 'rotate(0deg)';
-          
+          const details = document.getElementById('details-'+id);
+          const open = details.classList.contains('open');
+          details.classList.toggle('open', !open);
+          this.querySelector('.chev').style.transform = !open ? 'rotate(180deg)' : 'rotate(0deg)';
           const isAnalysis = this.closest('.analysis') !== null;
-          this.querySelector('span').textContent = !isOpen ? 'Show less' : 
-            (isAnalysis ? 'View analysis' : 'Read more');
+          this.querySelector('span').textContent = !open ? 'Show less' : (isAnalysis ? 'View analysis' : 'Read more');
         });
       });
-
-      // Copy links
       $$('.copy-link').forEach(btn => {
-        btn.addEventListener('click', function() {
+        btn.addEventListener('click', function(){
           const url = this.getAttribute('data-url');
           navigator.clipboard.writeText(url);
-          const original = this.innerHTML;
+          const t = this.innerHTML;
           this.innerHTML = '<span>Copied!</span>';
-          setTimeout(() => {
-            this.innerHTML = original;
-          }, 2000);
+          setTimeout(() => this.innerHTML = t, 1400);
         });
       });
     }
 
-    // Expand all functionality
-    $("#expandAll").addEventListener("click", function() {
+    // Expand all
+    $("#expandAll").addEventListener("click", function(){
       const allClosed = $$('.article-details').every(d => !d.classList.contains('open'));
-      
-      $$('.article-details').forEach(details => {
-        details.classList.toggle('open', allClosed);
-      });
-      
+      $$('.article-details').forEach(d => d.classList.toggle('open', allClosed));
       $$('.expand-btn').forEach(btn => {
         const chev = btn.querySelector('.chev');
         chev.style.transform = allClosed ? 'rotate(180deg)' : 'rotate(0deg)';
-        
         const isAnalysis = btn.closest('.analysis') !== null;
-        btn.querySelector('span').textContent = allClosed ? 'Show less' : 
-          (isAnalysis ? 'View analysis' : 'Read more');
+        btn.querySelector('span').textContent = allClosed ? 'Show less' : (isAnalysis ? 'View analysis' : 'Read more');
       });
-      
       this.textContent = allClosed ? 'Collapse All' : 'Expand All';
     });
 
-    // Initialize
-    async function init() {
-      const content = await loadContent();
-      renderContent(content);
-    }
-
-    // Start when ready
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', init);
-    } else {
-      init();
-    }
+    // Init
+    async function init(){ renderContent(await loadContent()); }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
   </script>
 </body>
 </html>
