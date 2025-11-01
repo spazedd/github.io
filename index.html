@@ -8,12 +8,86 @@
   <meta name="theme-color" content="#0f1011" />
   <meta name="description" content="Daily news and analysis">
 
-  <link rel="icon" type="image/png" href="icons/icon-2.png">
-  <link rel="apple-touch-icon" href="icons/icon-2.png">
-  <link rel="manifest" href="manifest.webmanifest">
+  <style>
+    :root { --bg:#0a0a0a; --fg:#fff; --rule:#2a2a2a; --card:#111; --accent:#2563eb; --accent-alt:#dc2626; --meta:#9aa0a6; }
+    .light { --bg:#fff; --fg:#171717; --rule:#e5e5e5; --card:#fafafa; --accent:#2563eb; --accent-alt:#dc2626; --meta:#666; }
+
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--fg);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh}
+    a{color:inherit;text-decoration:none} a:hover{opacity:.85}
+    .container{max-width:760px;margin:0 auto;padding:0 20px}
+
+    header{padding:40px 0 20px;border-bottom:1px solid var(--rule)}
+    header h1{font-size:2.4rem;font-weight:800;letter-spacing:-.02em;margin-bottom:.3rem}
+    header p{opacity:.8}
+    .date{opacity:.7;font-size:.95rem;margin-top:.25rem}
+
+    .controls{display:flex;gap:.75rem;padding:16px 0;align-items:center;flex-wrap:wrap}
+    .btn,.filter-select,.search-btn{height:44px}
+    .btn{padding:0 .95rem;border-radius:10px;border:1px solid var(--rule);background:var(--card);cursor:pointer;font-weight:700;color:var(--fg);transition:.2s;font-size:.9rem;line-height:44px}
+    .btn:hover{border-color:var(--accent)}
+    .filter-select{padding:0 2rem 0 1rem;border-radius:10px;border:1px solid var(--rule);background:var(--card);color:var(--fg);font-size:16px;line-height:44px;cursor:pointer;-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .6rem center;background-size:1rem}
+    .search-container{display:flex;align-items:center;gap:.5rem;margin-left:auto;width:auto}
+    .search-btn{padding:0 .75rem;border-radius:10px;border:1px solid var(--rule);background:var(--card);cursor:pointer;color:var(--fg);transition:.2s;display:flex;align-items:center;justify-content:center}
+    .search-btn:hover{border-color:var(--accent);background:var(--accent);color:#fff}
+    .search-icon{width:1.2rem;height:1.2rem;stroke:currentColor;fill:none}
+    .search-input{padding:.5rem 1rem;border-radius:10px;border:1px solid var(--rule);background:var(--card);color:var(--fg);font-size:16px;width:0;opacity:0;transition:.3s}
+    .search-input.expanded{width:220px;opacity:1}
+
+    .section-header{font-size:1.15rem;font-weight:800;margin:1.5rem 0 1rem;padding-bottom:.5rem;border-bottom:2px solid var(--accent);display:inline-block}
+    .section-header.analysis{border-bottom-color:var(--accent-alt)}
+
+    .articles{display:flex;flex-direction:column;gap:1.2rem;margin:0 0 2.2rem}
+    .article{background:var(--card);border:1px solid var(--rule);border-radius:16px;overflow:hidden}
+    .article.analysis{border-left:3px solid var(--accent-alt)}
+    .article-header{padding:18px 18px 0}
+    .article-title{font-size:1.2rem;font-weight:800;letter-spacing:-.01em;line-height:1.3;margin-bottom:.4rem}
+    .article-body{padding:0 18px 14px}
+    .article-summary{margin-bottom:.5rem}
+    .article-meta{font-size:.92rem;opacity:.8;margin:.2rem 0 .8rem}
+
+    /* Analysis action */
+    .open-full-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.5rem .9rem;background:var(--bg);border:1px solid var(--rule);border-radius:10px;cursor:pointer;font-weight:700;font-size:.9rem;color:var(--fg);transition:.2s}
+    .open-full-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+    .article-actions{padding:0 18px 16px;display:flex;gap:.6rem;align-items:center;flex-wrap:wrap}
+
+    /* News dropdown */
+    .toggle-more{display:inline-flex;align-items:center;gap:.45rem;padding:.45rem .75rem;margin:.2rem 0 .6rem;background:var(--bg);border:1px solid var(--rule);border-radius:10px;cursor:pointer;font-weight:700;font-size:.9rem;color:var(--fg);user-select:none;transition:.2s}
+    .toggle-more:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+    .chev{transition:transform .24s ease}
+    .chev svg{width:1rem;height:1rem;display:block}
+    .collapsible{overflow:hidden;max-height:0;opacity:0;transition:max-height .48s ease, opacity .48s ease}
+    .collapsible.open{opacity:1;margin-top:.25rem}
+
+    footer{border-top:1px solid var(--rule);opacity:.8;text-align:center;padding:36px 0;font-size:.95rem}
+
+    /* Overlay */
+    .overlay{position:fixed;inset:0;background:color-mix(in oklab, var(--bg) 96%, black 4%);display:none;z-index:9999}
+    .overlay.open{display:block}
+    .overlay-wrap{max-width:860px;margin:0 auto;height:100%;overflow:auto;padding:16px 18px 48px}
+    .overlay-card{background:var(--card);border:1px solid var(--rule);border-radius:18px;padding:22px;margin-top:12px}
+    .overlay h2{font-size:2rem;letter-spacing:-.02em;margin-bottom:.3rem}
+    .overlay .lead{opacity:.9;margin:.6rem 0 1rem}
+    .overlay .meta{opacity:.75;margin-bottom:1rem}
+    .overlay .content{font-family:Georgia, 'Times New Roman', serif;line-height:1.7}
+    .overlay .content h3{font-family:ui-sans-serif,system-ui;font-size:1.2rem;margin:1.1rem 0 .5rem}
+    .overlay .content p{margin:.75rem 0}
+    .overlay .content ul{margin:.5rem 0 .9rem 1.25rem}
+    .overlay .content li{margin:.3rem 0}
+    .callout{border-left:3px solid var(--accent);background:color-mix(in oklab, var(--card) 85%, var(--accent) 15%);padding:.75rem .9rem;border-radius:.6rem;margin:1rem 0}
+    .overlay .toolbar{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem}
+    .overlay .btn{height:auto;line-height:1.2;padding:.55rem .9rem}
+    .overlay-close{position:sticky;top:8px;margin-left:auto;display:inline-flex;align-items:center;gap:.4rem;background:var(--bg);border:1px solid var(--rule);border-radius:10px;padding:.45rem .8rem;cursor:pointer;font-weight:700;color:var(--fg)}
+    .overlay-close:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+    /* Mobile */
+    @media (max-width:768px){ .container{padding:0 16px} header{padding:28px 0 16px} header h1{font-size:2rem} .search-input.expanded{width:160px} }
+    @media (max-width:480px){ .controls{flex-wrap:wrap} .btn,.filter-select{flex:1;min-width:120px} .search-container{width:auto;margin-top:.5rem;margin-left:auto;justify-content:flex-end} .search-container.open{width:100%;justify-content:stretch} .search-input.expanded{width:auto;flex:1;opacity:1} }
+  </style>
 
   <script>
-    /* Prevent flash on load */
+    /* Theme init (no flash) */
     (function () {
       const saved = localStorage.getItem("mode");
       const prefers = window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -21,184 +95,8 @@
       document.documentElement.classList.add(dark ? "dark" : "light");
     })();
   </script>
-
-  <style>
-    /* Base */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-      background: var(--bg);
-      color: var(--fg);
-      min-height: 100vh;
-    }
-
-    /* Theme tokens */
-    :root { --bg:#0a0a0a; --fg:#fff; --rule:#2a2a2a; --card:#111; --accent:#2563eb; --accent-alt:#dc2626; --meta:#888; }
-    .light { --bg:#fff; --fg:#171717; --rule:#e5e5e5; --card:#fafafa; --accent:#2563eb; --accent-alt:#dc2626; --meta:#666; }
-
-    a { color: inherit; text-decoration: none; }
-    a:hover { opacity: .85; }
-
-    .reading-progress { position: fixed; top: 0; left: 0; width: 0%; height: 2px; background: var(--accent); z-index: 1000; }
-
-    .container { max-width: 680px; margin: 0 auto; padding: 0 20px; }
-
-    header { padding: 40px 0 20px; border-bottom: 1px solid var(--rule); }
-    header h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: .5rem; letter-spacing: -.02em; }
-    header p { opacity: .7; font-size: 1.1rem; margin-bottom: 1rem; }
-    .date { opacity: .6; font-size: .95rem; font-family: Georgia, 'Times New Roman', serif; }
-
-    /* Controls row */
-    .controls { display: flex; gap: .75rem; padding: 20px 0; align-items: center; flex-wrap: wrap; }
-    .btn, .filter-select, .search-btn { height: 44px; }  /* unify height */
-
-    .btn {
-      padding: 0 .95rem;
-      border-radius: 6px;
-      border: 1px solid var(--rule);
-      background: var(--card);
-      cursor: pointer;
-      font-weight: 600;
-      color: var(--fg);
-      transition: .2s;
-      font-size: 14px;
-      line-height: 44px;  /* center text */
-    }
-    .btn:hover { border-color: var(--accent); }
-    .btn.active { background: var(--accent); color:#fff; border-color: var(--accent); }
-
-    .filter-select {
-      padding: 0 2rem 0 1rem;  /* room for chevron */
-      border-radius: 6px;
-      border: 1px solid var(--rule);
-      background: var(--card);
-      color: var(--fg);
-      font-size: 16px; /* avoid iOS zoom */
-      line-height: 44px;
-      cursor: pointer;
-      -webkit-appearance: none;
-      appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right .6rem center;
-      background-size: 1rem;
-    }
-    .filter-select:hover { border-color: var(--accent); }
-
-    .search-container {
-      display: flex; align-items: center; gap: .5rem;
-      width: auto;  /* important for mobile gap fix */
-      margin-left: auto;  /* push to right on wide screens */
-    }
-    .search-btn {
-      padding: 0 .75rem;
-      border-radius: 6px;
-      border: 1px solid var(--rule);
-      background: var(--card);
-      cursor: pointer;
-      color: var(--fg);
-      transition: .2s;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .search-btn:hover { border-color: var(--accent); background: var(--accent); color:#fff; }
-    .search-icon { width: 1.2rem; height: 1.2rem; stroke: currentColor; fill: none; }
-
-    .search-input {
-      padding: .5rem 1rem;
-      border-radius: 6px;
-      border: 1px solid var(--rule);
-      background: var(--card);
-      color: var(--fg);
-      font-size: 16px; /* avoid iOS zoom */
-      width: 0;
-      opacity: 0;
-      transition: .3s;
-    }
-    .search-input.expanded { width: 200px; opacity: 1; }
-    .search-input:focus { outline: none; border-color: var(--accent); }
-
-    /* Content */
-    .section-header { font-size: 1.1rem; font-weight: 700; margin: 1.5rem 0 1rem; padding-bottom: .5rem; border-bottom: 2px solid var(--accent); display: inline-block; }
-    .section-header.analysis { border-bottom-color: var(--accent-alt); }
-
-    .articles { display: flex; flex-direction: column; gap: 1.5rem; margin: 0 0 3rem; }
-    .article { background: var(--card); border-radius: 12px; padding: 0; transition: .2s; border: 1px solid var(--rule); }
-    .article:hover { transform: translateY(-1px); border-color: var(--accent); }
-    .article.analysis { border-left: 3px solid var(--accent-alt); }
-
-    .article-header { padding: 20px 20px 0; }
-    .article-title { font-size: 1.25rem; font-weight: 800; line-height: 1.3; margin-bottom: .35rem; }
-    .article-meta { font-size: .9rem; opacity: .7; margin-bottom: 1rem; font-family: Georgia, 'Times New Roman', serif; }
-
-    .article-body { padding: 0 20px; }
-    .article-summary { line-height: 1.6; margin-bottom: 1rem; font-size: 1.05rem; }
-
-    .expand-btn {
-      display: inline-flex; align-items: center; gap: .5rem;
-      padding: .5rem 1rem;
-      background: var(--bg);
-      border: 1px solid var(--rule);
-      border-radius: 8px;
-      cursor: pointer; font-weight: 600; font-size: .9rem; color: var(--fg);
-      transition: .2s; margin-bottom: 1rem;
-    }
-    .expand-btn:hover { background: var(--accent); color:#fff; border-color: var(--accent); }
-    .chev { width: 1rem; height: 1rem; stroke: currentColor; fill: none; transition: transform .3s; }
-
-    .article-details { max-height: 0; overflow: hidden; opacity: 0; transform: translateY(-8px); transition: all .35s; }
-    .article-details.open { max-height: 800px; opacity: 1; transform: translateY(0); margin-bottom: 1rem; }
-    .analysis-content { background: var(--bg); border-radius: 8px; padding: 1rem; margin: 1rem 0; border-left: 3px solid var(--accent-alt); }
-
-    .article-actions { padding: 0 20px 20px; display:flex; gap:.8rem; align-items:center; }
-    .action-btn {
-      display:inline-flex; align-items:center; gap:.5rem;
-      padding:.5rem 1rem; background: var(--bg);
-      border:1px solid var(--rule); border-radius:8px;
-      cursor:pointer; font-weight:600; font-size:.9rem; color:var(--fg); transition:.2s;
-    }
-    .action-btn:hover { background: var(--accent); color:#fff; border-color: var(--accent); }
-
-    .source-link {
-      display:inline-flex; align-items:center; gap:.5rem;
-      padding:.55rem 1rem; background: var(--accent);
-      color:#fff; border-radius:8px; font-weight:700; font-size:.95rem; transition:.2s;
-    }
-    .source-link:hover { opacity:.95; transform: translateX(2px); }
-
-    footer { border-top: 1px solid var(--rule); opacity: .7; text-align: center; padding: 40px 0; font-size: .9rem; }
-    .backtop { display:inline-flex; align-items:center; gap:.5rem; margin-top:1rem; opacity:.8; font-weight:600; padding:.5rem; }
-
-    /* Tablet tweaks */
-    @media (max-width: 768px) {
-      .container { padding: 0 16px; }
-      header { padding: 30px 0 15px; }
-      header h1 { font-size: 2rem; }
-      .articles { gap: 1.5rem; }
-      .controls { gap: .5rem; }
-      .search-input.expanded { width: 160px; }
-    }
-
-    /* Mobile tweaks + gap fix */
-    @media (max-width: 480px) {
-      .controls { flex-wrap: wrap; }
-      .btn, .filter-select { flex: 1; min-width: 120px; }
-      .search-container { width: auto; margin-top: .5rem; margin-left: auto; justify-content: flex-end; }
-      .search-container.open { width: 100%; justify-content: stretch; }
-      .search-input.expanded { width: auto; flex: 1; opacity: 1; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      * { transition-duration: .01ms !important; }
-    }
-  </style>
 </head>
 <body>
-  <div class="reading-progress" id="readingProgress"></div>
-
   <div class="container">
     <header>
       <h1>somethingtoreport</h1>
@@ -207,8 +105,6 @@
 
       <div class="controls">
         <button id="themeToggle" class="btn">Light Mode</button>
-        <button id="expandAll" class="btn">Expand All</button>
-
         <select id="contentFilter" class="filter-select" aria-label="Filter content">
           <option value="all">All Content</option>
           <option value="news">News Only</option>
@@ -228,18 +124,12 @@
     </header>
 
     <main>
-      <!-- Today -->
-      <h2 class="section-header" id="newsHeader">Today's Reports</h2>
-      <div id="newsArticles" class="articles">
-        <div style="text-align:center;padding:2rem;opacity:.7;">Loading news reports...</div>
-      </div>
+      <h2 class="section-header" id="newsHeader">Latest Reports</h2>
+      <div id="newsArticles" class="articles"></div>
 
-      <h2 class="section-header analysis" id="analysisHeader">Data & Analysis</h2>
-      <div id="analysisArticles" class="articles">
-        <div style="text-align:center;padding:2rem;opacity:.7;">Loading analysis...</div>
-      </div>
+      <h2 class="section-header analysis" id="analysisHeader">Latest Analysis</h2>
+      <div id="analysisArticles" class="articles"></div>
 
-      <!-- Earlier -->
       <h3 class="section-header" id="newsEarlierHeader">Earlier Reports</h3>
       <div id="newsEarlier" class="articles"></div>
 
@@ -249,26 +139,35 @@
 
     <footer>
       <p>© <span id="year"></span> somethingtoreport</p>
-      <a class="backtop" href="#"><span>Back to top</span> ↑</a>
     </footer>
+  </div>
+
+  <!-- Overlay (Full analysis) -->
+  <div id="overlay" class="overlay" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="overlay-wrap">
+      <button class="overlay-close" id="overlayClose">← Back</button>
+      <div class="overlay-card">
+        <div class="meta" id="ovKind"></div>
+        <h2 id="ovTitle"></h2>
+        <p class="lead" id="ovLead"></p>
+        <div class="meta" id="ovDate"></div>
+        <div class="content" id="ovContent"></div>
+        <div class="toolbar">
+          <button class="btn" onclick="window.print()">Save as PDF</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script>
     const $ = (s) => document.querySelector(s);
     const $$ = (s) => [...document.querySelectorAll(s)];
 
-    // State
-    let currentArticles = { newsToday: [], newsEarlier: [], analysisToday: [], analysisEarlier: [] };
-    let currentSearch = '';
-    let isSearchExpanded = false;
-
-    // Dates/helpers
+    // Dates
     const today = new Date();
     const pad = (n) => String(n).padStart(2,'0');
     const toYMD = (d) => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
-    const todayString = toYMD(today);
-
-    $("#currentDate").textContent = today.toLocaleDateString('en-US', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+    $("#currentDate").textContent = today.toLocaleDateString(undefined, {weekday:'long',year:'numeric',month:'long',day:'numeric'});
     $("#year").textContent = today.getFullYear();
 
     // Theme toggle
@@ -282,134 +181,51 @@
     setTheme(document.documentElement.classList.contains("dark"));
     themeBtn.addEventListener("click", () => setTheme(!document.documentElement.classList.contains("dark")));
 
-    // Filter
-    $("#contentFilter").addEventListener("change", (e) => {
-      const v = e.target.value;
-      const show = (el, on) => el && (el.style.display = on ? 'block' : 'none');
-      if (v === 'all') {
-        show($("#newsHeader"), true); show($("#newsArticles"), true);
-        show($("#analysisHeader"), true); show($("#analysisArticles"), true);
-        show($("#newsEarlierHeader"), true); show($("#newsEarlier"), true);
-        show($("#analysisEarlierHeader"), true); show($("#analysisEarlier"), true);
-      } else if (v === 'news') {
-        show($("#newsHeader"), true); show($("#newsArticles"), true);
-        show($("#newsEarlierHeader"), true); show($("#newsEarlier"), true);
-        show($("#analysisHeader"), false); show($("#analysisArticles"), false);
-        show($("#analysisEarlierHeader"), false); show($("#analysisEarlier"), false);
-      } else {
-        show($("#newsHeader"), false); show($("#newsArticles"), false);
-        show($("#newsEarlierHeader"), false); show($("#newsEarlier"), false);
-        show($("#analysisHeader"), true); show($("#analysisArticles"), true);
-        show($("#analysisEarlierHeader"), true); show($("#analysisEarlier"), true);
-      }
-    });
+    // ===== CONFIG (JSON ONLY) =====
+    const DAYS_BACK = 30;           // how far back to look for files
+    const MAX_CONSEC_MISSES = 7;    // stop early if many empty days
 
-    // Search UI (with container.open toggle for mobile layout)
-    const searchContainer = $(".search-container");
-    const searchInput = $("#searchInput");
-    $("#searchBtn").addEventListener('click', () => {
-      isSearchExpanded = !isSearchExpanded;
-      if (isSearchExpanded) {
-        searchContainer.classList.add('open');
-        searchInput.classList.add('expanded');
-        searchInput.focus();
-      } else {
-        searchInput.classList.remove('expanded');
-        searchContainer.classList.remove('open');
-        if (!searchInput.value) { currentSearch = ''; renderContent(currentArticles); }
-      }
-    });
-    $("#searchInput").addEventListener('input', (e) => {
-      currentSearch = e.target.value.toLowerCase();
-      renderContent(currentArticles);
-    });
-    document.addEventListener('click', (e) => {
-      if (isSearchExpanded && !searchContainer.contains(e.target)) {
-        if (!searchInput.value) {
-          searchInput.classList.remove('expanded');
-          searchContainer.classList.remove('open');
-          isSearchExpanded = false;
-        }
-      }
-    });
+    // Helpers
+    function prettyDate(ds){ const [y,m,d] = ds.split('-').map(Number); const dt=new Date(y,m-1,d);
+      return dt.toLocaleDateString(undefined,{year:'numeric',month:'long',day:'numeric'}); }
+    async function fetchJSONOrNull(url){ try{ const r=await fetch(url,{cache:'no-store'}); if(!r.ok) return null; return await r.json(); }catch{ return null; } }
 
-    // Reading progress
-    window.addEventListener('scroll', () => {
-      const winH = window.innerHeight, docH = document.documentElement.scrollHeight, y = window.pageYOffset;
-      const pct = Math.floor((y / (docH - winH)) * 100);
-      $("#readingProgress").style.width = pct + '%';
-    });
-
-    function chevron() {
-      const s = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-      s.setAttribute("viewBox","0 0 24 24"); s.classList.add("chev");
-      const p = document.createElementNS("http://www.w3.org/2000/svg","path");
-      p.setAttribute("d","M7 10l5 5 5-5"); p.setAttribute("stroke","currentColor");
-      p.setAttribute("stroke-width","2"); p.setAttribute("stroke-linecap","round");
-      p.setAttribute("stroke-linejoin","round"); p.setAttribute("fill","none");
-      s.appendChild(p); return s;
-    }
-
-    // Fetch helper
-    async function fetchJSONOrNull(url) {
-      try {
-        const res = await fetch(url, { cache: 'no-store' });
-        if (!res.ok) return null;
-        return await res.json();
-      } catch { return null; }
-    }
-
-    // Load content (today + earlier)
-    const MAX_DAYS_BACK = 30;
-    const MAX_CONSECUTIVE_MISSES = 7;
-
-    function normalizeArticle(raw, {type, dateStr}) {
-      const a = {
-        title: raw.title || '(Untitled)',
-        summary: raw.summary || '',
-        details: raw.details || '',
-        source: raw.source || '#',
-        dateStr
-      };
-      if (type === 'analysis') {
-        a.insights = Array.isArray(raw.insights) ? raw.insights : (raw.insights ? [String(raw.insights)] : []);
-        if (raw.conclusion) a.conclusion = raw.conclusion;
-      }
-      return a;
-    }
-
-    async function loadContent() {
-      const out = { newsToday: [], newsEarlier: [], analysisToday: [], analysisEarlier: [] };
-      let misses = 0;
-
-      for (let i = 0; i <= MAX_DAYS_BACK; i++) {
-        const d = new Date(); d.setDate(today.getDate() - i);
-        const dateStr = toYMD(d);
-
+    // Load newest day first, then earlier days (newest → older)
+    async function loadRange(daysBack=DAYS_BACK){
+      const out=[]; let misses=0;
+      for (let i=0;i<=daysBack;i++){
+        const d = new Date(); d.setDate(d.getDate()-i);
+        const ds = toYMD(d);
         const [news, analysis] = await Promise.all([
-          fetchJSONOrNull(`./data/news-${dateStr}.json`),
-          fetchJSONOrNull(`./data/analysis-${dateStr}.json`)
+          fetchJSONOrNull(`./data/news-${ds}.json`),
+          fetchJSONOrNull(`./data/analysis-${ds}.json`)
         ]);
-
-        const got = (Array.isArray(news) && news.length) || (Array.isArray(analysis) && analysis.length);
-        misses = got ? 0 : misses + 1;
-        if (misses >= MAX_CONSECUTIVE_MISSES) break;
-
-        if (Array.isArray(news)) news.forEach(r => (i === 0 ? out.newsToday : out.newsEarlier).push(normalizeArticle(r, {type:'news', dateStr})));
-        if (Array.isArray(analysis)) analysis.forEach(r => (i === 0 ? out.analysisToday : out.analysisEarlier).push(normalizeArticle(r, {type:'analysis', dateStr})));
+        const has = (Array.isArray(news)&&news.length) || (Array.isArray(analysis)&&analysis.length);
+        misses = has ? 0 : (misses+1);
+        if (has) out.push({ dateStr: ds, news: news||[], analysis: analysis||[] });
+        if (misses>=MAX_CONSEC_MISSES) break;
       }
-
-      // Earlier: newest first so older sink further down
-      const byDateDesc = (a,b) => a.dateStr > b.dateStr ? -1 : a.dateStr < b.dateStr ? 1 : 0;
-      out.newsEarlier.sort(byDateDesc);
-      out.analysisEarlier.sort(byDateDesc);
-      return out;
+      return out; // newest first by construction
     }
 
     // Search
-    function filterList(list) {
-      if (!currentSearch) return list;
-      const q = currentSearch;
+    let currentSearch=''; let isSearchExpanded=false; let daysCache=[];
+    const searchContainer=$(".search-container"), searchInput=$("#searchInput");
+    $("#searchBtn").addEventListener('click',()=>{
+      isSearchExpanded=!isSearchExpanded;
+      if(isSearchExpanded){ searchContainer.classList.add('open'); searchInput.classList.add('expanded'); searchInput.focus(); }
+      else { searchInput.classList.remove('expanded'); searchContainer.classList.remove('open'); if(!searchInput.value){ currentSearch=''; renderRange(daysCache); } }
+    });
+    $("#searchInput").addEventListener('input',e=>{ currentSearch=e.target.value.toLowerCase(); renderRange(daysCache); });
+    document.addEventListener('click',e=>{
+      if(isSearchExpanded && !searchContainer.contains(e.target)){
+        if(!searchInput.value){ searchInput.classList.remove('expanded'); searchContainer.classList.remove('open'); isSearchExpanded=false; }
+      }
+    });
+
+    function filterList(list){
+      if(!currentSearch) return list;
+      const q=currentSearch;
       return list.filter(a =>
         (a.title||'').toLowerCase().includes(q) ||
         (a.summary||'').toLowerCase().includes(q) ||
@@ -417,105 +233,139 @@
       );
     }
 
-    // Render
-    function createArticleElement(article, type, isToday) {
-      const el = document.createElement('article');
-      el.className = `article ${type==='analysis' ? 'analysis' : ''}`;
-      const metaText = isToday ? 'Today' : article.dateStr;
+    // Collapsible (news)
+    function openCollapsible(el){ el.classList.add('open'); const h=el.scrollHeight; el.style.maxHeight=h+'px'; el.style.opacity='1'; }
+    function closeCollapsible(el){
+      el.style.maxHeight = el.scrollHeight+'px';
+      requestAnimationFrame(()=>{ el.style.maxHeight='0px'; el.style.opacity='0';
+        el.addEventListener('transitionend', function end(){ el.classList.remove('open'); el.removeEventListener('transitionend', end); }); });
+    }
 
-      el.innerHTML = `
+    // Cards
+    function createCard(article, kind, dateStr){
+      const el=document.createElement('article');
+      el.className=`article ${kind==='analysis'?'analysis':''}`;
+      const dateLine = prettyDate(dateStr);
+
+      el.innerHTML=`
         <div class="article-header">
-          <h2 class="article-title">${article.title}</h2>
-          <div class="article-meta">${metaText}</div>
+          <h3 class="article-title">${article.title}</h3>
         </div>
         <div class="article-body">
-          <p class="article-summary">${article.summary}</p>
-          <button class="expand-btn" aria-expanded="false" aria-controls="details">
-            ${chevron().outerHTML}
-            <span>${type === 'analysis' ? 'View analysis' : 'Read more'}</span>
-          </button>
-          <div class="article-details" role="region" aria-label="Details">
-            <p>${article.details}</p>
-            ${type==='analysis' && article.insights && article.insights.length ? `
-              <div class="analysis-content">
-                <strong>Key Insights:</strong>
-                <p>${article.insights.map(i => `• ${i}`).join('<br>')}</p>
-              </div>` : ''}
-            ${type==='analysis' && article.conclusion ? `<p>${article.conclusion}</p>` : ''}
+          <p class="article-summary">${article.summary||''}</p>
+          <div class="article-meta">${dateLine}</div>
+
+          ${kind==='news' ? `
+            <button class="toggle-more" type="button" aria-expanded="false">
+              <span class="chev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span>
+              <span class="label">Read more</span>
+            </button>
+            <div class="collapsible" aria-hidden="true">
+              <div style="padding:.25rem 0 .5rem">
+                <p>${article.details||''}</p>
+              </div>
+            </div>
+          ` : ``}
+        </div>
+
+        ${kind==='analysis' ? `
+          <div class="article-actions">
+            ${article.full ? `<button class="open-full-btn" type="button">Full analysis</button>` : ``}
           </div>
-        </div>
-        <div class="article-actions">
-          <a href="${article.source}" target="_blank" class="source-link" rel="noopener">
-            <span>${type==='analysis' ? 'Full analysis' : 'Full story'}</span><span>→</span>
-          </a>
-          <button class="action-btn copy-link" data-url="${article.source}"><span>Copy link</span></button>
-        </div>
+        ` : ``}
       `;
+
+      if (kind==='news'){
+        const toggle = el.querySelector('.toggle-more');
+        const coll = el.querySelector('.collapsible');
+        const label = toggle.querySelector('.label');
+        const chev = toggle.querySelector('.chev');
+        toggle.addEventListener('click', ()=>{
+          const open = toggle.getAttribute('aria-expanded') === 'true';
+          if (open) {
+            toggle.setAttribute('aria-expanded','false');
+            label.textContent = 'Read more';
+            chev.style.transform = 'rotate(0deg)';
+            closeCollapsible(coll);
+            coll.setAttribute('aria-hidden','true');
+          } else {
+            toggle.setAttribute('aria-expanded','true');
+            label.textContent = 'Show less';
+            chev.style.transform = 'rotate(180deg)';
+            openCollapsible(coll);
+            coll.setAttribute('aria-hidden','false');
+          }
+        });
+      }
+
+      if (kind==='analysis' && article.full){
+        el.querySelector('.open-full-btn').addEventListener('click', ()=>{
+          openOverlay(article, 'analysis', dateStr);
+        });
+      }
+
       return el;
     }
 
-    function renderBucket(list, container, type, emptyMsg, isToday) {
-      container.innerHTML = '';
+    function renderSection(list, container, headerEl, kind){
       const items = filterList(list);
-      if (items.length === 0) {
-        container.innerHTML = `<div style="text-align:center;padding:2rem;opacity:.7;">${currentSearch ? 'No results match your search.' : emptyMsg}</div>`;
-        return;
-      }
-      items.forEach(a => container.appendChild(createArticleElement(a, type, isToday)));
+      if (items.length === 0) { container.innerHTML=''; if (headerEl) headerEl.style.display='none'; return; }
+      if (headerEl) headerEl.style.display='block';
+      container.innerHTML='';
+      items.forEach(a => container.appendChild(createCard(a, kind, a.dateStr)));
     }
 
-    function renderContent(data) {
-      currentArticles = data;
-      renderBucket(data.newsToday, $("#newsArticles"), 'news', 'No news reports today.', true);
-      renderBucket(data.analysisToday, $("#analysisArticles"), 'analysis', 'No analysis available.', true);
-      renderBucket(data.newsEarlier, $("#newsEarlier"), 'news', 'No earlier news.', false);
-      renderBucket(data.analysisEarlier, $("#analysisEarlier"), 'analysis', 'No earlier analysis.', false);
-      setupInteractions();
+    // Overlay
+    const overlay=$("#overlay"), ovTitle=$("#ovTitle"), ovLead=$("#ovLead"), ovDate=$("#ovDate"), ovContent=$("#ovContent"), ovKind=$("#ovKind");
+    function openOverlay(article, kind, dateStr){
+      ovKind.textContent='Analysis';
+      ovTitle.textContent=article.title;
+      ovLead.textContent=article.summary||'';
+      ovDate.textContent=prettyDate(dateStr);
+      ovContent.innerHTML=article.full || `<p>${article.details||''}</p>`;
+      overlay.classList.add('open'); overlay.setAttribute('aria-hidden','false');
+      $("#overlayClose").focus(); document.body.style.overflow='hidden';
     }
+    function closeOverlay(){ overlay.classList.remove('open'); overlay.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
+    $("#overlayClose").addEventListener('click', closeOverlay);
+    overlay.addEventListener('click', (e)=>{ if(e.target===overlay) closeOverlay(); });
+    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && overlay.classList.contains('open')) closeOverlay(); });
 
-    // Interactions (local lookups; no IDs)
-    function setupInteractions() {
-      $$('.expand-btn').forEach(btn => {
-        btn.addEventListener('click', function(){
-          const articleEl = this.closest('.article');
-          const details = articleEl.querySelector('.article-details');
-          const open = details.classList.contains('open');
-          details.classList.toggle('open', !open);
-          this.setAttribute('aria-expanded', String(!open));
-          this.querySelector('.chev').style.transform = !open ? 'rotate(180deg)' : 'rotate(0deg)';
-          const isAnalysis = articleEl.classList.contains('analysis');
-          this.querySelector('span').textContent = !open ? 'Show less' : (isAnalysis ? 'View analysis' : 'Read more');
-        });
-      });
-
-      $$('.copy-link').forEach(btn => {
-        btn.addEventListener('click', function(){
-          const url = this.getAttribute('data-url');
-          navigator.clipboard.writeText(url);
-          const t = this.innerHTML;
-          this.innerHTML = '<span>Copied!</span>';
-          setTimeout(() => this.innerHTML = t, 1400);
-        });
-      });
-    }
-
-    // Expand All
-    $("#expandAll").addEventListener("click", function(){
-      const allClosed = $$('.article-details').every(d => !d.classList.contains('open'));
-      $$('.article-details').forEach(d => d.classList.toggle('open', allClosed));
-      $$('.expand-btn').forEach(btn => {
-        const chev = btn.querySelector('.chev');
-        chev.style.transform = allClosed ? 'rotate(180deg)' : 'rotate(0deg)';
-        const isAnalysis = btn.closest('.article')?.classList.contains('analysis');
-        btn.querySelector('span').textContent = allClosed ? 'Show less' : (isAnalysis ? 'View analysis' : 'Read more');
-        btn.setAttribute('aria-expanded', String(allClosed));
-      });
-      this.textContent = allClosed ? 'Collapse All' : 'Expand All';
+    // Filter dropdown
+    $("#contentFilter").addEventListener('change', (e)=>{
+      const v=e.target.value, show=(sel,on)=>{const el=$(sel); if(el) el.style.display=on?'block':'none';};
+      if(v==='all'){ show('#newsHeader',1); show('#newsArticles',1); show('#analysisHeader',1); show('#analysisArticles',1); show('#newsEarlierHeader',1); show('#newsEarlier',1); show('#analysisEarlierHeader',1); show('#analysisEarlier',1); }
+      else if(v==='news'){ show('#newsHeader',1); show('#newsArticles',1); show('#newsEarlierHeader',1); show('#newsEarlier',1); show('#analysisHeader',0); show('#analysisArticles',0); show('#analysisEarlierHeader',0); show('#analysisEarlier',0); }
+      else { show('#newsHeader',0); show('#newsArticles',0); show('#newsEarlierHeader',0); show('#newsEarlier',0); show('#analysisHeader',1); show('#analysisArticles',1); show('#analysisEarlierHeader',1); show('#analysisEarlier',1); }
     });
 
-    // Init
-    async function init(){ renderContent(await loadContent()); }
-    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+    // Render newest at top + earlier under it
+    function attachDate(list, dateStr){ return (list||[]).map(a => ({...a, dateStr})); }
+
+    async function renderRange(days){
+      daysCache = days;
+      const latest = days[0];
+      if (latest){
+        $("#currentDate").textContent = new Date(latest.dateStr).toLocaleDateString(undefined, {weekday:'long',year:'numeric',month:'long',day:'numeric'});
+      }
+
+      const latestNews = attachDate(latest?.news||[], latest?.dateStr||'');
+      const latestAnalysis = attachDate(latest?.analysis||[], latest?.dateStr||'');
+      renderSection(latestNews, $("#newsArticles"), $("#newsHeader"), 'news');
+      renderSection(latestAnalysis, $("#analysisArticles"), $("#analysisHeader"), 'analysis');
+
+      const earlier = days.slice(1);
+      const newsEarlierList = earlier.flatMap(d => attachDate(d.news, d.dateStr));
+      const analysisEarlierList = earlier.flatMap(d => attachDate(d.analysis, d.dateStr));
+      renderSection(newsEarlierList, $("#newsEarlier"), $("#newsEarlierHeader"), 'news');
+      renderSection(analysisEarlierList, $("#analysisEarlier"), $("#analysisEarlierHeader"), 'analysis');
+    }
+
+    (async function init(){
+      $("#year").textContent = new Date().getFullYear();
+      const days = await loadRange(DAYS_BACK);
+      renderRange(days);
+    })();
   </script>
 </body>
 </html>
