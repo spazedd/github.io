@@ -7,146 +7,129 @@
   <meta name="color-scheme" content="light dark" />
   <meta name="theme-color" content="#0f1011" />
   <meta name="description" content="Daily news and analysis" />
-
   <style>
     :root {
       --bg:#0a0a0a; --fg:#fff; --rule:#2a2a2a; --card:#111;
       --accent:#2563eb; --accent-alt:#dc2626; --meta:#9aa0a6;
-      --btn-fg:#fff;
+      --btn-fg:#fff; --news-accent:#16a34a;
     }
     .light {
-      --bg:#ffffff; --fg:#171717; --rule:#cbd5e1; /* stronger border in light */
+      --bg:#ffffff; --fg:#171717; --rule:#cbd5e1;
       --card:#fafafa; --accent:#2563eb; --accent-alt:#dc2626; --meta:#586274;
-      --btn-fg:#fff;
+      --btn-fg:#fff; --news-accent:#16a34a;
     }
 
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
-    body{background:var(--bg);color:var(--fg);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh}
-    a{color:inherit;text-decoration:none} a:hover{opacity:.96}
+    body{background:var(--bg);color:var(--fg);font-family:system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;line-height:1.6;margin:0;min-height:100vh}
     .container{max-width:760px;margin:0 auto;padding:0 20px}
 
-    header{padding:40px 0 20px;border-bottom:1px solid var(--rule)}
-    header h1{font-size:2.4rem;font-weight:800;letter-spacing:-.02em;margin-bottom:.3rem}
+    header{padding:30px 0 20px;border-bottom:1px solid var(--rule)}
+    header h1{font-size:2.4rem;font-weight:800;margin-bottom:.3rem}
     header p{opacity:.8}
-    .date{opacity:.75;font-size:.95rem;margin-top:.25rem}
+    .date{color:var(--meta);font-size:.9rem;margin-top:.25rem}
 
-    /* Controls */
     .controls{display:flex;gap:.6rem;padding:16px 0;align-items:center;flex-wrap:nowrap}
-    .filter-select{
-      padding:0 2rem 0 1rem;height:40px;border-radius:10px;border:1px solid var(--rule);
-      background:var(--card);color:var(--fg);font-size:16px;cursor:pointer;-webkit-appearance:none;appearance:none;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
-      background-repeat:no-repeat;background-position:right .6rem center;background-size:1rem
-    }
+    .pills{display:flex;gap:.4rem;align-items:center;flex-wrap:wrap}
+    .pills .label{opacity:.7;font-weight:700;margin-right:.25rem}
+    .pill{height:40px;padding:0 .9rem;border-radius:999px;border:1px solid var(--rule);background:var(--card);color:var(--fg);font-weight:800;cursor:pointer;font-size:.9rem}
+    .pill[aria-pressed="true"]{border-color:var(--accent-alt);background:color-mix(in oklab, var(--card) 85%, var(--accent-alt) 15%)}
+    .spacer{flex:1 1 auto}
 
-    /* Icon-only buttons (theme/search) */
-    .icon-btn{
-      width:40px;height:40px;border-radius:10px;border:1px solid var(--rule);
-      background:var(--card);display:inline-flex;align-items:center;justify-content:center;
-      cursor:pointer;transition:.2s;color:var(--fg);flex:0 0 auto
-    }
-    .icon-btn:hover{border-color:var(--accent);background:color-mix(in oklab, var(--card) 88%, var(--accent) 12%)}
+    .icon-btn{width:40px;height:40px;border-radius:10px;border:1px solid var(--rule);background:var(--card);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:.2s;color:var(--fg)}
     .icon{width:1.1rem;height:1.1rem;stroke:currentColor;fill:none}
 
-    .search-container{display:flex;align-items:center;gap:.5rem;margin-left:auto}
-    .search-input{
-      padding:.5rem .8rem;height:40px;border-radius:10px;border:1px solid var(--rule);
-      background:var(--card);color:var(--fg);font-size:16px;width:0;opacity:0;transition:.3s
-    }
+    .search-container{display:flex;align-items:center;gap:.5rem;margin-left:0;margin-right:0}
+    .search-input{padding:.5rem .8rem;height:40px;border-radius:10px;border:1px solid var(--rule);background:var(--card);color:var(--fg);font-size:16px;width:0;opacity:0;transition:.3s}
     .search-input.expanded{width:220px;opacity:1}
 
-    .section-header{font-size:1.15rem;font-weight:800;margin:1.5rem 0 1rem;padding-bottom:.5rem;border-bottom:2px solid var(--accent);display:inline-block}
+    /* Theme slider (top-right) */
+    .theme-switch{display:flex;align-items:center}
+    .theme-switch input{position:absolute;opacity:0;pointer-events:none}
+    .theme-switch label{position:relative;display:inline-flex;align-items:center;gap:.35rem;width:66px;height:32px;border-radius:999px;border:1px solid var(--rule);background:var(--card);cursor:pointer;box-shadow:inset 0 0 0 1px rgba(0,0,0,.02)}
+    .theme-switch label::after{content:"";position:absolute;top:2px;left:2px;width:28px;height:28px;border-radius:50%;background:linear-gradient(#f9c86a,#eaa22d);transition:transform .25s ease, background .25s ease}
+    .light .theme-switch label::after{background:linear-gradient(#f9c86a,#eaa22d)}
+    .dark .theme-switch label::after{background:linear-gradient(#9aa0a6,#6b7280)}
+    .theme-switch svg{width:14px;height:14px;stroke:currentColor;fill:none;opacity:.9}
+    .theme-switch .sun{position:absolute;left:10px;color:#f59e0b}
+    .theme-switch .moon{position:absolute;right:10px}
+    .theme-switch input:checked + label::after{transform:translateX(34px)}
+    @media (max-width:480px){ .theme-switch label{width:58px;height:30px} .theme-switch label::after{width:26px;height:26px} .theme-switch input:checked + label::after{transform:translateX(30px)} }
+
+
+    .section-header{font-size:1.15rem;font-weight:800;margin:1.5rem 0 1rem;padding-bottom:.5rem;border-bottom:2px solid var(--accent)}
     .section-header.analysis{border-bottom-color:var(--accent-alt)}
+    .section-header.earlier{opacity:.8;font-size:1rem;border-bottom-color:var(--rule)}
 
     .articles{display:flex;flex-direction:column;gap:1.2rem;margin:0 0 2.2rem}
-    .article{
-      background:var(--card);border:1.5px solid var(--rule);border-radius:16px;overflow:hidden;
-      transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease
-    }
-    .article:hover{transform:translateY(-2px);border-color:var(--accent);box-shadow:0 6px 22px rgba(37,99,235,.16)}
-    .light .article{box-shadow:0 1px 0 rgba(0,0,0,.02), 0 4px 14px rgba(0,0,0,.06)}
+    .article{background:var(--card);border:1.5px solid var(--rule);border-radius:16px;overflow:hidden;transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}
+    .article:hover{transform:translateY(-2px);border-color:var(--accent)}
     .article.analysis{border-left:3px solid var(--accent-alt)}
+    .article.news{border-left:3px solid var(--news-accent)}
+
     .article-header{padding:18px 18px 0}
-    .article-title{font-size:1.2rem;font-weight:800;letter-spacing:-.01em;line-height:1.3;margin-bottom:.4rem}
+    .article-title{font-size:1.2rem;font-weight:800;margin-bottom:.4rem}
     .article-body{padding:0 18px 14px}
-    .article-summary{margin-bottom:.5rem}
     .article-meta{font-size:.92rem;opacity:.85;margin:.2rem 0 .8rem}
 
-    /* PRIMARY buttons — blue by default */
-    .open-full-btn,
-    .toggle-more{
-      display:inline-flex;align-items:center;gap:.5rem;padding:.55rem 1rem;border-radius:10px;cursor:pointer;
-      font-weight:800;font-size:.9rem;background:var(--accent);color:var(--btn-fg);border:1px solid var(--accent);
-      transition:filter .2s ease, transform .02s
-    }
-    .open-full-btn:hover,
-    .toggle-more:hover{filter:brightness(1.05)}
-    .open-full-btn:active,
-    .toggle-more:active{transform:translateY(1px)}
-    .article-actions{padding:0 18px 16px;display:flex;gap:.6rem;align-items:center;flex-wrap:wrap}
+    .toggle-more,.open-full-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.55rem 1rem;border-radius:10px;cursor:pointer;font-weight:800;font-size:.9rem;color:var(--btn-fg);border:1px solid;transition:filter .2s ease, transform .02s}
+    .toggle-more{background:var(--news-accent);border-color:var(--news-accent)}
+    .open-full-btn{background:var(--accent-alt);border-color:var(--accent-alt)}
 
-    /* News dropdown */
-    .chev{transition:transform .24s ease}
-    .chev svg{width:1rem;height:1rem;display:block}
     .collapsible{overflow:hidden;max-height:0;opacity:0;transition:max-height .5s ease, opacity .5s ease}
     .collapsible.open{opacity:1;margin-top:.25rem}
 
     footer{border-top:1px solid var(--rule);opacity:.85;text-align:center;padding:36px 0;font-size:.95rem}
 
-    /* Overlay */
-    .overlay{position:fixed;inset:0;background:color-mix(in oklab, var(--bg) 96%, black 4%);display:none;z-index:9999}
-    .overlay.open{display:block}
-    .overlay-wrap{max-width:860px;margin:0 auto;height:100%;overflow:auto;padding:18px 18px 56px}
-    .overlay-card{background:var(--card);border:1.5px solid var(--rule);border-radius:18px;padding:22px;margin-top:12px}
-    .overlay h2{font-size:2rem;letter-spacing:-.02em;margin-bottom:.3rem}
-    .overlay .lead{opacity:.9;margin:.6rem 0 1rem}
-    .overlay .meta{opacity:.8;margin-bottom:1rem}
-    .overlay .content{font-family:Georgia, 'Times New Roman', serif;line-height:1.7}
-    .overlay .content h3{font-family:ui-sans-serif,system-ui;font-size:1.2rem;margin:1.1rem 0 .5rem}
-    .overlay .content p{margin:.75rem 0}
-    .overlay .content ul{margin:.5rem 0 .9rem 1.25rem}
-    .overlay .content li{margin:.3rem 0}
-    .callout{border-left:3px solid var(--accent);background:color-mix(in oklab, var(--card) 85%, var(--accent) 15%);padding:.75rem .9rem;border-radius:.6rem;margin:1rem 0}
-
-    /* Back button (normal flow, scrolls with content) */
-    .overlay-close{
-      position: static;
-      display:inline-flex; align-items:center; gap:.4rem; background:var(--accent);
-      color:var(--btn-fg); border:1px solid var(--accent); border-radius:10px;
-      padding:.5rem .85rem; cursor:pointer; font-weight:800; margin-bottom:1rem;
-    }
-    .overlay-close:hover{filter:brightness(1.05)}
-
-    /* Focus rings */
-    .icon-btn:focus-visible,
-    .toggle-more:focus-visible,
-    .open-full-btn:focus-visible,
-    .overlay-close:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-
-    /* Mobile */
+    #backToTop{position:fixed;right:16px;bottom:16px;display:none;z-index:9999;border-radius:999px;border:1px solid var(--rule);background:var(--card);padding:.6rem .8rem;font-weight:800;cursor:pointer}
+  
+    /* --- Layout tweaks for mobile & de-cluttered header --- */
     @media (max-width:768px){
-      .container{padding:0 16px}
-      header{padding:28px 0 16px}
-      header h1{font-size:2rem}
-      .search-input.expanded{width:160px}
+      /* Two-row grid: row1 (theme left, search right), row2 (pills full width) */
+      .controls{display:grid;grid-template-columns:1fr auto;grid-template-areas:"theme search" "pills pills";row-gap:8px;column-gap:8px}
+      .theme-switch{grid-area:theme}
+      .search-container{grid-area:search;justify-self:end}
+      .pills{grid-area:pills;overflow-x:auto;white-space:nowrap;padding-bottom:2px}
+      .controls .spacer{display:none}
+      /* Search input floats; expanding won't push pills underneath */
+      .search-container{position:relative}
+      .search-input{position:absolute;right:44px;top:0}
+      .search-input.expanded{width:min(220px, calc(100vw - 120px));opacity:1}
     }
     @media (max-width:480px){
-      .controls{gap:.5rem}
-      .filter-select{flex:0 0 auto}
-      .search-container{gap:.4rem;margin-left:auto}
-      .search-input.expanded{width:100%}
+      .pills .label{display:none}
+      .pill{padding:0 .8rem}
     }
-    @media (prefers-reduced-motion: reduce){ *{transition-duration:.01ms !important} }
-  </style>
+  
+    /* === Enhancements per request === */
+    /* Fixed theme slider (top-right, always visible) */
+    .theme-switch{position:fixed !important; top: max(12px, env(safe-area-inset-top)); right: max(12px, env(safe-area-inset-right)); z-index:10000}
+    .theme-switch label{box-shadow:0 2px 10px rgba(0,0,0,.25), inset 0 0 0 1px rgba(0,0,0,.02)}
 
-  <!-- No-flash theme -->
+    /* Keep filter + search on the same row (desktop & mobile) */
+    .controls{display:flex;align-items:center;gap:.6rem}
+    .pills{flex:1 1 auto;white-space:nowrap;overflow-x:auto}
+    .spacer{display:none}
+    .search-container{margin-left:auto;position:relative}
+    .search-input{position:absolute;right:44px;top:0}
+
+    /* Mobile fine-tuning */
+    @media (max-width:768px){
+      .controls{gap:.5rem}
+      .search-input.expanded{width:min(220px, calc(100vw - 140px));opacity:1}
+      .pills .label{display:none}
+      .pill{padding:0 .8rem}
+    }
+  </style>
+  <!-- No-flash theme setup -->
   <script>
     (function () {
-      const saved = localStorage.getItem("mode");
-      const prefers = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      const dark = saved ? saved === "dark" : prefers;
-      document.documentElement.classList.add(dark ? "dark" : "light");
+      try {
+        const saved = localStorage.getItem('mode');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const dark = saved ? saved === 'dark' : prefersDark;
+        document.documentElement.classList.add(dark ? 'dark' : 'light');
+      } catch (_) {
+        document.documentElement.classList.add('dark');
+      }
     })();
   </script>
 </head>
@@ -158,38 +141,55 @@
       <div class="date" id="currentDate"></div>
 
       <div class="controls">
-        <!-- Theme toggle -->
-        <button id="themeToggle" class="icon-btn" aria-label="Toggle theme" title="Toggle theme">
-          <svg id="iconSun" class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-          <svg id="iconMoon" class="icon" viewBox="0 0 24 24" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-        </button>
-
-        <select id="contentFilter" class="filter-select" aria-label="Filter content">
-          <option value="all">All Content</option>
-          <option value="news">News Only</option>
-          <option value="analysis">Analysis Only</option>
-        </select>
-
+        <div class="pills" role="group" aria-label="Content filter">
+          <span class="label">Filter:</span>
+          <button class="pill" data-filter="all" aria-pressed="true">All</button>
+          <button class="pill" data-filter="news" aria-pressed="false">News</button>
+          <button class="pill" data-filter="analysis" aria-pressed="false">Analysis</button>
+        </div>
+        <div class="spacer"></div>
         <div class="search-container">
           <input type="text" id="searchInput" class="search-input" placeholder="Search articles..." aria-label="Search">
           <button id="searchBtn" class="icon-btn" aria-label="Open search" title="Search">
             <svg class="icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
           </button>
         </div>
-      </div>
+        <!-- Theme slider (top-right) -->
+        <div class="theme-switch">
+          <input type="checkbox" id="themeSwitch" aria-label="Toggle dark mode">
+          <label for="themeSwitch" title="Toggle dark mode">
+            <svg class="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+            <svg class="moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          </label>
+        </div>
+        </div>
     </header>
 
-    <main>
-      <h2 class="section-header" id="newsHeader">Latest Reports</h2>
-      <div id="newsArticles" class="articles"></div>
+    <!-- Overlay (restored) -->
+    <div id="overlay" class="overlay" aria-hidden="true" role="dialog" aria-modal="true">
+      <div class="overlay-wrap">
+        <div class="overlay-card">
+          <button class="overlay-close" id="overlayClose">← Back</button>
+          <div class="meta" id="ovKind"></div>
+          <h2 id="ovTitle"></h2>
+          <p class="lead" id="ovLead"></p>
+          <div class="meta" id="ovDate"></div>
+          <div class="content" id="ovContent"></div>
+        </div>
+      </div>
+    </div>
 
+    <main>
       <h2 class="section-header analysis" id="analysisHeader">Latest Analysis</h2>
       <div id="analysisArticles" class="articles"></div>
 
-      <h3 class="section-header" id="newsEarlierHeader">Earlier Reports</h3>
+      <h2 class="section-header" id="newsHeader">Latest Reports</h2>
+      <div id="newsArticles" class="articles"></div>
+
+      <h3 class="section-header earlier" id="newsEarlierHeader">Earlier Reports</h3>
       <div id="newsEarlier" class="articles"></div>
 
-      <h3 class="section-header analysis" id="analysisEarlierHeader">Earlier Analysis</h3>
+      <h3 class="section-header analysis earlier" id="analysisEarlierHeader">Earlier Analysis</h3>
       <div id="analysisEarlier" class="articles"></div>
     </main>
 
@@ -198,60 +198,77 @@
     </footer>
   </div>
 
-  <!-- Overlay -->
-  <div id="overlay" class="overlay" aria-hidden="true" role="dialog" aria-modal="true">
-    <div class="overlay-wrap">
-      <div class="overlay-card">
-        <!-- Back button inside card (scrolls with content) -->
-        <button class="overlay-close" id="overlayClose">← Back</button>
-
-        <div class="meta" id="ovKind"></div>
-        <h2 id="ovTitle"></h2>
-        <p class="lead" id="ovLead"></p>
-        <div class="meta" id="ovDate"></div>
-        <div class="content" id="ovContent"></div>
-      </div>
-    </div>
-  </div>
+  <button id="backToTop" title="Back to top">↑ Top</button>
 
   <script>
-    /* Utils */
+    /* Theme toggle logic (slider) */
+    function applyTheme(mode){
+      document.documentElement.classList.toggle('dark', mode === 'dark');
+      document.documentElement.classList.toggle('light', mode !== 'dark');
+      try { localStorage.setItem('mode', mode); } catch {}
+    }
+    (function initTheme(){
+      var checkbox = document.getElementById('themeSwitch');
+      var current = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+      applyTheme(current);
+      if(checkbox){ checkbox.checked = (current === 'dark');
+        checkbox.addEventListener('change', function(){
+          applyTheme(this.checked ? 'dark' : 'light');
+        });
+      }
+    })();
+
     const $ = (s) => document.querySelector(s);
     const $$ = (s) => [...document.querySelectorAll(s)];
     const pad = (n) => String(n).padStart(2,'0');
     const toYMD = (d) => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
     const prettyDate = (ds) => { const [y,m,d]=ds.split('-').map(Number); return new Date(y,m-1,d).toLocaleDateString(undefined,{year:'numeric',month:'long',day:'numeric'}); };
 
-    // Current date in header
     const now = new Date();
     $("#currentDate").textContent = now.toLocaleDateString(undefined, {weekday:'long',year:'numeric',month:'long',day:'numeric'});
     $("#year").textContent = now.getFullYear();
 
-    /* Theme toggle */
-    const themeBtn = $("#themeToggle");
-    const iconSun  = $("#iconSun");
-    const iconMoon = $("#iconMoon");
-    function applyTheme(mode){
-      document.documentElement.classList.toggle("dark",  mode === 'dark');
-      document.documentElement.classList.toggle("light", mode !== 'dark');
-      try{ localStorage.setItem("mode", mode); }catch{}
-      if (mode === 'dark'){ iconSun.style.display='none'; iconMoon.style.display='block'; }
-      else { iconSun.style.display='block'; iconMoon.style.display='none'; }
+    const pills = $$('.pill');
+    function setFilter(active){
+      pills.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.filter===active)));
+      const show=(sel,on)=>{ const el=$(sel); if(el) el.style.display=on?'block':'none'; };
+      if(active==='all'){
+        show('#newsHeader',1); show('#newsArticles',1);
+        show('#analysisHeader',1); show('#analysisArticles',1);
+        show('#newsEarlierHeader',1); show('#newsEarlier',1);
+        show('#analysisEarlierHeader',1); show('#analysisEarlier',1);
+      } else if(active==='news'){
+        show('#newsHeader',1); show('#newsArticles',1);
+        show('#newsEarlierHeader',1); show('#newsEarlier',1);
+        show('#analysisHeader',0); show('#analysisArticles',0);
+        show('#analysisEarlierHeader',0); show('#analysisEarlier',0);
+      } else {
+        show('#newsHeader',0); show('#newsArticles',0);
+        show('#newsEarlierHeader',0); show('#newsEarlier',0);
+        show('#analysisHeader',1); show('#analysisArticles',1);
+        show('#analysisEarlierHeader',1); show('#analysisEarlier',1);
+      }
     }
-    (function initTheme(){
-      let saved=''; try{ saved = localStorage.getItem("mode") || ''; }catch{}
-      const start = saved || (window.matchMedia("(prefers-color-scheme: dark)").matches ? 'dark' : 'light');
-      applyTheme(start);
-      themeBtn.addEventListener('click',()=>{
-        const cur = document.documentElement.classList.contains('dark') ? 'dark':'light';
-        applyTheme(cur === 'dark' ? 'light':'dark');
-      });
-    })();
+    pills.forEach(b => b.addEventListener('click',()=> setFilter(b.dataset.filter)));
 
-    /* Search */
+    const backToTop = $("#backToTop");
+    backToTop.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
+    window.addEventListener('scroll', ()=>{
+      const cards = $$('.article');
+      if(cards.length < 3) return;
+      const third = cards[2];
+      const threshold = third.getBoundingClientRect().top + window.scrollY - 80;
+      backToTop.style.display = (window.scrollY > threshold) ? 'block' : 'none';
+    }, {passive:true});
+  
+    /* ===== Restored app logic (search, JSON fetch, collapsibles, overlay) ===== */
     let currentSearch = ""; let searchOpen=false; let daysCache=[];
-    const searchContainer=$(".search-container"), searchInput=$("#searchInput"), searchBtn=$("#searchBtn");
-    function reRenderIfReady(){ if (typeof renderRange==='function' && Array.isArray(daysCache)) renderRange(daysCache); }
+    const searchContainer=$('.search-container'), searchInput=$('#searchInput'), searchBtn=$('#searchBtn');
+    function reRenderIfReady(){
+      if (Array.isArray(daysCache) && daysCache.length > 0 && typeof renderRange === 'function') {
+        renderRange(daysCache);
+      }
+    }
     searchBtn.addEventListener('click',(e)=>{ e.preventDefault(); searchOpen=!searchOpen;
       if(searchOpen){ searchInput.classList.add('expanded'); setTimeout(()=>searchInput.focus(),10); }
       else { searchInput.classList.remove('expanded'); if(!searchInput.value){ currentSearch=""; reRenderIfReady(); } }
@@ -261,21 +278,16 @@
     function filterList(list){
       if(!currentSearch) return list||[];
       const q=currentSearch;
-      return (list||[]).filter(a =>
-        ((a.title||"").toLowerCase().includes(q)) ||
-        ((a.summary||"").toLowerCase().includes(q)) ||
-        ((a.details||"").toLowerCase().includes(q))
-      );
+      return (list||[]).filter(a => ((a.title||"").toLowerCase().includes(q)) || ((a.summary||"").toLowerCase().includes(q)) || ((a.details||"").toLowerCase().includes(q)) );
     }
 
-    /* Data (JSON-only) — adjust these if you want) */
     const DAYS_BACK=10, MAX_CONSEC_MISSES=3;
     async function fetchJSONOrNull(url){ try{ const r=await fetch(url,{cache:'no-store'}); if(!r.ok) return null; return await r.json(); }catch{ return null; } }
     async function loadRange(daysBack=DAYS_BACK){
       const out=[]; let misses=0;
       for(let i=0;i<=daysBack;i++){
         const d=new Date(); d.setDate(d.getDate()-i);
-        const ds=toYMD(d);
+        const ds=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
         const [news,analysis] = await Promise.all([
           fetchJSONOrNull(`./data/news-${ds}.json`),
           fetchJSONOrNull(`./data/analysis-${ds}.json`)
@@ -288,50 +300,43 @@
       return out;
     }
 
-    /* UI helpers */
     function openCollapsible(el){ el.classList.add('open'); const h=el.scrollHeight; el.style.maxHeight=h+'px'; el.style.opacity='1'; }
-    function closeCollapsible(el){
-      el.style.maxHeight = el.scrollHeight+'px';
-      requestAnimationFrame(()=>{ el.style.maxHeight='0px'; el.style.opacity='0';
-        el.addEventListener('transitionend', function end(){ el.classList.remove('open'); el.removeEventListener('transitionend', end); }); });
+    function closeCollapsible(el){ el.style.maxHeight = el.scrollHeight+'px'; requestAnimationFrame(()=>{ el.style.maxHeight='0px'; el.style.opacity='0'; el.addEventListener('transitionend', function end(){ el.classList.remove('open'); el.removeEventListener('transitionend', end); }); }); }
+
+    const overlayEl=$('#overlay'), ovTitle=$('#ovTitle'), ovLead=$('#ovLead'), ovDate=$('#ovDate'), ovContent=$('#ovContent'), ovKind=$('#ovKind');
+    function openOverlay(article, kind, dateStr){
+      ovKind.textContent= kind==='analysis' ? 'Analysis' : '';
+      ovTitle.textContent=article.title||'';
+      ovLead.textContent=article.summary||'';
+      ovDate.textContent=new Date(dateStr).toLocaleDateString(undefined,{year:'numeric',month:'long',day:'numeric'});
+      ovContent.textContent = '';
+      const content = article.full || ('<p>' + (article.details||'') + '</p>');
+      ovContent.innerHTML = content;
+      overlayEl.classList.add('open'); overlayEl.setAttribute('aria-hidden','false');
+      const bc=$('#overlayClose'); if(bc) bc.focus(); document.body.style.overflow='hidden';
     }
+    function closeOverlay(){ overlayEl.classList.remove('open'); overlayEl.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
+    document.addEventListener('click',(e)=>{ if(e.target && e.target.id==='overlayClose') closeOverlay(); if(e.target===overlayEl) closeOverlay(); });
+    document.addEventListener('keydown',(e)=>{ if(e.key==='Escape' && overlayEl.classList.contains('open')) closeOverlay(); });
 
-    function createCard(article, kind, dateStr){
+    function createCard(article, kind, dateStr, {defaultOpen=false} = {}){
       const el=document.createElement('article');
-      el.className=`article ${kind==='analysis'?'analysis':''}`;
-      const dateLine=prettyDate(dateStr);
-
+      el.className=`article ${kind==='analysis'?'analysis':'news'}`;
+      const dateLine=new Date(dateStr).toLocaleDateString(undefined,{year:'numeric',month:'long',day:'numeric'});
       el.innerHTML=`
-        <div class="article-header">
-          <h3 class="article-title">${article.title}</h3>
-        </div>
-        <div class="article-body">
-          <p class="article-summary">${article.summary||''}</p>
-          <div class="article-meta">${dateLine}</div>
-
+        <div class=\"article-header\"><h3 class=\"article-title\">${article.title}</h3></div>
+        <div class=\"article-body\">
+          <p class=\"article-summary\">${article.summary||''}</p>
+          <div class=\"article-meta\">${dateLine}</div>
           ${kind==='news' ? `
-            <button class="toggle-more" type="button" aria-expanded="false">
-              <span class="chev" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
-              </span>
-              <span class="label">Read more</span>
+            <button class=\"toggle-more\" type=\"button\" aria-expanded=\"false\">
+              <span class=\"chev\" aria-hidden=\"true\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M6 9l6 6 6-6\"></path></svg></span>
+              <span class=\"label\">+ Expand</span>
             </button>
-            <div class="collapsible" aria-hidden="true">
-              <div style="padding:.25rem 0 .5rem">
-                <p>${article.details||''}</p>
-              </div>
-            </div>
-          ` : ``}
+            <div class=\"collapsible\" aria-hidden=\"true\"><div style=\"padding:.25rem 0 .5rem\"><p>${article.details||''}</p></div></div>` : ``}
         </div>
-
-        ${kind==='analysis' ? `
-          <div class="article-actions">
-            <button class="open-full-btn" type="button">Full analysis</button>
-          </div>
-        ` : ``}
+        ${kind==='analysis' ? `<div class=\"article-actions\"><button class=\"open-full-btn\" type=\"button\">Read Full Analysis</button></div>` : ``}
       `;
-
-      // News dropdown
       if(kind==='news'){
         const toggle=el.querySelector('.toggle-more');
         const coll=el.querySelector('.collapsible');
@@ -339,97 +344,43 @@
         const chev=toggle.querySelector('.chev');
         toggle.addEventListener('click', ()=>{
           const open = toggle.getAttribute('aria-expanded') === 'true';
-          if(open){
-            toggle.setAttribute('aria-expanded','false');
-            label.textContent='Read more'; chev.style.transform='rotate(0deg)';
-            closeCollapsible(coll); coll.setAttribute('aria-hidden','true');
-          } else {
-            toggle.setAttribute('aria-expanded','true');
-            label.textContent='Show less'; chev.style.transform='rotate(180deg)';
-            openCollapsible(coll); coll.setAttribute('aria-hidden','false');
-          }
+          if(open){ toggle.setAttribute('aria-expanded','false'); label.textContent='+ Expand'; chev.style.transform='rotate(0deg)'; closeCollapsible(coll); coll.setAttribute('aria-hidden','true'); }
+          else { toggle.setAttribute('aria-expanded','true'); label.textContent='Show less'; chev.style.transform='rotate(180deg)'; openCollapsible(coll); coll.setAttribute('aria-hidden','false'); }
         });
+        if(defaultOpen){ toggle.setAttribute('aria-expanded','true'); label.textContent='Show less'; chev.style.transform='rotate(180deg)'; openCollapsible(coll); coll.setAttribute('aria-hidden','false'); }
       }
-
-      // Analysis overlay
       if(kind==='analysis'){
-        el.querySelector('.open-full-btn').addEventListener('click',()=>{
-          openOverlay(article,'analysis',dateStr);
-        });
+        el.querySelector('.open-full-btn').addEventListener('click',()=> openOverlay(article,'analysis',dateStr));
       }
-
       return el;
     }
 
-    function renderSection(list, container, headerEl, kind){
+    function renderSection(list, container, headerEl, kind, opts={}){
       const items = filterList(list);
       if(items.length===0){ container.innerHTML=''; if(headerEl) headerEl.style.display='none'; return; }
       if(headerEl) headerEl.style.display='block';
       container.innerHTML='';
-      items.forEach(a=>container.appendChild(createCard(a,kind,a.dateStr)));
+      items.forEach((a,i)=> container.appendChild(createCard(a, kind, a.dateStr, {defaultOpen:(kind==='news' && i < (opts.expandCount||0))})) );
     }
 
-    /* Overlay (simple injection; sanitizer removed as requested) */
-    const overlay=$("#overlay"), ovTitle=$("#ovTitle"), ovLead=$("#ovLead"), ovDate=$("#ovDate"), ovContent=$("#ovContent"), ovKind=$("#ovKind");
-    function openOverlay(article, kind, dateStr){
-      ovKind.textContent='Analysis';
-      ovTitle.textContent=article.title||'';
-      ovLead.textContent=article.summary||'';
-      ovDate.textContent=prettyDate(dateStr);
-      ovContent.textContent = '';
-      const content = article.full || ('<p>' + (article.details||'') + '</p>');
-      ovContent.innerHTML = content;
-      overlay.classList.add('open'); overlay.setAttribute('aria-hidden','false');
-      $("#overlayClose").focus(); document.body.style.overflow='hidden';
-    }
-    function closeOverlay(){ overlay.classList.remove('open'); overlay.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
-    $("#overlayClose").addEventListener('click', closeOverlay);
-    overlay.addEventListener('click',(e)=>{ if(e.target===overlay) closeOverlay(); });
-    document.addEventListener('keydown',(e)=>{ if(e.key==='Escape' && overlay.classList.contains('open')) closeOverlay(); });
-
-    /* Filter dropdown */
-    $("#contentFilter").addEventListener('change',(e)=>{
-      const v=e.target.value, show=(sel,on)=>{ const el=$(sel); if(el) el.style.display=on?'block':'none'; };
-      if(v==='all'){
-        show('#newsHeader',1); show('#newsArticles',1);
-        show('#analysisHeader',1); show('#analysisArticles',1);
-        show('#newsEarlierHeader',1); show('#newsEarlier',1);
-        show('#analysisEarlierHeader',1); show('#analysisEarlier',1);
-      } else if(v==='news'){
-        show('#newsHeader',1); show('#newsArticles',1);
-        show('#newsEarlierHeader',1); show('#newsEarlier',1);
-        show('#analysisHeader',0); show('#analysisArticles',0);
-        show('#analysisEarlierHeader',0); show('#analysisEarlier',0);
-      } else {
-        show('#newsHeader',0); show('#newsArticles',0);
-        show('#newsEarlierHeader',0); show('#newsEarlier',0);
-        show('#analysisHeader',1); show('#analysisArticles',1);
-        show('#analysisEarlierHeader',1); show('#analysisEarlier',1);
-      }
-    });
-
-    /* Render newest on top + earlier below */
     function attachDate(list, dateStr){ return (list||[]).map(a=>({...a, dateStr})); }
     function renderRange(days){
       daysCache=days;
       const latest=days[0];
-
-      const latestNews = attachDate(latest?.news||[], latest?.dateStr||'');
       const latestAnalysis = attachDate(latest?.analysis||[], latest?.dateStr||'');
-      renderSection(latestNews, $("#newsArticles"), $("#newsHeader"), 'news');
-      renderSection(latestAnalysis, $("#analysisArticles"), $("#analysisHeader"), 'analysis');
-
+      const latestNews = attachDate(latest?.news||[], latest?.dateStr||'');
+      renderSection(latestAnalysis, $('#analysisArticles'), $('#analysisHeader'), 'analysis');
+      renderSection(latestNews, $('#newsArticles'), $('#newsHeader'), 'news', {expandCount:2});
       const earlier=days.slice(1);
       const newsEarlierList = earlier.flatMap(d=>attachDate(d.news,d.dateStr));
       const analysisEarlierList = earlier.flatMap(d=>attachDate(d.analysis,d.dateStr));
-      renderSection(newsEarlierList, $("#newsEarlier"), $("#newsEarlierHeader"), 'news');
-      renderSection(analysisEarlierList, $("#analysisEarlier"), $("#analysisEarlierHeader"), 'analysis');
+      renderSection(analysisEarlierList, $('#analysisEarlier'), $('#analysisEarlierHeader'), 'analysis');
+      renderSection(newsEarlierList, $('#newsEarlier'), $('#newsEarlierHeader'), 'news', {expandCount:0});
     }
 
     (async function init(){
-      const days = await loadRange(DAYS_BACK);
-      if(!days.length) return;
-      renderRange(days);
+      const days = await loadRange(10);
+      if(!days.length) return; renderRange(days);
     })();
   </script>
 </body>
