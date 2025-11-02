@@ -15,7 +15,7 @@
       --btn-fg:#fff;
     }
     .light {
-      --bg:#ffffff; --fg:#171717; --rule:#cbd5e1; /* stronger border in light */
+      --bg:#ffffff; --fg:#171717; --rule:#cbd5e1;
       --card:#fafafa; --accent:#2563eb; --accent-alt:#dc2626; --meta:#586274;
       --btn-fg:#fff;
     }
@@ -33,11 +33,16 @@
 
     /* Controls */
     .controls{display:flex;gap:.6rem;padding:16px 0;align-items:center;flex-wrap:nowrap}
-    .filter-select{
-      padding:0 2rem 0 1rem;height:40px;border-radius:10px;border:1px solid var(--rule);
-      background:var(--card);color:var(--fg);font-size:16px;cursor:pointer;-webkit-appearance:none;appearance:none;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
-      background-repeat:no-repeat;background-position:right .6rem center;background-size:1rem
+    
+    /* Pills filter (NEW - replacing dropdown) */
+    .pills{display:flex;gap:.4rem;align-items:center;flex-wrap:wrap}
+    .pills .label{opacity:.7;font-weight:700;margin-right:.25rem}
+    .pill{
+      height:40px;padding:0 .9rem;border-radius:999px;border:1px solid var(--rule);
+      background:var(--card);color:var(--fg);font-weight:800;cursor:pointer;font-size:.9rem
+    }
+    .pill[aria-pressed="true"]{
+      border-color:var(--accent-alt);background:color-mix(in oklab, var(--card) 85%, var(--accent-alt) 15%)
     }
 
     /* Icon-only buttons (theme/search) */
@@ -55,6 +60,57 @@
       background:var(--card);color:var(--fg);font-size:16px;width:0;opacity:0;transition:.3s
     }
     .search-input.expanded{width:220px;opacity:1}
+
+    /* Fixed Theme Toggle (NEW - top right of screen) */
+    .theme-switch{
+      position:fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 10000;
+      display:flex;
+      align-items:center
+    }
+    .theme-switch input{
+      position:absolute;
+      opacity:0;
+      pointer-events:none
+    }
+    .theme-switch label{
+      position:relative;
+      display:inline-flex;
+      align-items:center;
+      gap:.35rem;
+      width:66px;
+      height:32px;
+      border-radius:999px;
+      border:1px solid var(--rule);
+      background:var(--card);
+      cursor:pointer;
+      box-shadow:0 2px 10px rgba(0,0,0,.25)
+    }
+    .theme-switch label::after{
+      content:"";
+      position:absolute;
+      top:2px;
+      left:2px;
+      width:28px;
+      height:28px;
+      border-radius:50%;
+      background:linear-gradient(#f9c86a,#eaa22d);
+      transition:transform .25s ease, background .25s ease
+    }
+    .light .theme-switch label::after{background:linear-gradient(#f9c86a,#eaa22d)}
+    .dark .theme-switch label::after{background:linear-gradient(#9aa0a6,#6b7280)}
+    .theme-switch svg{
+      width:14px;
+      height:14px;
+      stroke:currentColor;
+      fill:none;
+      opacity:.9
+    }
+    .theme-switch .sun{position:absolute;left:10px;color:#f59e0b}
+    .theme-switch .moon{position:absolute;right:10px}
+    .theme-switch input:checked + label::after{transform:translateX(34px)}
 
     .section-header{font-size:1.15rem;font-weight:800;margin:1.5rem 0 1rem;padding-bottom:.5rem;border-bottom:2px solid var(--accent);display:inline-block}
     .section-header.analysis{border-bottom-color:var(--accent-alt)}
@@ -130,10 +186,12 @@
       header{padding:28px 0 16px}
       header h1{font-size:2rem}
       .search-input.expanded{width:160px}
+      .theme-switch{top:12px;right:12px}
     }
     @media (max-width:480px){
       .controls{gap:.5rem}
-      .filter-select{flex:0 0 auto}
+      .pills .label{display:none}
+      .pill{padding:0 .8rem}
       .search-container{gap:.4rem;margin-left:auto}
       .search-input.expanded{width:100%}
     }
@@ -158,17 +216,13 @@
       <div class="date" id="currentDate"></div>
 
       <div class="controls">
-        <!-- Theme toggle -->
-        <button id="themeToggle" class="icon-btn" aria-label="Toggle theme" title="Toggle theme">
-          <svg id="iconSun" class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-          <svg id="iconMoon" class="icon" viewBox="0 0 24 24" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-        </button>
-
-        <select id="contentFilter" class="filter-select" aria-label="Filter content">
-          <option value="all">All Content</option>
-          <option value="news">News Only</option>
-          <option value="analysis">Analysis Only</option>
-        </select>
+        <!-- Pills filter (NEW - replacing dropdown) -->
+        <div class="pills" role="group" aria-label="Content filter">
+          <span class="label">Filter:</span>
+          <button class="pill" data-filter="all" aria-pressed="true">All</button>
+          <button class="pill" data-filter="news" aria-pressed="false">News</button>
+          <button class="pill" data-filter="analysis" aria-pressed="false">Analysis</button>
+        </div>
 
         <div class="search-container">
           <input type="text" id="searchInput" class="search-input" placeholder="Search articles..." aria-label="Search">
@@ -196,6 +250,15 @@
     <footer>
       <p>© <span id="year"></span> somethingtoreport</p>
     </footer>
+  </div>
+
+  <!-- Fixed Theme Toggle (NEW - outside container) -->
+  <div class="theme-switch">
+    <input type="checkbox" id="themeSwitch" aria-label="Toggle dark mode">
+    <label for="themeSwitch" title="Toggle dark mode">
+      <svg class="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      <svg class="moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </label>
   </div>
 
   <!-- Overlay -->
@@ -227,26 +290,47 @@
     $("#currentDate").textContent = now.toLocaleDateString(undefined, {weekday:'long',year:'numeric',month:'long',day:'numeric'});
     $("#year").textContent = now.getFullYear();
 
-    /* Theme toggle */
-    const themeBtn = $("#themeToggle");
-    const iconSun  = $("#iconSun");
-    const iconMoon = $("#iconMoon");
+    /* Theme toggle (NEW - slider version) */
     function applyTheme(mode){
       document.documentElement.classList.toggle("dark",  mode === 'dark');
       document.documentElement.classList.toggle("light", mode !== 'dark');
       try{ localStorage.setItem("mode", mode); }catch{}
-      if (mode === 'dark'){ iconSun.style.display='none'; iconMoon.style.display='block'; }
-      else { iconSun.style.display='block'; iconMoon.style.display='none'; }
     }
     (function initTheme(){
-      let saved=''; try{ saved = localStorage.getItem("mode") || ''; }catch{}
-      const start = saved || (window.matchMedia("(prefers-color-scheme: dark)").matches ? 'dark' : 'light');
-      applyTheme(start);
-      themeBtn.addEventListener('click',()=>{
-        const cur = document.documentElement.classList.contains('dark') ? 'dark':'light';
-        applyTheme(cur === 'dark' ? 'light':'dark');
-      });
+      var checkbox = document.getElementById('themeSwitch');
+      var current = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+      applyTheme(current);
+      if(checkbox){ 
+        checkbox.checked = (current === 'dark');
+        checkbox.addEventListener('change', function(){
+          applyTheme(this.checked ? 'dark' : 'light');
+        });
+      }
     })();
+
+    /* Pills filter (NEW - replacing dropdown) */
+    const pills = $$('.pill');
+    function setFilter(active){
+      pills.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.filter===active)));
+      const show=(sel,on)=>{ const el=$(sel); if(el) el.style.display=on?'block':'none'; };
+      if(active==='all'){
+        show('#newsHeader',1); show('#newsArticles',1);
+        show('#analysisHeader',1); show('#analysisArticles',1);
+        show('#newsEarlierHeader',1); show('#newsEarlier',1);
+        show('#analysisEarlierHeader',1); show('#analysisEarlier',1);
+      } else if(active==='news'){
+        show('#newsHeader',1); show('#newsArticles',1);
+        show('#newsEarlierHeader',1); show('#newsEarlier',1);
+        show('#analysisHeader',0); show('#analysisArticles',0);
+        show('#analysisEarlierHeader',0); show('#analysisEarlier',0);
+      } else {
+        show('#newsHeader',0); show('#newsArticles',0);
+        show('#newsEarlierHeader',0); show('#newsEarlier',0);
+        show('#analysisHeader',1); show('#analysisArticles',1);
+        show('#analysisEarlierHeader',1); show('#analysisEarlier',1);
+      }
+    }
+    pills.forEach(b => b.addEventListener('click',()=> setFilter(b.dataset.filter)));
 
     /* Search */
     let currentSearch = ""; let searchOpen=false; let daysCache=[];
@@ -268,7 +352,7 @@
       );
     }
 
-    /* Data (JSON-only) — adjust these if you want) */
+    /* Data (JSON-only) */
     const DAYS_BACK=10, MAX_CONSEC_MISSES=3;
     async function fetchJSONOrNull(url){ try{ const r=await fetch(url,{cache:'no-store'}); if(!r.ok) return null; return await r.json(); }catch{ return null; } }
     async function loadRange(daysBack=DAYS_BACK){
@@ -369,7 +453,7 @@
       items.forEach(a=>container.appendChild(createCard(a,kind,a.dateStr)));
     }
 
-    /* Overlay (simple injection; sanitizer removed as requested) */
+    /* Overlay */
     const overlay=$("#overlay"), ovTitle=$("#ovTitle"), ovLead=$("#ovLead"), ovDate=$("#ovDate"), ovContent=$("#ovContent"), ovKind=$("#ovKind");
     function openOverlay(article, kind, dateStr){
       ovKind.textContent='Analysis';
@@ -386,27 +470,6 @@
     $("#overlayClose").addEventListener('click', closeOverlay);
     overlay.addEventListener('click',(e)=>{ if(e.target===overlay) closeOverlay(); });
     document.addEventListener('keydown',(e)=>{ if(e.key==='Escape' && overlay.classList.contains('open')) closeOverlay(); });
-
-    /* Filter dropdown */
-    $("#contentFilter").addEventListener('change',(e)=>{
-      const v=e.target.value, show=(sel,on)=>{ const el=$(sel); if(el) el.style.display=on?'block':'none'; };
-      if(v==='all'){
-        show('#newsHeader',1); show('#newsArticles',1);
-        show('#analysisHeader',1); show('#analysisArticles',1);
-        show('#newsEarlierHeader',1); show('#newsEarlier',1);
-        show('#analysisEarlierHeader',1); show('#analysisEarlier',1);
-      } else if(v==='news'){
-        show('#newsHeader',1); show('#newsArticles',1);
-        show('#newsEarlierHeader',1); show('#newsEarlier',1);
-        show('#analysisHeader',0); show('#analysisArticles',0);
-        show('#analysisEarlierHeader',0); show('#analysisEarlier',0);
-      } else {
-        show('#newsHeader',0); show('#newsArticles',0);
-        show('#newsEarlierHeader',0); show('#newsEarlier',0);
-        show('#analysisHeader',1); show('#analysisArticles',1);
-        show('#analysisEarlierHeader',1); show('#analysisEarlier',1);
-      }
-    });
 
     /* Render newest on top + earlier below */
     function attachDate(list, dateStr){ return (list||[]).map(a=>({...a, dateStr})); }
