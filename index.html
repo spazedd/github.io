@@ -255,11 +255,17 @@
     </header>
 
     <main>
-      <h2 class="section-header" id="latestHeader">Latest Content</h2>
-      <div id="latestArticles" class="articles"></div>
+      <h2 class="section-header" id="newsHeader">Latest Reports</h2>
+      <div id="newsArticles" class="articles"></div>
 
-      <h3 class="section-header" id="earlierHeader">Earlier Content</h3>
-      <div id="earlierArticles" class="articles"></div>
+      <h2 class="section-header analysis" id="analysisHeader">Latest Analysis</h2>
+      <div id="analysisArticles" class="articles"></div>
+
+      <h3 class="section-header" id="newsEarlierHeader">Earlier Reports</h3>
+      <div id="newsEarlier" class="articles"></div>
+
+      <h3 class="section-header analysis" id="analysisEarlierHeader">Earlier Analysis</h3>
+      <div id="analysisEarlier" class="articles"></div>
     </main>
 
     <footer>
@@ -323,22 +329,34 @@
       }
     })();
 
-    /* Pills filter (NEW - replacing dropdown) */
+    /* Pills filter - FIXED */
     const pills = $$('.pill');
+    let currentFilter = 'all';
+    
     function setFilter(active){
+      currentFilter = active;
       pills.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.filter===active)));
+      
       const show=(sel,on)=>{ const el=$(sel); if(el) el.style.display=on?'block':'none'; };
+      
       if(active==='all'){
-        show('#latestHeader',1); show('#latestArticles',1);
-        show('#earlierHeader',1); show('#earlierArticles',1);
+        show('#newsHeader',1); show('#newsArticles',1);
+        show('#analysisHeader',1); show('#analysisArticles',1);
+        show('#newsEarlierHeader',1); show('#newsEarlier',1);
+        show('#analysisEarlierHeader',1); show('#analysisEarlier',1);
       } else if(active==='news'){
-        show('#latestHeader',1); show('#latestArticles',1);
-        show('#earlierHeader',1); show('#earlierArticles',1);
+        show('#newsHeader',1); show('#newsArticles',1);
+        show('#newsEarlierHeader',1); show('#newsEarlier',1);
+        show('#analysisHeader',0); show('#analysisArticles',0);
+        show('#analysisEarlierHeader',0); show('#analysisEarlier',0);
       } else {
-        show('#latestHeader',1); show('#latestArticles',1);
-        show('#earlierHeader',1); show('#earlierArticles',1);
+        show('#newsHeader',0); show('#newsArticles',0);
+        show('#newsEarlierHeader',0); show('#newsEarlier',0);
+        show('#analysisHeader',1); show('#analysisArticles',1);
+        show('#analysisEarlierHeader',1); show('#analysisEarlier',1);
       }
     }
+    
     pills.forEach(b => b.addEventListener('click',()=> setFilter(b.dataset.filter)));
 
     /* Search */
@@ -397,7 +415,7 @@
       el.innerHTML=`
         <div class="article-header">
           <h3 class="article-title">${article.title}</h3>
-          <div class="article-meta">${dateLine} • ${kind==='analysis'?'Analysis':'News'}</div>
+          <div class="article-meta">${dateLine}</div>
         </div>
         <div class="article-body">
           <p class="article-summary">${article.summary||''}</p>
@@ -454,12 +472,12 @@
       return el;
     }
 
-    function renderSection(list, container, headerEl){
+    function renderSection(list, container, headerEl, kind){
       const items = filterList(list);
       if(items.length===0){ container.innerHTML=''; if(headerEl) headerEl.style.display='none'; return; }
       if(headerEl) headerEl.style.display='block';
       container.innerHTML='';
-      items.forEach(a=>container.appendChild(createCard(a,a.kind,a.dateStr)));
+      items.forEach(a=>container.appendChild(createCard(a,kind,a.dateStr)));
     }
 
     /* Overlay */
@@ -480,51 +498,22 @@
     overlay.addEventListener('click',(e)=>{ if(e.target===overlay) closeOverlay(); });
     document.addEventListener('keydown',(e)=>{ if(e.key==='Escape' && overlay.classList.contains('open')) closeOverlay(); });
 
-    /* NEW: Combine news and analysis articles in chronological order */
-    function combineAndSortArticles(days) {
-      const allArticles = [];
-      
-      days.forEach(day => {
-        // Add news articles
-        day.news.forEach(article => {
-          allArticles.push({
-            ...article,
-            dateStr: day.dateStr,
-            kind: 'news',
-            timestamp: new Date(day.dateStr).getTime()
-          });
-        });
-        
-        // Add analysis articles
-        day.analysis.forEach(article => {
-          allArticles.push({
-            ...article,
-            dateStr: day.dateStr,
-            kind: 'analysis',
-            timestamp: new Date(day.dateStr).getTime()
-          });
-        });
-      });
-      
-      // Sort by date (newest first)
-      return allArticles.sort((a, b) => b.timestamp - a.timestamp);
-    }
-
-    /* Render mixed content */
+    /* FIXED: Render newest on top + earlier below (original working structure) */
+    function attachDate(list, dateStr){ return (list||[]).map(a=>({...a, dateStr})); }
     function renderRange(days){
       daysCache=days;
-      
-      if (!days.length) return;
-      
-      const allArticles = combineAndSortArticles(days);
-      
-      // Split into latest (today's) and earlier content
-      const today = toYMD(new Date());
-      const latestArticles = allArticles.filter(a => a.dateStr === today);
-      const earlierArticles = allArticles.filter(a => a.dateStr !== today);
-      
-      renderSection(latestArticles, $("#latestArticles"), $("#latestHeader"));
-      renderSection(earlierArticles, $("#earlierArticles"), $("#earlierHeader"));
+      const latest=days[0];
+
+      const latestNews = attachDate(latest?.news||[], latest?.dateStr||'');
+      const latestAnalysis = attachDate(latest?.analysis||[], latest?.dateStr||'');
+      renderSection(latestNews, $("#newsArticles"), $("#newsHeader"), 'news');
+      renderSection(latestAnalysis, $("#analysisArticles"), $("#analysisHeader"), 'analysis');
+
+      const earlier=days.slice(1);
+      const newsEarlierList = earlier.flatMap(d=>attachDate(d.news,d.dateStr));
+      const analysisEarlierList = earlier.flatMap(d=>attachDate(d.analysis,d.dateStr));
+      renderSection(newsEarlierList, $("#newsEarlier"), $("#newsEarlierHeader"), 'news');
+      renderSection(analysisEarlierList, $("#analysisEarlier"), $("#analysisEarlierHeader"), 'analysis');
     }
 
     (async function init(){
