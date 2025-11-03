@@ -137,6 +137,7 @@
     }
     .article:hover{transform:translateY(-2px);border-color:var(--accent);box-shadow:0 6px 22px rgba(37,99,235,.16)}
     .light .article{box-shadow:0 1px 0 rgba(0,0,0,.02), 0 4px 14px rgba(0,0,0,.06)}
+    .article.news{border-left:3px solid #10b981} /* NEW: Green border for news */
     .article.analysis{border-left:3px solid var(--accent-alt)}
     .article-header{padding:18px 18px 0}
     .article-title{
@@ -390,7 +391,7 @@
 
     function createCard(article, kind, dateStr){
       const el=document.createElement('article');
-      el.className=`article ${kind==='analysis'?'analysis':''}`;
+      el.className=`article ${kind==='analysis'?'analysis':'news'}`; // ADDED: 'news' class for news articles
       const dateLine=prettyDate(dateStr);
 
       el.innerHTML=`
