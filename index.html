@@ -418,6 +418,14 @@
       margin:1.2rem 0;
       opacity:.9;
     }
+    /* added for summary line in overlay */
+    .overlay-lead{
+      font-family:'Inter',sans-serif;
+      font-size:14px;
+      line-height:1.6;
+      opacity:.9;
+      margin:.2rem 0 1rem;
+    }
     
     .overlay-close{
       display:inline-flex;
@@ -463,6 +471,8 @@
       }
       .pills{
         justify-content: center;
+        /* center the whole pills group on mobile */
+        margin: 0 auto;
       }
       .search-container{
         justify-content: center;
@@ -559,6 +569,8 @@
         <button class="overlay-close" id="overlayClose">← back</button>
         <div class="meta" id="ovKind"></div>
         <h2 id="ovTitle"></h2>
+        <!-- added: lead/summary element so Full analysis works -->
+        <p id="ovLead" class="overlay-lead"></p>
         <div class="meta" id="ovDate"></div>
         <div class="content" id="ovContent"></div>
       </div>
