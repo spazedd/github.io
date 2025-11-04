@@ -8,6 +8,7 @@
   <meta name="theme-color" content="#0f1011" />
   <meta name="description" content="Daily news and analysis" />
   
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,10 +38,11 @@
     }
     a{color:inherit;text-decoration:none} a:hover{opacity:.8}
     
+    /* Container - Centered with more width and good margins */
     .container{
-      max-width:680px;
-      margin: 0 auto 0 8%; /* More left shift for all screens */
-      padding:0 20px;
+      max-width: 1000px; /* Much wider */
+      margin: 0 auto;
+      padding: 0 40px; /* Good side margins */
     }
 
     /* Header - Smaller */
@@ -85,10 +87,10 @@
       gap: 1rem;
     }
     
-    /* Pills filter - Smaller */
+    /* Pills filter - Smaller with better spacing */
     .pills{
       display:flex;
-      gap:.4rem;
+      gap:.6rem; /* More space between pills */
       align-items:center;
       flex-wrap:wrap
     }
@@ -98,9 +100,10 @@
       letter-spacing: 0.06em;
       text-transform: uppercase;
       color: var(--meta);
+      margin-right: 0.5rem; /* Space from pills */
     }
     .pill{
-      padding:.35rem .7rem;
+      padding:.4rem .9rem; /* More horizontal padding */
       border-radius:4px;
       border:1px solid var(--rule);
       background:transparent;
@@ -114,9 +117,9 @@
       transition: all .2s;
     }
     .pill[aria-pressed="true"]{
-      background:var(--fg);
-      color:var(--bg);
-      border-color:var(--fg);
+      background:var(--accent); /* Use accent color instead of fg */
+      color:var(--btn-fg);
+      border-color:var(--accent);
     }
 
     /* Search - Smaller */
@@ -222,44 +225,45 @@
       margin:0 0 2.5rem
     }
 
-    /* Article Cards - Smaller */
+    /* Article Cards - Smaller with better spacing */
     .article{
       background:transparent;
       border:1px solid var(--rule);
       border-radius:0;
-      padding:0;
+      padding:20px; /* Added padding inside cards */
       transition:border-color .2s ease;
     }
     .article:hover{
-      border-color:var(--fg);
+      border-color:var(--accent);
     }
     .article.news{
-      border-left:2px solid #10b981;
+      border-left:3px solid #10b981; /* Thicker colored border */
     }
     .article.analysis{
-      border-left:2px solid var(--accent-alt);
+      border-left:3px solid var(--accent-alt); /* Thicker colored border */
     }
     
     .article-header{
       padding:0;
-      margin-bottom:.8rem;
+      margin-bottom:1rem; /* More space below header */
     }
     .article-title{
       font-family: 'Inter', sans-serif;
       font-size:1.1rem;
       font-weight:500;
       line-height:1.4;
-      margin-bottom:.4rem;
+      margin-bottom:.6rem; /* More space below title */
     }
     .article-body{
       padding:0;
-      margin-bottom:.8rem;
+      margin-bottom:1rem; /* More space above buttons */
     }
     .article-summary{
       font-size:13px;
       line-height:1.5;
       color:var(--fg);
       opacity:.9;
+      margin-bottom: 0.8rem; /* Space below summary */
     }
     .article-meta{
       font-family: 'Source Code Pro', monospace;
@@ -267,15 +271,15 @@
       letter-spacing: 0.06em;
       text-transform: uppercase;
       color: var(--meta);
-      margin:.4rem 0;
+      margin:.5rem 0; /* More space around meta */
     }
 
-    /* Buttons - Smaller */
+    /* Buttons - Smaller with better spacing */
     .toggle-more, .open-full-btn{
       display:inline-flex;
       align-items:center;
-      gap:.3rem;
-      padding:.3rem .6rem;
+      gap:.4rem; /* More space between icon and text */
+      padding:.4rem .8rem; /* Slightly larger */
       border-radius:4px;
       border:1px solid var(--rule);
       background:transparent;
@@ -289,9 +293,9 @@
       transition:all .2s;
     }
     .toggle-more:hover, .open-full-btn:hover{
-      background:var(--fg);
-      color:var(--bg);
-      border-color:var(--fg);
+      background:var(--accent);
+      color:var(--btn-fg);
+      border-color:var(--accent);
     }
 
     /* News dropdown - Smaller */
@@ -308,7 +312,7 @@
       max-height:0;
       opacity:0;
       transition:max-height .4s ease, opacity .4s ease;
-      margin-top:.8rem;
+      margin-top:1rem; /* More space above dropdown */
     }
     .collapsible.open{
       opacity:1;
@@ -325,21 +329,21 @@
       color: var(--meta);
     }
 
-    /* Overlay - More left alignment */
+    /* Overlay - Centered with more width */
     .overlay{
       position:fixed;
       inset:0;
       background:var(--bg);
       display:none;
       z-index:9999;
-      padding:35px 20px;
+      padding:35px 40px; /* Match container padding */
     }
     .overlay.open{
       display:block
     }
     .overlay-wrap{
-      max-width:680px;
-      margin: 0 auto 0 8%; /* Match container alignment */
+      max-width: 1000px; /* Match container width */
+      margin: 0 auto;
       height:100%;
       overflow:auto;
     }
@@ -390,35 +394,18 @@
       text-transform: uppercase;
     }
     .overlay-close:hover{
-      background:var(--fg);
-      color:var(--bg);
+      background:var(--accent);
+      color:var(--btn-fg);
+      border-color:var(--accent);
     }
 
-    @media (min-width: 1200px) {
-      .container {
-        margin: 0 auto 0 12%; 
-      }
-      .overlay-wrap {
-        margin: 0 auto 0 12%; 
-      }
-    }
-
-    @media (max-width: 1024px) {
-      .container {
-        margin: 0 auto 0 5%; 
-      }
-      .overlay-wrap {
-        margin: 0 auto 0 5%; 
-      }
-    }
-
+    /* Mobile adjustments */
     @media (max-width:768px){
       .container{
-        padding:0 16px;
-        margin: 0 auto 0 3%; 
+        padding:0 20px;
       }
-      .overlay-wrap {
-        margin: 0 auto 0 3%; 
+      .overlay{
+        padding:35px 20px;
       }
       header{padding:35px 0 18px}
       .header-quote{
@@ -439,54 +426,29 @@
       }
       .search-input.expanded{width:100%}
       .theme-switch{top:10px;right:10px}
+      .article{
+        padding:16px; /* Slightly less padding on mobile */
+      }
     }
 
     @media (max-width:480px){
       .container{
         padding:0 16px;
-        margin: 0 auto 0 2%; 
       }
-      .overlay-wrap {
-        margin: 0 auto 0 2%; 
+      .overlay{
+        padding:35px 16px;
       }
       .header-quote{
         font-size: 12px;
         padding-left: 0.6rem;
       }
-    }
-
-    @media not all and (min-resolution:.001dpcm) { 
-      @supports (-webkit-appearance:none) {
-        .container {
-          margin-left: 8%;
-        }
-        .overlay-wrap {
-          margin-left: 8%;
-        }
-        @media (min-width: 1200px) {
-          .container, .overlay-wrap {
-            margin-left: 12%;
-          }
-        }
-        @media (max-width: 1024px) {
-          .container, .overlay-wrap {
-            margin-left: 5%;
-          }
-        }
-        @media (max-width: 768px) {
-          .container, .overlay-wrap {
-            margin-left: 3%;
-          }
-        }
-        @media (max-width: 480px) {
-          .container, .overlay-wrap {
-            margin-left: 2%;
-          }
-        }
+      .article{
+        padding:14px; /* Even less padding on small mobile */
       }
     }
   </style>
 
+  <!-- No-flash theme -->
   <script>
     (function () {
       const saved = localStorage.getItem("mode");
@@ -505,7 +467,7 @@
     </header>
 
     <div class="controls">
-      
+      <!-- Pills filter - LEFT SIDE -->
       <div class="pills" role="group" aria-label="Content filter">
         <span class="label">Filter:</span>
         <button class="pill" data-filter="all" aria-pressed="true">All</button>
@@ -513,6 +475,7 @@
         <button class="pill" data-filter="analysis" aria-pressed="false">Analysis</button>
       </div>
 
+      <!-- Search - RIGHT SIDE -->
       <div class="search-container">
         <input type="text" id="searchInput" class="search-input" placeholder="Search articles..." aria-label="Search">
         <button id="searchBtn" class="icon-btn" aria-label="Open search" title="Search">
@@ -540,11 +503,13 @@
     </footer>
   </div>
 
+  <!-- Fixed Theme Toggle -->
   <div class="theme-switch">
     <input type="checkbox" id="themeSwitch" aria-label="Toggle dark mode">
     <label for="themeSwitch" title="Toggle dark mode"></label>
   </div>
 
+  <!-- Overlay -->
   <div id="overlay" class="overlay" aria-hidden="true" role="dialog" aria-modal="true">
     <div class="overlay-wrap">
       <div class="overlay-card">
@@ -558,17 +523,19 @@
   </div>
 
   <script>
-
+    /* Utils */
     const $ = (s) => document.querySelector(s);
     const $$ = (s) => [...document.querySelectorAll(s)];
     const pad = (n) => String(n).padStart(2,'0');
     const toYMD = (d) => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
     const prettyDate = (ds) => { const [y,m,d]=ds.split('-').map(Number); return new Date(y,m-1,d).toLocaleDateString(undefined,{year:'numeric',month:'long',day:'numeric'}); };
 
+    // Current date in header
     const now = new Date();
     $("#currentDate").textContent = now.toLocaleDateString(undefined, {weekday:'long',year:'numeric',month:'long',day:'numeric'});
     $("#year").textContent = now.getFullYear();
 
+    /* Theme toggle */
     function applyTheme(mode){
       document.documentElement.classList.toggle("dark",  mode === 'dark');
       document.documentElement.classList.toggle("light", mode !== 'dark');
@@ -586,6 +553,7 @@
       }
     })();
 
+    /* Pills filter */
     const pills = $$('.pill');
     let currentFilter = 'all';
     
@@ -615,6 +583,7 @@
     
     pills.forEach(b => b.addEventListener('click',()=> setFilter(b.dataset.filter)));
 
+    /* Search - Fixed to prevent disappearing content */
     let currentSearch = ""; let searchOpen=false; let daysCache=[];
     const searchContainer=$(".search-container"), searchInput=$("#searchInput"), searchBtn=$("#searchBtn");
     function reRenderIfReady(){ if (typeof renderRange==='function' && Array.isArray(daysCache)) renderRange(daysCache); }
@@ -626,7 +595,7 @@
         setTimeout(()=>searchInput.focus(),10); 
       } else { 
         searchInput.classList.remove('expanded'); 
-
+        // Only clear search if there's actually search text
         if(!searchInput.value && currentSearch){ 
           currentSearch=""; 
           reRenderIfReady(); 
@@ -645,10 +614,22 @@
       );
     }
 
+    /* Data (JSON-only) */
     const DAYS_BACK=10, MAX_CONSEC_MISSES=3;
-    async function fetchJSONOrNull(url){ try{ const r=await fetch(url,{cache:'no-store'}); if(!r.ok) return null; return await r.json(); }catch{ return null; } }
+    async function fetchJSONOrNull(url){ 
+      try{ 
+        const r=await fetch(url,{cache:'no-store'}); 
+        if(!r.ok) return null; 
+        return await r.json(); 
+      }catch(e){ 
+        console.log('Failed to load:', url, e);
+        return null; 
+      } 
+    }
+
     async function loadRange(daysBack=DAYS_BACK){
       const out=[]; let misses=0;
+      
       for(let i=0;i<=daysBack;i++){
         const d=new Date(); d.setDate(d.getDate()-i);
         const ds=toYMD(d);
@@ -656,14 +637,28 @@
           fetchJSONOrNull(`./data/news-${ds}.json`),
           fetchJSONOrNull(`./data/analysis-${ds}.json`)
         ]);
-        const has = (Array.isArray(news)&&news.length) || (Array.isArray(analysis)&&analysis.length);
+        
+        const hasNews = Array.isArray(news) && news.length;
+        const hasAnalysis = Array.isArray(analysis) && analysis.length;
+        const has = hasNews || hasAnalysis;
+        
         misses = has ? 0 : (misses+1);
-        if(has) out.push({dateStr:ds, news:news||[], analysis:analysis||[]});
+        
+        if(has) {
+          out.push({
+            dateStr: ds, 
+            news: hasNews ? news : [],
+            analysis: hasAnalysis ? analysis : []
+          });
+        }
+        
         if(misses>=MAX_CONSEC_MISSES) break;
       }
+      
       return out;
     }
 
+    /* UI helpers */
     function openCollapsible(el){ el.classList.add('open'); const h=el.scrollHeight; el.style.maxHeight=h+'px'; el.style.opacity='1'; }
     function closeCollapsible(el){
       el.style.maxHeight = el.scrollHeight+'px';
@@ -738,7 +733,11 @@
 
     function renderSection(list, container, headerEl, kind){
       const items = filterList(list);
-      if(items.length===0){ container.innerHTML=''; if(headerEl) headerEl.style.display='none'; return; }
+      if(items.length===0){ 
+        container.innerHTML=''; 
+        if(headerEl) headerEl.style.display='none'; 
+        return; 
+      }
       if(headerEl) headerEl.style.display='block';
       container.innerHTML='';
       items.forEach(a=>container.appendChild(createCard(a,kind,a.dateStr)));
@@ -782,7 +781,10 @@
 
     (async function init(){
       const days = await loadRange(DAYS_BACK);
-      if(!days.length) return;
+      if(!days.length) {
+        console.log('No data loaded - create JSON files in ./data/ folder');
+        return;
+      }
       renderRange(days);
     })();
   </script>
