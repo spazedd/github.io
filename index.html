@@ -20,7 +20,9 @@
       --btn-fg:#fff;
     }
     .light {
-      --bg:#ffffff; --fg:#171717; --rule:#e5e5e5;
+      --bg:#ffffff; --fg:#171717; 
+      /* darker borders in light mode for contrast */
+      --rule:#1f2937; 
       --card:#fafafa; --accent:#2563eb; --accent-alt:#dc2626; --meta:#666;
       --btn-fg:#fff;
     }
@@ -87,7 +89,7 @@
       gap: 1rem;
     }
     
-    /* Pills filter - Less blocky, more refined */
+    /* Pills filter */
     .pills{
       display:flex;
       gap:.6rem;
@@ -155,6 +157,8 @@
       cursor:pointer;
       transition:.2s;
       color:var(--fg);
+      /* make the button look crisp */
+      width:36px;height:36px;line-height:0;
     }
     .icon-btn:hover{
       border-color:var(--accent);
@@ -225,7 +229,7 @@
       margin:0 0 2.5rem
     }
 
-    /* Article Cards - Better spacing and colors */
+    /* Article Cards */
     .article{
       background:transparent;
       border:1px solid var(--rule);
@@ -239,7 +243,7 @@
       transform: translateY(-2px);
     }
     
-    /* Subtle gradient borders instead of solid blocks */
+    /* Gradient rails */
     .article.news::before{
       content: '';
       position: absolute;
@@ -250,7 +254,6 @@
       background: linear-gradient(to bottom, #10b981, #34d399);
       border-radius: 0 2px 2px 0;
     }
-    
     .article.analysis::before{
       content: '';
       position: absolute;
@@ -262,39 +265,11 @@
       border-radius: 0 2px 2px 0;
     }
     
-    .article-header{
-      padding:0;
-      margin-bottom:1rem;
-      margin-left: 8px;
-    }
-    .article-title{
-      font-family: 'Inter', sans-serif;
-      font-size:1.2rem;
-      font-weight:500;
-      line-height:1.4;
-      margin-bottom:.6rem;
-    }
-    .article-body{
-      padding:0;
-      margin-bottom:1rem;
-      margin-left: 8px;
-    }
-    .article-summary{
-      font-size:14px;
-      line-height:1.5;
-      color:var(--fg);
-      opacity:.9;
-      margin-bottom: 0.8rem;
-    }
-    .article-meta{
-      font-family: 'Source Code Pro', monospace;
-      font-size: 11px;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--meta);
-      margin:.5rem 0;
-      margin-left: 8px;
-    }
+    .article-header{padding:0;margin-bottom:1rem;margin-left: 8px;}
+    .article-title{font-family:'Inter',sans-serif;font-size:1.2rem;font-weight:500;line-height:1.4;margin-bottom:.6rem;}
+    .article-body{padding:0;margin-bottom:1rem;margin-left: 8px;}
+    .article-summary{font-size:14px;line-height:1.5;color:var(--fg);opacity:.9;margin-bottom: .8rem;}
+    .article-meta{font-family:'Source Code Pro',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--meta);margin:.5rem 0;margin-left: 8px;}
 
     /* Buttons */
     .toggle-more, .open-full-btn, .source-btn{
@@ -313,8 +288,8 @@
       text-transform: uppercase;
       cursor:pointer;
       transition:all .2s;
-      margin-right: 0.5rem;
-      margin-bottom: 0.5rem;
+      margin-right: .5rem;
+      margin-bottom: .5rem;
     }
     .toggle-more:hover, .open-full-btn:hover, .source-btn:hover{
       background:var(--accent);
@@ -323,14 +298,8 @@
     }
 
     /* News dropdown */
-    .chev{
-      transition:transform .24s ease
-    }
-    .chev svg{
-      width:.8rem;
-      height:.8rem;
-      display:block
-    }
+    .chev{transition:transform .24s ease}
+    .chev svg{width:.8rem;height:.8rem;display:block}
     .collapsible{
       overflow:hidden;
       max-height:0;
@@ -339,184 +308,70 @@
       margin-top:1rem;
       margin-left: 8px;
     }
-    .collapsible.open{
-      opacity:1;
-    }
+    .collapsible.open{opacity:1;}
 
-    /* Source link styling */
-    .source-link{
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
-      color: var(--accent);
-      font-size: 11px;
-      text-decoration: none;
-      margin-top: 0.5rem;
-    }
-    .source-link:hover{
-      opacity: 0.8;
-    }
-    .source-link svg{
-      width: 10px;
-      height: 10px;
-    }
+    .source-link{display:inline-flex;align-items:center;gap:.3rem;color:var(--accent);font-size:11px;text-decoration:none;margin-top:.5rem;}
+    .source-link:hover{opacity:.8}
+    .source-link svg{width:10px;height:10px;}
 
-    /* Footer */
-    footer{
-      border-top:1px solid var(--rule);
-      padding:35px 0;
-      text-align:center;
-      font-family: 'Source Code Pro', monospace;
-      font-size: 11px;
-      letter-spacing: 0.06em;
-      color: var(--meta);
-    }
+    footer{border-top:1px solid var(--rule);padding:35px 0;text-align:center;font-family:'Source Code Pro',monospace;font-size:11px;letter-spacing:.06em;color:var(--meta);}
 
-    /* Overlay — smoother open/close */
+    /* Overlay — smooth open/close */
     .overlay{
-      position:fixed;
-      inset:0;
-      background:var(--bg);
-      z-index:9999;
-      padding:35px 40px;
-      opacity:0;
-      visibility:hidden;
-      pointer-events:none;
+      position:fixed; inset:0; background:var(--bg);
+      z-index:9999; padding:35px 40px;
+      opacity:0; visibility:hidden; pointer-events:none;
       transition:opacity .25s ease, visibility .25s ease;
     }
-    .overlay.open{
-      opacity:1;
-      visibility:visible;
-      pointer-events:auto;
-    }
-    .overlay-wrap{
-      max-width: 1000px;
-      margin: 0 auto;
-      height:100%;
-      overflow:auto;
-    }
-    .overlay-card{
-      background:transparent;
-      padding:0;
-      opacity:0;
-      transform:translateY(12px);
-      transition:opacity .25s ease, transform .25s ease;
-    }
-    .overlay.open .overlay-card{
-      opacity:1;
-      transform:translateY(0);
-    }
-    .overlay h2{
-      font-family: 'Inter', sans-serif;
-      font-size:1.8rem;
-      font-weight:500;
-      line-height:1.3;
-      margin-bottom:.8rem;
-    }
-    .overlay .meta{
-      font-family: 'Source Code Pro', monospace;
-      font-size: 11px;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--meta);
-      margin-bottom:1.2rem;
-    }
-    .overlay .content{
-      font-family: 'Inter', sans-serif;
-      line-height:1.6;
-      font-size:14px;
-    }
-    .overlay .content p{
-      margin:1.2rem 0;
-      opacity:.9;
-    }
-    .overlay-lead{
-      font-family:'Inter',sans-serif;
-      font-size:14px;
-      line-height:1.6;
-      opacity:.9;
-      margin:.2rem 0 1rem;
-    }
-    
-    .overlay-close{
-      display:inline-flex;
-      align-items:center;
-      gap:.3rem;
-      background:transparent;
-      color:var(--fg);
-      border:1px solid var(--rule);
-      border-radius:6px;
-      padding:.4rem .8rem;
-      cursor:pointer;
-      margin-bottom:1.5rem;
-      font-family: 'Source Code Pro', monospace;
-      font-size: 11px;
-      font-weight:500;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-    .overlay-close:hover{
-      background:var(--accent);
-      color:var(--btn-fg);
-      border-color:var(--accent);
-    }
+    .overlay.open{opacity:1; visibility:visible; pointer-events:auto;}
+    .overlay-wrap{max-width:1000px; margin:0 auto; height:100%; overflow:auto;}
+    .overlay-card{background:transparent; padding:0; opacity:0; transform:translateY(12px); transition:opacity .25s ease, transform .25s ease;}
+    .overlay.open .overlay-card{opacity:1; transform:translateY(0);}
+    .overlay h2{font-family:'Inter',sans-serif;font-size:1.8rem;font-weight:500;line-height:1.3;margin-bottom:.8rem;}
+    .overlay .meta{font-family:'Source Code Pro',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--meta);margin-bottom:1.2rem;}
+    .overlay .content{font-family:'Inter',sans-serif;line-height:1.6;font-size:14px;}
+    .overlay .content p{margin:1.2rem 0;opacity:.9;}
+    .overlay-lead{font-family:'Inter',sans-serif;font-size:14px;line-height:1.6;opacity:.9;margin:.2rem 0 1rem;}
+    .overlay-close{display:inline-flex;align-items:center;gap:.3rem;background:transparent;color:var(--fg);border:1px solid var(--rule);border-radius:6px;padding:.4rem .8rem;cursor:pointer;margin-bottom:1.5rem;font-family:'Source Code Pro',monospace;font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;}
+    .overlay-close:hover{background:var(--accent);color:var(--btn-fg);border-color:var(--accent);}
 
-    /* Respect reduced motion */
     @media (prefers-reduced-motion: reduce){
-      .overlay,
-      .overlay-card{ transition:none; }
+      .overlay, .overlay-card{transition:none;}
     }
 
-    /* Mobile adjustments */
+    /* Mobile layout tweaks: pills left, search right */
     @media (max-width:768px){
-      .container{
-        padding:0 20px;
-      }
-      .overlay{
-        padding:35px 20px;
-      }
+      .container{padding:0 20px;}
+      .overlay{padding:35px 20px;}
       header{padding:35px 0 18px}
-      .header-quote{
-        font-size: 14px;
-        padding-left: 0.8rem;
-        margin-bottom: 0.8rem;
-      }
+      .header-quote{font-size:14px;padding-left:.8rem;margin-bottom:.8rem;}
+
+      /* turn controls into 2-column grid */
       .controls{
-        flex-direction: column;
-        align-items: stretch;
-        gap: .8rem;
+        display:grid;
+        grid-template-columns: 1fr auto; /* pills left, search right */
+        align-items:start;
+        gap:.8rem;
       }
       .pills{
-        justify-content: center;
-        margin: 0 auto; /* center the group */
+        justify-content:flex-start;
+        margin:0;
       }
-      .pills .label{
-        display:none;   /* hide “Filter:” on phones */
-      }
+      .pills .label{display:none;} /* keep hidden for alignment */
+
       .search-container{
-        justify-content: center;
+        justify-content:flex-end;
       }
       .search-input.expanded{width:100%}
       .theme-switch{top:10px;right:10px}
-      .article{
-        padding:20px;
-      }
+      .article{padding:20px;}
     }
 
     @media (max-width:480px){
-      .container{
-        padding:0 16px;
-      }
-      .overlay{
-        padding:35px 16px;
-      }
-      .header-quote{
-        font-size: 13px;
-        padding-left: 0.6rem;
-      }
-      .article{
-        padding:18px;
-      }
+      .container{padding:0 16px;}
+      .overlay{padding:35px 16px;}
+      .header-quote{font-size:13px;padding-left:.6rem;}
+      .article{padding:18px;}
     }
   </style>
 
@@ -539,7 +394,7 @@
     </header>
 
     <div class="controls">
-      <!-- Pills filter - LEFT SIDE -->
+      <!-- Pills filter -->
       <div class="pills" role="group" aria-label="Content filter">
         <span class="label">Filter:</span>
         <button class="pill" data-filter="all" aria-pressed="true">All</button>
@@ -547,7 +402,7 @@
         <button class="pill" data-filter="analysis" aria-pressed="false">Analysis</button>
       </div>
 
-      <!-- Search - RIGHT SIDE -->
+      <!-- Search -->
       <div class="search-container">
         <input type="text" id="searchInput" class="search-input" placeholder="Search articles..." aria-label="Search">
         <button id="searchBtn" class="icon-btn" aria-label="Open search" title="Search">
@@ -653,7 +508,6 @@
         show('#analysisEarlierHeader',1); show('#analysisEarlier',1);
       }
     }
-    
     pills.forEach(b => b.addEventListener('click',()=> setFilter(b.dataset.filter)));
 
     /* Search */
@@ -772,9 +626,7 @@
       // Analysis overlay
       if(kind==='analysis'){
         const fullBtn = el.querySelector('.open-full-btn');
-        fullBtn.addEventListener('click',()=>{
-          openOverlay(article,'analysis',dateStr);
-        });
+        fullBtn.addEventListener('click',()=>{ openOverlay(article,'analysis',dateStr); });
       }
 
       return el;
@@ -812,13 +664,11 @@
       $("#overlayClose").focus(); 
       document.body.style.overflow='hidden';
     }
-    
     function closeOverlay(){ 
       overlay.classList.remove('open'); 
       overlay.setAttribute('aria-hidden','true'); 
       document.body.style.overflow=''; 
     }
-    
     $("#overlayClose").addEventListener('click', closeOverlay);
     overlay.addEventListener('click',(e)=>{ if(e.target===overlay) closeOverlay(); });
     document.addEventListener('keydown',(e)=>{ if(e.key==='Escape' && overlay.classList.contains('open')) closeOverlay(); });
