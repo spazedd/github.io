@@ -10,7 +10,7 @@ from github import Github, Auth
 
 from xai_sdk import Client
 from xai_sdk.chat import user
-from xai_sdk.tools import web_search, x_search   # ✅ enable live tools
+from xai_sdk.tools import web_search, x_search   # ✅ live tools
 
 # ───────────────────────── Env ─────────────────────────
 root_env = os.path.join(os.path.dirname(__file__), "..", ".env")
@@ -20,12 +20,12 @@ else:
     load_dotenv()
 
 XAI_API_KEY  = (os.getenv("XAI_API_KEY") or "").strip()
-GITHUB_TOKEN = (os.getenv("GITHUB_TOKEN") or "").strip()   # In Actions this is secrets.GITHUB_TOKEN
+GITHUB_TOKEN = (os.getenv("GITHUB_TOKEN") or "").strip()
 GITHUB_REPO  = (os.getenv("GITHUB_REPO") or "spazedd/github.io").strip()
 if not XAI_API_KEY:
     raise SystemExit("Missing XAI_API_KEY")
 if not GITHUB_TOKEN:
-    raise SystemExit("Missing GITHUB_TOKEN (use Actions' provided GITHUB_TOKEN or set in .env)")
+    raise SystemExit("Missing GITHUB_TOKEN (use Actions' GITHUB_TOKEN or set in .env)")
 if "/" not in GITHUB_REPO:
     raise SystemExit(f"GITHUB_REPO must be 'owner/repo'. Current: {GITHUB_REPO!r}")
 
@@ -37,30 +37,77 @@ path_in_repo = f"data/{file_name}"
 commit_message = f"Daily News {today}"
 
 # ───────────────────────── Model ─────────────────────────
-# Use a tool-enabled model (fast is fine for daily runs)
-MODEL = "grok-4-fast"
+MODEL = "grok-4-fast"  # tool-enabled
 
-# ───────────────────────── Domains (expanded) ─────────────────────────
+# ───────────────────────── Domains ─────────────────────────
 ALLOWED_DOMAINS = {
-    # Core
+    # Core/broad
     "reuters.com","wsj.com","bbc.com","bbc.co.uk","thehill.com","nypost.com",
     "nationalreview.com","apnews.com","bloomberg.com","ft.com","politico.com",
     "washingtonexaminer.com","foxnews.com","newsmax.com",
     # Big US outlets
     "cbsnews.com","abcnews.go.com","nbcnews.com","axios.com",
     "nytimes.com","theguardian.com","marketwatch.com","businessinsider.com",
-    # Topical / tech / science
-    "coindesk.com","defensenews.com","militarytimes.com","nature.com","sciencedaily.com",
-    "statnews.com","techcrunch.com","arstechnica.com","wired.com","technologyreview.com",
-    "venturebeat.com","ieee.org","openai.com","tabletmag.com","city-journal.org",
-    "thefp.com","thefederalist.com","justthenews.com","al-monitor.com","quillette.com",
+    # Tech/science/health
+    "techcrunch.com","arstechnica.com","wired.com","technologyreview.com","venturebeat.com",
+    "ieee.org","openai.com","statnews.com","nature.com","sciencedaily.com",
+    # Security/defense, culture
+    "defensenews.com","militarytimes.com","al-monitor.com","city-journal.org","tabletmag.com",
+    "thefp.com","thefederalist.com","justthenews.com","quillette.com","coindesk.com",
 }
 DISALLOWED = {"example.com","localhost","127.0.0.1"}
 
 def host_ok(host: str) -> bool:
     return bool(host) and any(host == d or host.endswith("." + d) for d in ALLOWED_DOMAINS)
 
-# ───────────────────────── YOUR prompt (flat array; tools wording preserved) ─────────────────────────
+def base_domain(host: str) -> str:
+    parts = host.lower().split(".")
+    if len(parts) >= 3 and parts[-2] in {"co", "com", "org", "net"} and parts[-1] in {"uk","au"}:
+        return ".".join(parts[-3:])
+    return ".".join(parts[-2:]) if len(parts) >= 2 else host.lower()
+
+def rebalance_by_domain(valid, raw_pool, target=20, per_cap=3):
+    """Limit to per_cap per domain; then backfill from raw_pool to hit target with more domains."""
+    picked, counts, used = [], {}, set()
+    for it in valid:
+        try:
+            d = base_domain(urlparse(it["source"]).netloc)
+        except Exception:
+            continue
+        if counts.get(d, 0) >= per_cap:
+            continue
+        picked.append(it)
+        counts[d] = counts.get(d, 0) + 1
+        used.add(it["source"])
+    if len(picked) < target:
+        for it in raw_pool:
+            if not isinstance(it, dict): 
+                continue
+            s = (it.get("source") or it.get("url") or "").strip()
+            t = (it.get("title") or "").strip()
+            dsc = (it.get("details") or it.get("summary") or "").strip()
+            if not (t and dsc and s) or s in used:
+                continue
+            try:
+                host = urlparse(s).netloc
+            except Exception:
+                continue
+            if not host or not host_ok(host):
+                continue
+            bd = base_domain(host)
+            if counts.get(bd, 0) >= per_cap:
+                continue
+            parts = re.split(r"(?<=[.!?])\s+", dsc)
+            if len(parts) > 4:
+                dsc = " ".join(parts[:4])
+            picked.append({"title": t, "details": dsc, "source": s})
+            counts[bd] = counts.get(bd, 0) + 1
+            used.add(s)
+            if len(picked) >= target:
+                break
+    return picked[:target]
+
+# ───────────────────────── Prompt (your style + 2 small diversity nudges) ─────────────────────────
 prompt = f"""
 Generate a flat JSON array (valid JSON, no markdown, no extra text) of 15-20 stories from TODAY ONLY ({today}).
 Use categories (family, security, economy, health, tech, world) internally for variety, but DO NOT include them in output.
@@ -78,13 +125,15 @@ Rules:
 - Target variety: 2-4 per internal category, total 15-20.
 - Ensure REAL URLs from today's publications; search exhaustively and verify with tools to avoid fakes.
 - If tools return limited results, note in details but aim for quality over quantity.
+- **Diversity requirement:** Include at least 6 distinct outlets overall; paywalled URLs are allowed.
+- **Cap per outlet:** No more than 3 stories from any single outlet/domain.
 """
 
 # ───────────────────────── xAI Call WITH TOOLS ─────────────────────────
 client = Client(api_key=XAI_API_KEY)
 chat = client.chat.create(
     model=MODEL,
-    tools=[ web_search(), x_search() ],   # ✅ this is what enables live web access
+    tools=[ web_search(), x_search() ],   # ✅ live web & X search
     messages=[]
 )
 chat.append(user(prompt))
@@ -103,14 +152,14 @@ def sample_chat(chat_obj, temperature=0.2, max_tokens=2500):
 resp = sample_chat(chat)
 raw = (getattr(resp, "content", None) or "").strip()
 
-# Extract the JSON array from the response (strip fences if present)
+# Extract JSON array
 if raw.startswith("```"):
     raw = raw.strip("`")
     raw = raw[raw.find("\n")+1:]
 start, end = raw.find("["), raw.rfind("]")
 json_text = raw[start:end+1] if start != -1 and end != -1 else raw
 
-# ───────────────────────── Parse & Normalize to flat list ─────────────────────────
+# ───────────────────────── Parse & Normalize ─────────────────────────
 try:
     data = json.loads(json_text)
 except json.JSONDecodeError as e:
@@ -131,7 +180,7 @@ def clean_text(s: str) -> str:
     s = re.sub(r"\s+", " ", s).strip()
     return s
 
-out = []
+validated = []
 for item in data:
     if not isinstance(item, dict): 
         continue
@@ -140,13 +189,11 @@ for item in data:
     source  = (item.get("source") or item.get("url") or "").strip()
     if not (title and details and source):
         continue
-
-    # Enforce 3–4 sentences best-effort
-    sentences = re.split(r"(?<=[.!?])\s+", details)
-    if len(sentences) > 4:
-        details = " ".join(sentences[:4])
-
-    # Soft URL validation (no live GET; many sites block CI runners)
+    # 3–4 sentences (best effort)
+    parts = re.split(r"(?<=[.!?])\s+", details)
+    if len(parts) > 4:
+        details = " ".join(parts[:4])
+    # soft URL validation (domain + has path)
     try:
         p = urlparse(source)
     except Exception:
@@ -157,13 +204,13 @@ for item in data:
         continue
     if p.netloc in DISALLOWED or not host_ok(p.netloc.lower()): 
         continue
+    validated.append({"title": title, "details": details, "source": source})
 
-    out.append({"title": title, "details": details, "source": source})
-
-# If too few validated, fall back to cleaned raw model items (always publish)
+# Fallback if needed (publish anyway)
 MIN_PUBLISH = 8
+out = validated
 if len(out) < MIN_PUBLISH:
-    print("⚠️ Low validated count; falling back to unvalidated model output.")
+    print("⚠️ Low validated count; falling back to cleaned model output for backfill.")
     fallback = []
     for item in data:
         if not isinstance(item, dict): 
@@ -171,20 +218,29 @@ if len(out) < MIN_PUBLISH:
         t = clean_text(item.get("title") or "")
         d = clean_text(item.get("details") or item.get("summary") or "")
         s = (item.get("source") or item.get("url") or "").strip()
-        if t and d and s:
-            # keep 3–4 sentences best-effort
-            parts = re.split(r"(?<=[.!?])\s+", d)
-            if len(parts) > 4:
-                d = " ".join(parts[:4])
-            fallback.append({"title": t, "details": d, "source": s})
-    if fallback:
-        out = fallback[:15]
+        if not (t and d and s):
+            continue
+        parts = re.split(r"(?<=[.!?])\s+", d)
+        if len(parts) > 4:
+            d = " ".join(parts[:4])
+        fallback.append({"title": t, "details": d, "source": s})
+    # merge keeping preferred validated first
+    seen = {it["source"] for it in out}
+    for it in fallback:
+        if it["source"] not in seen:
+            out.append(it)
+            seen.add(it["source"])
 
-# Cap to 20
-out = out[:20]
+# Rebalance: ≤3 per outlet, aim for 20 total & ≥6 outlets encouraged
+TARGET = 20
+PER_DOMAIN_CAP = 3
+out = rebalance_by_domain(out, data, target=TARGET, per_cap=PER_DOMAIN_CAP)
 
 if not out:
-    raise SystemExit("No usable stories produced — try rerunning or widening sources in prompt.")
+    raise SystemExit("No usable stories produced after rebalancing.")
+
+# Cap to 20 just in case
+out = out[:20]
 
 # ───────────────────────── Save & Push ─────────────────────────
 os.makedirs(os.path.join(os.path.dirname(__file__), "..", "data"), exist_ok=True)
@@ -199,8 +255,8 @@ with open(local_path, "r", encoding="utf-8") as f:
 
 try:
     repo.create_file(path_in_repo, commit_message, content, branch="main")
-    print(f"✅ Created {path_in_repo} with {len(out)} stories (tools enabled)")
+    print(f"✅ Created {path_in_repo} with {len(out)} stories (tools + rebalance)")
 except Exception:
     existing = repo.get_contents(path_in_repo, ref="main")
     repo.update_file(existing.path, commit_message, content, existing.sha, branch="main")
-    print(f"♻️ Updated {path_in_repo} with {len(out)} stories (tools enabled)")
+    print(f"♻️ Updated {path_in_repo} with {len(out)} stories (tools + rebalance)")
