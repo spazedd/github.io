@@ -25,7 +25,7 @@ jobs:
       - name: Install deps
         run: |
           python -m pip install --upgrade pip
-          pip install -U xai-sdk python-dotenv PyGithub requests
+          pip install -U "xai-sdk>1.4.0" python-dotenv PyGithub requests
 
       - name: Generate and push JSON
         env:
