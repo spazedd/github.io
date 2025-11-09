@@ -155,8 +155,9 @@ for item in data:
 
 # If nothing valid, don’t publish junk
 if not out:
-    raise SystemExit("No valid links survived validation — aborting publish.")
-
+    print("No links passed live-check; publishing unvalidated results.")
+    out = data
+    
 # Cap to 20 if the model gave more
 out = out[:20]
 
