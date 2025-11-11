@@ -1,67 +1,37 @@
 [
   {
-    "title": "Senate Passes Bill Ending Government Shutdown",
-    "details": "The U.S. Senate passed a bipartisan bill on November 11, 2025, to end the 41-day government shutdown, the longest in history, restoring funding through January 2026 and securing SNAP benefits until September. This impasse, sparked by disputes over spending and healthcare subsidies, disrupted federal services, furloughed workers, and caused over 1,000 flight cancellations, exacerbating economic strain on families. The resolution averts further chaos, allowing efficiency in government operations and prioritizing American workers' paychecks.",
+    "title": "House Votes to End Longest US Government Shutdown",
+    "details": "The U.S. House is voting on a bill to end the 42-day government shutdown that began October 1, 2025, after Senate approval, with President Trump set to sign it and restore funding through January 30. This historic shutdown has disrupted air travel, delayed federal paychecks, and stalled operations amid rising national debt trends and partisan fiscal fights. It burdens the economy with stalled growth, threatens security via workforce cuts, and hits families hard by risking SNAP food aid disruptions, though the deal secures it until September 2026.",
     "source": "https://www.reuters.com/world/us/us-house-returns-washington-vote-end-government-shutdown-2025-11-11/"
   },
   {
-    "title": "Trump Honors Veterans at Arlington Ceremony",
-    "details": "President Trump laid a wreath at the Tomb of the Unknown Soldier on Veterans Day, November 11, 2025, joined by VP Vance and VA Secretary Collins to salute fallen heroes. Amid national remembrance, this event highlights sacrifices securing American sovereignty against global threats. It boosts morale for military families, reinforcing efficient support for vets over bloated bureaucracy. America First shines: Prioritizing our warriors' legacy strengthens domestic security without overseas entanglements.",
-    "source": "https://www.foxnews.com/politics/trump-lays-wreath-tomb-unknown-soldier-arlington-national-cemetery-veterans-day"
+    "title": "Chronic Kidney Disease Rises to Ninth Global Killer",
+    "details": "Chronic kidney disease (CKD) has climbed to the ninth leading cause of global death, with cases doubling to 788 million from 378 million in 1990, killing 1.5 million last year and affecting 14% of adults. Driven by rising blood sugar, hypertension, and obesity in the U.S. and worldwide, CKD often goes undetected early, contributing to 12% of cardiovascular deaths and straining healthcare systems. It imposes heavy economic costs through dialysis and transplants, heightens security risks via linked heart issues, and burdens families with caregiving demands and disabilities.",
+    "source": "https://nypost.com/2025/11/11/health/killer-condition-lands-in-top-10-leading-causes-of-death-as-global-cases-surge/"
   },
   {
-    "title": "Shutdown Fallout Reveals Political Winners and Losers",
-    "details": "The 40-day shutdown ended November 11, 2025, without major concessions, leaving Trump neutral long-term while Democrats gain on healthcare issues for midterms. Economic hardships like flight delays hit families hard, but the deal avoids debt escalation beyond $38 trillion. Senate Republicans claim a win, yet face backlash for inefficiency. Sovereignty preserved by focusing on affordability, critiquing Dems' push for subsidies as wasteful—empowers Americans directly.",
-    "source": "https://www.reuters.com/sustainability/sustainable-finance-reporting/us-shutdown-fallout-who-came-out-ahead-who-didnt-2025-11-11/"
+    "title": "UK Slashes Aid to Global Fund Fighting Deadly Diseases",
+    "details": "Britain committed 850 million pounds ($1.14 billion) to the Global Fund against AIDS, TB, and malaria for 2026-2028, down 15% from prior pledges due to tight budgets and rising defense priorities. This mirrors a trend among major donors shifting funds from global health to national security amid economic pressures. The cut could save 1.3 million lives globally but signals reduced international support, with indirect U.S. effects on disease spread and trade; families benefit from stable domestic focus.",
+    "source": "https://www.reuters.com/business/healthcare-pharmaceuticals/uk-pledges-850-million-pounds-global-disease-fight-2025-11-11/"
   },
   {
-    "title": "SoftBank Profits Surge on AI Investments",
-    "details": "SoftBank reported doubled profits on November 11, 2025, from OpenAI stakes and Nvidia sales, amid U.S. tech boom. This reflects global AI race, with U.S. firms leading innovation.",
-    "source": "https://www.reuters.com/technology/"
+    "title": "Israeli AI Firm Wonderful Secures $100M Funding Boost",
+    "details": "Israeli AI startup Wonderful raised $100 million in its second round, led by Index Ventures, valuing it at $700 million after a $34 million debut in July for its multilingual customer service platform. Amid booming global AI investments, the Amsterdam-headquartered firm with Israeli R&D eyes $10 million annual revenue in 2025 and expansion into Europe, Middle East, and Asia. It spurs economic innovation and jobs, strengthens enterprise security with adaptive AI, and aids family-run businesses via efficient tools. America First takeaway: U.S.",
+    "source": "https://www.reuters.com/technology/israeli-ai-startup-wonderful-raises-another-100-million-valued-700-million-2025-11-11/"
   },
   {
-    "title": "AI Cold War Intensifies Between U.S. and China",
-    "details": "U.S.-China AI rivalry escalates as of November 11, 2025, with America dominating cutting-edge tech amid export curbs. Context: Beijing's push for self-reliance challenges U.S. lead in chips and models. Impacts national security, economy via innovation races.",
-    "source": "https://www.wsj.com/podcasts/tech-news-briefing/inside-the-ai-cold-war-between-the-us-and-china/AA8BBDFC-E306-4096-B25D-5C4E1F7F881A"
+    "title": "Arctic Blast Hits Tri-State with Early Snow and Freeze",
+    "details": "A polar vortex from Canada brought New York City's first snow flurries and arctic air, with tri-state highs in the low 40s, wind chills to 25 degrees, and freeze warnings for over 100 million Americans. This early winter surge, tied to a dipping jet stream, brings light snow risks without major NYC accumulation but heavier falls elsewhere, part of rising extreme weather patterns. It disrupts travel and daily life, straining emergency services and family schedules while posing slip hazards. America First takeaway: Bolstering U.S.",
+    "source": "https://nypost.com/2025/11/11/us-news/polar-vortex-sends-arctic-blast-into-new-york-putting-tri-state-under-freeze-warning/"
   },
   {
-    "title": "Shutdown Disrupts U.S. Economy and Families",
-    "details": "The shutdown, ending November 11, 2025, cost $16 billion in lost wages and hit SNAP, flights hardest. Broader trends show struggling economy from partisan fights. Effects: Families face food insecurity, travel woes. America First: Highlights gov waste; resolution prioritizes citizens over foreign aid, restoring efficiency for working Americans.",
-    "source": "https://apnews.com/article/economy-impact-shutdown-snap-flights-trump-826406b1083b262cad78338bc99f103b"
+    "title": "S&P 500 Dips as ADP Data Signals Labor Market Weakness",
+    "details": "The S&P 500 and Nasdaq slipped Tuesday amid labor softening, with ADP reporting over 11,000 weekly private job losses through late October and Goldman forecasting a 50,000 October payroll drop from shutdown deferrals. Senate's spending bill to end the shutdown heads to House and Trump, promising delayed September jobs data release. This underscores economic uncertainty trends, risking fiscal instability and family finances via unemployment, while lifting gold and silver prices. America First takeaway: Shutdown resolution under Trump stabilizes markets and bolsters domestic employment.",
+    "source": "https://www.wsj.com/livecoverage/stock-market-today-dow-sp-500-nasdaq-11-11-2025"
   },
   {
-    "title": "Supreme Court Rejects Same-Sex Marriage Revisit",
-    "details": "On November 11, 2025, Supreme Court declined to revisit Obergefell, upholding same-sex marriage amid cultural debates. Context: Ongoing challenges to traditional family norms in U.S. society. Effects: Stabilizes legal landscape but fuels division on social issues.",
-    "source": "https://apnews.com/video/ap-top-stories-november-11-e7b3235fec7145658ee98e93effec5ac"
-  },
-  {
-    "title": "Pentagon Deploys Carrier to Combat Drug Trafficking",
-    "details": "USS Gerald R. Ford arrived in Latin America November 11, 2025, to bolster U.S. presence against cartels. Context: Rising border threats from Venezuela ties.",
-    "source": "https://thehill.com/policy/defense/5600377-uss-gerald-ford-venezuela-caribbean/"
-  },
-  {
-    "title": "FAA Cuts Flights Amid Shutdown Chaos",
-    "details": "FAA announced more flight reductions November 11, 2025, due to shutdown furloughs, frustrating travelers. National trends show aviation strain from budget fights. Impacts economy, family travel. Efficiency restored post-deal—America First prioritizes domestic air security over wasteful spending abroad.",
-    "source": "https://thehill.com/homenews/ap/ap-business/ap-air-travelers-face-frustration-as-faa-increases-flight-cuts-during-the-government-shutdown/"
-  },
-  {
-    "title": "Families Sue Camp Mystic Over Flood Deaths",
-    "details": "Families filed lawsuits November 11, 2025, against Camp Mystic for negligence in Texas flood killing seven children. Context: Profit-driven decisions ignored warnings. Effects: Highlights risks to youth programs, seeks accountability. America First: Strengthens family protections, critiques lax regulations—ensures safe environments for American kids.",
-    "source": "https://www.foxnews.com/us/families-sue-camp-mystic-over-deadly-texas-flood-allege-negligence-profit-motive"
-  },
-  {
-    "title": "Dear Abby: Friend Claims Favor to Mom",
-    "details": "A woman learns her ex-best friend stayed close only as a favor to her mother, per advice column November 11, 2025. Explores family ties and friendships in modern life. Effects: Prompts reflection on genuine bonds amid social isolation trends. Takeaway: Bolsters family sovereignty—true support comes from within, not superficial ties.",
-    "source": "https://nypost.com/2025/11/11/lifestyle/dear-abby-my-former-best-friend-claims-she-was-only-in-my-life-as-a-favor-to-my-mom/"
-  },
-  {
-    "title": "Microsoft Invests $10B in AI for Portugal",
-    "details": "Microsoft announced over $10 billion AI infrastructure investment in Portugal November 11, 2025, expanding global reach. U.S. tech leads amid international partnerships. Effects: Job creation, but raises data sovereignty concerns.",
-    "source": "https://www.wsj.com/tech/ai/microsoft-to-invest-over-10-billion-to-expand-ai-infrastructure-in-portugal-09f6e5c4"
-  },
-  {
-    "title": "Serbian Protesters Block Trump-Linked Project",
-    "details": "Protesters in Serbia vow to halt Kushner real estate project November 11, 2025, citing environmental harms. World trends: U.S. business abroad faces backlash. Impacts: Delays investments, strains ties.",
-    "source": "https://thehill.com/homenews/ap/ap-international/ap-serbian-protesters-vow-to-prevent-real-estate-project-linked-to-trump-son-in-law-kushner/"
+    "title": "Trump Pardons Giuliani and 70 in Election Overturn Case",
+    "details": "President Trump pardoned Rudy Giuliani and over 70 linked to 2020 election challenges, as eight Senate Democrats backed ending the shutdown, fueling calls for Schumer's ouster. Rising anti-Semitism drew Barstool's Portnoy ire after a viral clip, while Trump slammed Greene over his Syrian meeting and eyed a $1B BBC lawsuit for J6 edits. Supreme Court rejected Kim Davis's gay marriage appeal; Trump misstated SNAP impacts during shutdown. Pardons strain security via election probes, hit families with aid fears.",
+    "source": "https://thehill.com/hilltv/rising/5600201-rising-november-11-2025/"
   }
 ]
