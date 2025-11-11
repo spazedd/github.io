@@ -9,18 +9,33 @@ on:
 
 permissions:
   contents: write
-  
+
+concurrency:
+  group: daily-news-json
+  cancel-in-progress: true
+
 jobs:
   run:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      # Guard so it only runs when it's exactly 09:00 in Los Angeles
+      - name: Run only at 9:00 AM America/Los_Angeles
+        run: |
+          HOUR="$(TZ=America/Los_Angeles date +%H)"
+          if [ "$HOUR" != "09" ]; then
+            echo "Not 09:00 in America/Los_Angeles (HOUR=$HOUR). Exiting gracefully."
+            exit 0
+          fi
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+          cache: "pip"
 
       - name: Install deps
         run: |
@@ -29,11 +44,8 @@ jobs:
 
       - name: Generate and push JSON
         env:
-          # auto-provided by Actions; sufficient to write files
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # you added this in Step 1
-          XAI_API_KEY:  ${{ secrets.XAI_API_KEY }}
-          # your repo (owner/repo)
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}   # auto-provided
+          XAI_API_KEY:  ${{ secrets.XAI_API_KEY }}    # you added this
           GITHUB_REPO:  spazedd/github.io
         run: |
           python automation/news_agent.py
