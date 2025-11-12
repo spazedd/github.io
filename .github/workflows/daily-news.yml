@@ -6,7 +6,7 @@ on:
     - cron: "0 17 * * *"
   workflow_dispatch:
 
-# Cancel in-flight runs if a new one starts (expected "canceled" label)
+# Cancel in-flight runs if a new one starts
 concurrency:
   group: daily-news
   cancel-in-progress: true
@@ -25,7 +25,7 @@ jobs:
       - name: Check out repo
         uses: actions/checkout@v4
 
-      # Optional: only run the heavy work exactly at 09:00 PT when triggered by cron
+      # Guard so it only runs at 9:00 AM PT for cron triggers
       - name: Guard time window (cron only)
         if: github.event_name == 'schedule'
         run: |
@@ -40,7 +40,6 @@ jobs:
         with:
           python-version: "3.11"
           cache: "pip"
-          # This is the key bit: tell the action where to find deps for the cache key
           cache-dependency-path: "requirements.txt"
 
       - name: Install dependencies
@@ -49,7 +48,10 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run news agent
-        # adjust the script path if yours is different
+        env:
+          XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPO: ${{ github.repository }}
         run: |
           python automation/news_agent.py
 
@@ -58,7 +60,6 @@ jobs:
           set -e
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          # Only commit if there are changes
           if [ -n "$(git status --porcelain)" ]; then
             git add -A
             git commit -m "chore: update news data [skip ci]"
