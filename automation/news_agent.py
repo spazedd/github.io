@@ -57,7 +57,7 @@ def base_domain(host: str) -> str:
         return ".".join(parts[-3:])
     return ".".join(parts[-2:]) if len(parts) >= 2 else host.lower()
 
-def rebalance_by_domain(valid, raw_pool, target=12, per_cap=3):
+def rebalance_by_domain(valid, raw_pool, target=15, per_cap=4):
     picked, counts, used = [], {}, set()
     for it in valid:
         try: d = base_domain(urlparse(it["source"]).netloc)
@@ -88,7 +88,7 @@ def rebalance_by_domain(valid, raw_pool, target=12, per_cap=3):
 
 # ───────────────────────── Prompt ─────────────────────────
 prompt = f"""
-Generate a flat JSON array (valid JSON, no markdown) of 10–12 stories from TODAY ONLY ({today}).
+Generate a flat JSON array (valid JSON, no markdown) of 12–15 stories from TODAY ONLY ({today}).
 Each story: {{
   "title": "Concise, human title (<= 15 words)",
   "details": "3–4 full sentences: Fact, context, effect, and a short logical analysis highlighting inefficiencies, hypocrisies, or unintended consequences (subtly implying national sovereignty, efficiency, self-reliance). 400–600 characters.",
@@ -97,7 +97,7 @@ Each story: {{
 Rules:
 - Use tools: search since:{today} until:{tomorrow}, browse to verify date.
 - Real news only. Blend politics/econ/tech/world + controversial items.
-- At least 5 distinct outlets; ≤3 per outlet.
+- At least 6 distinct outlets; ≤4 per outlet to ensure diversity.
 """
 
 # ───────────────────────── xAI Call ─────────────────────────
@@ -152,10 +152,33 @@ for item in data:
     except: continue
     validated.append({"title": title, "details": details, "source": source})
 
+# Fallback if low count
+MIN_PUBLISH = 10
+out = validated
+if len(out) < MIN_PUBLISH:
+    print("⚠️ Low count; backfilling...")
+    fallback = []
+    for item in data:
+        if not isinstance(item, dict): continue
+        t = re.sub(r"^\s*(analysis|report|update)[:\-–]\s*", "", str(item.get("title", ""))).strip()
+        d = re.sub(r"\s+", " ", str(item.get("details") or "")).strip()
+        s = (item.get("source") or "").strip()
+        if not (t and d and s): continue
+        parts = re.split(r"(?<=[.!?])\s+", d)
+        if len(parts) > 4: d = " ".join(parts[:4])
+        fallback.append({"title": t, "details": d, "source": s})
+    seen = {it["source"] for it in out}
+    for it in fallback:
+        if it["source"] not in seen:
+            out.append(it)
+            seen.add(it["source"])
+
 # Rebalance
-TARGET = 12
-out = rebalance_by_domain(validated, data, target=TARGET, per_cap=3)
+TARGET = 15
+PER_DOMAIN_CAP = 4
+out = rebalance_by_domain(out, data, target=TARGET, per_cap=PER_DOMAIN_CAP)
 if not out: raise SystemExit("No usable stories")
+out = out[:12]  # Cap at 12 max
 
 # Save & push
 with open(local_path, "w", encoding="utf-8") as f:
