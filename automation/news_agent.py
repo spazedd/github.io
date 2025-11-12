@@ -1,5 +1,3 @@
-# automation/news_agent.py
-
 import os, json, re, inspect
 from datetime import datetime, timedelta
 from urllib.parse import urlparse
@@ -43,7 +41,7 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 local_path = REPO_ROOT / "data" / file_name
 
 # ───────────────────────── Model ─────────────────────────
-MODEL = "grok-4-fast"  # tool-enabled
+MODEL = "grok-4"  # tool-enabled
 
 # ───────────────────────── Domains ─────────────────────────
 ALLOWED_DOMAINS = {
@@ -119,13 +117,13 @@ Generate a flat JSON array (valid JSON, no markdown, no extra text) of 15-20 sto
 Use categories internally for variety, but DO NOT include them in output.
 Each story: {{
   "title": "Concise, human title (<= 15 words; no 'Analysis:' or labels)",
-  "details": "3–4 full sentences: Fact, context, effect, and a short human takeaway (America First angle, logical). 400–600 characters total.",
+  "details": "3–4 full sentences: Fact, context, effect, and a short logical analysis highlighting inefficiencies, hypocrisies, or unintended consequences (America First angle). 400–600 characters total.",
   "source": "https://real-article-url-from-today"
 }}
 Rules:
 - Must use tools for real data: search since:{today} until:{tomorrow}, then browse pages to verify publication date is {today}.
 - Prioritize real, verified news; blend politics/econ/tech/world with quirky items. Exclude fabricated or undated content.
-- Align with America First; keep labels subtle; summarize real articles.
+- Align with America First; emphasize logical breakdowns subtly; summarize real articles with analytical takeaways.
 - At least 6 distinct outlets; ≤3 per outlet; paywalled allowed.
 """
 
