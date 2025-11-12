@@ -70,7 +70,7 @@ def base_domain(host: str) -> str:
         return ".".join(parts[-3:])
     return ".".join(parts[-2:]) if len(parts) >= 2 else host.lower()
 
-def rebalance_by_domain(valid, raw_pool, target=20, per_cap=3):
+def rebalance_by_domain(valid, raw_pool, target=30, per_cap=3):
     """Limit to per_cap per domain; backfill from raw_pool to hit target with more domains."""
     picked, counts, used = [], {}, set()
     for it in valid:
@@ -113,17 +113,17 @@ def rebalance_by_domain(valid, raw_pool, target=20, per_cap=3):
 
 # ───────────────────────── Prompt (your style) ─────────────────────────
 prompt = f"""
-Generate a flat JSON array (valid JSON, no markdown, no extra text) of 15-20 stories from TODAY ONLY ({today}).
+Generate a flat JSON array (valid JSON, no markdown, no extra text) of 20-30 stories from TODAY ONLY ({today}).
 Use categories internally for variety, but DO NOT include them in output.
 Each story: {{
   "title": "Concise, human title (<= 15 words; no 'Analysis:' or labels)",
-  "details": "3–4 full sentences: Fact, context, effect, and a short logical analysis highlighting inefficiencies, hypocrisies, or unintended consequences (America First angle). 400–600 characters total.",
+  "details": "3–4 full sentences: Fact, context, effect, and a short logical analysis highlighting inefficiencies, hypocrisies, or unintended consequences (subtly implying priorities like national sovereignty, economic efficiency, and self-reliance). 400–600 characters total.",
   "source": "https://real-article-url-from-today"
 }}
 Rules:
 - Must use tools for real data: search since:{today} until:{tomorrow}, then browse pages to verify publication date is {today}.
-- Prioritize real, verified news; blend politics/econ/tech/world with quirky items. Exclude fabricated or undated content.
-- Align with America First; emphasize logical breakdowns subtly; summarize real articles with analytical takeaways.
+- Prioritize real, verified news; blend politics/econ/tech/world with quirky and controversial items that challenge mainstream narratives. Exclude fabricated or undated content.
+- Subtly align with themes of national interests; emphasize logical breakdowns indirectly; summarize real articles with analytical takeaways.
 - At least 6 distinct outlets; ≤3 per outlet; paywalled allowed.
 """
 
@@ -222,13 +222,13 @@ if len(out) < MIN_PUBLISH:
             out.append(it)
             seen.add(it["source"])
 
-# Rebalance: ≤3 per outlet, aim for 20 & ≥6 outlets
-TARGET = 20
+# Rebalance: ≤3 per outlet, aim for 30 & ≥6 outlets
+TARGET = 30
 PER_DOMAIN_CAP = 3
 out = rebalance_by_domain(out, data, target=TARGET, per_cap=PER_DOMAIN_CAP)
 if not out:
     raise SystemExit("No usable stories produced after rebalancing.")
-out = out[:20]
+out = out[:30]
 
 # ───────────────────────── Save & Push ─────────────────────────
 with open(local_path, "w", encoding="utf-8") as f:
