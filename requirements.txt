@@ -1,0 +1,4 @@
+xai-sdk
+python-dotenv
+PyGithub
+requests
