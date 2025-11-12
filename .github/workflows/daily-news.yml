@@ -1,33 +1,37 @@
-name: Daily News JSON
+name: Daily News
 
 on:
   schedule:
-    # 9:00 AM Los Angeles time (PST = UTC-8, PDT = UTC-7)
-    - cron: "0 17 * * *"   # 09:00 PST (Nov–Mar)
-    - cron: "0 16 * * *"   # 09:00 PDT (Apr–Oct)
-  workflow_dispatch: {}
+    # 9:00 AM America/Los_Angeles every day
+    - cron: "0 17 * * *"
+  workflow_dispatch:
+
+# Cancel in-flight runs if a new one starts (expected "canceled" label)
+concurrency:
+  group: daily-news
+  cancel-in-progress: true
 
 permissions:
   contents: write
-
-concurrency:
-  group: daily-news-json
-  cancel-in-progress: true
+  actions: read
 
 jobs:
-  run:
+  build:
     runs-on: ubuntu-latest
+    env:
+      TZ: America/Los_Angeles
 
     steps:
-      - name: Checkout
+      - name: Check out repo
         uses: actions/checkout@v4
 
-      # Guard so it only runs when it's exactly 09:00 in Los Angeles
-      - name: Run only at 9:00 AM America/Los_Angeles
+      # Optional: only run the heavy work exactly at 09:00 PT when triggered by cron
+      - name: Guard time window (cron only)
+        if: github.event_name == 'schedule'
         run: |
-          HOUR="$(TZ=America/Los_Angeles date +%H)"
-          if [ "$HOUR" != "09" ]; then
-            echo "Not 09:00 in America/Los_Angeles (HOUR=$HOUR). Exiting gracefully."
+          now="$(TZ=$TZ date +'%H:%M')"
+          if [ "$now" != "09:00" ]; then
+            echo "It's $now $TZ; skipping (guard wants 09:00)."
             exit 0
           fi
 
@@ -36,16 +40,29 @@ jobs:
         with:
           python-version: "3.11"
           cache: "pip"
+          # This is the key bit: tell the action where to find deps for the cache key
+          cache-dependency-path: "requirements.txt"
 
-      - name: Install deps
+      - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -U xai-sdk python-dotenv PyGithub requests
+          pip install -r requirements.txt
 
-      - name: Generate and push JSON
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}   # auto-provided
-          XAI_API_KEY:  ${{ secrets.XAI_API_KEY }}    # you added this
-          GITHUB_REPO:  spazedd/github.io
+      - name: Run news agent
+        # adjust the script path if yours is different
         run: |
           python automation/news_agent.py
+
+      - name: Commit & push changes (if any)
+        run: |
+          set -e
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          # Only commit if there are changes
+          if [ -n "$(git status --porcelain)" ]; then
+            git add -A
+            git commit -m "chore: update news data [skip ci]"
+            git push
+          else
+            echo "No changes to commit."
+          fi
