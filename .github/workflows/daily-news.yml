@@ -1,68 +1,39 @@
-name: Daily News
+name: Daily News JSON
 
 on:
   schedule:
-    # 9:00 AM America/Los_Angeles every day
-    - cron: "0 17 * * *"
-  workflow_dispatch:
-
-# Cancel in-flight runs if a new one starts (expected "canceled" label)
-concurrency:
-  group: daily-news
-  cancel-in-progress: true
+    # 9:00 AM Los Angeles time (PST = UTC-8, PDT = UTC-7)
+    - cron: "0 17 * * *"   # 09:00 PST (Nov–Mar)
+    - cron: "0 16 * * *"   # 09:00 PDT (Apr–Oct)
+  workflow_dispatch: {}
 
 permissions:
   contents: write
-  actions: read
-
+  
 jobs:
-  build:
+  run:
     runs-on: ubuntu-latest
-    env:
-      TZ: America/Los_Angeles
-
     steps:
-      - name: Check out repo
+      - name: Checkout
         uses: actions/checkout@v4
-
-      # Optional: only run the heavy work exactly at 09:00 PT when triggered by cron
-      - name: Guard time window (cron only)
-        if: github.event_name == 'schedule'
-        run: |
-          now="$(TZ=$TZ date +'%H:%M')"
-          if [ "$now" != "09:00" ]; then
-            echo "It's $now $TZ; skipping (guard wants 09:00)."
-            exit 0
-          fi
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-          cache: "pip"
-          # This is the key bit: tell the action where to find deps for the cache key
-          cache-dependency-path: "requirements.txt"
 
-      - name: Install dependencies
+      - name: Install deps
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install -U "xai-sdk>1.4.0" python-dotenv PyGithub requests
 
-      - name: Run news agent
-        # adjust the script path if yours is different
+      - name: Generate and push JSON
+        env:
+          # auto-provided by Actions; sufficient to write files
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # you added this in Step 1
+          XAI_API_KEY:  ${{ secrets.XAI_API_KEY }}
+          # your repo (owner/repo)
+          GITHUB_REPO:  spazedd/github.io
         run: |
           python automation/news_agent.py
-
-      - name: Commit & push changes (if any)
-        run: |
-          set -e
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          # Only commit if there are changes
-          if [ -n "$(git status --porcelain)" ]; then
-            git add -A
-            git commit -m "chore: update news data [skip ci]"
-            git push
-          else
-            echo "No changes to commit."
-          fi
