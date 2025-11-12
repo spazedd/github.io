@@ -25,7 +25,7 @@ jobs:
       - name: Check out repo
         uses: actions/checkout@v4
 
-      # Guard so it only runs at 9:00 AM PT for cron triggers
+      # Only run at exactly 09:00 PT for scheduled triggers
       - name: Guard time window (cron only)
         if: github.event_name == 'schedule'
         run: |
@@ -60,10 +60,14 @@ jobs:
           set -e
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+
           if [ -n "$(git status --porcelain)" ]; then
             git add -A
             git commit -m "chore: update news data [skip ci]"
-            git push
+            # Pull latest commits and rebase before pushing
+            git fetch origin main
+            git rebase origin/main || git rebase --skip
+            git push origin HEAD:main
           else
             echo "No changes to commit."
           fi
