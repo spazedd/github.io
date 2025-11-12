@@ -3,6 +3,7 @@
 import os, json, re, inspect
 from datetime import datetime, timedelta
 from urllib.parse import urlparse
+from pathlib import Path
 
 from dotenv import load_dotenv
 import requests
@@ -33,8 +34,13 @@ if "/" not in GITHUB_REPO:
 today = datetime.now().strftime("%Y-%m-%d")
 tomorrow = (datetime.now() + timedelta(days=1)).strftime("%Y-%m-%d")
 file_name = f"news-{today}.json"
-path_in_repo = f"data/{file_name}"
+repo_data_path = f"data/{file_name}"
 commit_message = f"Daily News {today}"
+
+# local write path (ensure data/ exists)
+REPO_ROOT = Path(__file__).resolve().parent.parent
+(REPO_ROOT / "data").mkdir(parents=True, exist_ok=True)
+local_path = REPO_ROOT / "data" / file_name
 
 # ───────────────────────── Model ─────────────────────────
 MODEL = "grok-4-fast"  # tool-enabled
@@ -67,7 +73,7 @@ def base_domain(host: str) -> str:
     return ".".join(parts[-2:]) if len(parts) >= 2 else host.lower()
 
 def rebalance_by_domain(valid, raw_pool, target=20, per_cap=3):
-    """Limit to per_cap per domain; then backfill from raw_pool to hit target with more domains."""
+    """Limit to per_cap per domain; backfill from raw_pool to hit target with more domains."""
     picked, counts, used = [], {}, set()
     for it in valid:
         try:
@@ -107,35 +113,25 @@ def rebalance_by_domain(valid, raw_pool, target=20, per_cap=3):
                 break
     return picked[:target]
 
-# ───────────────────────── Prompt (your style + 2 small diversity nudges) ─────────────────────────
+# ───────────────────────── Prompt (your style) ─────────────────────────
 prompt = f"""
 Generate a flat JSON array (valid JSON, no markdown, no extra text) of 15-20 stories from TODAY ONLY ({today}).
-Use categories (family, security, economy, health, tech, world) internally for variety, but DO NOT include them in output.
+Use categories internally for variety, but DO NOT include them in output.
 Each story: {{
   "title": "Concise, human title (<= 15 words; no 'Analysis:' or labels)",
   "details": "3–4 full sentences: Fact, context, effect, and a short human takeaway (America First angle, logical). 400–600 characters total.",
   "source": "https://real-article-url-from-today"
 }}
 Rules:
-- **Must use tools for real data:** First, use web_search and x_keyword_search with since:{today} until:{tomorrow} to find recent stories. Then, use browse_page on promising URLs to extract and verify content published today. Ensure all stories are from credible outlets (Reuters, WSJ, BBC, The Hill, NY Post, National Review, etc.).
-- Prioritize real, verified news; blend politics/econ/tech/world with quirky items. Exclude any fabricated or undated content.
-- Align with America First: Praise sovereignty/efficiency; critique gov waste/foreign aid/feminist issues/cultural fads.
-- Details flow: Fact, context (national trends), effect (econ/security/family), takeaway (unique, e.g., 'Puts citizens first—finally.').
-- Use X conservative perspectives subtly from users like unusual_whales, Cernovich (don't name), but summarize real articles.
-- Target variety: 2-4 per internal category, total 15-20.
-- Ensure REAL URLs from today's publications; search exhaustively and verify with tools to avoid fakes.
-- If tools return limited results, note in details but aim for quality over quantity.
-- **Diversity requirement:** Include at least 6 distinct outlets overall; paywalled URLs are allowed.
-- **Cap per outlet:** No more than 3 stories from any single outlet/domain.
+- Must use tools for real data: search since:{today} until:{tomorrow}, then browse pages to verify publication date is {today}.
+- Prioritize real, verified news; blend politics/econ/tech/world with quirky items. Exclude fabricated or undated content.
+- Align with America First; keep labels subtle; summarize real articles.
+- At least 6 distinct outlets; ≤3 per outlet; paywalled allowed.
 """
 
 # ───────────────────────── xAI Call WITH TOOLS ─────────────────────────
 client = Client(api_key=XAI_API_KEY)
-chat = client.chat.create(
-    model=MODEL,
-    tools=[ web_search(), x_search() ],   # ✅ live web & X search
-    messages=[]
-)
+chat = client.chat.create(model=MODEL, tools=[ web_search(), x_search() ], messages=[])
 chat.append(user(prompt))
 
 def sample_chat(chat_obj, temperature=0.2, max_tokens=2500):
@@ -189,11 +185,9 @@ for item in data:
     source  = (item.get("source") or item.get("url") or "").strip()
     if not (title and details and source):
         continue
-    # 3–4 sentences (best effort)
     parts = re.split(r"(?<=[.!?])\s+", details)
     if len(parts) > 4:
         details = " ".join(parts[:4])
-    # soft URL validation (domain + has path)
     try:
         p = urlparse(source)
     except Exception:
@@ -202,7 +196,7 @@ for item in data:
         continue
     if not p.netloc or not p.path.strip("/"): 
         continue
-    if p.netloc in DISALLOWED or not host_ok(p.netloc.lower()): 
+    if p.hostname and not host_ok(p.hostname.lower()):
         continue
     validated.append({"title": title, "details": details, "source": source})
 
@@ -224,27 +218,21 @@ if len(out) < MIN_PUBLISH:
         if len(parts) > 4:
             d = " ".join(parts[:4])
         fallback.append({"title": t, "details": d, "source": s})
-    # merge keeping preferred validated first
     seen = {it["source"] for it in out}
     for it in fallback:
         if it["source"] not in seen:
             out.append(it)
             seen.add(it["source"])
 
-# Rebalance: ≤3 per outlet, aim for 20 total & ≥6 outlets encouraged
+# Rebalance: ≤3 per outlet, aim for 20 & ≥6 outlets
 TARGET = 20
 PER_DOMAIN_CAP = 3
 out = rebalance_by_domain(out, data, target=TARGET, per_cap=PER_DOMAIN_CAP)
-
 if not out:
     raise SystemExit("No usable stories produced after rebalancing.")
-
-# Cap to 20 just in case
 out = out[:20]
 
 # ───────────────────────── Save & Push ─────────────────────────
-os.makedirs(os.path.join(os.path.dirname(__file__), "..", "data"), exist_ok=True)
-local_path = os.path.join(os.path.dirname(__file__), "..", file_name)
 with open(local_path, "w", encoding="utf-8") as f:
     json.dump(out, f, indent=2, ensure_ascii=False)
 
@@ -254,9 +242,9 @@ with open(local_path, "r", encoding="utf-8") as f:
     content = f.read()
 
 try:
-    repo.create_file(path_in_repo, commit_message, content, branch="main")
-    print(f"✅ Created {path_in_repo} with {len(out)} stories (tools + rebalance)")
+    repo.create_file(repo_data_path, commit_message, content, branch="main")
+    print(f"✅ Created {repo_data_path} with {len(out)} stories")
 except Exception:
-    existing = repo.get_contents(path_in_repo, ref="main")
+    existing = repo.get_contents(repo_data_path, ref="main")
     repo.update_file(existing.path, commit_message, content, existing.sha, branch="main")
-    print(f"♻️ Updated {path_in_repo} with {len(out)} stories (tools + rebalance)")
+    print(f"♻️ Updated {repo_data_path} with {len(out)} stories")
