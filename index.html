@@ -334,56 +334,61 @@
   </div>
 
   <script>
-    /* ---------- UTILS ---------- */
+    /* Utils */
     const $ = (s) => document.querySelector(s);
     const $$ = (s) => [...document.querySelectorAll(s)];
-    const pad = (n) => String(n).padStart(2, '0');
-    const toYMD = (d) => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
-    const prettyDate = (ds) => {
-      const [y, m, d] = ds.split('-').map(Number);
-      return new Date(y, m - 1, d).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+    const pad = (n) => String(n).padStart(2,'0');
+    const toYMD = (d) => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+    const prettyDate = (ds) => { 
+      const [y,m,d] = ds.split('-').map(Number); 
+      return new Date(y,m-1,d).toLocaleDateString(undefined,{year:'numeric',month:'long',day:'numeric'}); 
     };
 
-    // Header date
+    // Current date in header
     const now = new Date();
-    $("#currentDate").textContent = now.toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    $("#currentDate").textContent = now.toLocaleDateString(undefined, {weekday:'long',year:'numeric',month:'long',day:'numeric'});
     $("#year").textContent = now.getFullYear();
 
-    /* ---------- THEME TOGGLE ---------- */
-    function applyTheme(mode) {
+    /* Theme toggle */
+    function applyTheme(mode){
       document.documentElement.classList.toggle("dark", mode === 'dark');
       document.documentElement.classList.toggle("light", mode !== 'dark');
-      try { localStorage.setItem("mode", mode); } catch {}
+      try{ localStorage.setItem("mode", mode); }catch{}
     }
-    (function initTheme() {
+    (function initTheme(){
       const checkbox = document.getElementById('themeSwitch');
       const current = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
       applyTheme(current);
-      if (checkbox) {
+      if(checkbox){ 
         checkbox.checked = (current === 'dark');
-        checkbox.addEventListener('change', () => applyTheme(checkbox.checked ? 'dark' : 'light'));
+        checkbox.addEventListener('change', function(){
+          applyTheme(this.checked ? 'dark' : 'light');
+        });
       }
     })();
 
-    /* ---------- ENRICHMENT ---------- */
+    /* Client-side enrichment (category + credibility) */
     const DOMAIN_CRED = {
       "reuters.com":9,"apnews.com":9,"bbc.com":8,"bbc.co.uk":8,"wsj.com":8,"ft.com":8,"bloomberg.com":8,
       "nytimes.com":7,"theguardian.com":7,"politico.com":7,"axios.com":7,"marketwatch.com":7,
       "washingtonexaminer.com":6,"nationalreview.com":6,"city-journal.org":6,"nypost.com":5,"foxnews.com":5,"newsmax.com":4
     };
-    function baseDomain(url) {
-      try {
+    function baseDomain(url){
+      try{
         const u = new URL(url);
         const h = u.hostname.toLowerCase();
         const parts = h.split('.');
-        if (parts.length >= 3 && ["co","com","org","net"].includes(parts[parts.length-2]) && ["uk","au"].includes(parts[parts.length-1])) {
+        if(parts.length >= 3 && ["co","com","org","net"].includes(parts[parts.length-2]) && ["uk","au"].includes(parts[parts.length-1])){
           return parts.slice(-3).join('.');
         }
         return parts.slice(-2).join('.');
-      } catch { return ""; }
+      }catch{ return ""; }
     }
-    function credibilityFor(url) { return DOMAIN_CRED[baseDomain(url)] ?? 7; }
-    function categorize(title, details) {
+    function credibilityFor(url){
+      const bd = baseDomain(url);
+      return DOMAIN_CRED[bd] ?? 7;
+    }
+    function categorize(title, details){
       const t = `${title} ${details}`.toLowerCase();
       if (/(election|senate|house|white house|biden|trump|policy|court|congress|governor)/.test(t)) return "politics";
       if (/(inflation|jobs|labor|unemployment|gdp|market|stocks|oil|tariff|trade|tax)/.test(t)) return "economy";
@@ -395,44 +400,45 @@
       return "other";
     }
 
-    /* ---------- CONTROLS ---------- */
+    /* Controls */
     const elSort = $("#sortSelect");
     const elCat = $("#categoryFilter");
     const elCount = $("#countWrap");
     const elReset = $("#resetBtn");
 
-    /* ---------- LOAD ONLY TODAY ---------- */
-    async function loadToday() {
-      const today = toYMD(new Date());
-      const url = `./data/news-${today}.json`;
-
-      try {
-        const r = await fetch(url, { cache: 'no-store' });
-        if (!r.ok) throw new Error(`HTTP ${r.status}`);
-        const data = await r.json();
-        if (!Array.isArray(data)) return [];
-
-        return data.map(article => ({
-          ...article,
-          dateStr: today,
-          _category: categorize(article.title || "", article.details || ""),
-          _cred: credibilityFor(article.source || "")
-        }));
-      } catch (e) {
-        console.warn("Failed to load today's news:", e);
-        return [];
-      }
+    /* Load only today */
+    async function loadNews(){
+      const ds = toYMD(new Date());
+      const news = await fetchJSONOrNull(`./data/news-${ds}.json`);
+      if (!Array.isArray(news)) return [];
+      return news.map(article => ({
+        ...article,
+        dateStr: ds,
+        _category: categorize(article.title || "", article.details || ""),
+        _cred: credibilityFor(article.source || "")
+      }));
     }
 
-    /* ---------- CARD CREATION ---------- */
-    function createCard(article) {
+    async function fetchJSONOrNull(url){ 
+      try{ 
+        const r = await fetch(url, {cache: 'no-store'}); 
+        if(!r.ok) return null; 
+        return await r.json(); 
+      } catch{ 
+        return null; 
+      } 
+    }
+
+    /* Create article card — uses only title, details, source */
+    function createCard(article){
       const el = document.createElement('article');
       el.className = 'article';
       const dateLine = prettyDate(article.dateStr);
+
       const credClass = `cred c${Math.max(1, Math.min(10, Math.round(article._cred)))}`;
 
-      // Fallback preview if no `summary`
-      const preview = article.summary || (article.details ? article.details.slice(0, 150) + '…' : '');
+      // Preview: first sentence of details
+      const firstSentence = article.details ? article.details.split(/[.!?]/)[0].trim() + '.' : '';
 
       el.innerHTML = `
         <div class="article-header">
@@ -448,7 +454,7 @@
           <span class="badge">${dateLine}</span>
           <span class="${credClass}" title="Credibility (domain-based)"> ${article._cred}/10 </span>
         </div>
-        <div class="article-summary">${preview}</div>
+        <div class="article-summary">${firstSentence}</div>
         <div class="article-details">
           <div class="article-content">${article.details || ''}</div>
           ${article.source ? `
@@ -464,27 +470,27 @@
         </div>
       `;
 
-      // Expand/collapse
+      // Toggle expansion
       el.addEventListener('click', (e) => {
         if (e.target.closest('.source-link')) return;
         const isExpanded = el.classList.contains('expanded');
         $$('.article').forEach(a => {
           a.classList.remove('expanded');
-          const d = a.querySelector('.article-details');
-          if (d) d.style.maxHeight = '0px';
+          const details = a.querySelector('.article-details');
+          if (details) details.style.maxHeight = '0px';
         });
         if (!isExpanded) {
           el.classList.add('expanded');
-          const d = el.querySelector('.article-details');
-          if (d) d.style.maxHeight = d.scrollHeight + 'px';
+          const details = el.querySelector('.article-details');
+          if (details) details.style.maxHeight = details.scrollHeight + 'px';
         }
       });
 
       return el;
     }
 
-    function badgeColor(cat) {
-      switch (cat) {
+    function badgeColor(cat){
+      switch(cat){
         case "politics": return "#a855f7";
         case "economy": return "#22c55e";
         case "tech": return "#0ea5e9";
@@ -496,41 +502,43 @@
       }
     }
 
-    /* ---------- FILTER / SORT / RENDER ---------- */
-    let RAW = [], VIEW = [];
+    /* Filtering/Sorting/Rendering */
+    let RAW = [];
+    let VIEW = [];
 
-    function applyControls() {
+    function applyControls(){
       const cat = elCat.value;
       VIEW = RAW.filter(s => cat === 'all' ? true : s._category === cat);
 
       const sort = elSort.value;
       if (sort === 'latest') VIEW.sort(() => 0); // all same day
-      else if (sort === 'cred') VIEW.sort((a, b) => (b._cred ?? -1) - (a._cred ?? -1));
-      else if (sort === 'title') VIEW.sort((a, b) => (a.title || '').localeCompare(b.title || ''));
+      else if (sort === 'cred') VIEW.sort((a,b) => (b._cred ?? -1) - (a._cred ?? -1));
+      else if (sort === 'title') VIEW.sort((a,b) => (a.title || '').localeCompare(b.title || ''));
 
       renderArticles(VIEW);
       elCount.textContent = `${VIEW.length} stor${VIEW.length === 1 ? 'y' : 'ies'}`;
     }
 
-    function renderArticles(articles) {
+    function renderArticles(articles){
       const container = $("#newsArticles");
       container.innerHTML = '';
-      if (!articles.length) {
-        container.innerHTML = '<div style="text-align:center;color:var(--meta);padding:40px;">No news for today.</div>';
+      if(articles.length === 0){
+        container.innerHTML = '<div style="text-align: center; color: var(--meta); padding: 40px;">No news articles found.</div>';
         return;
       }
       const frag = document.createDocumentFragment();
-      articles.forEach(a => frag.appendChild(createCard(a)));
+      articles.forEach(article => frag.appendChild(createCard(article)));
       container.appendChild(frag);
     }
 
-    /* ---------- INITIALIZE ---------- */
-    (async function init() {
-      const todayArticles = await loadToday();
-      RAW = todayArticles;
+    /* Initialize */
+    (async function init(){
+      const articles = await loadNews();
+      RAW = articles;
       applyControls();
     })();
 
+    // Events
     elSort.addEventListener('change', applyControls);
     elCat.addEventListener('change', applyControls);
     elReset.addEventListener('click', () => {
